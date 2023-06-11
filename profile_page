@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Profile Page </title>
+  </head>
+  <body>
+	  <!-- nav bar here -->
+
+      <div id="page">
+        <div id="userdetails">
+            <div>
+                <div id="profilepic"></div>
+            </div>
+            <div>
+                <div id="username"></div>
+                <div id=""></div>
+            </div>
+            <div id="bio">
+                He/they
+            </div>
+        </div>
+        <div id="interactions">
+            <div id="buttons">
+                <div id="postsbutton"></div>
+                <div id="commentsbutton"></div>
+            </div>
+            <div id="posts">
+                <div id="post1"></div>
+            </div>
+        </div>
+      </div>
+  </body>
+</html>

@@ -1,30 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title> Home Page </title>
-    <link rel="stylesheet" href="home.css">
-  </head>
-  <body>
-	  <div class="navbar"> nav bar </div>
-    <div class="page">
-      <div class="userdetails">
-        <div class="user">
-          <div class="profilepic"></div>
-          <div class="username">competentcrab67</div>
+<html>
+    <head>
+        <title> Home Page </title>
+        <link rel="stylesheet" href="home.css">
+    </head>
+    <body>
+        <div class="nav">
+            <p> nav bar </p>
         </div>
-        <div class="bio"></div>
-        <div class="editprofilebutton">
-          <a href="edit_profile.html" target="_self" title="Edit profile"> Edit profile </a>
-        </div>
-      </div>
 
-      <div class="postscontainer">
-        <div class="makepost">
-          <textarea class="newpost" rows="10" cols="50"> Make a new post! </textarea>
+        <div class="flex-container">
+            <div class="container userdetails">
+                <p> user profile </p>
+                <div class="flex-container">
+                    <div class="profilepic">
+                        <img src="profilepic.jpg">
+                    </div>
+
+                    <div class="username">
+                        <p> wnflwr </p>
+                    </div>
+                    
+                </div>
+
+                <div class="bio">
+                    <p> bio here </p>
+                </div>
+
+                <div class="editprofilebutton">
+                    <a href="edit_profile.html" target="_self" title="Edit profile"> Edit profile </a>
+                </div>
+            </div>
+    
+            <div class="container feed">
+                <div class="create-post">
+                    <textarea class="newpost" rows="10" cols="50"> Make a new post! </textarea>
+                </div>
+        
+                <div class="post">
+                    <p> post #1 </p>
+                </div>
+        
+                <div class="post">
+                    <p> post #2 </p>
+                </div>
+            </div>
         </div>
-        <div class="post"> hahahahah </div>
-        <div class="post"> ugh </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>

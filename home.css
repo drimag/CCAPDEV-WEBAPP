@@ -13,17 +13,17 @@ body {
     flex-direction: row;
 }
 
+.page {
+    margin: 50px;
+    background-color: darkblue;
+    width: 70%;
+}
+
 .container {
     border: solid 1px #E1E8ED;
-    margin-right: 1rem;
 }
 
 .userdetails {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding-left: 1%;
-    padding-right: 1%;
-    width: 15%;
     border: none;
 }
 
@@ -38,11 +38,21 @@ body {
     flex-grow: 1;
 }
 
-.userdetails img {
-    height: 75px;
-    width: 75px;
+.user-profilepic img {
+    height: 100px;
+    width: 100px;
     border-radius: 50px;
     flex-grow: 1;
+    margin-left: 12px;
+}
+
+.userdetails {
+    width: 150px;
+}
+
+.userdetails:hover {
+    height: 130px;
+    background-color: #e0ddddbe;
 }
 
 .username, .post-username {
@@ -55,12 +65,12 @@ body {
     font-weight: bold;
 }
 
-
 .feed {
-    width: 85%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     border-bottom: none;
+    background-color: beige;
 }
 
 .feed>div {
@@ -104,9 +114,11 @@ body {
     font-size: 1.04rem;
 }
 
+.title {
+    font-weight: bold;
+}
 
 div.actions {
-	margin-top: 0.5%;
 	display: flex;
 }
 

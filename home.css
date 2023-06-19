@@ -1,56 +1,60 @@
-body {
-    background-color: whitesmoke;
+
+.nav {
+    background-color: aqua;
 }
 
-.navbar {
-
-}
-
-.page {
-    background-color: azure;
+.flex-container {
     display: flex;
     flex-direction: row;
 }
 
-.userdetails {
-    flex-grow: 1;
+.container {
+    border: solid 1px #E1E8ED;
+    margin-right: 1rem;
+}
 
+.userdetails {
+    border-radius: 12px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-left: 1%;
+    padding-right: 1%;
+    flex-grow: 1;
 }
 
 .user {
     display: flex;
-    flex-direction: row;
 }
 
-    .profilepic {
-        background-image: url("profilepic.jpg");
-        flex-grow: 1;
-    }
-
-    .username {
-        font-weight: bold;
-        flex-grow: 10;
-    }
-
-    .editprofilebutton {
-
-    }
-
-.postscontainer {
-    background-color: mediumaquamarine;
-    flex-grow: 4;
+.profilepic img {
+    width: 50px;
+    border-radius: 25px;
+    flex-grow: 1;
 }
 
-    .makepost {
-        background-color: white;
-    }
+.username {
+    padding-left: 8px;
+    font-weight: bold;
+    flex-grow: 10;
+}
 
-    .newpost {
-        margin: 20px;
-    }
+.feed {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+}
 
-    .post {
-        background-color: aqua;
-        margin: 20px;
-        padding: 10px;
-    }
+.feed div {
+    border-bottom: solid 1px #E1E8ED;
+}
+
+.newpost {
+    margin: 20px;
+}
+
+.post {
+    background-color:pink;
+    padding: 1rem;
+}
+

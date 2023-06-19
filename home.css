@@ -2,6 +2,10 @@ body {
     background-color: whitesmoke;
 }
 
+.navbar {
+
+}
+
 .page {
     background-color: azure;
     display: flex;
@@ -10,18 +14,26 @@ body {
 
 .userdetails {
     flex-grow: 1;
+
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
 }
 
     .profilepic {
-
+        background-image: url("profilepic.jpg");
+        flex-grow: 1;
     }
 
     .username {
-
+        font-weight: bold;
+        flex-grow: 10;
     }
 
     .editprofilebutton {
-        
+
     }
 
 .postscontainer {

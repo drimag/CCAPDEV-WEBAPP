@@ -1,9 +1,9 @@
 body {
-    background-color: beige;
+    background-color: whitesmoke;
 }
 
 .page {
-    background-color: whitesmoke;
+    background-color: azure;
     display: flex;
     flex-direction: row;
 }
@@ -12,15 +12,33 @@ body {
     flex-grow: 1;
 }
 
-.posts {
-    background-color: blue;
+    .profilepic {
+
+    }
+
+    .username {
+
+    }
+
+    .editprofilebutton {
+        
+    }
+
+.postscontainer {
+    background-color: mediumaquamarine;
     flex-grow: 4;
 }
 
     .makepost {
-
+        background-color: white;
     }
 
-    .post1 {
-        
+    .newpost {
+        margin: 20px;
+    }
+
+    .post {
+        background-color: aqua;
+        margin: 20px;
+        padding: 10px;
     }

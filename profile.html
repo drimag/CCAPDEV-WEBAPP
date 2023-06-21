@@ -1,41 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title> Profile Page </title>
-    <link rel="stylesheet" href="profile.css">
-  </head>
-  <body>
-	  <!-- nav bar here -->
-      <div class="page">
-        <div class="userdetails">
-            <div class="top">
-                <div class="profilepic"></div>
-                <div class="profile">
-                    <div class="username"> competentcrab67 </div>
-                    <div class="name"> Imogen Paras </div>
+    <head>
+        <title> Profile Page </title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style-posts.css"> 
+    </head>
+    <body>
+	    <!-- nav bar here -->
+        <div class="flex-row-container">
+
+            <div class="flex-column-container user-details">
+                <div>
+                    <img src="profilepics/sakura.jpg">
+                </div>
+                <div class="username"> @sakura </div>
+                <div class="short-description">
+                    <p>She/her</p>
+                <div>
+            </div>
+
+
+            <div class="flex-column-container latest">
+
+                <div class="actions flex-row-container">
+                    <a href="profile.html" target="_self" name="View latest comments"> 
+                        <p> Latest Posts </p>
+                    </a>
+                    <a href="profile_comments.html" target="_self" name="View latest comments"> 
+                        <p class="buttons"> Latest Comments </p>
+                    </a>
                 </div>
             </div>
-            <div class="bio">
-                <pre>
-She/they
-Virgo
-
-I love long walks on the beach.
-                </pre>
-            </div>
-            <div class="editprofilebutton">
-                <a href="edit_profile.html" target="_self" title="Edit profile"> Edit profile </a>
-            </div>
         </div>
-        <div class="interactions">
-            <div class="buttons">
-                <div class="postsbutton"></div>
-                <div class="commentsbutton"></div>
-            </div>
-            <div class="posts">
-                <div class="post1"></div>
-            </div>
-        </div>
-      </div>
-  </body>
+    </body>
 </html>

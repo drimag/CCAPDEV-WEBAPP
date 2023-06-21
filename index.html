@@ -6,22 +6,38 @@
         <link rel="stylesheet" href="style-posts.css">
     </head>
     <body>
+        <div class="navbar">
+            <p> nav bar</p>
+        </div>
+
         <!-- Outer Container-->
         <div class="page flex-row-container">
 
             <!-- Users Container -->
             <div class="flex-column-container users">
                 <div class="current-user">
-                    <img class="user" id="user-selected" src="profilepics/sakura.jpg">
+                    <a href="profile.html" target="_self" title="View Profile">
+                        <img class="user" id="user-selected" src="profilepics/sakura.jpg">
+                    </a>
                     <p class="username"> @sakura </p>
                     <p>
                 </div>
                 <div class="flex-column-container other-users">
-                    <img class="user" id="user-sakura"  src="profilepics/sakura.jpg">
-                    <img class="user" id="user-chaewon" src="profilepics/chaewon.jpg">
-                    <img class="user" id="user-yunjin"  src="profilepics/yunjin.jpg">
-                    <img class="user" id="user-kazuha"  src="profilepics/kazuha.jpg">
-                    <img class="user" id="user-eunchae" src="profilepics/eunchae.jpg">
+                    <a href="index.html" target="_self" title="Select User">
+                        <img class="user" id="user-sakura"  src="profilepics/sakura.jpg">
+                    </a>
+                    <a href="index.html" target="_self" title="Select User">
+                        <img class="user" id="user-chaewon" src="profilepics/chaewon.jpg">
+                    </a>
+                    <a href="index.html" target="_self" title="Select User">
+                        <img class="user" id="user-yunjin"  src="profilepics/yunjin.jpg">
+                    </a>
+                    <a href="index.html" target="_self" title="Select User">
+                        <img class="user" id="user-kazuha"  src="profilepics/kazuha.jpg">
+                    </a>
+                    <a href="index.html" target="_self" title="Select User">
+                        <img class="user" id="user-eunchae" src="profilepics/eunchae.jpg">
+                    </a>
                 </div>
             </div>
 
@@ -44,10 +60,6 @@
                 <!-- Timeline -->
                 <div class="posts flex-column-container">
                     <div class="flex-row-container post" id="post1">
-                        <!-- Username, 
-                            Title (Hover when clicked leads to post html)
-                            Description Snippet-->
-                        
                         <div>
                             <img class="user" src="profilepics/chaewon.jpg">
                         </div>
@@ -65,7 +77,6 @@
                         </div>
                     </div>
 
-                    <!-- add more posts-->
                     <div class="flex-row-container post" id="post2">
                             
                         <div>
@@ -84,6 +95,64 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="flex-row-container post" id="post3">
+                            
+                        <div>
+                            <img class="user" src="profilepics/eunchae.jpg">
+                        </div>
+
+                        <div class="flex-column-container post-details">
+                            <p class="username"> @eunchae </p>
+                            <p class="post-title"> Title </p>
+                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
+
+                            <div class="actions">
+                                <span class="comment"></span>
+                                <span class="upvote"></span>
+                                <span class="downvote"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-row-container post" id="post4">
+                            
+                        <div>
+                            <img class="user" src="profilepics/sakura.jpg">
+                        </div>
+
+                        <div class="flex-column-container post-details">
+                            <p class="username"> @sakura </p>
+                            <p class="post-title"> Title </p>
+                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
+
+                            <div class="actions">
+                                <span class="comment"></span>
+                                <span class="upvote"></span>
+                                <span class="downvote"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-row-container post" id="post5">
+                            
+                        <div>
+                            <img class="user" src="profilepics/kazuha.jpg">
+                        </div>
+
+                        <div class="flex-column-container post-details">
+                            <p class="username"> @kazuha </p>
+                            <p class="post-title"> Title </p>
+                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
+
+                            <div class="actions">
+                                <span class="comment"></span>
+                                <span class="upvote"></span>
+                                <span class="downvote"></span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

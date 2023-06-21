@@ -1,42 +1,55 @@
 .posts-container {
     flex-grow: 10;
     flex-direction: column;
-    border: solid 2px #8B8C89;
     border-radius: 15px;
     padding: 15px;
+    background-color: beige;
 }
 
 .post-creation-container {
     margin: 10px 25px;
-    background-color: #81A5F9;
+    padding: 20px;
     border-radius: 20px;
+    align-items: center;
+    background-color: lavender;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
 .new-post-title-container input {
-    width: 100%;
     margin: 10px;
     box-sizing: border-box;
     text-align: center;
+    width: 100%;
+}
+
+.textbox-container {
+    width: 80%;
 }
 
 .textbox-container textarea {
     height: 100px;
-    width: 100%;
+    width: 89.9%;
     margin: 10px;
     padding: 12px 20px;
     resize: none;
     border: 2px solid #888;
     border-radius: 10px;
+    font-family: Karla, sans-serif;
 }
-
-.
 
 .post {
     width: 70%;
     border: solid 1px #ced1c8;
     align-self: center;
     margin: 5px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .post-details .username {
@@ -48,10 +61,7 @@
     font-weight: bold;
     font-size: 20px;
     margin: 0px;
-}
-
-.post-description {
-    
+    line-height: 15px;
 }
 
 span.comment {

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Home Page </title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style-posts.css">
+    </head>
+    <body>
+        <!-- Outer Container-->
+        <div class="page flex-row-container">
+
+            <!-- Users Container -->
+            <div class="flex-column-container users">
+                <div class="current-user">
+                    <img class="user" id="user-selected" src="../profilepics/sakura.jpg">
+                    <p class="username"> @sakura </p>
+                </div>
+                <div class="flex-column-container other-users">
+                    <img class="user" id="user-sakura"  src="../profilepics/sakura.jpg">
+                    <img class="user" id="user-chaewon" src="../profilepics/chaewon.jpg">
+                    <img class="user" id="user-yunjin"  src="../profilepics/yunjin.jpg">
+                    <img class="user" id="user-kazuha"  src="../profilepics/kazuha.jpg">
+                    <img class="user" id="user-eunchae" src="../profilepics/eunchae.jpg">
+                </div>
+            </div>
+
+            <!-- Posts container -->
+            <div class="posts-container">
+
+                <div class="post-creation-container">
+                    <div class="create-post">
+                        <input type="text" name="new-post-title" placeholder="Title" class="new-post-title">
+                        <textarea class="new-post-text" placeholder="What's on your mind?"></textarea>
+                    </div>
+                </div>
+
+                <div class="posts flex-column-container">
+                    <div class="post" id="post1">
+                        <!-- Username, 
+                            Title (Hover when clicked leads to post html)
+                            Description Snippet-->
+                        <div class="username"></div>
+                        <div class="post-title"></div>
+                        <div class="description">hi</div>
+                        <div class="actions">
+                            <span class="comment"></span>
+                            <span class="upvote"></span>
+                            <span class="downvote"></span>
+                        </div>
+                    </div>
+
+                    <!-- add more posts-->
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

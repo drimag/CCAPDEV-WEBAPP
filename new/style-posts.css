@@ -1,0 +1,58 @@
+.posts-container {
+    flex-grow: 10;
+    flex-direction: column;
+    border: solid 2px #8B8C89;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.post-creation-container {
+    
+}
+
+.create-post {
+    margin: 10px 25px;
+}
+
+.new-post-title {
+      
+}
+
+.new-post-text {
+
+}
+
+.posts {
+
+}
+
+.post {
+    
+}
+
+span.comment {
+	display: inline-block;
+	background-image: url('icons/comment.png');
+	background-size: 20px;
+    background-repeat: no-repeat;
+	height: 20px;
+	width: 100px;
+}
+
+span.upvote {
+	display: inline-block;
+	background-image: url('icons/upvote.png');
+	background-size: 20px;
+    background-repeat: no-repeat;
+	height: 20px;
+	width: 100px;
+}
+
+span.downvote {
+	display: inline-block;
+	background-image: url('icons/downvote.png');
+	background-size: 20px;
+    background-repeat: no-repeat;
+	height: 20px;
+	width: 100px;
+}

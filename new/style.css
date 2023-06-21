@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
+/*
+    colors used:
+    #E7ECEF - white
+    #8B8C89 - gray
+    #A3CEF1 - light blue
+    #6096BA - blue
+    #274C77 -dark blue
+*/
+
+body {
+    color: black;
+	font-family: Karla;
+}
+
+.page {
+    margin: 15px 50px;
+}
+
+.flex-row-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Users */
+div.users {
+    flex-grow: 1;
+    align-items: center;
+    border-right: #8B8C89;
+}
+
+.user {
+    height: 75px;
+    width: 75px;
+    margin: 10px;
+    border-radius: 50px;
+    border: solid 1px #8B8C89;
+}
+
+.user:hover {
+    opacity: 1.0;
+}
+
+.current-user {
+    background-color: #81A5F9;
+    border-radius: 25px;
+}
+
+.current-user p {  
+    margin: 0px 0px 10px 0px;
+    text-align: center;
+    color: #E7ECEF;
+}
+
+.other-users {
+    margin-top: 15px;
+}
+
+.other-users img.user {
+    opacity: 0.50;
+}

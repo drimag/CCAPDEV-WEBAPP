@@ -2,53 +2,80 @@
 <html>
     <head>
         <title> Home Page </title>
-        <link rel="stylesheet" href="index.css">
-        <script src="home.js" defer></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style-posts.css">
     </head>
     <body>
-        <!-- Navigation Bar -->
-        <div class="nav">
-            <p> nav bar </p>
-        </div>
+        <!-- Outer Container-->
+        <div class="page flex-row-container">
 
-        <!-- Container for everything else-->
-        <div class="flex-container page">
-
-            <!-- User Info / Profile -->
-            <div class="userdetails">
-                <div class="user-profilepic">
-                    <br>
-                    <a href="profile.html" target="_self" title="View profile"> <img src="profilepics/profilepic.jpg"> </a>
+            <!-- Users Container -->
+            <div class="flex-column-container users">
+                <div class="current-user">
+                    <img class="user" id="user-selected" src="profilepics/sakura.jpg">
+                    <p class="username"> @sakura </p>
+                    <p>
                 </div>
-                <div class="username">
-                    <p> @username </p>
+                <div class="flex-column-container other-users">
+                    <img class="user" id="user-sakura"  src="profilepics/sakura.jpg">
+                    <img class="user" id="user-chaewon" src="profilepics/chaewon.jpg">
+                    <img class="user" id="user-yunjin"  src="profilepics/yunjin.jpg">
+                    <img class="user" id="user-kazuha"  src="profilepics/kazuha.jpg">
+                    <img class="user" id="user-eunchae" src="profilepics/eunchae.jpg">
                 </div>
             </div>
-            
-            <!-- Feed -->
-            <div class="container feed">
 
-                <!-- Create New Post -->
-                <div class="create-post">
-                    <textarea class="newpost" placeholder="What's on your mind?"></textarea>
+            <!-- Posts container -->
+            <div class="posts-container">
+                
+                <!-- Create Post -->
+                <div class="post-creation-container flex-column-container">
+                    <div class="title-container">
+                        <input type="text" name="new-post-title" placeholder="Title">
+                    </div>
+                    <div class="textbox-container">
+                        <textarea placeholder="What's on your mind?"></textarea>
+                    </div>
+                    <div class="post-button">
+                        <input type="button" value="Post">
+                    </div>
                 </div>
                 
-                <!-- Posts on Feed -->
-                <div class="post">
-                    <div class="flex-container">
-                        <div class="profilepic">
-                            <img src="profilepics/gwen.jpg">
+                <!-- Timeline -->
+                <div class="posts flex-column-container">
+                    <div class="flex-row-container post" id="post1">
+                        <!-- Username, 
+                            Title (Hover when clicked leads to post html)
+                            Description Snippet-->
+                        
+                        <div>
+                            <img class="user" src="profilepics/chaewon.jpg">
                         </div>
-    
-                        <div class="postinfo">
-                            <div>
-                                <p class="post-username"> @spidergwen </p>
-                            </div>
+
+                        <div class="flex-column-container post-details">
+                            <p class="username"> @chaewon </p>
+                            <p class="post-title"> Title </p>
+                            <p class="description"> Thank you for supporting us! </p>
                             
-                            <div class="content">
-                                <p class="title"> Title </p>
-                                <p class="body"> Body </p>
+                            <div class="actions">
+                                <span class="comment"></span>
+                                <span class="upvote"></span>
+                                <span class="downvote"></span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- add more posts-->
+                    <div class="flex-row-container post" id="post2">
+                            
+                        <div>
+                            <img class="user" src="profilepics/yunjin.jpg">
+                        </div>
+
+                        <div class="flex-column-container post-details">
+                            <p class="username"> @yunjin </p>
+                            <p class="post-title"> Title </p>
+                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
 
                             <div class="actions">
                                 <span class="comment"></span>
@@ -58,32 +85,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="post">
-                    <div class="flex-container">
-                        <div class="profilepic">
-                            <img src="https://pbs.twimg.com/profile_images/1579711677494284289/83ZqS7IJ_400x400.jpg">
-                        </div>
-    
-                        <div class="postinfo">
-                            <div>
-                                <p class="post-username"> @livenationph </p>
-                            </div>
-                            
-                            <div class="content">
-                                <p class="title"> Title </p>
-                                <p class="body"> Body </p>
-                            </div>
-
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span class="downvote"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
             </div>
         </div>
     </body>

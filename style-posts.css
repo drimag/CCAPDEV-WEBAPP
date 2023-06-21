@@ -1,0 +1,87 @@
+.posts-container {
+    flex-grow: 10;
+    flex-direction: column;
+    border: solid 2px #8B8C89;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.post-creation-container {
+    margin: 10px 25px;
+    background-color: #81A5F9;
+    border-radius: 20px;
+    align-items: center;
+}
+
+.new-post-title-container input {
+    width: 100%;
+    margin: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.textbox-container textarea {
+    height: 100px;
+    width: 100%;
+    margin: 10px;
+    padding: 12px 20px;
+    resize: none;
+    border: 2px solid #888;
+    border-radius: 10px;
+}
+
+.
+
+.post {
+    width: 70%;
+    border: solid 1px #ced1c8;
+    align-self: center;
+    margin: 5px;
+}
+
+.post-details .username {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.post-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.post-description {
+    
+}
+
+span.comment {
+	display: inline-block;
+	background-image: url('icons/comment.png');
+	background-size: 20px;
+    background-repeat: no-repeat;
+	height: 20px;
+	width: 100px;
+}
+
+span.upvote {
+	display: inline-block;
+	background-image: url('icons/upvote.png');
+	background-size: 20px;
+    background-repeat: no-repeat;
+	height: 20px;
+	width: 100px;
+}
+
+span.downvote {
+	display: inline-block;
+	background-image: url('icons/downvote.png');
+	background-size: 20px;
+    background-repeat: no-repeat;
+	height: 20px;
+	width: 100px;
+}
+
+.actions {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

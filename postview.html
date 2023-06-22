@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Post View</title>
+        <link rel="stylesheet" href="postview.css">
+    </head>
+
+    <body>
+        <div class="navbar">navbar here</div>
+        <br>
+        <div class="post-container">
+            <div class="post-header">
+                <div class="post-title">Do I need anything to run Go code?</div>
+                <div class="user">
+                    <a href="example.com" class="username">randomthrowaway727</a>
+                </div>
+            </div>
+
+            <p class="post-content">I have been learning coding in Python and you need to install Python on the machine to be able to run the code.
+
+                I wanted to try to learn Go. But where I use the code, we need to go through a lot of hoops to install anything new or get permission.
+                
+                But do I actually need to install anything to use Go? Can I just code on my home machine then send the compiled file to the machine where we actually run the code, without installing anything, and it will just run on there without needing to do anything?</p>
+            <div class="icons">
+                <span class="upvote"></span> 700 <span class="downvote"></span> <span class="reply"></span>
+            </div>
+        </div>
+        <br>
+        <div class="comment-section">
+            <textarea rows="10" cols="87" placeholder="Comment here..."></textarea>
+            <button>Submit</button>
+            <br><br>
+            <div class="comment-box">
+                <div class="user">
+                    <a href="example.com" class="username">spidergwen</a>
+                </div>
+                <p class="comment">Go creates native binaries - you don't need an interpreter or runtime to run them.
+
+                    So yes, you can just compile on your home machine (cross compile if the target computer is a different platform) and then just run the binary on the target computer (that's assuming that the machine isn't locked down in a way that disallows executing arbitrary binaries - but if that's the case, you're just plain out of luck).</p>
+                <div class="icons">
+                    <span class="upvote"></span> 2 <span class="downvote"></span> <span class="reply"></span>
+                </div>
+            </div>
+
+            <div class="comment-box">
+                <div class="user">
+                    <a href="example.com" class="username">kavinsky378</a>
+                </div>
+                <p class="comment">You really haven't explained much about your situation.
+
+                    If you can plug in a flash drive and have read/write access to it then you can probably run Python from that.
+                    
+                    There are quite a few online coding environments these days, you can probably find one to suit your needs. And I don't just mean for Python.</p>
+                <div class="icons">
+                    <span class="upvote"></span> -1 <span class="downvote"></span> <span class="reply"></span>
+                </div>
+            </div>
+                
+        </div>
+            
+        </div>
+    </body>
+
+</html>

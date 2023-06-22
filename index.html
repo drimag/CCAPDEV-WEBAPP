@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-posts.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="js/index.js"></script>
+        <script src="js/script.js" defer></script>
     </head>
     <body>
         <div class="navbar">
@@ -18,27 +18,17 @@
             <!-- Users Container -->
             <div class="flex-column-container users">
                 <div class="current-user">
-                    <a href="profile.html" target="_self" title="View Profile">
-                        <img class="user" id="user-selected" src="profilepics/sakura.jpg">
-                    </a>
-                    <p class="username"> @sakura </p>
+                    <img class="user" id="user-selected" src="profilepics/guest.jpg">
+                    <p class="username" id="current-username"> @guest </p>
                     <p>
                 </div>
                 <div class="flex-column-container other-users">
-                    <a href="index.html" target="_self" title="Select User">
-                        <img class="user" id="user-sakura"  src="profilepics/sakura.jpg">
-                    </a>
-                    <a href="index.html" target="_self" title="Select User">
-                        <img class="user" id="user-chaewon" src="profilepics/chaewon.jpg">
-                    </a>
-                    <a href="index.html" target="_self" title="Select User">
-                        <img class="user" id="user-yunjin"  src="profilepics/yunjin.jpg">
-                    </a>
-                    <a href="index.html" target="_self" title="Select User">
-                        <img class="user" id="user-kazuha"  src="profilepics/kazuha.jpg">
-                    </a>
-                    <a href="index.html" target="_self" title="Select User">
-                        <img class="user" id="user-eunchae" src="profilepics/eunchae.jpg">
+                    <img class="user" id="user-guest"   src="profilepics/guest.jpg">
+                    <img class="user" id="user-sakura"  src="profilepics/sakura.jpg">
+                    <img class="user" id="user-chaewon" src="profilepics/chaewon.jpg">
+                    <img class="user" id="user-yunjin"  src="profilepics/yunjin.jpg">
+                    <img class="user" id="user-kazuha"  src="profilepics/kazuha.jpg">
+                    <img class="user" id="user-eunchae" src="profilepics/eunchae.jpg">
                     </a>
                 </div>
             </div>
@@ -49,13 +39,13 @@
                 <!-- Create Post -->
                 <div class="post-creation-container flex-column-container">
                     <div class="title-container">
-                        <input type="text" name="new-post-title" placeholder="Title">
+                        <input type="text" id="new-post-title" name="new-post-title" placeholder="Title">
                     </div>
                     <div class="textbox-container">
                         <textarea placeholder="What's on your mind?"></textarea>
                     </div>
                     <div class="post-button">
-                        <input type="button" value="Post">
+                        <input type="button" id="submit-post" value="Post">
                     </div>
                 </div>
                 

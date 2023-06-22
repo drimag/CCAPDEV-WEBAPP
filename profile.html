@@ -2,8 +2,12 @@
 <html>
     <head>
         <title> Profile Page </title>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-posts.css"> 
+        <script src="js/script.js"></script>
+        
     </head>
     <body>
 	    <!-- nav bar here -->
@@ -11,16 +15,14 @@
             <div class="parent">
                 <div class="flex-column-container user-details">
                     <div>
-                        <img src="profilepics/sakura.jpg">
+                        <img id="profile-img" src="profilepics/sakura.jpg">
                     </div>
-                    <div class="username"> @sakura </div>
+                    <div class="username" id="profile-username"> @username </div>
                     <div class="short-description">
-                        <p> She/her </p>
-                        <p> Aries </p>
-                        <p> I love long walks on the beach. </p>
+                        <p id="profile-bio"> bio </p>
                     </div>
-                    <div class="buttons">
-                        <a href="edit_profile.html" target="_self" name="Edit Your Profile">
+                    <div class="buttons" id="edit-profile">
+                        <a href="edit_profile.html" target="_self" name="Edit Profile">
                             <p> Edit Profile </p>
                         </a>
                     </div>

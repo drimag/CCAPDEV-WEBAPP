@@ -1,0 +1,131 @@
+.nav-bar{
+    background-color: lavender;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.nav-content {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.nav-left {
+    display: flex;
+}
+
+/*
+home button home button home button home button 
+home button home button home button home button 
+home button home button home button home button 
+home button home button home button home button 
+*/
+
+.home-button{
+    text-decoration: none;
+}
+
+.home-button i{
+    font-size: 35px;
+    margin-left: 20px;
+
+}
+
+.home-button span{
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 30px;
+    
+}
+
+/*
+searchbar searchbar searchbar searchbar 
+searchbar searchbar searchbar searchbar 
+searchbar searchbar searchbar searchbar 
+searchbar searchbar searchbar searchbar 
+*/
+
+.search-form {
+    margin-left: 100px;
+}
+
+.search-form button {
+    float: right;
+    padding: 6px 10px;
+    background: #ddd;
+    font-size: 23px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-form input[type=text] {
+    padding: 8px;
+    font-size: 19px;
+    border: none;
+    width: 300px;
+}
+
+
+/*
+dropdown dropdown dropdown dropdown 
+dropdown dropdown dropdown dropdown 
+dropdown dropdown dropdown dropdown 
+dropdown dropdown dropdown dropdown 
+*/
+
+.nav-dropdown {
+    margin-right: 20px;
+}
+
+.dropdown-button i {
+    font-size: 35px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    /* display: none; */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    overflow: auto;
+    right: 0;
+    margin-right: 20px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.dropdown-button img {
+    width: 50px;
+    height: 50px;
+} 
+
+
+
+.show {
+    display: block;
+}

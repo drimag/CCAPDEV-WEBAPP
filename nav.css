@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
 .nav-bar{
     background-color: lavender;
     margin: 0;
@@ -5,6 +7,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    font-family: Karla, sans-serif;
 }
 
 .nav-content {
@@ -35,14 +38,14 @@ home button home button home button home button
 .home-button i{
     font-size: 35px;
     margin-left: 20px;
-
+    color: blueviolet;
 }
 
 .home-button span{
-    margin-left: 5px;
+    margin-left: 0px;
     font-weight: bold;
-    font-size: 30px;
-    
+    font-size: 35px;
+    color: blueviolet;
 }
 
 /*
@@ -53,23 +56,26 @@ searchbar searchbar searchbar searchbar
 */
 
 .search-form {
-    margin-left: 100px;
+    margin-left: 65px;
 }
 
 .search-form button {
     float: right;
     padding: 6px 10px;
-    background: #ddd;
+    background: blueviolet;
+    color:lavender;
     font-size: 23px;
     border: none;
     cursor: pointer;
+    border-radius: 0px 15px 15px 0px;
 }
 
 .search-form input[type=text] {
-    padding: 8px;
+    padding: 8px 15px;
     font-size: 19px;
     border: none;
     width: 300px;
+    border-radius: 15px 0px 0px 15px;
 }
 
 
@@ -87,30 +93,8 @@ dropdown dropdown dropdown dropdown
 .dropdown-button i {
     font-size: 35px;
     border: none;
-    cursor: pointer;
+    color: blueviolet;
 }
-
-.dropdown-content {
-    /* display: none; */
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    overflow: auto;
-    right: 0;
-    margin-right: 20px;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown-button {
     background-color: transparent;
@@ -119,12 +103,29 @@ dropdown dropdown dropdown dropdown
     cursor: pointer;
 }
 
-.dropdown-button img {
-    width: 50px;
-    height: 50px;
-} 
+.dropdown-content {
+    /* display: none;   */
+    
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    overflow: auto;
+    right: 0;
+    margin-right: 20px; 
+}
 
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;  
+    float: none;
+    text-align: left;
+}
 
+.dropdown-content a:hover {background-color: #ddd;}
 
 .show {
     display: block;

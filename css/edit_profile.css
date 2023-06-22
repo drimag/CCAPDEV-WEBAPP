@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
+.edit-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: honeydew;
+    height: 100vh;
+    
+}
+
+.edit-top {
+    /* background-color: aliceblue; */
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 80px;
+}
+
+#profile-image {
+    border-radius: 100%;
+    height: 200px;
+    width: 200px;
+    
+}
+
+.edit-userinfo {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 50%
+}
+
+.edit-userinfo label {
+    padding: 0;
+    /* background-color:blueviolet; */
+    font-family: Karla, sans-serif;
+}
+
+
+
+.edit-userinfo input[type=text] {
+    width: 100%;
+    
+    padding: 5px;
+    margin: 0;
+    box-sizing: border-box;
+    border: 2px solid blueviolet;
+    border-radius: 4px;
+    font-family: Karla, sans-serif;
+}
+
+.edit-pfp {
+    font-family: Karla, sans-serif;
+    margin-top: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/*
+BIO AND SUBMIT BUTTON BIO AND SUBMIT BUTTON 
+BIO AND SUBMIT BUTTON BIO AND SUBMIT BUTTON 
+BIO AND SUBMIT BUTTON BIO AND SUBMIT BUTTON 
+BIO AND SUBMIT BUTTON BIO AND SUBMIT BUTTON 
+*/
+
+.edit-bottom {
+    /* background-color: aquamarine; */
+
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100vh;
+
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.edit-bio {
+    padding-top: 10%;
+}
+
+.edit-bio textarea {
+    height: 100px;
+    width: 95%;
+    padding: 2%;
+    resize: none;
+    border: 2px solid #888;
+    border-radius: 10px;
+    font-family: Karla, sans-serif;
+}
+
+.edit-submit {
+    /* background-color: blanchedalmond; */
+    width: 100%;
+}
+
+#bio-form {
+    width: 100%;
+    text-align: right;
+    padding-top: 20px;
+}
+
+#bio-form input[type=submit]{
+    padding: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: lavender;
+    border: none;
+    border-radius: 20px;
+    font-family: Karla, sans-serif;
+    margin-right: 2.5%;
+}

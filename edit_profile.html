@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title> Edit Profile </title>
-  </head>
-  <body>
-	  <!-- navbar -->
-  </body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/edit_profile.css">
+    </head>
+    <body>
+        <div class="edit-div">
+           <div class="edit-top">
+                <div id="edit-picture">
+                    <img src="profilepics/IU.png" alt="Profile Image" id="profile-image">
+                </div>
+                <div class="edit-userinfo">
+                    <label for="username">username</label>
+                    <input type="text" id="username" name="username" form="bio-form" placeholder="아이유isLOVE! 💜">
+                    <input type="file" id="upload-pfp" name="filename" form="bio-form" alt="profile pic" hidden/>
+                    <label for="upload-pfp" class="edit-pfp">Change Profile Picture</label>
+                </div>
+
+            </div>
+
+            <div class="edit-bottom"> 
+                <div class="edit-bio">
+                    <textarea name="bio" form="bio-form">:¨·.·¨:
+`·. 𝐿𝑒𝑒 𝒥𝒾-𝑒𝓊𝓃 ˙ᵕ˙ | #아이유 ♡ ꜰᴀɴ ꜱɪɴᴄᴇ╰ ₂₀₁₂ˊ✦・₍ ᐢ.ˬ.ᐢ₎˚୨୧</textarea>
+                </div>
+                <div class="edit-submit">
+                    <form action="edit_profile.html" id="bio-form">
+                        <input type="submit" value="Save Changes">
+                    </form>
+                </div>
+                
+            </div>
+        
+
+        </div>  
+    </body>
 </html>

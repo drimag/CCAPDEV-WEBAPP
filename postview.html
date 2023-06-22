@@ -3,80 +3,109 @@
     <head>
         <title>Post View</title>
         <link rel="stylesheet" href="postview.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="postview.js"></script>
     </head>
 
     <body>
         <div class="navbar">navbar here</div>
         <br>
-        <div class="expanded-post-container">
+        <div class="expanded-container">
             <div class="post-container">
-                <div class="user-icon">
-                    <img class="pfp" src="profilepics/yunjin.jpg">
-                </div>
-
-                <div class="post-details">
-                    <div class="user">
-                        <span class="username">@yunjin</span>
+                <div class="post-no-comment">
+                    <div class="user-icon">
+                        <img class="pfp" src="profilepics/yunjin.jpg">
                     </div>
-                    <div class="post-title">Do I need anything to run Go code?</div>
-                  
-                    <p class="post-content">I have been learning coding in Python and you need to install Python on the machine to be able to run the code.
 
-                    I wanted to try to learn Go. But where I use the code, we need to go through a lot of hoops to install anything new or get permission.
+                    <div class="post-details">
+                        <div class="user">
+                            <span class="username">@yunjin</span>
+                        </div>
+                        <div class="post-title">Do I need anything to run Go code?</div>
+                  
+                        <p class="post-content">I have been learning coding in Python and you need to install Python on the machine to be able to run the code.
+
+                        I wanted to try to learn Go. But where I use the code, we need to go through a lot of hoops to install anything new or get permission.
                 
-                    But do I actually need to install anything to use Go? Can I just code on my home machine then send the compiled file to the machine where we actually run the code, without installing anything, and it will just run on there without needing to do anything?</p>
-                    <div class="icons">
-                        <span class="reply"></span> 
-                        <span class="upvote"></span> 
-                        700<span class="downvote"></span>
+                        But do I actually need to install anything to use Go? Can I just code on my home machine then send the compiled file to the machine where we actually run the code, without installing anything, and it will just run on there without needing to do anything?</p>
+                        <div class="icons">
+                            <button class="reply" id="reply1"></button> 
+                            <div class="votes">
+                            <button class="upvote" id="upvote1"></button><span class="vote-value" id="vote-value1">700</span><button class="downvote" id="downvote1"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="comment-popup" id="comment-popup1">
+                    <textarea rows="10" cols="87" placeholder="Comment here..."></textarea>
+                    <div class="post-button">
+                        <input type="button" value="Reply">
                     </div>
                 </div>
             </div>
         <br>
         <div class="comment-section">
-            <textarea rows="10" cols="87" placeholder="Comment here..."></textarea>
-            <button>Submit</button>
-            <br><br>
             <div class="comment-box">
-                <div class="user-icon">
-                    <img class="pfp" src="profilepics/chaewon.jpg">
-                </div>
-                <div class="post-details">
-                    <div class="user">
-                        <span class="username">@chaewon</span>
+                <div class="post-no-comment">
+                    <div class="user-icon">
+                        <img class="pfp" src="profilepics/chaewon.jpg">
                     </div>
-                    <p class="comment">Go creates native binaries - you don't need an interpreter or runtime to run them.
+                    <div class="post-details">
+                        <div class="user">
+                            <span class="username">@chaewon</span>
+                        </div>
+                        <p class="comment">Go creates native binaries - you don't need an interpreter or runtime to run them.
     
                         So yes, you can just compile on your home machine (cross compile if the target computer is a different platform) and then just run the binary on the target computer (that's assuming that the machine isn't locked down in a way that disallows executing arbitrary binaries - but if that's the case, you're just plain out of luck).</p>
-                    <div class="icons">
-                        <span class="reply"></span> 
-                        <span class="upvote"></span> 
-                        2<span class="downvote"></span>
+                        <div class="icons">
+                            <button class="reply" id="reply2"></button> 
+                            <div class="votes">
+                            <button class="upvote" id="upvote2"></button><span class="vote-value" id="vote-value2">23</span><button class="downvote" id="downvote2"></button>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="comment-popup" id="comment-popup2">
+                    <textarea rows="10" cols="87" placeholder="Comment here..."></textarea>
+                    <div class="post-button">
+                        <input type="button" value="Reply">
                     </div>
                 </div>
                 
             </div>
 
             <div class="comment-box">
-                <div class="user-icon">
-                    <img class="pfp" src="profilepics/eunchae.jpg">
-                </div>
-                <div class="post-details">
-                    <div class="user">
-                        <span class="username">@eunchae</span>
+                <div class="post-no-comment">
+                    <div class="user-icon">
+                        <img class="pfp" src="profilepics/eunchae.jpg">
                     </div>
-                    <p class="comment">You really haven't explained much about your situation.
+                    <div class="post-details">
+                        <div class="user">
+                            <span class="username">@eunchae</span>
+                        </div>
+                   
+                        <p class="comment">You really haven't explained much about your situation.
     
                         If you can plug in a flash drive and have read/write access to it then you can probably run Python from that.
                         
                         There are quite a few online coding environments these days, you can probably find one to suit your needs. And I don't just mean for Python.</p>
-                    <div class="icons">
-                        <span class="reply"></span> 
-                        <span class="upvote"></span>
-                        -1<span class="downvote"></span>
+                        <div class="icons">
+                            <button class="reply" id="reply3"></button> 
+                            <div class="votes">
+                                <button class="upvote" id="upvote3"></button><span class="vote-value" id="vote-value3">7</span><button class="downvote" id="downvote3"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                <br>
+                <div class="comment-popup" id="comment-popup3">
+                    <textarea rows="10" cols="87" placeholder="Comment here..."></textarea>
+                    <div class="post-button">
+                        <input type="button" value="Reply">
+                    </div>
+                </div>
             </div>
                 
         </div>

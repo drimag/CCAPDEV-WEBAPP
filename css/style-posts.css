@@ -66,7 +66,7 @@
 
 span.comment {
 	display: inline-block;
-	background-image: url('icons/comment.png');
+	background-image: url('../icons/comment.png');
 	background-size: 20px;
     background-repeat: no-repeat;
 	height: 20px;
@@ -75,7 +75,7 @@ span.comment {
 
 span.upvote {
 	display: inline-block;
-	background-image: url('icons/upvote.png');
+	background-image: url('../icons/upvote.png');
 	background-size: 20px;
     background-repeat: no-repeat;
 	height: 20px;
@@ -84,7 +84,7 @@ span.upvote {
 
 span.downvote {
 	display: inline-block;
-	background-image: url('icons/downvote.png');
+	background-image: url('../icons/downvote.png');
 	background-size: 20px;
     background-repeat: no-repeat;
 	height: 20px;

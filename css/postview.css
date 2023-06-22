@@ -105,7 +105,7 @@ textarea{
 }
 
 .upvote{
-    background: url('icons/rsz_upvote.png') no-repeat 0 0;
+    background: url('../icons/rsz_upvote.png') no-repeat 0 0;
 	background-size: 24px 24px;
 	width: 24px;
 	height: 24px;
@@ -122,7 +122,7 @@ textarea{
 }
 */
 .downvote{
-    background: url('icons/rsz_downvote.png') no-repeat 0 0;
+    background: url('../icons/rsz_downvote.png') no-repeat 0 0;
 	background-size: 24px 24px;
 	width: 24px;
 	height: 24px;
@@ -134,7 +134,7 @@ textarea{
 
 
 .reply{
-    background: url('icons/rsz_comment.png') no-repeat 0 0;
+    background: url('../icons/rsz_comment.png') no-repeat 0 0;
 	background-size: 24px 24px;
 	width: 24px;
 	height: 24px;

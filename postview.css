@@ -8,23 +8,36 @@ body {
     width: 100%;
     background-color: fuchsia;
 }
+
+.expanded-post-container{
+    background-color: beige;
+    margin:auto;
+    width: 1000px;
+    padding:15px;
+    border-radius: 15px;
+}
+
 div.post-container{
+    display: flex;
+    flex-direction: row;
 	margin: auto;
 	width: 700px;
 	background-color:white;
-	border: 3px solid black;
-    border-radius: 3px;
+    border-radius: 15px;
 	box-sizing: border-box;
-	padding: 15px;
-    
+	padding: 15px;   
+}
+
+.post-details{
+    display:flex;
+    flex-direction: column;
 }
 
 .comment-section{
 	margin: auto;
 	width: 700px;
-	background-color:white;
-	border: 3px solid black;
-    border-radius: 3px;
+	background-color:lavender;
+    border-radius: 15px;
 	box-sizing: border-box;
 	padding: 15px;
     
@@ -33,81 +46,51 @@ div.post-container{
 .comment-box{
     margin: auto;
 	width: 650px;
-	background-color:white;
-	border-left: 3px solid grey;
-    border-radius: 3px;
+	background-color:lavender;
+    border-radius: 15px;
 	box-sizing: border-box;
-	padding:5px;
+	padding: 15px;
+    display: flex;
+    flex-direction: row;
 }
 
-/*
-.comment-border{
-    width: 645px;
-    height: 5px;
-    background-color: black;
-}
-*/
-/*
-.comment-box:hover{
-    border: 3px solid black;
-}
-*/
+
 .post-title{
-    font-size: xx-large;
+    font-size: 25;
     font-weight: 700;
 }
 
 
-
 .user{
-    border: 3px solid white;
-    padding: 2px;
-    display: flex;
-    flex-direction: row;
     display: inline-block;
-    padding: 3px;
-   
+    padding: 2px;
+    
 }
 
+/*
 .user:hover{
     border: 3px solid black;
     border-radius: 15px;
 }
-/*
-.pfp{
-    display: inline-block;
-    background-image: url("../juan/reddit.png");
-    background-repeat: no-repeat; 
-    width:20px;
-    height:20px; 
-    border-radius: 10px;
-}
 */
-.username{
-    display: inline-block;
-   
-
-}
-
 
 .post-content{
     text-align:justify;
-    font-size: 14px;
+    font-size: 16px;
 }
 
-/*
-.border{
-    width: 675px;
-    height: 5px;
-    background-color: black;
+.username{
+    font-size:large;
+    font-weight: 700;
 }
-*/
 
 textarea{
+    margin: auto;
     border-radius: 2px;
-    resize:none;
-    border:2px solid black;
+    resize: none;
+    border: 2px solid black;
     height: 100px;
+    width: 650px;
 }
 
 .icons{
@@ -139,4 +122,18 @@ textarea{
 	width: 24px;
 	height: 24px;
     display: inline-block
+}
+
+
+.pfp{
+    height: 75px;
+    width: 75px;
+    margin: 10px;
+    border-radius: 50px;
+}
+
+
+.comment{
+    text-align:justify;
+    font-size: 14px;
 }

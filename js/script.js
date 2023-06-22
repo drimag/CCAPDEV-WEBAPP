@@ -21,7 +21,15 @@ let userEunchae = new User("eunchae", "mubankpresident");
 FUNCTIONS TO DO:
 - show edit button
 - view profile
-- submit post
+- create post
+- create comment
+- view post
+- upvote downvote post comment
+- search
+- view profile
+-view all posts 
+- view latest comments and posts
+- login logout
 */
 
 const Post = function(num, title, description, user, comments = []) {
@@ -55,17 +63,28 @@ function switchUser(newUser) {
 }
 
 function viewingProfile(user) {
-    $(document).ready(function() {
+    $(document).load(function() {
         console.log("Current User Profile: " + user.name);
         $("#profile-img").attr("src", user.img);
         $("#profile-username").text("hello");
-        console.log("wooo");
         $("#profile-bio").text("it worked");
     });
 }
 
 function hideEditProfile(user) {
-    
+    const editProfileButton = document.getElementsByName("Edit Profile");
+
+    // Show edit profile button
+    $(document).ready(function() {
+        if(currentUser.id === viewingProfile.id) {
+            //editProfileButton.show();
+            editProfileButton.style.display = "block";
+        // Hide edit profile button
+        } else {
+            //editProfileButton.hide();
+            editProfileButton.style.display = "none";
+        }
+    });
 }
 
 // Switching User on Home Page
@@ -156,7 +175,7 @@ function submitPost(newPost) {
                     "</div>" +
                 "</div>";
                 
-    document.querySelector("div#post-container").innerHTML += post;
+    document.querySelector("posts").innerHTML += post;
 }
 
 

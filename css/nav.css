@@ -9,6 +9,7 @@
     width: 100%;
     font-family: Karla, sans-serif;
     border-bottom: 1px solid slateblue;
+    transition: top 0.3s;
 }
 
 .nav-content {

@@ -6,18 +6,18 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./css/nav.css">
+        <link rel="stylesheet" href="nav.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <!-- <script src="nav.js"></script> -->
+        <script src="nav.js"></script>
     </head>
     <body>
 
-        <div class="nav-bar">
+        <div class="nav-bar" id="navbar">
             <ul class="nav-content">
 
                 <div class="nav-left">
                 <li class="nav-home">
-                    <a href="#" class="home-button">
+                    <a href="index.html" class="home-button">
                         <i class="fab fa-reddit"></i>
                         <span>Rawr</span>
                     </a>
@@ -37,10 +37,10 @@
                         <i class="fas fa-user-circle"></i>
                     </button>
                     <div id="dropdown" class="dropdown-content">
-                        <a href="#">Edit Profile</a>
-                        <a href="#">Log In</a>
-                        <a href="#">Sign Out</a>
-                        <a href="#">Send Feedback</a>
+                        <a href="edit_profile.html">Edit Profile</a>
+                        <a href="login.html">Log In / Switch Account</a>
+                        <a href="index.html">Sign Out</a>
+                        <a href="#">Change Password</a>
                     </div>
                 </li>
                 </div>
@@ -74,28 +74,13 @@
         <p>yoo</p>
         <p>yoo</p>
         <p>yoo</p>
+        <p>yoo</p>
+        <p>yoo</p>
+        <p>yoo</p>
+        <p>yoo</p>
+        <p>yoo</p>
+        <p>yoo</p>
+        <p>yoo</p>
 
-
-<script>
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-  var dropdown = document.getElementById('dropdown');
-  dropdown.classList.toggle('show');
-}
-
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-  if (!event.target.matches('.dropdown-button')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    for (var i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-};
-        </script>
     </body>
 </html>

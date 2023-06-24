@@ -21,7 +21,6 @@ let posts = [];
 const Post = function(num, user, title, description) {
     this.num = num;
     this.title = title;
-    this.descsnippet = description.substr(0, 20);
     this.user = user;
     this.description = description;
     this.upvotes = 0;
@@ -63,9 +62,17 @@ function displayAllPosts(posts) {
     }
 }
 
-displayAllPosts(posts);
+function displaySnippetPosts(posts) {
+    $(document).ready(function() {
+        for(let post of posts) {
+            
+            writePostSnippet(post.user, post);
+        }
+    });
+}
 
 // Functions
+displaySnippetPosts(posts.slice(0, 3));
 
 // Switch User: updates currentUser
 function switchUser(newUser) {
@@ -75,6 +82,16 @@ function switchUser(newUser) {
         currentUser = newUser;
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
         console.log(localStorage);
+
+        if(newUser == userGuest) {
+            let feedContainer = document.querySelector("#posts-feed");
+            feedContainer.innerHTML = "";
+            displaySnippetPosts(posts.slice(0, 3));
+        } else {
+            let feedContainer = document.querySelector("#posts-feed");
+            feedContainer.innerHTML = "";
+            displayAllPosts(posts);
+        }
     });
 }
 
@@ -157,6 +174,31 @@ function writePost(user, post) {
     postContainer.innerHTML += item;
 }
 
+function writePostSnippet(user, post) {
+    const postContainer = document.querySelector("#posts-feed");
+    let desc = post.description.slice(0,30);
+    const item =
+            `<div class="flex-row-container post">
+                <div>
+                    <img class="user" src="${user.img}">
+                </div>
+
+                <div class="flex-column-container post-details">
+                    <p class="username"> ${user.username} </p>
+                    <p class="post-title"> ${post.title} </p>
+                    <p class="description"> ${desc}... </p>
+                        
+                    <div class="actions">
+                        <span class="comment"></span>
+                        <span class="upvote"></span>
+                        <span class="downvote"></span>
+                    </div>
+                </div>
+            </div>`;
+
+    postContainer.innerHTML += item;
+}
+
 // Switching User on Home Page
 $(document).ready(function() {
 
@@ -167,6 +209,13 @@ $(document).ready(function() {
         } else {
             getInputs(currentUser);
         }
+    })
+
+    $("p.post-title").click(function() {
+        console.log("Viewing Post");
+        //$(this).css("color", "red");
+        //alert("viewing post");
+        window.location = "postview.html";
     })
 
     // View Current User's Profile
@@ -212,116 +261,3 @@ $(document).ready(function() {
         switchUser(user);
     });
 });
-
-/*
-const allPosts = [];
-document.getElementsByClassName("post").innerHTML = allPosts;
-// OR?
-const allPosts = Array.from(document.getElementsByClassName(".post"));
-
-// Refreshes the post-container according to the post contents of displayedPosts
-function refreshDisplay(displayedPosts) {
-    if (allPosts.length > 0) {
-        displayPosts(displayedPosts);
-    }
-}
-
-// Submit Post
-function submitPost(newPost) {
-    let user = newPost.user;
-    const post = "<div class='posts flex-column-container'>" +
-                    "<div class='flex-row-container post'>" +
-                        "<div>" +
-                            "<img class='user' src='" + currentUser.img + "'>" +
-                        "</div>" +
-                        
-                        "<div class='flex-column-container post-details'>" +
-                            "<p class='username'>" + currentUser + "</p>"
-                            "<p class='post-title'>" + newPost.title + "</p>" +
-                            "<p class='description'>" + newPost.description + "</p>" +
-
-                            "<div class="actions">" +
-                                "<span class="comment"></span>" +
-                                "<span class="upvote"></span>" +
-                                "<span class="downvote"></span>" +
-                            "</div>" +
-                        "</div>" +
-                    "</div>" +
-                "</div>";
-                
-    document.querySelector("posts").innerHTML += post;
-}
-
-
-
-
-
-Profile Page Functions
-
-let viewingProfile = "profile.html";
-
-allPosts.forEach(checkUsersPostsAndComments());
-
-function checkUsersPostsAndComments(element) {
-
-    if(currentUser === postAuthor) {
-        $(".comment").show();
-    }
-}
-
-
-
-
-
-// Display user's latest posts
-$(document).ready(function() {
-    $(".latestposts a").click(function() {
-        if(currentUser === postAuthor) {
-            $(".post").show();
-        }
-    })
-});
-
-// Display user's latest comments
-$(document).ready(function() {
-    $(".latestcomments a").click(function() {
-        if(currentUser === postAuthor) {
-            $(".comment").show();
-        }
-    })
-});
-
-// "Show More Posts" button to show more posts
-function showMorePosts() {
-    $(document).ready(function() {
-        $(".show-more-posts-button").click(function() {
-            if(currentUser === postAuthor) {
-                listOfPosts.toggle();
-            }
-        })
-    });
-}
-
-
-
-
-
-
-
-
-// "Edit Profile" button to only appear for the logged in user under their own profile
-
-const editProfileButton = document.getElementsByName("Edit Profile");
-
-// Show edit profile button
-$(document).ready(function() {
-    if(currentUser.id === viewingProfile.id) {
-        editProfileButton.show();
-        // editProfileButton.style.display = "block";
-    // Hide edit profile button
-    } else {
-        editProfileButton.hide();
-        // editProfileButton.style.display = "none";
-    }
-});
-*/

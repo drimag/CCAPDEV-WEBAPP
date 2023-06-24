@@ -27,6 +27,24 @@ $(document).ready(function() {
         feedContainer.innerHTML = "";
         displayAllPosts(currentPosts);
     });
+
+    $("#edit-profile").click(function() {
+        console.log("Editing Profile");
+        window.location = "edit_profile.html";
+    })
+
+    // Show first 3 posts
+    $(".post").slice(0,3).show();
+
+    $("#show-more-button").on("click", function() {
+        // Show 3 more posts when "Show More" button is clicked
+        $(".post:hidden").slice(0,2).show();
+
+        // Hide button
+        if($(".post:hidden").length == 0) {
+            $("#show-more-button").hide();
+        }
+    })
 });
 
 function displayAllPosts(posts) {
@@ -73,10 +91,12 @@ function writePost(user, post) {
 
 displayAllPosts(currentPosts);
 
-displayPosts = currentPosts.slice(0, 2);
+/********************/
 
-// "Show More Posts" button
-let showMorePostsBtn = document.querySelector('#show-more-posts-button');
+
+/*
+// "Show More Posts/Comments" button
+let showMorePostsBtn = document.querySelector('#show-more-button');
 let numOfPosts = 3;
 
 showMorePostsBtn.onclick = () => {
@@ -92,15 +112,4 @@ showMorePostsBtn.onclick = () => {
         showMorePostsBtn.style.display = "none";
     }
 };
-
-/*
-    they hide the posts using
-    
-    .post:nth-child(3) {
-        display: none;
-    }
-
-    but idk how to make it work
- */
-
-// "Show More Comments" button
+*/

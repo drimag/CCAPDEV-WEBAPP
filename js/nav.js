@@ -14,7 +14,7 @@ window.onscroll = function() {
 function clickDrop() {
   var dropdown = document.getElementById('dropdown');
   dropdown.style.display = "block";
-  console.log("bacon");
+  //console.log("bacon");
 
 }
    
@@ -48,6 +48,7 @@ function dropdownItems(toDropdown) {
 // choose which dropdown links to display depending
 // on if logged in or not
 
+
 document.addEventListener("DOMContentLoaded", function() {
 
   const guestDropdown = [
@@ -64,7 +65,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const dropdown = document.getElementById("dropdown");
 
-  let isLoggedIn = false //temporary
+  let isLoggedIn = !(currentUser.lname === "guest");
+  console.log(currentUser.lname);
+  console.log(isLoggedIn);
 
   if(isLoggedIn){
     dropdownItems(userDropdown);

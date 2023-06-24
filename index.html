@@ -38,20 +38,23 @@
                 
                 <!-- Create Post -->
                 <div class="post-creation-container flex-column-container">
-                    <div class="title-container">
-                        <input type="text" id="new-post-title" name="new-post-title" placeholder="Title">
-                    </div>
-                    <div class="textbox-container">
-                        <textarea placeholder="What's on your mind?"></textarea>
-                    </div>
-                    <div class="post-button">
-                        <input type="button" id="submit-post" value="Post">
-                    </div>
+                    <form id="postform">
+                        <div class="title-container">
+                            <input type="text" id="new-post-title" name="new-post-title" placeholder="Title">
+                        </div>
+                        <div class="textbox-container">
+                            <textarea form="postform" name="new-post-description" id="new-post-description" class="text" placeholder="What's on your mind?"></textarea>
+                        </div>
+                        <div class="post-button">
+                            <input type="button" id="submit-post" value="Post">
+                        </div>
+                    </form>
                 </div>
                 
                 <!-- Timeline -->
-                <div class="posts flex-column-container">
-                    <div class="flex-row-container post" id="post1">
+                <div class="posts flex-column-container" id="posts-feed">
+                    <!-- POST FORMATTING
+                    <div class="flex-row-container post">
                         <div>
                             <img class="user" src="profilepics/chaewon.jpg">
                         </div>
@@ -68,83 +71,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="flex-row-container post" id="post2">
-                            
-                        <div>
-                            <img class="user" src="profilepics/yunjin.jpg">
-                        </div>
-
-                        <div class="flex-column-container post-details">
-                            <p class="username"> @yunjin </p>
-                            <p class="post-title"> Title </p>
-                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
-
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span class="downvote"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex-row-container post" id="post3">
-                            
-                        <div>
-                            <img class="user" src="profilepics/eunchae.jpg">
-                        </div>
-
-                        <div class="flex-column-container post-details">
-                            <p class="username"> @eunchae </p>
-                            <p class="post-title"> Title </p>
-                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
-
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span class="downvote"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex-row-container post" id="post4">
-                            
-                        <div>
-                            <img class="user" src="profilepics/sakura.jpg">
-                        </div>
-
-                        <div class="flex-column-container post-details">
-                            <p class="username"> @sakura </p>
-                            <p class="post-title"> Title </p>
-                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
-
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span class="downvote"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex-row-container post" id="post5">
-                            
-                        <div>
-                            <img class="user" src="profilepics/kazuha.jpg">
-                        </div>
-
-                        <div class="flex-column-container post-details">
-                            <p class="username"> @kazuha </p>
-                            <p class="post-title"> Title </p>
-                            <p class="description"> I GOT A CONDO IN MANHATTAN!!!! </p>
-
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span class="downvote"></span>
-                            </div>
-                        </div>
-                    </div>
-
+                    
+                    -->
                 </div>
             </div>
         </div>

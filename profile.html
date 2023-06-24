@@ -6,7 +6,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-posts.css"> 
-        <script src="js/script.js" defer></script>
+        <script src="js/profile.js" defer></script>
         
     </head>
     <body>
@@ -29,20 +29,17 @@
             
             <div class="flex-column-container latest">
                 <div class="buttons flex-row-container">
-                    <div class="latestposts active">
-                        <a href="profile.html" target="_self" name="View Latest Posts">
-                            <p> Latest Posts </p>
-                        </a>
+                    <div class="latestposts active" id="latest-posts">
+                        <p> Latest Posts </p>
                     </div>
-                    <div class="latestcomments">
-                        <a href="profile_comments.html" target="_self" name="View Latest Comments">
-                            <p> Latest Comments </p>
-                        </a>
+                    <div class="latestcomments" id="latest-comments">
+                        <p> Latest Comments </p>
                     </div>
                 </div>
 
-                <div class="posts flex-column-container">
-                    <div class="flex-row-container post" id="post1">
+                <div class="posts flex-column-container" id="latest-feed">
+                    <!-- TEMPLATE FOR POSTS
+                    <div class="flex-row-container post">
                         <div>
                             <img class="user" src="profilepics/chaewon.jpg">
                         </div>
@@ -59,12 +56,13 @@
                             </div>
                         </div>
                     </div>
+                    -->
                 </div>
 
                 <!-- add 2 more for preview -->
                 <!-- "Show More Posts" button -->
-                <div>
-                    <input type="button" class="show-more-posts-button">
+                <div class="show-more">
+                    <input type="button" id="show-more-button" value="Show More">
                 </div>
             </div>
         </div>

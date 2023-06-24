@@ -32,3 +32,48 @@ window.onclick = function(event) {
     }
   }
 };
+
+
+// displaying dropdown items
+function dropdownItems(toDropdown) {
+  toDropdown.forEach(item => {
+  const menuItem = document.createElement("a");
+  menuItem.href = item.link;
+  menuItem.textContent = item.label;
+
+  dropdown.appendChild(menuItem);
+  });
+}
+
+// choose which dropdown links to display depending
+// on if logged in or not
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  const guestDropdown = [
+    { label: "Sign Up", link: "index.html" },
+  ];
+
+  const userDropdown = [
+    { label: "Edit Profile", link: "edit_profile.html" },
+    { label: "Switch Account", link: "login.html" },
+    { label: "Sign Out", link: "index.html" },
+    { label: "Change Password", link: "#" },
+    { label: "View Profile", link: "profile.html"}
+  ];
+
+  const dropdown = document.getElementById("dropdown");
+
+  let isLoggedIn = false //temporary
+
+  if(isLoggedIn){
+    dropdownItems(userDropdown);
+  } else{
+    dropdownItems(guestDropdown);
+  }
+});
+
+
+
+
+

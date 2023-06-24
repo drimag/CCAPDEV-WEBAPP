@@ -1,5 +1,5 @@
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-let currentPosts = JSON.parse(localStorage.getItem("currentPosts"));
+let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+let currentPosts = JSON.parse(sessionStorage.getItem("currentPosts"));
 
 console.log(currentPosts);
 
@@ -30,15 +30,12 @@ $(document).ready(function() {
 
     $("#edit-profile").click(function() {
         console.log("Editing Profile");
-        window.location = "edit_profile.html";
+        window.location = "index.html";
     })
-
-    // Show first 3 posts
-    $(".post").slice(0,3).show();
 
     $("#show-more-button").on("click", function() {
         // Show 3 more posts when "Show More" button is clicked
-        $(".post:hidden").slice(0,2).show();
+        $(".post:hidden").slice(0,4).show();
 
         // Hide button
         if($(".post:hidden").length == 0) {

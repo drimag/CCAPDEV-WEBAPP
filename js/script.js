@@ -5,10 +5,10 @@ const User = function(name, password) {
     this.password = password;
     this.acc = "#user-" + name;
     this.img = "./profilepics/" + this.lname + ".jpg";
-    this.bio = "test bio";
+    this.bio = "";
 }
 
-let users = []
+let users = [];
 let userGuest = new User("Guest", "1234");
 let userSakura = new User("Sakura", "letmeplay");
 let userChaewon = new User("Chaewon", "tyforsupportingus");
@@ -76,7 +76,7 @@ if(currentUser == null && viewingUser == null) {
     console.log("Current User is " + currentUser.name);
 }
 
-console.log(posts);
+console.log("Total Posts: " + posts.length);
 
 
 // Functions -----------------------------------------------------------------------
@@ -93,7 +93,6 @@ function switchUser(newUser) {
         $("#user-selected").attr("src", newUser.img);
         currentUser = newUser;
         sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
-        console.log(sessionStorage);
 
         if(newUser.name == userGuest.name) {
             $(".descsnippet").show();
@@ -127,7 +126,6 @@ function getInputs(user) {
         let count = 0;
         let title = null;
         let description = null;
-        console.log()
 
         for (let data of formData) {
             if(count == 0) {

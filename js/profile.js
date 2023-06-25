@@ -1,6 +1,8 @@
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let currentPosts = JSON.parse(sessionStorage.getItem("currentPosts"));
 let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
+let currentComments = JSON.parse(sessionStorage.getItem("currentComments"));
+console.log(currentComments);
 
 console.log("Current User: " + currentUser.username);
 console.log("Current Total Posts: " + currentPosts.length);
@@ -11,6 +13,9 @@ $(document).ready(function() {
     $("#profile-img").attr("src", viewingUser.img);
     $("#profile-bio").text(viewingUser.bio);
     $("#latest-feed-comments").hide();
+
+    displayAllPosts(currentPosts);
+    displayAllComments(currentComments);
 
     // Hide/Show Edit Profile Button depending on the current user and shown user profile
     if(viewingUser.username != currentUser.username) {
@@ -72,6 +77,14 @@ function displayAllPosts(posts) {
 }
 
 // TODO: displayAllComments()
+function displayAllComments(comments) {
+    for(let comment of comments) {
+        console.log("User " + comment.user + " replied to " + comment.repliedTo);
+        if(comment.user.username == viewingUser.username) {
+            writeComment(comment.user, comment);
+        }
+    }
+}
 
 console.log(currentPosts);
 
@@ -101,6 +114,27 @@ function writePost(user, post) {
 }
 
 // TODO: writeComment()
+function writeComment(user, comment) {
+    const postContainer = document.querySelector("#latest-feed-comments");
+    const item =
+            `<div class="flex-row-container post">
+                <div>
+                    <img class="user ${user.lname}" src="${user.img}">
+                </div>
 
-displayAllPosts(currentPosts);
-// displayAllComments();
+                <div class="flex-column-container post-details">
+                    <p class="username"> ${user.username} </p>
+                    <p class="post-title"> Replied to ${comment.repliedTo.username} </p>
+                    <p class="description"> ${comment.description} </p>
+                    
+                    <div class="actions">
+                        <span class="comment"></span>
+                        <span class="upvote"></span>
+                        <span class="number"> ${comment.votes} </span>
+                        <span class="downvote"></span>
+                    </div>
+                </div>
+            </div>`;
+
+    postContainer.innerHTML += item;
+}

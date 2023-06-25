@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login Page</title>
+        <title>Register Page</title>
         <link rel="stylesheet" href="css/login.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/login.js"></script>
@@ -10,11 +10,10 @@
     <body>
         <img class="bg-image" src="./images/background.jpg">
         <div class="outer-login-container">
-            <h1 class="login-title">Welcome to ???</h1>
             <br>
             <div class="inner-login-container">
-                <h2 class="login-title">Log In</h2>
-                <form>
+                <h2 class="login-title">Create an Account</h2>
+                <form class="registration-form">
                     <div class="login-box" id="username-box">
                         <span class="credential-title">Username</span>
                         <input class="credential-input" type="text" id="username" name="username" required>
@@ -26,11 +25,7 @@
                     </div>
                     <br>
                     <div class="submit-box">
-                        <input class="login-button" type="submit" value="Log In">
-                    </div>
-                    <br>
-                    <div class="register-container">
-                        <span>Don't have an account? <a href="register.html">Sign Up</a></span>
+                        <input class="register-button" type="submit" value="Register">
                     </div>
                 </form>
             </div>

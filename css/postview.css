@@ -30,6 +30,7 @@ body {
 .post-no-comment{
     display: flex;
     flex-direction: row;
+    width: 90%;
 }
 
 div.post-container{
@@ -47,6 +48,7 @@ div.post-container{
 .post-details{
     display:flex;
     flex-direction: column;
+    width: 90%;
 }
 
 .comment-section{

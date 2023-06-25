@@ -136,6 +136,10 @@ span.downvote {
     display: none;
 }
 
-.post:nth-last-child(1), .post:nth-last-child(2), .post:nth-last-child(3) {
+.post:nth-last-child(1), .post:nth-last-child(2), .post:nth-last-child(3),
+.post:nth-last-child(4), .post:nth-last-child(5), .post:nth-last-child(6),
+.post:nth-last-child(7), .post:nth-last-child(8), .post:nth-last-child(9),
+.post:nth-last-child(10), .post:nth-last-child(11), .post:nth-last-child(12),
+.post:nth-last-child(13), .post:nth-last-child(14), .post:nth-last-child(15) {
     display: flex;
 }

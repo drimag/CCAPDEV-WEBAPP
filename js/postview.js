@@ -1,152 +1,271 @@
 /*********************************************************************/
+
+$(document).ready(function() {
+  var upvoteCount = 1; 
+  var downvoteCount = 1;
+  var replyCount = 1;
+  var voteValCount = 1;
+  var commentPopCount = 1;
+  var postButtonCount = 1;
+  var commentAreaCount = 1;
+
+  // gives every relevant class an id
+  $('.upvote').each(function() {
+    var upvID = 'upvote' + upvoteCount;
+    $(this).attr('id', upvID);
+    upvoteCount++;
+  });
+
+
+  $('.downvote').each(function() {
+    var downvID = 'downvote' + downvoteCount;
+    $(this).attr('id', downvID);
+    downvoteCount++;
+  });
+
+
+  $('.reply').each(function() {
+    var repID = 'reply' + replyCount;
+    $(this).attr('id', repID);
+    replyCount++;
+  });
+
+
+  $('.vote-value').each(function() {
+    var voteValID = 'vote-value' + voteValCount;
+    $(this).attr('id', voteValID);
+    voteValCount++;
+  });
+
+  $('.comment-popup').each(function() {
+    var commentPopID = 'comment-popup' + commentPopCount;
+    $(this).attr('id', commentPopID);
+    commentPopCount++;
+  });
+
+
+  $('.post-button input').each(function() {
+    var postButtonID = 'postButton' + postButtonCount;
+    $(this).attr('id', postButtonID);
+    postButtonCount++;
+  });
+
+
+  $('.comment-area').each(function() {
+    var commentAreaID = 'comment-area' + commentAreaCount;
+    $(this).attr('id', commentAreaID);
+    commentAreaCount++;
+  });
+
+
+  //write comment
+  $(document).ready(function() {
+    $('.post-button input').each(function() {
+      var classID = $(this).attr('id');
+      var num = classID.slice(-1);
+      console.log(classID);
+      $(("#postButton"+ num)).click(function() {
+        var paragraph = $("#comment-area"+ num).val();
+        var commentObject = new Comment(currentUser,paragraph);
+        writeComment(commentObject);
+      });
+    });
+  });
+
+
+
+  function writeComment(userObject) {
+    const postContainer = document.querySelector(".comment-section");
+    const item =
+          `<div class="comment-box">
+            <div class="post-no-comment">
+                <div class="user-icon">
+                    <img class="pfp" src="${userObject.user.img}">
+                </div>
+                <div class="post-details">
+                    <div class="user">
+                        <span class="username">${userObject.user.username}</span>
+                    </div>
+                    <p class="comment">${userObject.description}</p>
+                    <div class="icons">
+                        <button class="reply"></button> 
+                        <div class="votes">
+                        <button class="upvote" id=${'upvote' + upvoteCount}></button><span class="vote-value" id=${'vote-value' + voteValCount}>${userObject.votes}</span><button class="downvote" id=${'downvote' + downvoteCount})></button>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+  
+            <br>
+  
+            <div class="comment-popup">
+                <textarea class="comment-area" rows="10" cols="87" placeholder="Comment here..."></textarea>
+                <div class="post-button">
+                    <input type="button" value="Reply">
+                </div>
+            </div>  
+        </div>`;
+  
+    postContainer.innerHTML += item;
+    console.log("Posted.");
+  }
+
+
+
+
+
+
+
+});
+
+
+/*********************************************************************/
 //comment related functions
-$(document).ready(function() {
-    $("#reply1").click(function() {
-      $("#comment-popup1").toggle();
-    });
-});
-
-$(document).ready(function() {
-    $("#reply2").click(function() {
-      $("#comment-popup2").toggle();
-    });
-});
 
 
+
+//expands comment box when icon is clicked
 $(document).ready(function() {
-    $("#reply3").click(function() {
-      $("#comment-popup3").toggle();
+  $('.reply').each(function() {
+    var classID = $(this).attr('id');
+    var num = classID.slice(-1);
+
+    $(("#reply"+ num)).click(function() {
+      $(("#comment-popup"+ num)).toggle();
     });
+  });
 });
 
 
 
-/*********************************************************************/
-//upvoted related functions
-$(document).ready(function() {
-    $("#upvote1").click(function() {
-      var counterValue = parseInt($("#vote-value1").text());
+class User {
+  constructor(name, password) {
+    this.name = name;
+    this.lname = this.name.toLowerCase();
+    this.username = "@" + this.lname;
+    this.password = password;
+    this.acc = "#user-" + name;
+    this.img = "./profilepics/" + this.lname + ".jpg";
+    this.bio = "test bio";
+  }
+}
+
+let userGuest = new User("Guest", "1234");
+let userSakura = new User("Sakura", "letmeplay");
+let userChaewon = new User("Chaewon", "tyforsupportingus");
+let userYunjin = new User("Yunjin", "IGOTACONDOINMANHATTAN");
+let userKazuha = new User("Kazuha", "bang!");
+let userEunchae = new User("eunchae", "mubankpresident");
+
+
+
+class Comment {
+  constructor(user, description) {
+    //this.num = num;
+    this.user = user;
+    this.description = description;
+    this.votes = 0;
+  }
+}
+
+$(document).ready(function(){
+  //upvote function
+  $('.upvote').each(function() {
+
+    var classID = $(this).attr('id');
+    var num = classID.slice(-1);
+
+    $("#upvote"+ num).click(function() {
+      var counterValue = parseInt($("#vote-value"+ num).text());
       var newCounterValue = counterValue;
       
+      //removes vote if clicked again
       if ($(this).hasClass('clicked')) {
         newCounterValue--;
-        $('#upvote1').removeClass('clicked');
-      }else if ($('#downvote1').hasClass('clicked')){
+        $('#upvote' + num).removeClass('clicked');
+      //removes effect of opposite vote if clicked
+      }else if ($('#downvote' + num).hasClass('clicked')){
         newCounterValue = counterValue + 2;
         $(this).addClass('clicked');
-        $('#downvote1').removeClass('clicked');
+        $('#downvote'+ num).removeClass('clicked');
+      //when no vote was clicked
       }else{
         newCounterValue++;
         $(this).addClass('clicked');
       }
-      
-      $("#vote-value1").text(newCounterValue);
+    
+      $("#vote-value"+num).text(newCounterValue);
     });
+
   });
 
-$(document).ready(function() {
-    $("#upvote2").click(function() {
-      var counterValue = parseInt($("#vote-value2").text());
+  //downvote
+  $('.downvote').each(function() {
+    var classID = $(this).attr('id');
+    var num = classID.slice(-1);
+
+    $("#downvote"+ num).click(function() {
+      var counterValue = parseInt($("#vote-value"+ num).text());
       var newCounterValue = counterValue;
-      
+      //removes vote if clicked again  
       if ($(this).hasClass('clicked')) {
-        newCounterValue--;
-        $('#upvote2').removeClass('clicked');
-      }else if ($('#downvote2').hasClass('clicked')){
-        newCounterValue = counterValue + 2;
-        $(this).addClass('clicked');
-        $('#downvote2').removeClass('clicked');
-      }else{
         newCounterValue++;
+        $('#downvote'+ num).removeClass('clicked');
+      //removes effect of opposite vote if clicked
+      }else if ($('#upvote'+ num).hasClass('clicked')){
+        newCounterValue = counterValue - 2;
+        $(this).addClass('clicked');
+        $('#upvote'+ num).removeClass('clicked');
+      //when no vote was clicked
+      }else{
+        newCounterValue--;
         $(this).addClass('clicked');
       }
 
-      $("#vote-value2").text(newCounterValue);
+      $("#vote-value"+ num).text(newCounterValue);
     });
   });
 
-$(document).ready(function() {
-    $("#upvote3").click(function() {
-      var counterValue = parseInt($("#vote-value3").text());
-      var newCounterValue = counterValue;
-      
-      if ($(this).hasClass('clicked')) {
-        newCounterValue--;
-        $('#upvote3').removeClass('clicked');
-      }else if ($('#downvote3').hasClass('clicked')){
-        newCounterValue = counterValue + 2;
-        $(this).addClass('clicked');
-        $('#downvote3').removeClass('clicked');
-      }else{
-        newCounterValue++;
-        $(this).addClass('clicked');
-      }
+});
 
-      $("#vote-value3").text(newCounterValue);
-    });
-  });
+//sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+//Temporary function because idk if i should be able to change posts here
+if(currentUser == null) {
+  currentUser = userYunjin;
+} 
 
-/*********************************************************************/
-//downvote related functions
 
-$(document).ready(function() {
-    $("#downvote1").click(function() {
-      var counterValue = parseInt($("#vote-value1").text());
-      var newCounterValue = counterValue;
-      
-    if ($(this).hasClass('clicked')) {
-        newCounterValue++;
-        $('#downvote1').removeClass('clicked');
-    }else if ($('#upvote1').hasClass('clicked')){
-        newCounterValue = counterValue - 2;
-        $(this).addClass('clicked');
-        $('#upvote1').removeClass('clicked');
-    }else{
-        newCounterValue--;
-        $(this).addClass('clicked');
-    }
-      $("#vote-value1").text(newCounterValue);
-    });
-  });
+/*
+ comment format:
+             <div class="comment-box">
+                <div class="post-no-comment">
+                    <div class="user-icon">
+                        <img class="pfp" src="profilepics/chaewon.jpg">
+                    </div>
+                    <div class="post-details">
+                        <div class="user">
+                            <span class="username">@chaewon</span>
+                        </div>
+                        <p class="comment">
 
-$(document).ready(function() {
-    $("#downvote2").click(function() {
-      var counterValue = parseInt($("#vote-value2").text());
-      var newCounterValue = counterValue;
-      
-    if ($(this).hasClass('clicked')) {
-        newCounterValue++;
-        $('#downvote2').removeClass('clicked');
-    }else if ($('#upvote2').hasClass('clicked')){
-        newCounterValue = counterValue - 2;
-        $(this).addClass('clicked');
-        $('#upvote2').removeClass('clicked');
-    }else{
-        newCounterValue--;
-        $(this).addClass('clicked');
-    }
-      $("#vote-value2").text(newCounterValue);
-    });
-  });
+                        </p>
+                        <div class="icons">
+                            <button class="reply"></button> 
+                            <div class="votes">
+                            <button class="upvote"></button><span class="vote-value">23</span><button class="downvote"></button>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="comment-popup">
+                    <textarea class="comment-area" rows="10" cols="87" placeholder="Comment here..."></textarea>
+                    <div class="post-button">
+                        <input type="button" value="Reply">
+                    </div>
+                </div>
+                
+            </div>
 
-$(document).ready(function() {
-    $("#downvote3").click(function() {
-      var counterValue = parseInt($("#vote-value3").text());
-      var newCounterValue = counterValue;
-
-    if ($(this).hasClass('clicked')) {
-        newCounterValue++;
-        $('#downvote3').removeClass('clicked');
-    }else if ($('#upvote3').hasClass('clicked')){
-        newCounterValue = counterValue - 2;
-        $(this).addClass('clicked');
-        $('#upvote3').removeClass('clicked');
-    }else{
-        newCounterValue--;
-        $(this).addClass('clicked');
-    }
-      $("#vote-value3").text(newCounterValue);
-    });
-  });
-
-/*********************************************************************/
+*/

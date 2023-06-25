@@ -61,6 +61,7 @@ posts.push(post1, post2, post3, post4, post5);
 //------------------------------------
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
+let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
 
 if(currentUser == null && viewingUser == null) {
     console.log("No Current User stored.");
@@ -150,7 +151,7 @@ function getInputs(user) {
 function writePost(user, post) {
     const postContainer = document.querySelector("#posts-feed");
     const item =
-            `<div class="flex-row-container post id="post${post.num}">
+            `<div class="flex-row-container post" id="post${post.num}">
                 <div>
                     <img class="user ${user.lname}" src="${user.img}">
                 </div>
@@ -194,16 +195,20 @@ $(document).ready(function() {
 
     // TODO: View Post
     $("p.post-title").click(function() {
-        console.log("Viewing Post");
-        //$(this).css("color", "red");
-        //alert("viewing post");
+        let postContainer = $(this.parentElement.parentElement).attr('id');
+        let id = postContainer.substr(4, postContainer.length);
+        
+        console.log("Viewing Post ID: " + id);
+        viewingPost = posts[id - 1];
+        sessionStorage.setItem("viewingPost", JSON.stringify(viewingPost));
+        
         window.location = "postview.html";
     });
 
     // View's Another User's Profile from Post
     $(".post img").click(function() {
         console.log("Viewing Profile");
-        img = this.getAttribute('src');
+        let img = this.getAttribute('src');
         console.log("Img clicked: " + this.getAttribute('src'));
 
         for(let user of users) {

@@ -1,4 +1,30 @@
+let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
+let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+let userOfPost = viewingPost.user;
+let comments = viewingPost.comments; // current comments of the viewed post
+console.log('Viewing the Post: ' + viewingPost.title + " of User " + viewingPost.user.name);
+
+/**
+ * TO DO: View User Profile from post
+ */
+
+
+
+
 /*********************************************************************/
+$(document).ready(function() {
+  // Change Post Contents
+  $("#post-username").text(userOfPost.username);
+  $("#post-pfp").attr("src", userOfPost.img);
+  
+  $("#post-title").text(viewingPost.title);
+  $("#post-content").text(viewingPost.description);
+
+  //TO DO: add the upvotes and downvotes of the post
+
+  // TO DO: add the comments of the post 
+});
+
 
 $(document).ready(function() {
   var upvoteCount = 1; 
@@ -216,7 +242,7 @@ class Comment {
 /*********************************************************************/
 
 //sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
-let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+//let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 //Temporary function because idk if i should be able to change posts here
 if(currentUser == null) {
   currentUser = userYunjin;

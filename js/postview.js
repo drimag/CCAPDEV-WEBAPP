@@ -119,15 +119,10 @@ $(document).ready(function() {
   });
 
   //open comment box
-  $(document).ready(function() {
-    $('.reply').each(function() {
-      var classID = $(this).attr('id');
-      var num = classID.slice(-1);
-  
-      $(("#reply"+ num)).click(function() {
-        $(("#comment-popup"+ num)).toggle();
-      });
-    });
+  $('body').on('click', '.reply',function() {
+    var classID = $(this).attr('id');
+    var num = classID.slice(-1);
+    $(("#comment-popup"+ num)).toggle();
   });
 
   //write comment
@@ -203,36 +198,44 @@ $(document).ready(function() {
   function writeComment(userObject) {
     const postContainer = document.querySelector(".comment-section");
     const item =
-          `<div class="comment-box">
-            <div class="post-no-comment">
-                <div class="user-icon">
-                    <img class="pfp" src="${userObject.user.img}">
-                </div>
-                <div class="post-details">
-                    <div class="user">
-                        <span class="username">${userObject.user.username}</span>
-                    </div>
-                    <p class="comment">${userObject.description}</p>
-                    <div class="icons">
-                        <button class="reply"></button> 
-                        <div class="votes">
-                          <button class="upvote" id=${'upvote' + upvoteCount}></button><span class="vote-value" id=${'vote-value' + voteValCount}>${userObject.votes}</span><button class="downvote" id=${'downvote' + downvoteCount}></button>
-                        </div>   
-                    </div>
-                </div>
-            </div>
-  
-            <br>
-  
-            <div class="comment-popup">
-                <textarea class="comment-area" rows="10" cols="87" placeholder="Comment here..."></textarea>
-                <div class="post-button">
-                    <input type="button" value="Reply">
-                </div>
-            </div>  
-        </div>`;
+          `<div class="comment-box" id=${'commentBox' + commentBoxCount}>
+          <div class="post-no-comment">
+              <div class="user-icon">
+                  <img class="pfp" src="${userObject.user.img}">
+              </div>
+              <div class="post-details">
+                  <div class="user">
+                      <span class="username">${userObject.user.username}</span>
+                  </div>
+                  <p class="comment">${userObject.description}</p>
+                  <div class="icons">
+                      <button class="reply" id=${'reply' + replyCount}></button> 
+                      <div class="votes">
+                        <button class="upvote" id=${'upvote' + upvoteCount}></button><span class="vote-value" id=${'vote-value' + voteValCount}>${userObject.votes}</span><button class="downvote" id=${'downvote' + downvoteCount}></button>
+                      </div>   
+                  </div>
+              </div>
+          </div>
+
+          <br>
+
+          <div class="comment-popup" id=${'comment-popup' + commentPopCount}>
+              <textarea class="comment-area" id=${'comment-area' + commentAreaCount} rows="10" cols="87" placeholder="Comment here..."></textarea>
+              <div class="post-button">
+                  <input type="button" id=${'postButton' + postButtonCount} value="Reply">
+              </div>
+          </div>  
+      </div>`;
   
     postContainer.innerHTML += item;
+    upvoteCount++;//
+    voteValCount++;//
+    downvoteCount++;//
+    commentBoxCount++;//
+    commentPopCount++;//
+    postButtonCount++;//
+    commentAreaCount++;//
+    replyCount++;//
     console.log("Posted.");
   }
 

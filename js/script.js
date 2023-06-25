@@ -42,6 +42,17 @@ let post3 = new Post(3, userYunjin, "life update", "BTS PLEASE COME BACK");
 let post4 = new Post(4, userChaewon, "What is Hyewon up to?", "Hyewon still updates her Youtube but not as regularly as before, she hasn't been posting a lot on Instagram like before too sadly.");
 let post5 = new Post(5, userKazuha, "How good was Park Sunghoon as a skater?", "He wasn't Korea's top man for sure haha but is there someone who maybe followed korean skating more or something who could tell me, from objective fs point, how good he actually was? Could he potentially get really on top if he continued? Was there still room for improvement (considering he's 19 rn, so not that young but also not that old) or he probably reached his limits?");
 
+post1.upvotes = 203;
+post1.downvotes = 2;
+post2.upvotes = 89;
+post2.downvotes = 8;
+post3.upvotes = 504;
+post3.downvotes = 12;
+post4.upvotes = 38;
+post4.downvotes = 1;
+post5.upvotes = 5;
+post5.downvotes = 0;
+
 posts.push(post1);
 posts.push(post2);
 posts.push(post3);
@@ -165,7 +176,9 @@ function writePost(user, post) {
                     <div class="actions">
                         <span class="comment"></span>
                         <span class="upvote"></span>
+                        <span class="number"> ${post.upvotes} </span>
                         <span class="downvote"></span>
+                        <span class="number"> ${post.downvotes} </span>
                     </div>
                 </div>
             </div>`;
@@ -185,6 +198,8 @@ $(document).ready(function() {
             window.location = "login.html";
         } else {
             getInputs(currentUser);
+            $(".home-description").show();
+            $(".descsnippet").hide();
         }
     })
 

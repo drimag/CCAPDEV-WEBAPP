@@ -83,13 +83,18 @@ span.comment {
 	width: 100px;
 }
 
+span.number {
+    display: inline-block;
+    width: 100px;
+}
+
 span.upvote {
 	display: inline-block;
 	background-image: url('../icons/upvote.png');
 	background-size: 20px;
     background-repeat: no-repeat;
 	height: 20px;
-	width: 100px;
+	width: 22px;
 }
 
 span.downvote {
@@ -98,7 +103,7 @@ span.downvote {
 	background-size: 20px;
     background-repeat: no-repeat;
 	height: 20px;
-	width: 100px;
+	width: 22px;
 }
 
 .actions {
@@ -109,3 +114,4 @@ span.downvote {
 .show-more {
     margin: 10px auto;
 }
+

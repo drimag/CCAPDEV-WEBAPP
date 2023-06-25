@@ -7,30 +7,30 @@ $(document).ready(function() {
     $("#profile-username").text(currentUser.username);
     $("#profile-img").attr("src", currentUser.img);
     $("#profile-bio").text(currentUser.bio);
+    $("#latest-feed-comments").hide();
 
     $("#latest-comments").click(function() {
         console.log("Viewing latest comments");
-        let feedContainer = document.querySelector("#latest-feed");
+
         $(this).addClass("active");
         $("#latest-posts").removeClass("active");
-        feedContainer.innerHTML = "";
-        // displayAllComments();
+
+        $("#latest-feed-posts").hide();
+        $("#latest-feed-comments").show();
     });
 
     $("#latest-posts").click(function() {
         console.log("Viewing latest posts");
-        let feedContainer = document.querySelector("#latest-feed");
-
+        
         $(this).addClass("active");
         $("#latest-comments").removeClass("active");
-
-        feedContainer.innerHTML = "";
-        displayAllPosts(currentPosts);
+        $("#latest-feed-posts").show();
+        $("#latest-feed-comments").hide();
     });
 
     $("#edit-profile").click(function() {
         console.log("Editing Profile");
-        window.location = "index.html";
+        window.location = "edit_profile.html";
     })
 
     $("#show-more-button").on("click", function() {
@@ -61,7 +61,7 @@ function displayAllPosts(posts) {
 console.log(currentPosts);
 
 function writePost(user, post) {
-    const postContainer = document.querySelector("#latest-feed");
+    const postContainer = document.querySelector("#latest-feed-posts");
     const item =
             `<div class="flex-row-container post">
                 <div>
@@ -76,7 +76,9 @@ function writePost(user, post) {
                     <div class="actions">
                         <span class="comment"></span>
                         <span class="upvote"></span>
+                        <span class="number"> ${post.upvotes} </span>
                         <span class="downvote"></span>
+                        <span class="number"> ${post.downvotes} </span>
                     </div>
                 </div>
             </div>`;
@@ -87,6 +89,7 @@ function writePost(user, post) {
 // TODO: writeComment()
 
 displayAllPosts(currentPosts);
+// displayAllComments();
 
 /********************/
 

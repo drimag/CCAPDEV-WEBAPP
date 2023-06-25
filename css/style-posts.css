@@ -73,14 +73,18 @@
 
 .post-details .username {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
+}
+
+p.home-description {
+    width: 95%;
 }
 
 .post-title {
     font-weight: bold;
     font-size: 20px;
     margin: 0px;
-    line-height: 15px;
+    line-height: 25px;
 }
 
 span.comment {

@@ -1,12 +1,11 @@
 let users = [];
 
-// let currentPosts = JSON.parse(sessionStorage.getItem("currentPostsWithDeleted"));
+let currentPosts = JSON.parse(sessionStorage.getItem("currentPosts"));
 let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let userOfPost = viewingPost.user;
 let comments = viewingPost.comments; // current comments of the viewed post
 console.log('Viewing the Post: ' + viewingPost.title + " of User " + viewingPost.user.name);
-console.log(currentPosts);
 /**
  * TO DO: View User Profile from post
  */
@@ -26,7 +25,6 @@ $(document).ready(function() {
   if(currentUser.name != userOfPost.name) {
     $("#delete-post").hide();
   }
-
   // TODO: Edit Post
 
   /*
@@ -81,7 +79,6 @@ function viewUserProfile() {
 }
 
 
-
 $(document).ready(function() {
   var upvoteCount = 1; 
   var downvoteCount = 1;
@@ -91,6 +88,12 @@ $(document).ready(function() {
   var postButtonCount = 1;
   var commentAreaCount = 1;
   var commentBoxCount = 1;
+
+  function displayAllComments(post) {
+    for(let comment of post.comments) {
+      writeComment(comment);
+  }
+  }
   // gives every relevant class an id
   $('.upvote').each(function() {
     var upvID = 'upvote' + upvoteCount;
@@ -159,7 +162,7 @@ $(document).ready(function() {
     console.log(classID);
    
     var paragraph = $("#comment-area" + num).val();
-    var commentObject = new Comment(currentUser, paragraph);
+    var commentObject = new Comment(viewingPost.user, currentUser, paragraph); // change first parameter to the user its replying to
     writeComment(commentObject);
    
   });
@@ -265,6 +268,7 @@ $(document).ready(function() {
     replyCount++;//
     console.log("Posted.");
   }
+  displayAllComments(viewingPost);
 
 });
 
@@ -291,14 +295,12 @@ let userEunchae = new User("eunchae", "mubankpresident");
 users.push(userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
 
 
-
-class Comment {
-  constructor(user, description) {
-    //this.num = num;
-    this.user = user;
-    this.description = description;
-    this.votes = 0;
-  }
+const Comment = function(repliedTo, user, description) {
+  this.repliedTo = repliedTo;
+  this.user = user;
+  this.description = description;
+  this.votes = 0;
+  this.comments = [];
 }
 /*********************************************************************/
 

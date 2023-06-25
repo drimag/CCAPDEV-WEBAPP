@@ -1,11 +1,11 @@
 let users = [];
 
+let currentPosts = JSON.parse(sessionStorage.getItem("currentPosts"));
 let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let userOfPost = viewingPost.user;
 let comments = viewingPost.comments; // current comments of the viewed post
 console.log('Viewing the Post: ' + viewingPost.title + " of User " + viewingPost.user.name);
-
 /**
  * TO DO: View User Profile from post
  */
@@ -22,6 +22,29 @@ $(document).ready(function() {
   $("#post-title").text(viewingPost.title);
   $("#post-content").text(viewingPost.description);
 
+  if(currentUser.name != userOfPost.name) {
+    $("#delete-post").hide();
+  }
+  // TODO: Edit Post
+
+  /*
+  Scuffed
+
+  // TODO: Delete Post
+  $("#delete-post").click(function() {
+    alert("Post Deleted!");
+  
+    for(let p of currentPosts) {
+      if(p.title == viewingPost.title) {
+        p.deleted = true;
+      }
+    }
+
+    sessionStorage.setItem("currentPostsWithDeleted", JSON.stringify(currentPosts));
+    window.location = "index.html";
+    
+  });
+  */
   //TO DO: add the upvotes and downvotes of the post
 
   // TO DO: add the comments of the post 
@@ -29,7 +52,11 @@ $(document).ready(function() {
   // View's Another User's Profile from Post
   $(".pfp").click(function() {
     console.log("Viewing Profile");
-    let img = "./" + this.getAttribute('src');
+    let img = this.getAttribute('src');
+
+    if(img[0] != ".") {
+      img = "./" + img;
+    }
     console.log("Img clicked: " + this.getAttribute('src'));
 
     for(let user of users) {
@@ -51,9 +78,6 @@ function viewUserProfile() {
   window.location = "profile.html";
 }
 
-// View's Another User's Profile from Post
-
-
 
 $(document).ready(function() {
   var upvoteCount = 1; 
@@ -64,6 +88,12 @@ $(document).ready(function() {
   var postButtonCount = 1;
   var commentAreaCount = 1;
   var commentBoxCount = 1;
+
+  function displayAllComments(post) {
+    for(let comment of post.comments) {
+      writeComment(comment);
+  }
+  }
   // gives every relevant class an id
   $('.upvote').each(function() {
     var upvID = 'upvote' + upvoteCount;
@@ -132,7 +162,7 @@ $(document).ready(function() {
     console.log(classID);
    
     var paragraph = $("#comment-area" + num).val();
-    var commentObject = new Comment(currentUser, paragraph);
+    var commentObject = new Comment(viewingPost.user, currentUser, paragraph); // change first parameter to the user its replying to
     writeComment(commentObject);
    
   });
@@ -238,6 +268,7 @@ $(document).ready(function() {
     replyCount++;//
     console.log("Posted.");
   }
+  displayAllComments(viewingPost);
 
 });
 
@@ -264,14 +295,12 @@ let userEunchae = new User("eunchae", "mubankpresident");
 users.push(userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
 
 
-
-class Comment {
-  constructor(user, description) {
-    //this.num = num;
-    this.user = user;
-    this.description = description;
-    this.votes = 0;
-  }
+const Comment = function(repliedTo, user, description) {
+  this.repliedTo = repliedTo;
+  this.user = user;
+  this.description = description;
+  this.votes = 0;
+  this.comments = [];
 }
 /*********************************************************************/
 

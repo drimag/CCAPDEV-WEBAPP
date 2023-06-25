@@ -52,17 +52,17 @@ $(document).ready(function() {
     
     // Show 3 latest posts
     $(".post").hide();
-    $(".post").slice(numOfPosts - 3, numOfPosts).show();
+    $(".post").slice(numOfPosts - 2, numOfPosts).show();
 
     // clean this: appears in script.js also
     // FIX: format of showed more posts is wrong
-    $("#show-more-button").on("click", function() {
+    $("#profile-show-more").on("click", function() {
         // Show 3 more posts when "Show More" button is clicked
         $(".post:hidden").slice(0,4).show();
 
         // Hide button
         if($(".post:hidden").length == 0) {
-            $("#show-more-button").hide();
+            $("#profile-show-more").hide();
         }
     })
 });

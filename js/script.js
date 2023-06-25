@@ -8,6 +8,7 @@ const User = function(name, password) {
     this.bio = "test bio";
 }
 
+let users = []
 let userGuest = new User("Guest", "1234");
 let userSakura = new User("Sakura", "letmeplay");
 let userChaewon = new User("Chaewon", "tyforsupportingus");
@@ -15,6 +16,8 @@ let userYunjin = new User("Yunjin", "IGOTACONDOINMANHATTAN");
 let userKazuha = new User("Kazuha", "bang!");
 let userEunchae = new User("eunchae", "mubankpresident");
 
+users.push(userGuest, userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
+console.log(users);
 // Post and Comment Construtors 
 const Post = function(num, user, title, description) {
     this.num = num;
@@ -53,18 +56,17 @@ post4.downvotes = 1;
 post5.upvotes = 5;
 post5.downvotes = 0;
 
-posts.push(post1);
-posts.push(post2);
-posts.push(post3);
-posts.push(post4);
-posts.push(post5);
+posts.push(post1, post2, post3, post4, post5);
 
 //------------------------------------
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
+let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
 
-if(currentUser == null) {
+if(currentUser == null && viewingUser == null) {
     console.log("No Current User stored.");
     currentUser = userGuest;
+    viewingUser = userGuest;
 } else {
     console.log("Current User is " + currentUser.name);
 }
@@ -87,6 +89,7 @@ function displayAllPosts(posts) {
     }
 }
 
+// Switching User
 function switchUser(newUser) {
     $(document).ready(function() {
         $("#current-username").text(newUser.username);
@@ -107,33 +110,19 @@ function switchUser(newUser) {
     });
 }
 
+// Window location when clicked on profile
 function viewUserProfile(user) {
-    if(user.name == userGuest.name) {
+    if(user.name == userGuest.name || currentUser.name == userGuest.name) {
         window.location = "login.html";
+        alert("You are not a registered user! Please log in.");
     } else {
         window.location = "profile.html";
     }
 }
 
-// Hides Edit Profile Button
-function hideEditProfile(user) {
-    const editProfileButton = document.getElementsByName("Edit Profile");
-
-    // Show edit profile button
-    $(document).ready(function() {
-        if(currentUser.id === viewingProfile.id) {
-            //editProfileButton.show();
-            editProfileButton.style.display = "block";
-        // Hide edit profile button
-        } else {
-            //editProfileButton.hide();
-            editProfileButton.style.display = "none";
-        }
-    });
-}
-
+// Post related Functions
 function getInputs(user) {
-    if(currentUser == userGuest) {
+    if(currentUser.name == userGuest.name) {
         window.location = "login.html";
     } else {
         let formElement = document.forms.postform;
@@ -162,12 +151,12 @@ function getInputs(user) {
 function writePost(user, post) {
     const postContainer = document.querySelector("#posts-feed");
     const item =
-            `<div class="flex-row-container post">
+            `<div class="flex-row-container post" id="post${post.num}">
                 <div>
-                    <img class="user" src="${user.img}">
+                    <img class="user ${user.lname}" src="${user.img}">
                 </div>
 
-                <div class="flex-column-container post-details">
+                <div class="flex-column-container post-details"">
                     <p class="username"> ${user.username} </p>
                     <p class="post-title"> ${post.title} </p>
                     <p class="home-description"> ${post.description} </p>
@@ -192,6 +181,7 @@ $(document).ready(function() {
     displayAllPosts(posts);
     switchUser(currentUser);
 
+    // Create Post
     $("#submit-post").click(function() {
         console.log("Posting...");
         if(currentUser == userGuest) {
@@ -201,22 +191,52 @@ $(document).ready(function() {
             $(".home-description").show();
             $(".descsnippet").hide();
         }
-    })
+    });
 
+    // TODO: View Post
     $("p.post-title").click(function() {
-        console.log("Viewing Post");
-        //$(this).css("color", "red");
-        //alert("viewing post");
-        window.location = "postview.html";
-    })
+        if(currentUser.name == userGuest.name) {
+            window.location = "login.html";
+            alert("You must be a registered user!")
+        } else {
+            let postContainer = $(this.parentElement.parentElement).attr('id');
+            let id = postContainer.substr(4, postContainer.length);
+            
+            console.log("Viewing Post ID: " + id);
+            viewingPost = posts[id - 1];
+            sessionStorage.setItem("viewingPost", JSON.stringify(viewingPost));
+            
+            window.location = "postview.html";
+        }
+    });
 
-    // View Current User's Profile
-    $("#user-selected").click(function() {
-        viewUserProfile(currentUser);
+    // View's Another User's Profile from Post
+    $(".post img").click(function() {
+        console.log("Viewing Profile");
+        let img = this.getAttribute('src');
+        console.log("Img clicked: " + this.getAttribute('src'));
+
+        for(let user of users) {
+            if(user.img == img) {
+                viewingUser = user;
+                sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
+                console.log("Viewing Profile of " + viewingUser.name);
+            }
+        }
+
+        viewUserProfile(viewingUser);
     });
 
 
-    // Switches User to clicked icon
+    // View Current User's Profile
+    $("#user-selected").click(function() {
+        viewingUser = currentUser;
+        sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
+        viewUserProfile(viewingUser);
+    });
+
+    // -----------------------------------------------------------------------------------------------
+    // Switches Current User to clicked icon
     $("#user-guest").click(function() {
         let user = userGuest;
         console.log(user.name);
@@ -252,4 +272,5 @@ $(document).ready(function() {
         console.log(user.name);
         switchUser(user);
     });
+    //---------------------------------------------------------------
 });

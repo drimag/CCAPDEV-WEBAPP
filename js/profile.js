@@ -1,13 +1,23 @@
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let currentPosts = JSON.parse(sessionStorage.getItem("currentPosts"));
+let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
 
-console.log(currentPosts);
+console.log("Current User: " + currentUser.username);
+console.log("Current Total Posts: " + currentPosts.length);
+console.log("Viewing User: " + viewingUser.username);
 
 $(document).ready(function() {
-    $("#profile-username").text(currentUser.username);
-    $("#profile-img").attr("src", currentUser.img);
-    $("#profile-bio").text(currentUser.bio);
+    $("#profile-username").text(viewingUser.username);
+    $("#profile-img").attr("src", viewingUser.img);
+    $("#profile-bio").text(viewingUser.bio);
     $("#latest-feed-comments").hide();
+
+    // Hide/Show Edit Profile Button depending on the current user and shown user profile
+    if(viewingUser.username != currentUser.username) {
+        $("#edit-profile").hide();
+    } else {
+        $("#edit-profile").show();
+    }
 
     $("#latest-comments").click(function() {
         console.log("Viewing latest comments");
@@ -47,7 +57,7 @@ $(document).ready(function() {
 function displayAllPosts(posts) {
     for(let post of posts) {
         console.log("User's post: " + post.user.username);
-        if(post.user.username == currentUser.username) {
+        if(post.user.username == viewingUser.username) {
             writePost(post.user, post);
         }
     }
@@ -65,7 +75,7 @@ function writePost(user, post) {
                     <img class="user" src="${user.img}">
                 </div>
 
-                <div class="flex-column-container post-details">
+                <div class="flex-column-container post-details" id="post${post.num}>
                     <p class="username"> ${user.username} </p>
                     <p class="post-title"> ${post.title} </p>
                     <p class="description"> ${post.description} </p>

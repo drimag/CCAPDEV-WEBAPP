@@ -7,30 +7,33 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/edit_profile.css">
-    </head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script src="js/edit-profile.js" defer></script>
+        </head>
     <body>
         <div class="edit-div">
            <div class="edit-top">
                 <div id="edit-picture">
-                    <img src="profilepics/IU.png" alt="Profile Image" id="profile-image">
+                    <img src="icons/guest.png" alt="Profile Image" id="profile-image">
+                    
                 </div>
                 <div class="edit-userinfo">
                     <label for="username">username</label>
                     <input type="text" id="username" name="username" form="bio-form" placeholder="아이유isLOVE! 💜">
-                    <input type="file" id="upload-pfp" name="filename" form="bio-form" alt="profile pic" hidden/>
-                    <label for="upload-pfp" class="edit-pfp">Change Profile Picture</label>
+                    <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" onchange="changePFP(this)" hidden/>
+                    <label for="pfp" id="edit-pfp">Change Profile Picture</label>
                 </div>
 
             </div>
 
             <div class="edit-bottom"> 
                 <div class="edit-bio">
-                    <textarea name="bio" form="bio-form">:¨·.·¨:
+                    <textarea name="bio" form="bio-form" id="bio">:¨·.·¨:
 `·. 𝐿𝑒𝑒 𝒥𝒾-𝑒𝓊𝓃 ˙ᵕ˙ | #아이유 ♡ ꜰᴀɴ ꜱɪɴᴄᴇ╰ ₂₀₁₂ˊ✦・₍ ᐢ.ˬ.ᐢ₎˚୨୧</textarea>
                 </div>
                 <div class="edit-submit">
-                    <form action="edit_profile.html" id="bio-form">
-                        <input type="submit" value="Save Changes">
+                    <form id="bio-form">
+                        <input type="submit" value="Save Changes" href="#index.html">
                     </form>
                 </div>
                 

@@ -43,6 +43,12 @@ $(document).ready(function() {
         window.location = "edit_profile.html";
     })
 
+    let numOfPosts = $('.posts .post').length;
+    
+    // Show 3 latest posts
+    $(".post").hide();
+    $(".post").slice(numOfPosts - 3, numOfPosts).show();
+
     // clean this: appears in script.js also
     // FIX: format of showed more posts is wrong
     $("#show-more-button").on("click", function() {
@@ -98,26 +104,3 @@ function writePost(user, post) {
 
 displayAllPosts(currentPosts);
 // displayAllComments();
-
-/********************/
-
-
-/*
-// "Show More Posts/Comments" button
-let showMorePostsBtn = document.querySelector('#show-more-button');
-let numOfPosts = 3;
-
-showMorePostsBtn.onclick = () => {
-    let listOfPosts = [...document.querySelectorAll('.flex-column-container .latest .buttons .flex-row-container')];
-
-    for(let i = numOfPosts; i < numOfPosts + 3; i++) {
-        listOfPosts[i].style.display = 'inline-block';
-    }
-
-    numOfPosts += 3;
-
-    if(numOfPosts >= listOfPosts.length) {
-        showMorePostsBtn.style.display = "none";
-    }
-};
-*/

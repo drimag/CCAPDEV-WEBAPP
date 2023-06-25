@@ -116,6 +116,12 @@ function switchUser(newUser) {
             $(".descsnippet").show();
             $(".home-description").hide();
             console.log("Switched to Guest");
+
+            let numOfPosts = $('.posts .post').length;
+    
+            // Show only 15 latest posts for guest
+            $(".post").hide();
+            $(".post").slice(numOfPosts - 15, numOfPosts).show();
         } else {
             $(".home-description").show();
             $(".descsnippet").hide();
@@ -228,7 +234,7 @@ $(document).ready(function() {
 
     // clean this: appears in profile.js also
     // FIX: format of showed more posts is wrong
-    $("#show-more-button").on("click", function() {
+    $("#home-show-more").on("click", function() {
         // Show 3 more posts when "Show More" button is clicked
         $(".post:hidden").slice(0,4).show();
 

@@ -125,8 +125,9 @@ function getInputs(user) {
         let formElement = document.forms.postform;
         let formData = new FormData(formElement);
         let count = 0;
-        let title = "";
-        let description = "";
+        let title = null;
+        let description = null;
+        console.log()
 
         for (let data of formData) {
             if(count == 0) {
@@ -137,10 +138,14 @@ function getInputs(user) {
 
             count += 1;
         }
-
-        let post = new Post(posts.length + 1, user, title, description);
-        posts.push(post);
-        writePost(currentUser, post);
+        console.log(title);
+        if(title == "" || description == "") {
+            console.log("Invalid Input for Post.");
+        } else {
+            let post = new Post(posts.length + 1, user, title, description);
+            posts.push(post);
+            writePost(currentUser, post);
+        }
     }
 }
 

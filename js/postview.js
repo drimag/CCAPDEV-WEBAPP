@@ -1,3 +1,5 @@
+let users = [];
+
 let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let userOfPost = viewingPost.user;
@@ -23,7 +25,34 @@ $(document).ready(function() {
   //TO DO: add the upvotes and downvotes of the post
 
   // TO DO: add the comments of the post 
+
+  // View's Another User's Profile from Post
+  $(".pfp").click(function() {
+    console.log("Viewing Profile");
+    let img = "./" + this.getAttribute('src');
+    console.log("Img clicked: " + this.getAttribute('src'));
+
+    for(let user of users) {
+      console.log(user.img);
+        if(user.img == img) {
+            let viewingUser = user;
+            sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
+            console.log("Viewing Profile of " + viewingUser.name);
+            break;
+        }
+    }
+
+    viewUserProfile();
+  });
 });
+
+// Window location when clicked on profile
+function viewUserProfile() {
+  window.location = "profile.html";
+}
+
+// View's Another User's Profile from Post
+
 
 
 $(document).ready(function() {
@@ -228,6 +257,8 @@ let userChaewon = new User("Chaewon", "tyforsupportingus");
 let userYunjin = new User("Yunjin", "IGOTACONDOINMANHATTAN");
 let userKazuha = new User("Kazuha", "bang!");
 let userEunchae = new User("eunchae", "mubankpresident");
+
+users.push(userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
 
 
 

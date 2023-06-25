@@ -41,6 +41,11 @@
     align-items: center;
 }
 
+#submit-post {
+    width: 100px;
+    height: 30px;
+}
+
 .textbox-container textarea {
     height: 100px;
     width: 89.9%;

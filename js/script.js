@@ -28,6 +28,7 @@ const Post = function(num, user, title, description) {
     this.descSnippet = description.slice(0,50) + "...";
     this.votes = 0;
     this.comments = [];
+    //this.deleted = false;
 }
 
 const Comment = function(user, description) {
@@ -60,13 +61,21 @@ posts.push(post1, post2, post3, post4, post5, post6, post7, post8, post9, post10
 
 // Add Comments to at least 5 posts
 
-
 sessionStorage.setItem("currentPosts", JSON.stringify(posts));
 
 //------------------------------------
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
 let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
+/*
+Scuffed for Delete Post
+let postsWithDeleted = JSON.parse(sessionStorage.getItem("currentPostsWithDeleted"));
+
+if(postsWithDeleted == null) {
+    postsWithDeleted = posts;
+    sessionStorage.setItem("currentPostsWithDeleted", JSON.stringify(posts));
+}
+*/
 
 if(currentUser == null && viewingUser == null) {
     console.log("No Current User stored.");
@@ -82,7 +91,9 @@ console.log("Total Posts: " + posts.length);
 // Functions -----------------------------------------------------------------------
 function displayAllPosts(posts) {
     for(let post of posts) {
-        writePost(post.user, post);
+        if(post.deleted == false) {
+            writePost(post.user, post);
+        }
     }
 }
 

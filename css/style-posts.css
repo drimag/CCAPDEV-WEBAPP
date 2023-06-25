@@ -44,6 +44,10 @@
 #submit-post {
     width: 100px;
     height: 30px;
+    border-radius: 15px;
+    font-family: Karla;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .textbox-container textarea {

@@ -18,6 +18,7 @@ let userEunchae = new User("eunchae", "mubankpresident");
 
 users.push(userGuest, userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
 console.log(users);
+
 // Post and Comment Construtors 
 const Post = function(num, user, title, description) {
     this.num = num;
@@ -25,38 +26,42 @@ const Post = function(num, user, title, description) {
     this.user = user;
     this.description = description;
     this.descSnippet = description.slice(0,50) + "...";
+    this.votes = 0;
+    this.comments = [];
+}
+
+const Comment = function(user, description) {
+    this.user = user;
+    this.description = description;
     this.upvotes = 0;
     this.downvotes = 0;
     this.comments = [];
 }
 
-const Comment = function(user, description, comments = []) {
-    this.user = user;
-    this.description = description;
-    this.upvotes = 0;
-    this.downvotes = 0;
-    this.comments = comments;
-}
-
 let posts = [];
-let post1 = new Post(1, userSakura, "test title", "test description");
-let post2 = new Post(2, userEunchae, "big announcement", "Ever since Wonyoung's contract for Music Bank expired, they opened auditions! GUESS WHO'S THE NEW MUSIC BANK PRESIDENT??????");
-let post3 = new Post(3, userYunjin, "life update", "BTS PLEASE COME BACK");
-let post4 = new Post(4, userChaewon, "What is Hyewon up to?", "Hyewon still updates her Youtube but not as regularly as before, she hasn't been posting a lot on Instagram like before too sadly.");
-let post5 = new Post(5, userKazuha, "How good was Park Sunghoon as a skater?", "He wasn't Korea's top man for sure haha but is there someone who maybe followed korean skating more or something who could tell me, from objective fs point, how good he actually was? Could he potentially get really on top if he continued? Was there still room for improvement (considering he's 19 rn, so not that young but also not that old) or he probably reached his limits?");
+let post1 = new Post(1, userSakura, "Would you disband IVE and LESSERAFIM to bring back IZONE?", "izone was smth else bruh they were the first 4th gen gg pulling both sales and charts they were straight up competing with bp and twice but we gotta admit IVE is definitely one of the best if its not the best 4th gen gg rn and Lesserafim debut is just iconic So if you ask me this after listening love dive and fearless I would say fck no but if you ask me this after watching izones old vlives and stuff I would straight up say yes no doubt tho I gotta say I feel theyre not as comfortable (as their were with izone members) with their new groups yet (specifically wy) but I believe its only matter of time");
+let post2 = new Post(2, userEunchae, "big announcement", "Ever since Wonyoungs contract for Music Bank expired, they opened auditions! GUESS WHOS THE NEW MUSIC BANK PRESIDENT??????");
+let post3 = new Post(3, userYunjin, "MANNNNNNNNNNNNNNN", "BTS PLEASE COME BACK");
+let post4 = new Post(4, userChaewon, "What is Hyewon up to?", "Hyewon still updates her Youtube but not as regularly as before, she hasnt been posting a lot on Instagram like before too sadly.");
+let post5 = new Post(5, userKazuha, "How good was Park Sunghoon as a skater?", "He wasnt Koreas top man for sure haha but is there someone who maybe followed korean skating more or something who could tell me, from objective fs point, how good he actually was? Could he potentially get really on top if he continued? Was there still room for improvement (considering hes 19 rn, so not that young but also not that old) or he probably reached his limits?");
+let post6 = new Post(6, userKazuha, "", "");
+let post7 = new Post(7, userYunjin, "scientist is one of twice best title tracks!", "this is unpopular due to the amount of hate the song got during the time it was being promoted, it still gets hate to this day in my opinion. but i personally believe it is one of their best title tracks, it is fun and upbeat without being too much on the ears. it utilizes the members voices in a way that is comfortable for them and the dance is AMAZING! it is also paired with their best full album as well! i was honestly shocked at the amount of hate it got everywhere, i think the song is such a happy pill!");
+let post8 = new Post(8, userEunchae, "How big/successful was this comeback (Dark Blood) compared to their previous comebacks?", "Not exactly a baby engene so sorry if this sounds ignorant/out of touch. I just cant keep up with the metrics, and even when I do read stuff about record numbers and new achievements, Im curious to know both objective and subjective (like how you personally gauge or feel about it) review/recap of Dark Bloods promotions compared to ENHYPENs previous comebacks. Because I can only speak subjectively, I will be honest and say I feel like it fell a bit short of expectations success-wise. It had the most anticipation for an Enha comeback since it had the longest timeframe between releases; also the fact that this was after a major world tour. Then we got the well-executed teasers leading up to the release. Then the EP itself-its arguably the most ENHYPEN album, the one most faithful to their concept and lore, which the kpop community actually gives credit to how the group suit their vampire concept well (even though Bite Me got mixed reviews mostly for song structure reasons). And speaking of Bite Me, the female dancers situation created a lot of buzz-mostly good imo! But heres where I felt it peaked (and that spectacle was only barely a week after the showcase, Im not sure anymore) After that I felt that while the group were getting music show wins and Bite Me/Sacrifice are still strong on several streaming platforms (at least on the intl side), I suppose there was a louder noise surrounding them and a longer sustained interest during the other eras e.g. Manifesto, D:D or D:A, etc. I could be entirely wrong though. So Im interested to know your thoughts, or you may just slap me with their achievements this era because I just probably need assurance that the boys are doing great (oh, I do see that theyve leveled up in many aspects, like theyre so comfortable and confident in front of the camera now! And their recent group weverse lives are lovely to watch, you can tell that the group is more tight-knit than ever)");
+let post9 = new Post(9, userChaewon, "the dancer controversy may unironically be the best thing that could have happened to enha, and/or the short attention span of kpop fans is something to behold", "As much as I love to shit on Belift I have to give it to them. They really played 4D chess with this. Even if the reaction was unintentional, the choice to use dancers for bite mes choreo was definitely a good move in hindsight, even if it isolated a few angry kfans lol. And sure, it could be argued that it had an affect on their kcharting but when has that ever been a factor for them (even if its not the best anyways, it did peak on melon and is still charting without free falling so Id consider it an improvement. Not only did it bring lots of attention to the song and the cb but anecdotally Ive noticed being an Enhypen fan is alot more peaceful this era. Of course being one of the most hated 4th Gen groups never means complete peace, but generally speaking Ive noticed more people including nonfans talking about them positively, sympathizing with them, giving them attention that wasnt there before, and less negative and hateful comments generally speaking. Due in part to the album being amazing of course but also due to this “controversy”. The hate I do still see usually gets ratioed or downvoted into oblivion moreso than being agreed with by default like before. I curate my experience but there will always be antis so the fact that Im not seeing much more than an odd comment or general passive aggressiveness is nice. Sometimes I forget how short the attention span and cycle of trends in kpop fandom works generally because I find it almost insane how Enhypen went from having a year long, very widespread and active hate train to being treated and regarded relatively normally and getting some praises within the course of less than a month. Knock on wood that it stays this way, but I just find it hilarious how this one little thing has improved my fan experience tenfold lol thanks for one thing belift ig");
+let post10 = new Post(10, userSakura, "Queendom Puzzle: Cherry Bullet Bora hate is laughable", "I didnt know who bora was before queendom but damn she is one of the most talented idols on the show but apparently she isnt well liked right now, bc she is being too strategic. However Im so lost bc literally a few weeks ago chaeyeon was praised like a bossgirl n queen for downvoting everyone n leaving. Saying its a competition n that she is being strategic. But when bora does something strategic as downvoting top performers or choosing a team that better outlines her vocals, she becomes the devil n hated by everyone? Mnet making her the villain n fans r eating it up, saying her vocals r not good and kei is much better. Slay bora make them mad lmao, I love stanning idols who piss off K-pop Stans for slaying.");
 
-post1.upvotes = 203;
-post1.downvotes = 2;
-post2.upvotes = 89;
-post2.downvotes = 8;
-post3.upvotes = 504;
-post3.downvotes = 12;
-post4.upvotes = 38;
-post4.downvotes = 1;
-post5.upvotes = 5;
-post5.downvotes = 0;
+post1.votes = 203;
+post2.votes = 89;
+post3.votes = 504;
+post4.votes = 38;
+post5.votes = 5;
 
-posts.push(post1, post2, post3, post4, post5);
+posts.push(post1, post2, post3, post4, post5, post6, post7, post8, post9, post10);
+
+// Add Comments to at least 5 posts
+
+
+sessionStorage.setItem("currentPosts", JSON.stringify(posts));
 
 //------------------------------------
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -69,14 +74,6 @@ if(currentUser == null && viewingUser == null) {
     viewingUser = userGuest;
 } else {
     console.log("Current User is " + currentUser.name);
-}
-
-if(sessionStorage.getItem("currentPosts") == null) {
-    console.log("There are no posts currently stored.");
-    sessionStorage.setItem("currentPosts", JSON.stringify(posts));
-} else {
-    console.log("Posts Retrieved.");
-    posts = JSON.parse(sessionStorage.getItem("currentPosts"));
 }
 
 console.log(posts);
@@ -143,7 +140,6 @@ function getInputs(user) {
 
         let post = new Post(posts.length + 1, user, title, description);
         posts.push(post);
-        sessionStorage.setItem("currentPosts", JSON.stringify(posts));
         writePost(currentUser, post);
     }
 }
@@ -165,9 +161,8 @@ function writePost(user, post) {
                     <div class="actions">
                         <span class="comment"></span>
                         <span class="upvote"></span>
-                        <span class="number"> ${post.upvotes} </span>
+                        <span class="number"> ${post.votes} </span>
                         <span class="downvote"></span>
-                        <span class="number"> ${post.downvotes} </span>
                     </div>
                 </div>
             </div>`;

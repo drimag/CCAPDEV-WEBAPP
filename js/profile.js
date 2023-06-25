@@ -72,10 +72,10 @@ function writePost(user, post) {
     const item =
             `<div class="flex-row-container post">
                 <div>
-                    <img class="user" src="${user.img}">
+                    <img class="user ${user.lname}" src="${user.img}">
                 </div>
 
-                <div class="flex-column-container post-details" id="post${post.num}>
+                <div class="flex-column-container post-details" id="post${post.num}">
                     <p class="username"> ${user.username} </p>
                     <p class="post-title"> ${post.title} </p>
                     <p class="description"> ${post.description} </p>
@@ -83,9 +83,8 @@ function writePost(user, post) {
                     <div class="actions">
                         <span class="comment"></span>
                         <span class="upvote"></span>
-                        <span class="number"> ${post.upvotes} </span>
+                        <span class="number"> ${post.votes} </span>
                         <span class="downvote"></span>
-                        <span class="number"> ${post.downvotes} </span>
                     </div>
                 </div>
             </div>`;

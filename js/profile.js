@@ -45,9 +45,6 @@ $(document).ready(function() {
 });
 
 function displayAllPosts(posts) {
-    let reversedposts = posts;
-    reversedposts.reverse();
-
     for(let post of posts) {
         console.log("User's post: " + post.user.username);
         if(post.user.username == currentUser.username) {

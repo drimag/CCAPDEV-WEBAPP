@@ -52,14 +52,14 @@ function dropdownItems(toDropdown) {
 document.addEventListener("DOMContentLoaded", function() {
 
   const guestDropdown = [
-    { label: "Sign Up", link: "index.html" },
+    { label: "Sign Up", link: "login.html" },
   ];
 
   const userDropdown = [
     { label: "Edit Profile", link: "edit_profile.html" },
     { label: "Switch Account", link: "login.html" },
     { label: "Sign Out", link: "index.html" },
-    { label: "Change Password", link: "#" },
+    { label: "Change Password", link: "change_password.html" },
     { label: "View Profile", link: "profile.html"}
   ];
 

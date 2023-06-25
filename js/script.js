@@ -114,7 +114,7 @@ function switchUser(newUser) {
 function viewUserProfile(user) {
     if(user.name == userGuest.name || currentUser.name == userGuest.name) {
         window.location = "login.html";
-        alert("You are not a registered visitor! Please log in.");
+        alert("You are not a registered user! Please log in.");
     } else {
         window.location = "profile.html";
     }
@@ -122,7 +122,7 @@ function viewUserProfile(user) {
 
 // Post related Functions
 function getInputs(user) {
-    if(currentUser == userGuest) {
+    if(currentUser.name == userGuest.name) {
         window.location = "login.html";
     } else {
         let formElement = document.forms.postform;
@@ -195,14 +195,19 @@ $(document).ready(function() {
 
     // TODO: View Post
     $("p.post-title").click(function() {
-        let postContainer = $(this.parentElement.parentElement).attr('id');
-        let id = postContainer.substr(4, postContainer.length);
-        
-        console.log("Viewing Post ID: " + id);
-        viewingPost = posts[id - 1];
-        sessionStorage.setItem("viewingPost", JSON.stringify(viewingPost));
-        
-        window.location = "postview.html";
+        if(currentUser.name == userGuest.name) {
+            window.location = "login.html";
+            alert("You must be a registered user!")
+        } else {
+            let postContainer = $(this.parentElement.parentElement).attr('id');
+            let id = postContainer.substr(4, postContainer.length);
+            
+            console.log("Viewing Post ID: " + id);
+            viewingPost = posts[id - 1];
+            sessionStorage.setItem("viewingPost", JSON.stringify(viewingPost));
+            
+            window.location = "postview.html";
+        }
     });
 
     // View's Another User's Profile from Post

@@ -210,6 +210,18 @@ $(document).ready(function() {
         }
     });
 
+    // clean this: appears in profile.js also
+    // FIX: format of showed more posts is wrong
+    $("#show-more-button").on("click", function() {
+        // Show 3 more posts when "Show More" button is clicked
+        $(".post:hidden").slice(0,4).show();
+
+        // Hide button
+        if($(".post:hidden").length == 0) {
+            $("#show-more-button").hide();
+        }
+    });
+
     // View's Another User's Profile from Post
     $(".post img").click(function() {
         console.log("Viewing Profile");

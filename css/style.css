@@ -137,3 +137,7 @@ a:visited, a {
 .active p {
     background-color: #b9a899;
 }
+
+.show-more {
+    margin: 10px auto;
+}

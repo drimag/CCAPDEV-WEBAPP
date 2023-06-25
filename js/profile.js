@@ -43,6 +43,8 @@ $(document).ready(function() {
         window.location = "edit_profile.html";
     })
 
+    // clean this: appears in script.js also
+    // FIX: format of showed more posts is wrong
     $("#show-more-button").on("click", function() {
         // Show 3 more posts when "Show More" button is clicked
         $(".post:hidden").slice(0,4).show();

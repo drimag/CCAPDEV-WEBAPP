@@ -60,18 +60,15 @@ div.post-container{
     flex-direction: column;
 }
 
-
 .post-title{
     font-size: 25;
     font-weight: 700;
 }
 
-
 .user{
     display: inline-block;
     padding: 2px;  
 }
-
 
 .post-content{
     text-align:justify;

@@ -119,3 +119,10 @@ span.downvote {
     margin: 10px auto;
 }
 
+.post {
+    display: none;
+}
+
+.post:nth-last-child(1), .post:nth-last-child(2), .post:nth-last-child(3) {
+    display: flex;
+}

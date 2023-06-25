@@ -8,7 +8,7 @@ $(document).ready(function() {
   var commentPopCount = 1;
   var postButtonCount = 1;
   var commentAreaCount = 1;
-
+  var commentBoxCount = 1;
   // gives every relevant class an id
   $('.upvote').each(function() {
     var upvID = 'upvote' + upvoteCount;
@@ -57,23 +57,94 @@ $(document).ready(function() {
     commentAreaCount++;
   });
 
+  $('.comment-box').each(function() {
+    var commentBoxID = 'commentBox' + commentBoxCount;
+    $(this).attr('id', commentBoxID);
+    commentBoxCount++;
+  });
 
-  //write comment
+  //open comment box
   $(document).ready(function() {
-    $('.post-button input').each(function() {
+    $('.reply').each(function() {
       var classID = $(this).attr('id');
       var num = classID.slice(-1);
-      console.log(classID);
-      $(("#postButton"+ num)).click(function() {
-        var paragraph = $("#comment-area"+ num).val();
-        var commentObject = new Comment(currentUser,paragraph);
-        writeComment(commentObject);
+  
+      $(("#reply"+ num)).click(function() {
+        $(("#comment-popup"+ num)).toggle();
       });
     });
   });
 
+  //write comment
+  $('.comment-popup').on('click', '.post-button input', function() {
+    var classID = $(this).attr('id');
+    var num = classID.slice(-1);
+    console.log(classID);
+   
+    var paragraph = $("#comment-area" + num).val();
+    var commentObject = new Comment(currentUser, paragraph);
+    writeComment(commentObject);
+   
+  });
+
+   //upvote function
+    $('body').on('click', '.upvote',function() {
+      var classID = $(this).attr('id');
+      var num = classID.slice(-1);
+      console.log(classID);
+  
+      var counterValue = parseInt($("#vote-value"+ num).text());
+      var newCounterValue = counterValue;
+    
+      //removes vote if clicked again
+      if ($(this).hasClass('clicked')) {
+        newCounterValue--;
+        $('#upvote' + num).removeClass('clicked');
+      //removes effect of opposite vote if clicked
+      }else if ($('#downvote' + num).hasClass('clicked')){
+        newCounterValue = counterValue + 2;
+        $(this).addClass('clicked');
+        $('#downvote'+ num).removeClass('clicked');
+      //when no vote was clicked
+      }else{
+        newCounterValue++;
+        $(this).addClass('clicked');
+      }
+  
+      $("#vote-value"+num).text(newCounterValue);
+  
+  });
 
 
+
+  //downvote
+  $('body').on('click', '.downvote',function() {
+    var classID = $(this).attr('id');
+    var num = classID.slice(-1);
+
+    var counterValue = parseInt($("#vote-value"+ num).text());
+    var newCounterValue = counterValue;
+    //removes vote if clicked again  
+    if ($(this).hasClass('clicked')) {
+      newCounterValue++;
+      $('#downvote'+ num).removeClass('clicked');
+    //removes effect of opposite vote if clicked
+    }else if ($('#upvote'+ num).hasClass('clicked')){
+      newCounterValue = counterValue - 2;
+      $(this).addClass('clicked');
+      $('#upvote'+ num).removeClass('clicked');
+    //when no vote was clicked
+    }else{
+      newCounterValue--;
+      $(this).addClass('clicked');
+    }
+
+    $("#vote-value"+ num).text(newCounterValue);
+  });
+
+
+
+  //function for comment
   function writeComment(userObject) {
     const postContainer = document.querySelector(".comment-section");
     const item =
@@ -90,7 +161,7 @@ $(document).ready(function() {
                     <div class="icons">
                         <button class="reply"></button> 
                         <div class="votes">
-                        <button class="upvote" id=${'upvote' + upvoteCount}></button><span class="vote-value" id=${'vote-value' + voteValCount}>${userObject.votes}</span><button class="downvote" id=${'downvote' + downvoteCount})></button>
+                          <button class="upvote" id=${'upvote' + upvoteCount}></button><span class="vote-value" id=${'vote-value' + voteValCount}>${userObject.votes}</span><button class="downvote" id=${'downvote' + downvoteCount}></button>
                         </div>   
                     </div>
                 </div>
@@ -110,34 +181,9 @@ $(document).ready(function() {
     console.log("Posted.");
   }
 
-
-
-
-
-
-
 });
-
 
 /*********************************************************************/
-//comment related functions
-
-
-
-//expands comment box when icon is clicked
-$(document).ready(function() {
-  $('.reply').each(function() {
-    var classID = $(this).attr('id');
-    var num = classID.slice(-1);
-
-    $(("#reply"+ num)).click(function() {
-      $(("#comment-popup"+ num)).toggle();
-    });
-  });
-});
-
-
-
 class User {
   constructor(name, password) {
     this.name = name;
@@ -167,66 +213,7 @@ class Comment {
     this.votes = 0;
   }
 }
-
-$(document).ready(function(){
-  //upvote function
-  $('.upvote').each(function() {
-
-    var classID = $(this).attr('id');
-    var num = classID.slice(-1);
-
-    $("#upvote"+ num).click(function() {
-      var counterValue = parseInt($("#vote-value"+ num).text());
-      var newCounterValue = counterValue;
-      
-      //removes vote if clicked again
-      if ($(this).hasClass('clicked')) {
-        newCounterValue--;
-        $('#upvote' + num).removeClass('clicked');
-      //removes effect of opposite vote if clicked
-      }else if ($('#downvote' + num).hasClass('clicked')){
-        newCounterValue = counterValue + 2;
-        $(this).addClass('clicked');
-        $('#downvote'+ num).removeClass('clicked');
-      //when no vote was clicked
-      }else{
-        newCounterValue++;
-        $(this).addClass('clicked');
-      }
-    
-      $("#vote-value"+num).text(newCounterValue);
-    });
-
-  });
-
-  //downvote
-  $('.downvote').each(function() {
-    var classID = $(this).attr('id');
-    var num = classID.slice(-1);
-
-    $("#downvote"+ num).click(function() {
-      var counterValue = parseInt($("#vote-value"+ num).text());
-      var newCounterValue = counterValue;
-      //removes vote if clicked again  
-      if ($(this).hasClass('clicked')) {
-        newCounterValue++;
-        $('#downvote'+ num).removeClass('clicked');
-      //removes effect of opposite vote if clicked
-      }else if ($('#upvote'+ num).hasClass('clicked')){
-        newCounterValue = counterValue - 2;
-        $(this).addClass('clicked');
-        $('#upvote'+ num).removeClass('clicked');
-      //when no vote was clicked
-      }else{
-        newCounterValue--;
-        $(this).addClass('clicked');
-      }
-
-      $("#vote-value"+ num).text(newCounterValue);
-    });
-  });
-
-});
+/*********************************************************************/
 
 //sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -269,3 +256,6 @@ if(currentUser == null) {
             </div>
 
 */
+
+
+

@@ -21,6 +21,8 @@ $(document).ready(function() {
   
   $("#post-title").text(viewingPost.title);
   $("#post-content").text(viewingPost.description);
+  
+  $("#post-votes").text(viewingPost.votes);
 
   if(currentUser.name != userOfPost.name) {
     $("#delete-post").hide();

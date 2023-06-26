@@ -72,7 +72,35 @@ posts[7].comments.push(comments[2]);
 sessionStorage.setItem("currentPosts", JSON.stringify(posts));
 sessionStorage.setItem("currentComments", JSON.stringify(comments));
 
+/*
+drimag testing code feel free to remove
+*/
+// console.log("test1");
+// console.log(posts.length);
+// let a = JSON.parse(sessionStorage.getItem("currentPosts"));
+// console.log(a[0].description);
+// let newPost = new Post(posts.length, userSakura, "the quick brown fox jumps", "over the lazy dog")
+// posts.push(newPost);
+// console.log(posts);
+
+// sessionStorage.setItem("currentPosts", JSON.stringify(posts));
+
+// console.log(a);
+
+// a = JSON.parse(sessionStorage.getItem("currentPosts"));
+
+
+// console.log(a);
+// console.log("test1");
+/*
+drimag testing code feel free to remove
+*/
+
+
+
 //------------------------------------
+//drimag edit again
+//let currentUser = 
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
 let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
@@ -98,6 +126,7 @@ console.log("Total Posts: " + posts.length);
 
 
 // Functions -----------------------------------------------------------------------
+
 function displayAllPosts(posts) {
     for(let post of posts) {
         writePost(post.user, post);
@@ -200,6 +229,12 @@ function writePost(user, post) {
 
 // Switching User on Home Page
 $(document).ready(function() {
+
+    // TODO: have function that decides what the posts are /*drimag edit*/
+    // depending on if the user just did a search 
+    // current approach: posts = session storage currentsearch posts
+    posts = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
+    console.log(posts);
     displayAllPosts(posts);
     switchUser(currentUser);
 

@@ -87,6 +87,13 @@ function setSearch(searchTerms){
   sessionStorage.setItem("currentSearch", JSON.stringify(searchTerms));
 }
 
+// clearing the current search
+function clearSearch(){
+  sessionStorage.setItem("currentSearch", JSON.stringify(""));
+  console.log(JSON.parse(sessionStorage.getItem("currentSearch")));
+  setSearchPosts();
+}
+
 
 // setting the posts that will pop-up based on the currentSearch
 function setSearchPosts(){
@@ -123,6 +130,8 @@ function enterSearch(event){
   let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
   console.log(a);
   console.log(b);
+
+  window.location.href = "index.html"; // redirect user to index
 
 }
 

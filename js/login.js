@@ -1,26 +1,40 @@
-users = [];
+/*
 
+  JS File for Login
+
+*/
+
+let users = [];
+
+/*
+
+  Constructors for User and New User
+
+*/
 class User {
   constructor(name, password) {
-    this.name = name;
-    this.lname = this.name.toLowerCase();
-    this.username = "@" + this.lname;
-    this.password = password;
-    this.acc = "#user-" + name;
-    this.img = "./profilepics/" + this.lname + ".jpg";
-    this.bio = "test bio";
+	this.name = name;
+	this.lname = this.name.toLowerCase();
+	this.username = "@" + this.lname;
+	this.password = password;
+	this.acc = "#user-" + name;
+	this.img = "./profilepics/" + this.lname + ".jpg";
+	this.bio = "";
   }
 }
 
 class newUser extends User{
   constructor(name,password){
-    super(name,password);
-    this.img = "./profilepics/guest.jpg";
+	super(name,password);
+	this.img = "./profilepics/guest.jpg";
   }
 }
 
+/*
+	
+	Sample Users
 
-
+*/
 let userGuest = new User("Guest", "1234");
 let userSakura = new User("Sakura", "letmeplay");
 let userChaewon = new User("Chaewon", "tyforsupportingus");
@@ -32,103 +46,109 @@ users.push(userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
 
 
 $(document).ready(function() {
-    $('.login-button').click(function(x) {
-      x.preventDefault();
-      
-        var uname = $('#username').val();
-        var pass = $('#password').val();
-        console.log(users);
-        if (uname === '' || pass === '') {
-          alert('Please enter both username and password.');
-          return;
-        }
-        var isUser= checkCredentials(uname,pass);
-        function checkCredentials(uname, pass) {
-        var valid = false;
-        var i = 0;
+	/*
 
-        while (i < users.length) {
-          let objName = users[i].name;
-          let objPass = users[i].password;
+		Login Function
 
-          if (uname === objName && pass === objPass) {
-            valid = true;
-            break;
-          }
-        i++;
-        }
-        return valid;
-      }
+	 */
+	$('.login-button').click(function(x) {
+	  x.preventDefault();
+	  
+		let uname = $('#username').val();
+		let pass = $('#password').val();
+		console.log(users);
+		if (uname === '' || pass === '') {
+		  alert('Please enter both username and password.');
+		  return;
+		}
 
+		let isUser = checkCredentials(uname,pass);
 
-        console.log(isUser);
-        if(isUser){
-          window.location.href = 'index.html';
-        }else{
-          alert('Invalid username or password.');
-          console.log('Invalid username or password.');
-          return;
-        }
-        
-    });
-});
+		function checkCredentials(uname, pass) {
+			let valid = false;
 
+			for(let user of users) {
+				if (uname === user.lname && pass === user.password) {
+					valid = true;
+					break;
+				}
+			}
+			return valid;
+	  	}
+	  
+		console.log(isUser);
 
-$(document).ready(function() {
-  $('.register-button').click(function(x) {
-    x.preventDefault();
-  
-    var uname = $('#username').val();
-    var pass = $('#password').val();
+		// Checks if Correct Input Details
+		if(isUser){
+		  	window.location.href = 'index.html';
+		} else {
+			alert('Invalid username or password.');
+			console.log('Invalid username or password.');
+			return;
+		}
+		
+	});
 
-    if (uname === '' || pass === '') {
-      alert('Please enter both username and password.');
-      return;
-    }
+	/*
 
-    var usernameTaken = false;
+		Register Function
 
-    var i = 0;
+	 */
+	$('.register-button').click(function(x) {
+		x.preventDefault();
+	  
+		let uname = $('#username').val();
+		let pass = $('#password').val();
+	
+		if (uname === '' || pass === '') {
+		  alert('Please enter both username and password.');
+		  return;
+		}
+	
+		let usernameTaken = false;
+	
+		let i = 0;
+	
+		while (i < users.length) {
+			if (users[i].username === uname) {
+				alert('Username is already taken.');
+				usernameTaken = true;
+				break;
+			}
+		  	i++;
+		}
+	
+		console.log(usernameTaken);
+		if (usernameTaken) {
+		  	return; // Exit the outer function if username is taken
+		}
+	
+		let newUser = { username: uname, password: pass };
+		users.push(newUser);
+		window.location.href = 'login.html';
+	});
 
-    while (i < users.length) {
-      if (users[i].username === uname) {
-        alert('Username is already taken.');
-        usernameTaken = true;
-        break; // Exit the while loop
-      }
-      i++;
-    }
+	let rememberCheckbox = $('#remember');
+	let rememberValue = localStorage.getItem('remember');
 
-    console.log(usernameTaken);
-    if (usernameTaken) {
-      return; // Exit the outer function if username is taken
-    }
+	rememberCheckbox.prop('checked', rememberValue === 'true');
 
-    let newUser = { username: uname, password: pass };
-    users.push(newUser);
-    window.location.href = 'login.html';
-  });
-});
+	let usernameValue = localStorage.getItem('username');
+	let passwordValue = localStorage.getItem('password');
+	$('#username').val(usernameValue);
+	$('#password').val(passwordValue);
 
+	rememberCheckbox.on('change', function() {
+		localStorage.setItem('remember', rememberCheckbox.prop('checked'));
+		if (rememberCheckbox.prop('checked')) {
+			let username = $('#username').val();
+			let password = $('#password').val();
 
-$(document).ready(function() {
-  var rememberCheckbox = $('#remember');
-  var rememberValue = localStorage.getItem('remember');
-  rememberCheckbox.prop('checked', rememberValue === 'true');
-  var usernameValue = localStorage.getItem('username');
-  var passwordValue = localStorage.getItem('password');
-  $('#username').val(usernameValue);
-  $('#password').val(passwordValue);
-  rememberCheckbox.on('change', function() {
-    localStorage.setItem('remember', rememberCheckbox.prop('checked'));
-    if (rememberCheckbox.prop('checked')) {
-      var username = $('#username').val();
-      var password = $('#password').val();
-      localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
-    } else {
-      localStorage.removeItem('username');
-      localStorage.removeItem('password');
-    }
-  });
+			localStorage.setItem('username', username);
+			localStorage.setItem('password', password);
+		} else {
+			localStorage.removeItem('username');
+			localStorage.removeItem('password');
+		}
+  	});
 });

@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Karla');
 
-/*
-    colors palette:
-    #E7ECEF - white
-    #8B8C89 - gray
-    #A3CEF1 - light blue
-    #6096BA - blue
-    #274C77 -dark blue
-*/
-
 body {
     color: black;
 	font-family: Karla, sans-serif;
@@ -25,14 +16,12 @@ body {
     width: 1000px;
     padding:15px;
     border-radius: 15px;
-    padding-top: 80px;
 }
 
 .post-no-comment{
     display: flex;
     flex-direction: row;
     width: 90%;
-    display:none;
 }
 
 div.post-container{
@@ -237,4 +226,5 @@ textarea{
     background-color: lavender;
     color:lavender;
     opacity:0;
+    display:none;
 }

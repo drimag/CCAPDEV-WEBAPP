@@ -24,7 +24,7 @@ $(document).ready(function() {
         $("#edit-profile").show();
     }
 
-    // EFFECTs WHEN HOVERING
+    // Effects when hovering
     $("p.post-title").hover(function() {
         $( this ).fadeOut( 200 );
         $( this ).fadeIn( 500 );
@@ -35,7 +35,6 @@ $(document).ready(function() {
         $(this).css('cursor', 'pointer');
     })
 
-    // EFFECTs WHEN HOVERING
     $("#latest-comments").hover(function() {
         $(this).css('cursor', 'pointer');
     })
@@ -44,6 +43,17 @@ $(document).ready(function() {
         $(this).css('cursor', 'pointer');
     })
 
+    // Show latest posts when "Latest Posts" button is clicked
+    $("#latest-posts").click(function() {
+        console.log("Viewing latest posts");
+        
+        $(this).addClass("active");
+        $("#latest-comments").removeClass("active");
+        $("#latest-feed-posts").show();
+        $("#latest-feed-comments").hide();
+    });
+
+    // Show latest comments when "Latest Comments" button is clicked
     $("#latest-comments").click(function() {
         console.log("Viewing latest comments");
 
@@ -54,15 +64,7 @@ $(document).ready(function() {
         $("#latest-feed-comments").show();
     });
 
-    $("#latest-posts").click(function() {
-        console.log("Viewing latest posts");
-        
-        $(this).addClass("active");
-        $("#latest-comments").removeClass("active");
-        $("#latest-feed-posts").show();
-        $("#latest-feed-comments").hide();
-    });
-
+    // Go to Edit Profile page when "Edit Profile" button is clicked
     $("#edit-profile").click(function() {
         console.log("Editing Profile");
         window.location = "edit_profile.html";
@@ -74,20 +76,17 @@ $(document).ready(function() {
     $(".post").hide();
     $(".post").slice(numOfPosts - 3, numOfPosts).show();
 
-    // clean this: appears in script.js also
-    // FIX: format of showed more posts is wrong
+    // Show more posts when "Show More" button is clicked
     $("#profile-show-more").on("click", function() {
-        // Show 3 more posts when "Show More" button is clicked
         $(".post:hidden").slice(0,4).show();
         $(".post:hidden").style.display = 'flex';
-
-        // Hide button
-        if($(".post:hidden").length == 0) {
-            $("#profile-show-more").hide();
-        }
     })
 });
 
+/**************************************************/
+/* Functions */
+
+// Display All Posts of User
 function displayAllPosts(posts) {
     for(let post of posts) {
         console.log("User's post: " + post.user.username);
@@ -97,7 +96,7 @@ function displayAllPosts(posts) {
     }
 }
 
-// TODO: displayAllComments()
+// Display All Comments of User
 function displayAllComments(comments) {
     for(let comment of comments) {
         console.log("User " + comment.user + " replied to " + comment.repliedTo);
@@ -109,6 +108,7 @@ function displayAllComments(comments) {
 
 console.log(currentPosts);
 
+// Write Post function
 function writePost(user, post) {
     const postContainer = document.querySelector("#latest-feed-posts");
     const item =
@@ -134,7 +134,7 @@ function writePost(user, post) {
     postContainer.innerHTML += item;
 }
 
-// TODO: writeComment()
+// Write Comment function
 function writeComment(user, comment) {
     const postContainer = document.querySelector("#latest-feed-comments");
     const item =

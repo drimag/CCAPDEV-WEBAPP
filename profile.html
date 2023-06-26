@@ -13,40 +13,42 @@
         <script src="js/nav.js" defer></script>
     </head>
     <body>
-	    <!-- nav bar here -->
+        <!-- Navigation Bar -->
         <div class="nav-bar" id="navbar">
             <ul class="nav-content">
-
                 <div class="nav-left">
-                <li class="nav-home">
-                    <a href="index.html" class="home-button" onclick="clearSearch()">
-                        <i class="fas fa-headphones-alt"></i>
-                        <span>Ourverse</span>
-                    </a>
-                </li>
+                    <li class="nav-home">
+                        <a href="index.html" class="home-button" onclick="clearSearch()">
+                            <i class="fas fa-headphones-alt"></i>
+                            <span> Ourverse </span>
+                        </a>
+                    </li>
 
-                <li class="nav-search">
-                    <form class="search-form" onsubmit="enterSearch(event)">
-                        <input type="text" placeholder="Search..." name="search", id="search">
-                        <button type="submit" ><i class="fa fa-search"></i></button>
-                    </form>
-                </li>
+                    <li class="nav-search">
+                        <form class="search-form" onsubmit="enterSearch(event)">
+                            <input type="text" placeholder="Search..." name="search", id="search">
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
                 </div>
 
                 <div class="nav-right">
-                <li class="nav-dropdown">
-                    <button class="dropdown-button" onclick="clickDrop()">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="dropdown" class="dropdown-content">
-                    </div>
-                </li>
+                    <li class="nav-dropdown">
+                        <button class="dropdown-button" onclick="clickDrop()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div id="dropdown" class="dropdown-content"></div>
+                    </li>
                 </div>
-
             </ul>
         </div>
+
+        <!-- Body -->
         <div class="flex-row-container">
             <div class="parent">
+                <!-- User's Details (Profile picture, username, bio) -->
                 <div class="flex-column-container user-details">
                     <img id="profile-img" src="profilepics/guest.jpg">
                     <div class="username" id="profile-username"> @username </div>
@@ -59,6 +61,7 @@
                 </div>
             </div>
             
+            <!-- User's Latest Posts/Comments -->
             <div class="flex-column-container latest">
                 <div class="latest-buttons flex-row-container">
                     <div class="latestposts active" id="latest-posts">
@@ -69,34 +72,55 @@
                     </div>
                 </div>
 
+                <!-- User's Latest Posts -->
                 <div class="posts flex-column-container" id="latest-feed-posts">
                     <!-- TEMPLATE FOR POSTS
-                    <div class="flex-row-container post">
-                        <div>
-                            <img class="user" src="profilepics/chaewon.jpg">
-                        </div>
+                        <div class="flex-row-container post">
+                            <div>
+                                <img class="user ${user.lname}" src="${user.img}">
+                            </div>
 
-                        <div class="flex-column-container post-details">
-                            <p class="username"> @chaewon </p>
-                            <p class="post-title"> Title </p>
-                            <p class="description"> Thank you for supporting us! </p>
-                            
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span> 7 </span>
-                                <span class="downvote"></span>
+                            <div class="flex-column-container post-details" id="post${post.num}">
+                                <p class="username"> ${user.username} </p>
+                                <p class="post-title"> ${post.title} </p>
+                                <p class="description"> ${post.description} </p>
+                                
+                                <div class="actions">
+                                    <span class="comment"></span>
+                                    <span class="upvote"></span>
+                                    <span class="number"> ${post.votes} </span>
+                                    <span class="downvote"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     -->
                 </div>
 
+                <!-- User's Latest Comments -->
                 <div class="posts flex-column-container" id="latest-feed-comments">
-                    
+                    <!-- TEMPLATE FOR COMMENTS
+                        <div class="flex-row-container post">
+                            <div>
+                                <img class="user ${user.lname}" src="${user.img}">
+                            </div>
+
+                            <div class="flex-column-container post-details">
+                                <p class="username"> ${user.username} </p>
+                                <p class="post-title"> Replied to ${comment.repliedTo.username} </p>
+                                <p class="description"> ${comment.description} </p>
+                                
+                                <div class="actions">
+                                    <span class="comment"></span>
+                                    <span class="upvote"></span>
+                                    <span class="number"> ${comment.votes} </span>
+                                    <span class="downvote"></span>
+                                </div>
+                            </div>
+                        </div>
+                    -->
                 </div>
                 
-                <!-- "Show More Posts" button -->
+                <!-- "Show More" button -->
                 <div class="show-more">
                     <button class="buttons" id="profile-show-more">
                         <p> Show More </p>

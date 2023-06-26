@@ -19,7 +19,9 @@ let userEunchae = new User("eunchae", "mubankpresident");
 users.push(userGuest, userSakura, userChaewon, userYunjin, userKazuha, userEunchae);
 console.log(users);
 
-// Post and Comment Construtors 
+/*
+    Post and Comment Construtors
+*/
 const Post = function(num, user, title, description) {
     this.num = num;
     this.title = title;
@@ -28,7 +30,6 @@ const Post = function(num, user, title, description) {
     this.descSnippet = description.slice(0,50) + "...";
     this.votes = 0;
     this.comments = [];
-    //this.deleted = false;
 }
 
 const Comment = function(repliedTo, user, description) {
@@ -42,6 +43,7 @@ const Comment = function(repliedTo, user, description) {
 let posts = [];
 let comments = [];
 
+// Add 10 Posts
 posts.push(new Post(1, userSakura, "Would you disband IVE and LESSERAFIM to bring back IZONE?", "izone was smth else bruh they were the first 4th gen gg pulling both sales and charts they were straight up competing with bp and twice but we gotta admit IVE is definitely one of the best if its not the best 4th gen gg rn and Lesserafim debut is just iconic So if you ask me this after listening love dive and fearless I would say fck no but if you ask me this after watching izones old vlives and stuff I would straight up say yes no doubt tho I gotta say I feel theyre not as comfortable (as their were with izone members) with their new groups yet (specifically wy) but I believe its only matter of time")
             , new Post(2, userEunchae, "big announcement", "Ever since Wonyoungs contract for Music Bank expired, they opened auditions! GUESS WHOS THE NEW MUSIC BANK PRESIDENT??????")
             , new Post(3, userYunjin, "MANNNNNNNNNNNNNNN", "BTS PLEASE COME BACK")
@@ -71,55 +73,15 @@ posts[9].comments.push(comments[0], comments[1], comments[4]);
 posts[7].comments.push(comments[2]);
 posts[6].comments.push(comments[3]);
 
-
-
 // Comment in Comment Sample Data
 comments[4].comments.push(comments[5]);
 
 sessionStorage.setItem("currentPosts", JSON.stringify(posts));
 sessionStorage.setItem("currentComments", JSON.stringify(comments));
 
-/*
-drimag testing code feel free to remove
-*/
-// console.log("test1");
-// console.log(posts.length);
-// let a = JSON.parse(sessionStorage.getItem("currentPosts"));
-// console.log(a[0].description);
-// let newPost = new Post(posts.length, userSakura, "the quick brown fox jumps", "over the lazy dog")
-// posts.push(newPost);
-// console.log(posts);
-
-// sessionStorage.setItem("currentPosts", JSON.stringify(posts));
-
-// console.log(a);
-
-// a = JSON.parse(sessionStorage.getItem("currentPosts"));
-
-
-// console.log(a);
-// console.log("test1");
-/*
-drimag testing code feel free to remove
-*/
-
-
-
-//------------------------------------
-//drimag edit again
-//let currentUser = 
 let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 let viewingUser = JSON.parse(sessionStorage.getItem("viewingUser"));
 let viewingPost = JSON.parse(sessionStorage.getItem("viewingPost"));
-/*
-Scuffed for Delete Post
-let postsWithDeleted = JSON.parse(sessionStorage.getItem("currentPostsWithDeleted"));
-
-if(postsWithDeleted == null) {
-    postsWithDeleted = posts;
-    sessionStorage.setItem("currentPostsWithDeleted", JSON.stringify(posts));
-}
-*/
 
 if(currentUser == null && viewingUser == null) {
     console.log("No Current User stored.");
@@ -132,7 +94,8 @@ if(currentUser == null && viewingUser == null) {
 console.log("Total Posts: " + posts.length);
 
 
-// Functions -----------------------------------------------------------------------
+/**************************************************/
+/* Functions */
 
 function displayAllPosts(posts) {
     for(let post of posts) {
@@ -140,7 +103,9 @@ function displayAllPosts(posts) {
     }
 }
 
-// Switching User
+/*
+    Switching User
+*/
 function switchUser(newUser) {
     $(document).ready(function() {
         $("#current-username").text(newUser.username);
@@ -163,13 +128,17 @@ function switchUser(newUser) {
             $(".descsnippet").hide();
             console.log("Switched to User");
         }
-        //loading dropdown menu items on navbar(could change based on user)
+
+        // Load dropdown menu items on navbar (could change based on user)
         dropdown.innerHTML = '';
         loadDropdown();
     });
 }
 
-// Window location when clicked on profile
+
+/*
+    Window location when clicked on profile
+*/
 function viewUserProfile(user) {
     if(user.name == userGuest.name || currentUser.name == userGuest.name) {
         window.location = "login.html";
@@ -179,7 +148,10 @@ function viewUserProfile(user) {
     }
 }
 
-// Post related Functions
+
+/*
+    Post related Functions
+*/
 function getInputs(user) {
     if(currentUser.name == userGuest.name) {
         window.location = "login.html";
@@ -210,6 +182,9 @@ function getInputs(user) {
     }
 }
 
+/*
+    Write Post function
+*/
 function writePost(user, post) {
     const postContainer = document.querySelector("#posts-feed");
     const item =
@@ -237,12 +212,11 @@ function writePost(user, post) {
     console.log("Posted.");
 }
 
-// Switching User on Home Page
+/*
+    Switching User on Home Page
+*/
 $(document).ready(function() {
 
-    // TODO: have function that decides what the posts are /*drimag edit*/
-    // depending on if the user just did a search 
-    // current approach: posts = session storage currentsearch posts
     posts = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
     if(!posts){
         posts = JSON.parse(sessionStorage.getItem("currentPosts"));
@@ -263,7 +237,7 @@ $(document).ready(function() {
         }
     });
 
-    // TODO: View Post
+    // View Post
     $("p.post-title").click(function() {
         if(currentUser.name == userGuest.name) {
             window.location = "login.html";
@@ -280,26 +254,21 @@ $(document).ready(function() {
         }
     });
     
-    // EFFECTs WHEN HOVERING
+    // Effects when Hovering
     $("p.post-title").hover(function() {
-        $( this ).fadeOut( 200 );
-        $( this ).fadeIn( 500 );
+        $(this).fadeOut(200);
+        $(this).fadeIn(500);
         $(this).css('cursor', 'pointer');
     })
 
     $("img").hover(function() {
         $(this).css('cursor', 'pointer');
     })
-    // clean this: appears in profile.js also
-    // FIX: format of showed more posts is wrong
+
+    // Show 3 more posts when "Show More" button is clicked
     $("#home-show-more").on("click", function() {
-        // Show 3 more posts when "Show More" button is clicked
-        $(".post:hidden").slice(0,4).show();
+        $(".post:hidden").slice(0,15).show();
         $(".post:hidden").style.display = 'flex';
-        // Hide button
-        if($(".post:hidden").length == 0) {
-            $("#home-show-more").hide();
-        }
     });
 
     // View's Another User's Profile from Post
@@ -319,7 +288,6 @@ $(document).ready(function() {
         viewUserProfile(viewingUser);
     });
 
-
     // View Current User's Profile
     $("#user-selected").click(function() {
         viewingUser = currentUser;
@@ -327,8 +295,8 @@ $(document).ready(function() {
         viewUserProfile(viewingUser);
     });
 
-    // -----------------------------------------------------------------------------------------------
-    // Switches Current User to clicked icon
+    /**************************************************/
+    // Switches Current User
     $("#user-guest").click(function() {
         let user = userGuest;
         console.log(user.name);
@@ -364,8 +332,4 @@ $(document).ready(function() {
         console.log(user.name);
         switchUser(user);
     });
-
-    // load navbar dropdown items
-    //loadDropdown();
-    //---------------------------------------------------------------
 });

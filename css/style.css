@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Karla');
 
-/*
-    colors palette:
-    #E7ECEF - white
-    #8B8C89 - gray
-    #A3CEF1 - light blue
-    #6096BA - blue
-    #274C77 -dark blue
-*/
-
 body {
     color: black;
 	font-family: Karla, sans-serif;
@@ -31,7 +22,11 @@ body {
     flex-direction: column;
 }
 
-/* Users */
+/*
+
+    Users
+    
+*/
 div.users {
     flex-grow: 1;
     align-items: center;

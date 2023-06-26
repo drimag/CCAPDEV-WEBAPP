@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Post View</title>
+        <title> Post View </title>
         <link rel="stylesheet" href="css/postview.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="css/nav.css">
@@ -12,35 +12,35 @@
     </head>
 
     <body>
+        <!-- Navigation Bar -->
         <div class="nav-bar" id="navbar">
             <ul class="nav-content">
-
                 <div class="nav-left">
-                <li class="nav-home">
-                    <a href="index.html" class="home-button" onclick="clearSearch()">
-                        <i class="fas fa-headphones-alt"></i>
-                        <span>Ourverse</span>
-                    </a>
-                </li>
+                    <li class="nav-home">
+                        <a href="index.html" class="home-button" onclick="clearSearch()">
+                            <i class="fas fa-headphones-alt"></i>
+                            <span> Ourverse </span>
+                        </a>
+                    </li>
 
-                <li class="nav-search">
-                    <form class="search-form" onsubmit="enterSearch(event)">
-                        <input type="text" placeholder="Search..." name="search", id="search">
-                        <button type="submit" ><i class="fa fa-search"></i></button>
-                    </form>
-                </li>
+                    <li class="nav-search">
+                        <form class="search-form" onsubmit="enterSearch(event)">
+                            <input type="text" placeholder="Search..." name="search", id="search">
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
                 </div>
 
                 <div class="nav-right">
-                <li class="nav-dropdown">
-                    <button class="dropdown-button" onclick="clickDrop()">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="dropdown" class="dropdown-content">
-                    </div>
-                </li>
+                    <li class="nav-dropdown">
+                        <button class="dropdown-button" onclick="clickDrop()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div id="dropdown" class="dropdown-content"></div>
+                    </li>
                 </div>
-
             </ul>
         </div>
         <br>
@@ -53,12 +53,15 @@
 
                     <div class="post-details">
                         <div class="user">
-                            <span class="username" id="post-username">@yunjin</span>
+                            <span class="username" id="post-username"> @yunjin </span>
                         </div>
+
                         <div class="post-title" id="post-title"> post title </div> 
                   
                         <p class="post-content" id="post-content"> post content </p>
-                        <div><button id="edit-title"> Edit Title </button>
+
+                        <div>
+                            <button id="edit-title"> Edit Title </button>
                             <button id="edit-post"> Edit Description</button>
                             <button id="delete-post"> Delete </button>
                         </div>
@@ -66,12 +69,10 @@
                         <div class="icons">
                             <button class="reply"></button> 
                             <div class="votes">
-                            <button class="upvote"></button><span class="vote-value" id="post-votes">700</span><button class="downvote"></button>
+                                <button class="upvote"></button><span class="vote-value" id=>700</span><button class="downvote"></button>
                             </div>
                         </div>
-
                     </div>
-                    
                 </div>
                 <br>
                 <div class="comment-popup">
@@ -81,13 +82,8 @@
                     </div>
                 </div>
             </div>
-        <br>
-        <div class="comment-section">
-            
-                
-        </div>
-         
+            <br>
+            <div class="comment-section"></div>
         </div>
     </body>
-
 </html>

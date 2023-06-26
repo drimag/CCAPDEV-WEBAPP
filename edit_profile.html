@@ -21,26 +21,27 @@
                 <li class="nav-home">
                     <a href="index.html" class="home-button" onclick="clearSearch()">
                         <i class="fas fa-headphones-alt"></i>
-                        <span>Ourverse</span>
+                        <span> Ourverse </span>
                     </a>
                 </li>
 
                 <li class="nav-search">
                     <form class="search-form" onsubmit="enterSearch(event)">
                         <input type="text" placeholder="Search..." name="search", id="search">
-                        <button type="submit" ><i class="fa fa-search"></i></button>
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </form>
                 </li>
                 </div>
 
                 <div class="nav-right">
-                <li class="nav-dropdown">
-                    <button class="dropdown-button" onclick="clickDrop()">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="dropdown" class="dropdown-content">
-                    </div>
-                </li>
+                    <li class="nav-dropdown">
+                        <button class="dropdown-button" onclick="clickDrop()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div id="dropdown" class="dropdown-content"></div>
+                    </li>
                 </div>
 
             </ul>
@@ -57,7 +58,6 @@
                     <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" onchange="changePFP(this)" hidden/>
                     <label for="pfp" id="edit-pfp">Change Profile Picture</label>
                 </div>
-
             </div>
 
             <div class="edit-bottom"> 
@@ -66,13 +66,10 @@
                 </div>
                 <div class="edit-submit">
                     <form id="bio-form" onsubmit="saveProfileEdit(event)">
-                        <input type="submit" value="Save Changes" >
+                        <input type="submit" value="Save Changes">
                     </form>
                 </div>
-                
             </div>
-        
-
         </div>  
     </body>
 </html>

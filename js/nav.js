@@ -1,38 +1,54 @@
-var prevScrollpos = window.scrollY;
+/*
+  JS File for NavBar
+*/
+
+let prevScrollpos = window.scrollY;
+
 window.onscroll = function() {
-  var currentScrollPos = window.scrollY;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("navbar").style.top = "0";
-  } else {
-    document.getElementById("navbar").style.top = "-61px";
-  }
-  prevScrollpos = currentScrollPos;
+	let currentScrollPos = window.scrollY;
+
+	if (prevScrollpos > currentScrollPos) {
+		document.getElementById("navbar").style.top = "0";
+	} else {
+		document.getElementById("navbar").style.top = "-61px";
+	}
+
+	prevScrollpos = currentScrollPos;
 }
 
-/* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
+/* 
+	When the user clicks on the button,
+	toggle between hiding and showing the dropdown content 
+*/
 function clickDrop() {
-  var dropdown = document.getElementById('dropdown');
-  dropdown.style.display = "block";
-  //console.log("bacon");
-
+	let dropdown = document.getElementById('dropdown');
+	dropdown.style.display = "block";
 }
    
-// Close the dropdown if the user clicks outside of it
+/*
+	
+	Close the dropdown if the user clicks outside of it
+
+ */
 window.onclick = function(event) {
-  // console.log(event.target);
-  // console.log(event.target.matches('i.fas.fa-user-circle'));
-  if (!event.target.matches('i.fas.fa-user-circle')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    for (var i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.style.display === "block") {
-        openDropdown.style.display = "none";
-      }
-    }
-  }
+	if (!event.target.matches('i.fas.fa-user-circle')) {
+		let dropdowns = document.getElementsByClassName("dropdown-content");
+
+		for (let i = 0; i < dropdowns.length; i++) {
+			let openDropdown = dropdowns[i];
+			
+			if (openDropdown.style.display === "block") {
+				openDropdown.style.display = "none";
+			}
+		}
+  	}
 };
 
+/*
+	
+	Sign Out Function
+	
+ */
 function handleSignOut(event) {
   event.preventDefault();
   
@@ -41,30 +57,37 @@ function handleSignOut(event) {
   window.location.href = "index.html";
 }
 
-// displaying dropdown items
+/*
+
+	Display dropdown items
+
+ */
 function dropdownItems(toDropdown) {
 
-  toDropdown.forEach(item => {
-  const menuItem = document.createElement("a");
-  menuItem.href = item.link;
-  menuItem.textContent = item.label;
+	toDropdown.forEach(item => {
+		const menuItem = document.createElement("a");
+		menuItem.href = item.link;
+		menuItem.textContent = item.label;
 
-  if (item.label === "Sign Out") {
-    menuItem.addEventListener("click", handleSignOut);
-  }
+		if (item.label === "Sign Out") {
+			menuItem.addEventListener("click", handleSignOut);
+		}
 
-  if (item.label === "View Profile") {
-    menuItem.addEventListener("click", handleViewProfile);
-  }
+		if (item.label === "View Profile") {
+			menuItem.addEventListener("click", handleViewProfile);
+		}
 
-  dropdown.appendChild(menuItem);
-  });
+		dropdown.appendChild(menuItem);
+	});
 }
 
-// choose which dropdown links to display depending
-// on if logged in or not
 
 
+/**
+ * 
+ * Dropdown links to Display for User
+ * 
+ */
 function handleViewProfile(){
   viewingUser = currentUser;
   sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
@@ -72,35 +95,30 @@ function handleViewProfile(){
 }
 
 
-
 function loadDropdown() {
   console.log("gmaing>");
   const guestDropdown = [
-    { label: "Sign Up", link: "login.html" },
+	{ label: "Sign Up", link: "login.html" },
   ];
 
   const userDropdown = [
-    { label: "Edit Profile", link: "edit_profile.html" },
-    { label: "Switch Account", link: "login.html" },
-    { label: "Sign Out", link: "index.html" },
-    { label: "Change Password", link: "change_password.html" },
-    { label: "View Profile", link: "profile.html"}
+	{ label: "Edit Profile", link: "edit_profile.html" },
+	{ label: "Switch Account", link: "login.html" },
+	{ label: "Sign Out", link: "index.html" },
+	{ label: "Change Password", link: "change_password.html" },
+	{ label: "View Profile", link: "profile.html"}
   ];
 
-  const dropdown = document.getElementById("dropdown");
-  //sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
   let user = JSON.parse(sessionStorage.getItem("currentUser"));
-
-
 
   let isLoggedIn = !(user.lname === "guest");
   console.log(user.lname);
   console.log(isLoggedIn);
 
   if(isLoggedIn){
-    dropdownItems(userDropdown);
+	dropdownItems(userDropdown);
   } else{
-    dropdownItems(guestDropdown);
+	dropdownItems(guestDropdown);
   }
 }
 
@@ -108,56 +126,70 @@ loadDropdown();
 
 
 
-// setting the current search terms 
+/*
+
+	Setting the current search terms 
+
+*/
 function setSearch(searchTerms){
-  sessionStorage.setItem("currentSearch", JSON.stringify(searchTerms));
+  	sessionStorage.setItem("currentSearch", JSON.stringify(searchTerms));
 }
 
-// clearing the current search
+/*
+
+	Clearing the current search
+
+ */
 function clearSearch(){
-  sessionStorage.setItem("currentSearch", JSON.stringify(""));
-  console.log(JSON.parse(sessionStorage.getItem("currentSearch")));
-  setSearchPosts();
+	sessionStorage.setItem("currentSearch", JSON.stringify(""));
+	console.log(JSON.parse(sessionStorage.getItem("currentSearch")));
+	setSearchPosts();
 }
 
 
-// setting the posts that will pop-up based on the currentSearch
+/*
+
+	Setting the posts that will pop-up based on the currentSearch
+
+ */
 function setSearchPosts(){
-  let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));
-  let posts = JSON.parse(sessionStorage.getItem("currentPosts"));
+	let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));
+	let posts = JSON.parse(sessionStorage.getItem("currentPosts"));
 
-  searchTerms = searchTerms.toLowerCase();
+	searchTerms = searchTerms.toLowerCase();
 
-  var searchPosts = posts.filter(function(post) {
+	let searchPosts = posts.filter(function(post) {
 
-    var postTitle = post.title.toLowerCase(); 
-    var postDescription = post.description.toLowerCase();
+		let postTitle = post.title.toLowerCase(); 
+		let postDescription = post.description.toLowerCase();
 
-    // Check if the title or description content contains the search term
+		// Check if the title or description content contains the search term
+		return (postTitle.includes(searchTerms) || postDescription.includes(searchTerms));
+	});
 
-    return (postTitle.includes(searchTerms) || postDescription.includes(searchTerms));
-  });
-
-  sessionStorage.setItem("currentSearchPosts", JSON.stringify(searchPosts));
-  //return(searchPosts);
+	sessionStorage.setItem("currentSearchPosts", JSON.stringify(searchPosts));
 }
 
+/*
 
+	Enter Search
+
+ */
 function enterSearch(event){
-  event.preventDefault();
+	event.preventDefault();
 
-  var searchInput = document.getElementById("search");
-  var searchTerms = searchInput.value;
+	let searchInput = document.getElementById("search");
+	let searchTerms = searchInput.value;
 
-  setSearch(searchTerms); // sets the currentSearch
-  setSearchPosts(); // should set currentSearchPosts in sessionStorage
+	setSearch(searchTerms); // sets the currentSearch
+	setSearchPosts(); // should set currentSearchPosts in sessionStorage
 
-  let a = JSON.parse(sessionStorage.getItem("currentSearch"));
-  let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
-  console.log(a);
-  console.log(b);
+	let a = JSON.parse(sessionStorage.getItem("currentSearch"));
+	let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
+	console.log(a);
+	console.log(b);
 
-  window.location.href = "index.html"; // redirect user to index
+	window.location.href = "index.html"; // redirect user to index
 
 }
 

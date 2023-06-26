@@ -11,47 +11,46 @@
         <script src="js/nav.js" defer></script>
     </head>
     <body>
+        <!-- Navigation Bar -->
         <div class="nav-bar" id="navbar">
             <ul class="nav-content">
-
                 <div class="nav-left">
-                <li class="nav-home">
-                    <a href="index.html" class="home-button" onclick="clearSearch()">
-                        <i class="fas fa-headphones-alt"></i>
-                        <span>Ourverse</span>
-                    </a>
-                </li>
+                    <li class="nav-home">
+                        <a href="index.html" class="home-button" onclick="clearSearch()">
+                            <i class="fas fa-headphones-alt"></i>
+                            <span> Ourverse </span>
+                        </a>
+                    </li>
 
-                <li class="nav-search">
-                    <form class="search-form" onsubmit="enterSearch(event)">
-                        <input type="text" placeholder="Search..." name="search", id="search">
-                        <button type="submit" ><i class="fa fa-search"></i></button>
-                    </form>
-                </li>
+                    <li class="nav-search">
+                        <form class="search-form" onsubmit="enterSearch(event)">
+                            <input type="text" placeholder="Search..." name="search", id="search">
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
                 </div>
 
                 <div class="nav-right">
-                <li class="nav-dropdown">
-                    <button class="dropdown-button" onclick="clickDrop()">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="dropdown" class="dropdown-content">
-                    </div>
-                </li>
+                    <li class="nav-dropdown">
+                        <button class="dropdown-button" onclick="clickDrop()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div id="dropdown" class="dropdown-content"></div>
+                    </li>
                 </div>
-
             </ul>
         </div>
 
         <!-- Outer Container-->
         <div class="page flex-row-container">
 
-            <!-- Users Container -->
+            <!-- "Users" Container -->
             <div class="flex-column-container users">
                 <div class="current-user">
                     <img class="user" id="user-selected" src="profilepics/guest.jpg">
                     <p class="username" id="current-username"> @guest </p>
-                    <p>
                 </div>
                 <div class="flex-column-container other-users">
                     <img class="user" id="user-guest"   src="profilepics/guest.jpg">
@@ -85,24 +84,25 @@
                 <!-- Timeline -->
                 <div class="posts flex-column-container" id="posts-feed">
                     <!-- POST FORMATTING
-                    <div class="flex-row-container post">
-                        <div>
-                            <img class="user" src="profilepics/chaewon.jpg">
-                        </div>
+                        <div class="flex-row-container post" id="post${post.num}">
+                            <div>
+                                <img class="user ${user.lname}" src="${user.img}">
+                            </div>
 
-                        <div class="flex-column-container post-details">
-                            <p class="username"> @chaewon </p>
-                            <p class="post-title"> Title </p>
-                            <p class="description"> Thank you for supporting us! </p>
-                            
-                            <div class="actions">
-                                <span class="comment"></span>
-                                <span class="upvote"></span>
-                                <span class="downvote"></span>
+                            <div class="flex-column-container post-details"">
+                                <p class="username"> ${user.username} </p>
+                                <p class="post-title"> ${post.title} </p>
+                                <p class="home-description"> ${post.description} </p>
+                                <p class="descsnippet"> ${post.descSnippet} </p>
+
+                                <div class="actions">
+                                    <span class="comment"></span>
+                                    <span class="upvote"></span>
+                                    <span class="number"> ${post.votes} </span>
+                                    <span class="downvote"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
                     -->
                 </div>
 

@@ -88,13 +88,29 @@ $(document).ready(function() {
   var postButtonCount = 1;
   var commentAreaCount = 1;
   var commentBoxCount = 1;
+  var editButtonCount = 1;
+  var deleteButtonCount = 1;
 
   function displayAllComments(post) {
     for(let comment of post.comments) {
-      writeComment(comment);
+      console.log("asdf",comment.description);
+      writeComment(comment,".comment-section");
   }
   }
+  //displayAllComments(viewingPost);
   // gives every relevant class an id
+  $('.edit-button').each(function() {
+    var eBID = 'editButton' + editButtonCount;
+    $(this).attr('id', eBID);
+    editButtonCount++;
+  });
+
+  $('.delete-button').each(function() {
+    var dID = 'delButton' + deleteButtonCount;
+    $(this).attr('id', dID);
+    deleteButtonCount++;
+  });
+
   $('.upvote').each(function() {
     var upvID = 'upvote' + upvoteCount;
     $(this).attr('id', upvID);
@@ -142,7 +158,7 @@ $(document).ready(function() {
     commentAreaCount++;
   });
 
-  $('.comment-box').each(function() {
+  $('.comment-box, .post-container').each(function() {
     var commentBoxID = 'commentBox' + commentBoxCount;
     $(this).attr('id', commentBoxID);
     commentBoxCount++;
@@ -155,16 +171,29 @@ $(document).ready(function() {
     $(("#comment-popup"+ num)).toggle();
   });
 
-  //write comment
+//write comment
   $('.comment-popup').on('click', '.post-button input', function() {
+    console.log("i am clicked");
     var classID = $(this).attr('id');
     var num = classID.slice(-1);
-    console.log(classID);
-   
+    console.log("ID", classID);
+    console.log("Num:", num);
+    var destination = ".comment-section";
     var paragraph = $("#comment-area" + num).val();
-    var commentObject = new Comment(viewingPost.user, currentUser, paragraph); // change first parameter to the user its replying to
-    writeComment(commentObject);
-   
+    var commentObject = new Comment(viewingPost.user,currentUser, paragraph);
+  
+    var isInnerComment = $(this).closest('.comment-box').length > 0;
+    console.log(isInnerComment);
+    if (isInnerComment) {
+      var parentCommentBox = $(this).closest('.comment-box');
+      var parentCommentBoxId = parentCommentBox.attr('id');
+      var commentBoxNum = parentCommentBoxId.slice(-1);
+      destination = "#commentBox" + commentBoxNum;
+      console.log("destination:",destination);
+      writeComment(commentObject, destination);
+    } else {
+      writeComment(commentObject, destination);
+    }
   });
 
    //upvote function
@@ -201,7 +230,7 @@ $(document).ready(function() {
   $('body').on('click', '.downvote',function() {
     var classID = $(this).attr('id');
     var num = classID.slice(-1);
-
+    
     var counterValue = parseInt($("#vote-value"+ num).text());
     var newCounterValue = counterValue;
     //removes vote if clicked again  
@@ -222,11 +251,19 @@ $(document).ready(function() {
     $("#vote-value"+ num).text(newCounterValue);
   });
 
-
+  //delete
+  $('body').on('click', '.delete-button',function() {
+    var classID = $(this).attr('id');
+    var num = parseInt(classID.slice(-1))+1;
+    console.log(num);
+    console.log(classID);
+    $("#commentBox"+ num).addClass('deleted');
+  });
 
   //function for comment
-  function writeComment(userObject) {
-    const postContainer = document.querySelector(".comment-section");
+  function writeComment(userObject, destination) {
+    console.log("destination:",destination);
+    const postContainer = document.querySelector(destination);//destination changed to "#commentBox2" for debugging,somehow ruins the code
     const item =
           `<div class="comment-box" id=${'commentBox' + commentBoxCount}>
           <div class="post-no-comment">
@@ -235,7 +272,7 @@ $(document).ready(function() {
               </div>
               <div class="post-details">
                   <div class="user">
-                      <span class="username">${userObject.user.username}</span>
+                      <span class="username">${userObject.user.username}</span> <span class="del-edit-buttons"> <button class="edit-button" id=${'editButton' + editButtonCount}></button> <button class="delete-button" id=${'delButton' + deleteButtonCount}></button> </span>
                   </div>
                   <p class="comment">${userObject.description}</p>
                   <div class="icons">
@@ -266,6 +303,8 @@ $(document).ready(function() {
     postButtonCount++;//
     commentAreaCount++;//
     replyCount++;//
+    editButtonCount++;
+    deleteButtonCount++;
     console.log("Posted.");
   }
   displayAllComments(viewingPost);

@@ -267,6 +267,16 @@ $(document).ready(function() {
         }
     });
 
+    // EFFECTs WHEN HOVERING
+    $("p.post-title").hover(function() {
+        $( this ).fadeOut( 200 );
+        $( this ).fadeIn( 500 );
+        $(this).css('cursor', 'pointer');
+    })
+
+    $("img").hover(function() {
+        $(this).css('cursor', 'pointer');
+    })
     // clean this: appears in profile.js also
     // FIX: format of showed more posts is wrong
     $("#home-show-more").on("click", function() {

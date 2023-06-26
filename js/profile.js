@@ -24,6 +24,26 @@ $(document).ready(function() {
         $("#edit-profile").show();
     }
 
+    // EFFECTs WHEN HOVERING
+    $("p.post-title").hover(function() {
+        $( this ).fadeOut( 200 );
+        $( this ).fadeIn( 500 );
+        $(this).css('cursor', 'pointer');
+    })
+
+    $("img").hover(function() {
+        $(this).css('cursor', 'pointer');
+    })
+
+    // EFFECTs WHEN HOVERING
+    $("#latest-comments").hover(function() {
+        $(this).css('cursor', 'pointer');
+    })
+
+    $("#latest-posts").hover(function() {
+        $(this).css('cursor', 'pointer');
+    })
+
     $("#latest-comments").click(function() {
         console.log("Viewing latest comments");
 

@@ -26,6 +26,7 @@ $(document).ready(function() {
 
 	if(currentUser.name != userOfPost.name) {
 		$("#delete-post").hide();
+		$("#edit-title").hide();
 		$("#edit-post").hide();
 	}
 

@@ -37,7 +37,7 @@ $(document).ready(function() {
       
         var uname = $('#username').val();
         var pass = $('#password').val();
-        
+        console.log(users);
         if (uname === '' || pass === '') {
           alert('Please enter both username and password.');
           return;
@@ -73,33 +73,6 @@ $(document).ready(function() {
     });
 });
 
-// $(document).ready(function() {
-//   $('.register-button').click(function(x) {
-//       x.preventDefault();
-    
-//       var uname = $('#username').val();
-//       var pass = $('#password').val();
-
-//       if (uname === '' || pass === '') {
-//         alert('Please enter both username and password.');
-//         return;
-//       }
-
-//       users.forEach(function(element) {
-//         if(element === uname){
-//           alert('Username is already taken.');
-//           return;
-//         }
-//       })
-
-//       let newuser =  "user" + uname;
-//       newuser = new newUser(uname,pass);
-//       users.push(newuser);
-//       console.log(users);
-//       //window.location.href = 'login.html';
-//       console.log(users[5].password);
-//   });
-// });
 
 $(document).ready(function() {
   $('.register-button').click(function(x) {
@@ -133,8 +106,6 @@ $(document).ready(function() {
 
     let newUser = { username: uname, password: pass };
     users.push(newUser);
-    console.log(users);
-    console.log(users[5].password);
-    //window.location.href = 'login.html';
+    window.location.href = 'login.html';
   });
 });

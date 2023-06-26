@@ -12,7 +12,10 @@ function changePFP(input){
 
 // changing fields based on logged in user
 let theUser = JSON.parse(sessionStorage.getItem("currentUser"));
-//let theUser = userSakura;
+if(!theUser){
+  theUser = userGuest;
+  console.log("user has gamed");
+}
 
 console.log(theUser);
 console.log(theUser.lname != "guest");
@@ -24,6 +27,55 @@ if(theUser.lname != "guest"){
   document.getElementById("bio").value = theUser.bio;
 }
 
+//console.log(JSON.parse(sessionStorage.getItem("pfp")));
+// console.log(JSON.parse(sessionStorage.getItem("b")));
+// console.log(JSON.parse(sessionStorage.getItem("c")));
+// console.log(JSON.parse(sessionStorage.getItem("d")));
+// console.log(JSON.parse(sessionStorage.getItem("e")));
+
+function saveProfileEdit(event) {
+  event.preventDefault();
+
+  var form = document.getElementById("bio-form");
+  var username = form.elements["username"].value;
+  var bio = form.elements["bio"].value;
+  var pfp = form.elements["pfp"].files[0];
+
+  oldPFP = theUser.img;
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('profile-image').src = e.target.result;
+  }
+
+  if (pfp) {
+    reader.readAsDataURL(pfp); // Read the image file as data URL
+  }
+  
+  
+
+  if(!username){
+    theUser = new User(theUser.name, theUser.password);
+  } else {
+    theUser = new User(username, theUser.password);
+  }
+
+  theUser.bio = bio;
+
+
+  var selectedImage = pfp ? URL.createObjectURL(pfp) : theUser.img; // Use selected image or existing image
+  theUser.img = selectedImage;
+  theUser.img = "profilepics/IU.png";
+  if(!pfp){
+    theUser.img = oldPFP;
+  }
+  
+  sessionStorage.setItem("pfp", JSON.stringify(pfp));
+
+  sessionStorage.setItem("currentUser", JSON.stringify(theUser));
+
+  window.location.href = "index.html";
+}
 
 
 // $("pfp").on("change", function() {

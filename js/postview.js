@@ -25,29 +25,7 @@ $(document).ready(function() {
   if(currentUser.name != userOfPost.name) {
     $("#delete-post").hide();
   }
-  // TODO: Edit Post
 
-  /*
-  Scuffed
-
-  // TODO: Delete Post
-  $("#delete-post").click(function() {
-    alert("Post Deleted!");
-  
-    for(let p of currentPosts) {
-      if(p.title == viewingPost.title) {
-        p.deleted = true;
-      }
-    }
-
-    sessionStorage.setItem("currentPostsWithDeleted", JSON.stringify(currentPosts));
-    window.location = "index.html";
-    
-  });
-  */
-  //TO DO: add the upvotes and downvotes of the post
-
-  // TO DO: add the comments of the post 
 
   // View's Another User's Profile from Post
   $(".pfp").click(function() {
@@ -377,47 +355,8 @@ const Comment = function(repliedTo, user, description) {
 }
 /*********************************************************************/
 
-//sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
-//let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-//Temporary function because idk if i should be able to change posts here
 if(currentUser == null) {
   currentUser = userYunjin;
 } 
-
-
-/*
- comment format:
-             <div class="comment-box">
-                <div class="post-no-comment">
-                    <div class="user-icon">
-                        <img class="pfp" src="profilepics/chaewon.jpg">
-                    </div>
-                    <div class="post-details">
-                        <div class="user">
-                            <span class="username">@chaewon</span>
-                        </div>
-                        <p class="comment">
-
-                        </p>
-                        <div class="icons">
-                            <button class="reply"></button> 
-                            <div class="votes">
-                            <button class="upvote"></button><span class="vote-value">23</span><button class="downvote"></button>
-                            </div>   
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="comment-popup">
-                    <textarea class="comment-area" rows="10" cols="87" placeholder="Comment here..."></textarea>
-                    <div class="post-button">
-                        <input type="button" value="Reply">
-                    </div>
-                </div>
-                
-            </div>
-
-*/
-
 
 

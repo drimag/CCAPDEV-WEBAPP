@@ -9,6 +9,23 @@ function changePFP(input){
   reader.readAsDataURL(input.files[0]);
 }
 
+
+// changing fields based on logged in user
+let theUser = JSON.parse(sessionStorage.getItem("currentUser"));
+//let theUser = userSakura;
+
+console.log(theUser);
+console.log(theUser.lname != "guest");
+console.log();
+
+if(theUser.lname != "guest"){
+  document.getElementById("profile-image").src = theUser.img;
+  document.getElementById("username").placeholder = theUser.name;
+  document.getElementById("bio").value = theUser.bio;
+}
+
+
+
 // $("pfp").on("change", function() {
 //   var file = this.files[0]; // Get the uploaded file
 //   //var reader = new FileReader();

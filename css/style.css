@@ -53,6 +53,7 @@ div.users {
 .current-user {
     background-color: #81A5F9;
     border-radius: 25px;
+    margin: 20px;
 }
 
 .current-user p {  
@@ -63,6 +64,7 @@ div.users {
     padding: 1px;
     font-size: 30px;
     font-weight: bold;
+    margin-bottom: 30px;
 }
 
 .other-users {

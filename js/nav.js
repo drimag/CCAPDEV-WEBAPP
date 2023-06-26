@@ -53,12 +53,24 @@ function dropdownItems(toDropdown) {
     menuItem.addEventListener("click", handleSignOut);
   }
 
+  if (item.label === "View Profile") {
+    menuItem.addEventListener("click", handleViewProfile);
+  }
+
   dropdown.appendChild(menuItem);
   });
 }
 
 // choose which dropdown links to display depending
 // on if logged in or not
+
+
+function handleViewProfile(){
+  viewingUser = currentUser;
+  sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
+  viewUserProfile(viewingUser);
+}
+
 
 
 function loadDropdown() {
@@ -76,7 +88,7 @@ function loadDropdown() {
   ];
 
   const dropdown = document.getElementById("dropdown");
-  sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+  //sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
   let user = JSON.parse(sessionStorage.getItem("currentUser"));
 
 

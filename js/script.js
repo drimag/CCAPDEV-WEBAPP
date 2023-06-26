@@ -233,7 +233,7 @@ $(document).ready(function() {
     // TODO: have function that decides what the posts are /*drimag edit*/
     // depending on if the user just did a search 
     // current approach: posts = session storage currentsearch posts
-    posts = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
+    posts = JSON.parse(sessionStorage.getItem("currentPosts"));
     console.log(posts);
     displayAllPosts(posts);
     switchUser(currentUser);

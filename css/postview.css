@@ -235,4 +235,5 @@ textarea{
     background-color: lavender;
     color:lavender;
     opacity:0;
+    display:none;
 }

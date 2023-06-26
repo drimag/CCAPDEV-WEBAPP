@@ -64,9 +64,13 @@ document.addEventListener("DOMContentLoaded", function() {
   ];
 
   const dropdown = document.getElementById("dropdown");
+  sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+  let user = JSON.parse(sessionStorage.getItem("currentUser"));
 
-  let isLoggedIn = !(currentUser.lname === "guest");
-  console.log(currentUser.lname);
+
+
+  let isLoggedIn = !(user.lname === "guest");
+  console.log(user.lname);
   console.log(isLoggedIn);
 
   if(isLoggedIn){
@@ -78,5 +82,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+// setting the current search terms 
+function setSearch(searchTerms){
+  sessionStorage.setItem("currentSearch", JSON.stringify(searchTerms));
+}
 
+
+// setting the posts that will pop-up based on the currentSearch
+function setSearchPosts(){
+  let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));
+  let posts = JSON.parse(sessionStorage.getItem("currentPosts"));
+
+  searchTerms = searchTerms.toLowerCase();
+
+  var searchPosts = posts.filter(function(post) {
+
+    var postTitle = post.title.toLowerCase(); 
+    var postDescription = post.description.toLowerCase();
+
+    // Check if the title or description content contains the search term
+
+    return (postTitle.includes(searchTerms) || postDescription.includes(searchTerms));
+  });
+
+  sessionStorage.setItem("currentSearchPosts", JSON.stringify(searchPosts));
+  //return(searchPosts);
+}
+
+
+function enterSearch(event){
+  event.preventDefault();
+
+  var searchInput = document.getElementById("search");
+  var searchTerms = searchInput.value;
+
+  setSearch(searchTerms); // sets the currentSearch
+  setSearchPosts(); // should set currentSearchPosts in sessionStorage
+
+  let a = JSON.parse(sessionStorage.getItem("currentSearch"));
+  let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
+  console.log(a);
+  console.log(b);
+
+}
 

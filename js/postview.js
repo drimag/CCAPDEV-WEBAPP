@@ -259,7 +259,41 @@ $(document).ready(function() {
   })
 
   // edit post
-  
+  $("#edit-post").click(function() {
+    let title = viewingPost.title;
+    let desc = viewingPost.description;
+
+    let textarea = $('<textarea>').val(desc);
+    $("#post-content").replaceWith(textarea);
+
+    textarea.on('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        let editedText = textarea.val();
+
+        let newParagraph = $('<p>').text(editedText);
+        textarea.replaceWith(newParagraph);
+      }
+    });
+  })
+
+  // edit title
+  $("#edit-title").click(function() {
+    let title = viewingPost.title;
+
+    let textarea = $('<textarea>').val(title);
+    $("#post-title").replaceWith(textarea);
+
+    textarea.on('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        let editedText = textarea.val();
+
+        let newParagraph = $('<p style="font-weight: bold">').text(editedText);
+        textarea.replaceWith(newParagraph);
+      }
+    });
+  })
 
   //edit comment
   $('body').on('click', '.edit-button',function() {

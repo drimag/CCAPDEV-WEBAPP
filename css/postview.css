@@ -32,6 +32,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 90%;
+    display:none;
 }
 
 div.post-container{

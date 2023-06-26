@@ -63,11 +63,17 @@ posts[4].votes = 5;
 // Add Comments to at least 5 posts
 comments.push(new Comment(userSakura, userEunchae, "I think it is because chae yeon was upfront about it. And let us be honest chae yeon os more well known and liked")
             , new Comment(userSakura, userYunjin, "The problem for me wasn't that she was strategic, but that her strategy was a very poor one.")
-            , new Comment(userEunchae, userChaewon, "imo this comeback was one of the best ones! since fever really widened their fanbase, this def had a bigger impact."));
+            , new Comment(userEunchae, userChaewon, "imo this comeback was one of the best ones! since fever really widened their fanbase, this def had a bigger impact.")
+            , new Comment(userYunjin, userKazuha, "I will never understand how people hate Scientist.. it's literally perfect, the choreography, the music everything was on point, this song literally screams TWICE")
+            , new Comment(userSakura, userChaewon, "I get where the hate is coming from. She's basically the top in rankings now yet she's still doing the I need to stand out bit. Although I think she's doing it too early. At this early point of the contest, any contestant should prioritize winning the group tasks first, before worrying about the need to stand out.")
+            , new Comment(userSakura, userYunjin, "I do not understand your comment, that should not warrant hate, who cares if she is still, doing “I am trying to stand out thing” isnt that the point of the show, it is still the beginning and anything could change, she could drop to the bottom next week, it is a competition. You can still prioritize yourself while prioritizing group tasks too, it is not like her doing ruined the song or she is at fault if a member she chooses underperforms"));
 
-posts[9].comments.push(comments[0], comments[1]);
+posts[9].comments.push(comments[0], comments[1], comments[4]);
 posts[7].comments.push(comments[2]);
+posts[6].comments.push(comments[3]);
 
+// Comment in Comment Sample Data
+comments[4].comments.push(comments[5]);
 
 sessionStorage.setItem("currentPosts", JSON.stringify(posts));
 sessionStorage.setItem("currentComments", JSON.stringify(comments));

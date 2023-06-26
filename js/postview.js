@@ -248,6 +248,15 @@ $(document).ready(function() {
     $("#commentBox"+ num).addClass('deleted');
   });
 
+  // delete post
+  $("#delete-post").click(function() {
+    $(".expanded-container").hide();
+    $(".comment-section").hide();
+    
+    $("body").append('<p style="text-align: center">Post was deleted.</p>');
+    console.log("Deleted Post");
+  })
+
   //edit post
   $('body').on('click', '.edit-button',function() {
     var classID = $(this).attr('id');

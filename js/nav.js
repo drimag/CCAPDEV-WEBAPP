@@ -33,13 +33,29 @@ window.onclick = function(event) {
   }
 };
 
+function handleSignOut(event) {
+  event.preventDefault();
+  
+  sessionStorage.setItem("currentUser", JSON.stringify(userGuest));
+  location.reload();
+  window.location.href = "index.html";
+}
 
 // displaying dropdown items
 function dropdownItems(toDropdown) {
+
   toDropdown.forEach(item => {
   const menuItem = document.createElement("a");
   menuItem.href = item.link;
   menuItem.textContent = item.label;
+
+  if (item.label === "Sign Out") {
+    menuItem.addEventListener("click", handleSignOut);
+  }
+
+  if (item.label === "View Profile") {
+    menuItem.addEventListener("click", handleViewProfile);
+  }
 
   dropdown.appendChild(menuItem);
   });
@@ -49,8 +65,16 @@ function dropdownItems(toDropdown) {
 // on if logged in or not
 
 
-document.addEventListener("DOMContentLoaded", function() {
+function handleViewProfile(){
+  viewingUser = currentUser;
+  sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
+  viewUserProfile(viewingUser);
+}
 
+
+
+function loadDropdown() {
+  console.log("gmaing>");
   const guestDropdown = [
     { label: "Sign Up", link: "login.html" },
   ];
@@ -64,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
   ];
 
   const dropdown = document.getElementById("dropdown");
-  sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
+  //sessionStorage.setItem("currentUser", JSON.stringify(currentUser));
   let user = JSON.parse(sessionStorage.getItem("currentUser"));
 
 
@@ -78,7 +102,9 @@ document.addEventListener("DOMContentLoaded", function() {
   } else{
     dropdownItems(guestDropdown);
   }
-});
+}
+
+loadDropdown();
 
 
 

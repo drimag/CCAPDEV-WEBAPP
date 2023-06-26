@@ -4,12 +4,43 @@
         <title> Home Page </title>
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-posts.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/script.js" defer></script>
+        <script src="js/nav.js" defer></script>
     </head>
     <body>
-        <div class="navbar">
-            <p> nav bar</p>
+        <div class="nav-bar" id="navbar">
+            <ul class="nav-content">
+
+                <div class="nav-left">
+                <li class="nav-home">
+                    <a href="index.html" class="home-button" onclick="clearSearch()">
+                        <i class="fas fa-headphones-alt"></i>
+                        <span>Ourverse</span>
+                    </a>
+                </li>
+
+                <li class="nav-search">
+                    <form class="search-form" onsubmit="enterSearch(event)">
+                        <input type="text" placeholder="Search..." name="search", id="search">
+                        <button type="submit" ><i class="fa fa-search"></i></button>
+                    </form>
+                </li>
+                </div>
+
+                <div class="nav-right">
+                <li class="nav-dropdown">
+                    <button class="dropdown-button" onclick="clickDrop()">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div id="dropdown" class="dropdown-content">
+                    </div>
+                </li>
+                </div>
+
+            </ul>
         </div>
 
         <!-- Outer Container-->

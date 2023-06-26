@@ -25,6 +25,7 @@ body {
     width: 1000px;
     padding:15px;
     border-radius: 15px;
+    padding-top: 80px;
 }
 
 .post-no-comment{
@@ -235,5 +236,4 @@ textarea{
     background-color: lavender;
     color:lavender;
     opacity:0;
-    display:none;
 }

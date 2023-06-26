@@ -90,6 +90,7 @@ $(document).ready(function() {
   var commentBoxCount = 1;
   var editButtonCount = 1;
   var deleteButtonCount = 1;
+  var commentCount = 1;
 
   function displayAllComments(post) {
     for(let comment of post.comments) {
@@ -103,6 +104,13 @@ $(document).ready(function() {
     var eBID = 'editButton' + editButtonCount;
     $(this).attr('id', eBID);
     editButtonCount++;
+  });
+
+
+  $('.post-details').each(function() {
+    var cID = 'comment' + commentCount;
+    $(this).attr('id', cID);
+    commentCount++;
   });
 
   $('.delete-button').each(function() {
@@ -260,6 +268,31 @@ $(document).ready(function() {
     $("#commentBox"+ num).addClass('deleted');
   });
 
+  //edit post
+  $('body').on('click', '.edit-button',function() {
+    var classID = $(this).attr('id');
+    var num = parseInt(classID.slice(-1))+1;
+    console.log(num);
+    console.log(classID);
+
+    var postContent = $('#comment'+num);
+    var currentText = postContent.text();
+
+    var textarea = $('<textarea>').val(currentText);
+    postContent.replaceWith(textarea);
+
+    textarea.on('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        var editedText = textarea.val();
+
+        var newParagraph = $('<p>').text(editedText);
+        textarea.replaceWith(newParagraph);
+      }
+    });
+  });
+
+
   //function for comment
   function writeComment(userObject, destination) {
     console.log("destination:",destination);
@@ -274,7 +307,7 @@ $(document).ready(function() {
                   <div class="user">
                       <span class="username">${userObject.user.username}</span> <span class="del-edit-buttons"> <button class="edit-button" id=${'editButton' + editButtonCount}></button> <button class="delete-button" id=${'delButton' + deleteButtonCount}></button> </span>
                   </div>
-                  <p class="comment">${userObject.description}</p>
+                  <p class="comment" id=${'comment' + commentCount}>${userObject.description}</p>
                   <div class="icons">
                       <button class="reply" id=${'reply' + replyCount}></button> 
                       <div class="votes">
@@ -305,6 +338,7 @@ $(document).ready(function() {
     replyCount++;//
     editButtonCount++;
     deleteButtonCount++;
+    commentCount++;
     console.log("Posted.");
   }
   displayAllComments(viewingPost);

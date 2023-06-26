@@ -26,6 +26,7 @@ $(document).ready(function() {
 
   if(currentUser.name != userOfPost.name) {
     $("#delete-post").hide();
+    $("#edit-post").hide();
   }
 
 
@@ -257,7 +258,10 @@ $(document).ready(function() {
     console.log("Deleted Post");
   })
 
-  //edit post
+  // edit post
+  
+
+  //edit comment
   $('body').on('click', '.edit-button',function() {
     var classID = $(this).attr('id');
     var num = parseInt(classID.slice(-1))+1;
@@ -280,6 +284,7 @@ $(document).ready(function() {
       }
     });
   });
+
 
 
   //function for comment

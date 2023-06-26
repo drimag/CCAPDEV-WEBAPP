@@ -150,7 +150,7 @@ function switchUser(newUser) {
     
             // Show only 15 latest posts for guest
             $(".post").hide();
-            $(".post").slice(numOfPosts - 25, numOfPosts).show();
+            $(".post").slice(numOfPosts - 15, numOfPosts).show();
         } else {
             $(".home-description").show();
             $(".descsnippet").hide();
@@ -272,6 +272,7 @@ $(document).ready(function() {
     $("#home-show-more").on("click", function() {
         // Show 3 more posts when "Show More" button is clicked
         $(".post:hidden").slice(0,4).show();
+        $(".post:hidden").style.display = 'flex';
 
         // Hide button
         if($(".post:hidden").length == 0) {

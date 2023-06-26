@@ -109,3 +109,26 @@ $(document).ready(function() {
     window.location.href = 'login.html';
   });
 });
+
+
+$(document).ready(function() {
+  var rememberCheckbox = $('#remember');
+  var rememberValue = localStorage.getItem('remember');
+  rememberCheckbox.prop('checked', rememberValue === 'true');
+  var usernameValue = localStorage.getItem('username');
+  var passwordValue = localStorage.getItem('password');
+  $('#username').val(usernameValue);
+  $('#password').val(passwordValue);
+  rememberCheckbox.on('change', function() {
+    localStorage.setItem('remember', rememberCheckbox.prop('checked'));
+    if (rememberCheckbox.prop('checked')) {
+      var username = $('#username').val();
+      var password = $('#password').val();
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+    } else {
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
+    }
+  });
+});

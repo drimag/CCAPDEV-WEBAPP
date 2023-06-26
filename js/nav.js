@@ -33,13 +33,25 @@ window.onclick = function(event) {
   }
 };
 
+function handleSignOut(event) {
+  event.preventDefault();
+  
+  sessionStorage.setItem("currentUser", JSON.stringify(userGuest));
+  location.reload();
+  window.location.href = "index.html";
+}
 
 // displaying dropdown items
 function dropdownItems(toDropdown) {
+
   toDropdown.forEach(item => {
   const menuItem = document.createElement("a");
   menuItem.href = item.link;
   menuItem.textContent = item.label;
+
+  if (item.label === "Sign Out") {
+    menuItem.addEventListener("click", handleSignOut);
+  }
 
   dropdown.appendChild(menuItem);
   });
@@ -49,8 +61,8 @@ function dropdownItems(toDropdown) {
 // on if logged in or not
 
 
-document.addEventListener("DOMContentLoaded", function() {
-
+function loadDropdown() {
+  console.log("gmaing>");
   const guestDropdown = [
     { label: "Sign Up", link: "login.html" },
   ];
@@ -78,7 +90,9 @@ document.addEventListener("DOMContentLoaded", function() {
   } else{
     dropdownItems(guestDropdown);
   }
-});
+}
+
+loadDropdown();
 
 
 

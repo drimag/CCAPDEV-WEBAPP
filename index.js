@@ -23,7 +23,11 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-
+// All requests must pass through this
+app.use((req, res, next) => {
+    // verify user??
+    next();
+});
 
 // localhost:3000/profile
 app.get("/profile/:username", (req, res) => {
@@ -41,7 +45,16 @@ app.get("/profile/:postId", (req, res) => {
     res.redirect("/profile"); // Redirect to profile
 });
 
-
+app.route("/post")
+    .post((req, res) => {
+        res.send("Create a post")
+    })
+    .put((req, res) => {
+        res.send("Edit a post")
+    })
+    .delete((req, res) => {
+        res.send("Delete a post")
+    })
 
 // Activate the app
 app.listen(3000, () => {

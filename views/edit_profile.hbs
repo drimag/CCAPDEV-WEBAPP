@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/static/css/edit_profile.css">
+
+<div class="edit-div">
+    <div class="edit-top">
+        <div id="edit-picture">
+            <img src="/static/profilepics/{{username}}.jpg" alt="Profile Image" id="profile-image">
+    
+        </div>
+
+        <div class="edit-userinfo">
+            <label for="username">{{username}}</label>
+            <input type="text" id="username" name="username" form="bio-form" placeholder="enter username">
+            <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" onchange="changePFP(this)" hidden/>
+            <label for="pfp" id="edit-pfp"> Change Profile Picture </label>
+        </div>
+    </div>
+
+    <div class="edit-bottom"> 
+        <div class="edit-bio">
+            <textarea name="bio" form="bio-form" id="bio" placeholder="bio"></textarea>
+        </div>
+
+        <div class="edit-submit">
+            <form id="bio-form" onsubmit="saveProfileEdit(event)">
+                <input type="submit" value="Save Changes">
+            </form>
+        </div>
+    </div>
+</div>

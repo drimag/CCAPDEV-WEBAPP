@@ -1,0 +1,19 @@
+<div class="flex-row-container post">
+    <div>
+        <img class="user" src="${user.img}">
+    </div>
+
+    <div class="flex-column-container post-details">
+        <p class="username"> {{user.username}} </p>
+        <p class="post-title"> {{post.title}} </p>
+        <p class="home-description"> {{post.description}} </p>
+        <p class="descsnippet"> {{post.descSnippet}} </p>
+
+        <div class="actions">
+            <span class="comment"></span>
+            <span class="upvote"></span>
+            <span class="number"> {{post.votes}} </span>
+            <span class="downvote"></span>
+        </div>
+    </div>
+</div>

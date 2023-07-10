@@ -1,0 +1,32 @@
+PRIORITY
+- clean css and html
+- create database
+
+AFTER
+- change to using reactjs????
+    - fix comment func (comment in comment doesnt work)
+    - fix edit profile func
+    - merge functions
+    - fix login and register
+
+
+DATABASE
+
+users
+- username
+- password
+- avatar pic
+- bio
+
+Posts
+- user object id
+- title
+- description
+- votes
+
+Comments
+- user object id
+- votes
+- post object id
+or
+- comment object id

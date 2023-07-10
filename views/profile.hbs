@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/css/style-posts.css">
+
+<!-- Outer Container -->
+<div class="flex-row-container">
+
+    <div class="parent">
+        <!-- User's Details (Profile picture, username, bio) -->
+        <div class="flex-column-container user-details">
+            <img id="profile-img" src="/static/profilepics/{{username}}.jpg">
+            <div class="username" id="profile-username"> @{{username}} </div>
+            <div class="short-description">
+                <p id="profile-bio"> {{bio}} </p>
+            </div>
+            <button class="buttons" id="edit-profile">
+                <p> Edit Profile </p>
+            </button>
+        </div>
+    </div>
+    
+    <!-- User's Latest Posts/Comments -->
+    <div class="flex-column-container latest">
+        <div class="latest-buttons flex-row-container">
+            <div class="latestposts active" id="latest-posts">
+                <p> Latest Posts </p>
+            </div>
+            <div class="latestcomments" id="latest-comments">
+                <p> Latest Comments </p>
+            </div>
+        </div>
+
+        <!-- User's Latest Posts -->
+        <div class="posts flex-column-container" id="latest-feed-posts">
+            
+        </div>
+
+        <!-- User's Latest Comments -->
+        <div class="posts flex-column-container" id="latest-feed-comments">
+            
+        </div>
+        
+        <!-- "Show More" button -->
+        <div class="show-more">
+            <button class="buttons" id="profile-show-more">
+                <p> Show More </p>
+            </button>
+        </div>
+    </div>
+    
+</div>

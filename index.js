@@ -29,45 +29,46 @@ app.get('/', (req, res) => {
 app.get('/home', (req, res) => {
     console.log("Request to home received");
     let data = {
-        page: true,
         username: "yunjin"
     }
     res.render("index", data);
 });
 
+// To Login
 app.get('/login', (req, res) => {
     console.log("Request to login received");
-    // Remove navbar in login page
-    let data = {
-        registered: true,
-        page: false
-    }
-    res.render("login", data);
+    res.render("login");
 });
 
+// To Register
+app.get('/register', (req, res) => {
+    console.log("Request to register received");
+    res.render("register");
+});
+
+// To Profile
 app.get('/profile', (req, res) => {
     console.log("Request to profile received");
     let data = {
-        page: true,
         username: guest
     }
     res.render("profile", data);
 });
 
+// To User's Profile
 app.get('/profile/:username', (req, res) => {
-    console.log("Request to profile received");
+    console.log("Request to " + req.params.username + "'s profile received");
     console.log(req.params);
     let data = {
-        page: true,
         username: req.params.username
     }
     res.render("profile", data);
 });
 
+// To Edit Profile
 app.get('/edit-profile', (req, res) => {
     console.log("Request to edit profile received");
     let data = {
-        page: true,
         username: "yunjin"
     }
     res.render("edit_profile", data);

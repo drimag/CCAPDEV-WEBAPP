@@ -5,16 +5,19 @@ body {
 	font-family: Karla, sans-serif;
 }
 
+.home {
+    width: 75%;
+}
+
+
 .page {
     margin: auto;
-    width: 75%;
     padding-top: 80px;
 }
 
 .flex-row-container {
     display: flex;
     flex-direction: row;
-    padding-top: 80px;
 }
 
 .flex-column-container {
@@ -22,88 +25,23 @@ body {
     flex-direction: column;
 }
 
-/*
-
-    Users
-    
-*/
-div.users {
-    flex-grow: 1;
-    align-items: center;
-    border-right: #8B8C89;
+.expanded-container {
+    background-color: beige;
+    margin:auto;
+    padding:15px;
+    padding-top: 80px;
+    border-radius: 15px;
 }
 
-.user {
-    height: 75px;
-    width: 75px;
-    margin: 10px;
-    border-radius: 50px;
-    border: solid 1px #8B8C89;
+a:visited, a {
+    text-decoration: none;
+    color: black;
 }
 
-.current-user img:hover {
-    color: #8B8C89;
-    opacity: 90%;
-}
 
-.other-users:hover {
-    color: #8B8C89;
+.active p {
+    background-color: #b9a899;
 }
-
-.current-user {
-    background-color: #81A5F9;
-    border-radius: 25px;
-    margin: 20px;
-}
-
-.current-user p {  
-    margin: 10px 0px;
-    text-align: center;
-    color: #E7ECEF;
-    line-height: 0px;
-    padding: 1px;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 30px;
-}
-
-.other-users {
-    margin-top: 15px;
-}
-
-.other-users img.user {
-    opacity: 0.50;
-}
-
-.parent {
-    height: 1000px;
-    width: 500px;
-}
-
-.user-details {
-    height: 500px;
-    width: 300px;
-    background-color: powderblue;
-    border-radius: 10px;
-    margin: 20px 30px;
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    flex-direction: column;
-}
-
-.user-details img, .current-user img {
-    width: 160px;
-    height: 160px;
-    border-radius: 80px;
-    margin: 10px;
-}
-
-.user-details div.username {
-    font-size: 50px;
-    font-weight: bold;
-}
-
 
 .latest-buttons p {
     font-size: 20px;
@@ -111,11 +49,6 @@ div.users {
     border-radius: 25px;
     border: solid 1px black;
     padding: 16px;
-}
-
-a:visited, a {
-    text-decoration: none;
-    color: black;
 }
 
 .latest-buttons p:hover {
@@ -131,10 +64,6 @@ a:visited, a {
 .latest-buttons {
     display: flex;
     justify-content: space-evenly;
-}
-
-.active p {
-    background-color: #b9a899;
 }
 
 .buttons {

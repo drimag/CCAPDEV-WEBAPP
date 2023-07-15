@@ -1,7 +1,6 @@
-import { sign } from 'crypto';
 import { MongoClient } from 'mongodb';
 
-const mongoURI = "mongodb://localhost:27017";
+const mongoURI = process.env.MONGODB_URI;
 const client = new MongoClient(mongoURI);
 
 export function connectToMongo (callback) {
@@ -12,7 +11,7 @@ export function connectToMongo (callback) {
     })
 }
 
-export function getDb(dbName = "Ourverse") {
+export function getDb(dbName = process.env.DB_NAME) {
     return client.db(dbName);
 }
 

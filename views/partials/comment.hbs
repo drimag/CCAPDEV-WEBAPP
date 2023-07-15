@@ -1,18 +1,34 @@
-<div class="flex-row-container post">
-    <div>
-    <img class="user" src={{user.img}}>
+<div class="flex-row-container">
+    <div class="flex-column-container c">
+        <img class="comment-user" src="/static/profilepics/sakura.jpg">
+        <div class="line-container"></div>
     </div>
 
     <div class="flex-column-container post-details">
-        <p class="username"> {{user.username}} </p>
-        <p class="post-title"> Replied to {{comment.repliedTo.username}} </p>
-        <p class="description"> {{comment.description}} </p>
+        <p class="comment-username"> Username </p>
+        <p class="replied-comment"> Replied to @yunjin </p>
+        <p class="comment-desc"> Comment </p>
 
-        <div class="actions">
-            <span class="comment"></span>
-            <span class="upvote"></span>
-            <span class="number"> {{comment.votes}} </span>
-            <span class="downvote"></span>
+        <div class="actions-comment flex-row-container">
+            <div class="flex-row-container">
+                <button class="upvote"></button>
+                <p class="number"> 123 </p>
+                <button class="downvote"></button>
+            </div>
+
+            <div class="flex-row-container">
+                <button class="comment"></button>
+                <p class="number"> 10 </p>
+            </div>
+
+            <div class="flex-row-container">
+                <button id="edit-comment" class="add-edit-button"> Edit </button>
+                <button id="delete-post" class="add-edit-button"> Delete </button>
+            </div>
+        </div>
+        <div class="comment-section">
+            <!--- nested comments--->   
+            
         </div>
     </div>
 </div>

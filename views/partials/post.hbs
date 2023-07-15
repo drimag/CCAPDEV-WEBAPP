@@ -1,19 +1,26 @@
 <div class="flex-row-container post">
-    <div>
-        <img class="user" src="${user.img}">
-    </div>
+    <div class="actions-post flex-column-container">
+            <button class="upvote"></button>
+            <p class="number"> 1234 </p>
+            <button class="downvote"></button>
+        </div>
 
-    <div class="flex-column-container post-details">
-        <p class="username"> {{user.username}} </p>
-        <p class="post-title"> {{post.title}} </p>
-        <p class="home-description"> {{post.description}} </p>
-        <p class="descsnippet"> {{post.descSnippet}} </p>
+    <div class="flex-column-container">
+        <div class="flex-row-container">
+            <div>
+                <img class="user" src="/static/profilepics/yunjin.jpg">
+            </div>
 
-        <div class="actions">
-            <span class="comment"></span>
-            <span class="upvote"></span>
-            <span class="number"> {{post.votes}} </span>
-            <span class="downvote"></span>
+            <div class="flex-column-container post-details">
+                <p class="username"> Username </p>
+                <p class="post-title"> Title </p>
+                <p class="home-description"> Desc </p>
+            </div>
+        </div>
+        
+        <div class="actions-post flex-row-container">
+            <button class="comment"></button>
+            <p class="number"> 10 </p>
         </div>
     </div>
 </div>

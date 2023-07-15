@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="/static/css/style.css">
-<link rel="stylesheet" href="/static/css/style-posts.css">
+<link rel="stylesheet" href="/static/css/user.css">
+<link rel="stylesheet" href="/static/css/post.css">
+<script src="/static/js/home.js"></script>
 
 <!-- Outer Container-->
-<div class="page flex-row-container">
+<div class="page flex-row-container home">
 
     <!-- "Users" Container -->
     <div class="flex-column-container users">
@@ -15,25 +17,13 @@
 
     <!-- Posts container -->
     <div class="posts-container">
-        
-        <!-- Create Post -->
-        <div class="post-creation-container flex-column-container">
-            <form id="postform" onsubmit="return false">
-                <div class="title-container">
-                    <input type="text" id="new-post-title" name="new-post-title" placeholder="Title" required/>
-                </div>
-                <div class="textbox-container">
-                    <textarea form="postform" name="new-post-description" id="new-post-description" class="text" placeholder="What's on your mind?" required></textarea>
-                </div>
-                <div class="post-button">
-                    <button type="submit" id="submit-post" value="Post"> Post </button>
-                </div>
-            </form>
-        </div>
+        {{> makepost }}
         
         <!-- Timeline -->
         <div class="posts flex-column-container" id="posts-feed">
-
+            {{#each posts}}
+            {{> post this}}
+            {{/each}}
         </div>
 
         <!-- "Show More Posts" button -->

@@ -4,7 +4,7 @@ SUPER PRIORITY (sirs comments from mco1)
 - put navbar in login/signup
 - add/fix change password
 - change view post from feed from clicking only title to the entire container
-- "some components still use browser default styles. try to replace as much as possibe" (?)
+- "some components still use browser default styles. try to replace as much as possible" (?)
 - add sep submit button when editing posts and comments
 - "sign up forms appear to be the same as login. add a confirm password input field"
 - include comments count of a post in the feed

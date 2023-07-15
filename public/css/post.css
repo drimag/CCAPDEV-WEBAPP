@@ -1,0 +1,245 @@
+.posts-container {
+    flex-grow: 10;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: beige;
+}
+
+.post-creation-container {
+    margin: 10px 25px;
+    padding: 20px;
+    border-radius: 20px;
+    align-items: center;
+    background-color: lavender;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-container input {
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid #888;
+    font-family: Karla, sans-serif;
+    text-align: center;
+    width: 80%;
+    height: 20px;
+}
+
+#postform {
+    width: 100%;
+}
+
+
+.textbox-container {
+    width: 100%;
+}
+
+.post-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submit-post {
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    font-family: Karla, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.textbox-container textarea {
+    height: 100px;
+    width: 89.9%;
+    margin: 10px;
+    padding: 12px 20px;
+    resize: none;
+    border: 2px solid #888;
+    border-radius: 10px;
+    font-family: Karla, sans-serif;
+}
+
+.post {
+    width: 70%;
+    border: solid 1px #ced1c8;
+    align-self: center;
+    margin: 5px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.posts {
+    flex-direction: column-reverse;
+}
+
+.post-details .username {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+p.home-description {
+    width: 95%;
+}
+
+.post-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px;
+    line-height: 25px;
+}
+
+.comment {
+    display: inline-block;
+	background-image: url('/static/icons/comment.png');
+    background-repeat: no-repeat;
+	background-size: 24px 24px;
+	width: 24px;
+	height: 24px;
+    margin: 0px;
+    border: none;
+    background-color: white;
+    margin-right: 5px;
+}
+
+p.number {
+    justify-content: center;
+    margin: 0px;
+}
+
+.upvote {
+    display: inline-block;
+	background-image: url('/static/icons/upvote.png');
+    background-repeat: no-repeat;
+	background-size: 24px 24px;
+	width: 24px;
+	height: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+.downvote {
+    display: inline-block;
+	background-image: url('/static/icons/downvote.png');
+    background-repeat: no-repeat;
+	background-size: 24px 24px;
+	width: 24px;
+	height: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+.upvote.clicked{
+    background: url('/static/icons/upvoted.png') no-repeat 0 0;
+	background-size: 24px 24px;
+	width: 23px;
+	height: 24px;
+    border: none;
+    background-color: white;
+}
+
+.downvote.clicked {
+    background: url('/static/icons/downvoted.png') no-repeat 0 0;
+	background-size: 24px 24px;
+	width: 23px;
+	height: 24px;
+   
+}
+
+.actions-post {
+    margin: 10px;
+    align-items: center;
+    width: 50px;
+}
+
+.actions-comment {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    width: 350px;
+}
+
+.actions-comment div > button {
+    background-color: lavender;
+}
+
+.actions-comment div >button.add-edit-button {
+    border: 1px solid blueviolet;
+}
+
+.show-more {
+    margin: 10px auto;
+}
+
+.post {
+    display: none;
+}
+
+.post:nth-last-child(1), .post:nth-last-child(2), .post:nth-last-child(3),
+.post:nth-last-child(4), .post:nth-last-child(5), .post:nth-last-child(6),
+.post:nth-last-child(7), .post:nth-last-child(8), .post:nth-last-child(9),
+.post:nth-last-child(10), .post:nth-last-child(11), .post:nth-last-child(12),
+.post:nth-last-child(13), .post:nth-last-child(14), .post:nth-last-child(15) {
+    display: flex;
+}
+
+
+
+/* edited */
+.add-edit-button {
+    font-family: Karla, sans-serif;
+    border-radius: 10px;
+    background-color: lavender;
+    color: blueviolet;
+    border: none;
+    margin: 5px;
+    margin-left: 0px;
+}
+
+#add-comment {
+    font-size: 20px;
+    height: 50px;
+    width: 200px;
+    margin: 5px;
+    border-radius: 20px;
+    border: 1px solid blueviolet;
+}
+
+.comment-title {
+    font-weight: bold;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.line-container {
+    border-left: 1px solid #888;
+    height: 100%;
+    width: 1px;
+}
+
+.c  {
+    align-items: center;
+}
+
+.comment-desc {
+    font-size: 15px;
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.comments {
+    width: 68%;
+    align-self: center;
+    margin: 5px;
+    background-color: lavender;
+    border-radius: 10px;
+    padding: 5px;
+}

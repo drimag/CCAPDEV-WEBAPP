@@ -7,10 +7,10 @@
     <div class="parent">
         <!-- User's Details (Profile picture, username, bio) -->
         <div class="flex-column-container user-details">
-            <img id="profile-img" src="/static/profilepics/{{username}}.jpg">
-            <div class="username" id="profile-username"> @{{username}} </div>
+            <img id="profile-img" src="/static/profilepics/ {{#each user_details}}{{username}}{{/each}}.jpg">
+            <div class="username" id="profile-username"> {{#each user_details}}@{{username}}{{/each}} </div>
             <div class="short-description">
-                <p id="profile-bio"> {{bio}} </p>
+                <p id="profile-bio"> {{#each user_details}}{{bio}}{{/each}} </p>
             </div>
             <button class="buttons" id="edit-profile">
                 <p> Edit Profile </p>
@@ -31,7 +31,9 @@
 
         <!-- User's Latest Posts -->
         <div class="posts flex-column-container" id="latest-feed-posts">
-            
+            {{#each posts}}
+            {{> post this}}
+            {{/each}}
         </div>
 
         <!-- User's Latest Comments -->

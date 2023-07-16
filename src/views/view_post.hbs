@@ -7,7 +7,7 @@
     <div class="flex-row-container post">
         <div class="actions-post flex-column-container">
             <button class="upvote"></button>
-            <p class="number"> 123 </p>
+            <p class="number"> {{post.votes}} </p>
             <button class="downvote"></button>
         </div>
 
@@ -16,17 +16,17 @@
                 <div>
                     <img class="user" src="/static/profilepics/yunjin.jpg">
                 </div>
-
+                
                 <div class="flex-column-container post-details">
-                    <p class="username"> Username </p>
-                    <p class="post-title"> Title </p>
-                    <p class="home-description"> Desc </p>
+                    <p class="username"> @Username </p>
+                    <p class="post-title">  {{ post.title }} </p>
+                    <p class="home-description">  {{ post.description }} </p>
                 </div>
             </div>
             
             <div class="actions-post flex-row-container">
                 <p class="comment"></p>
-                <p class="number"> 10 </p>
+                <p class="number"> {{ post.num_comments }} </p>
             </div>
             <div>
                 <button id="edit-title" class="add-edit-button"> Edit Title </button>

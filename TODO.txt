@@ -1,33 +1,79 @@
+TEMPORARY
+// Connect MongoDB to Node.js using Mongoose
+const express = require("express");
+const mongoose = require("mongoose");
+const Router = require("./routes");
+
+const app = express();
+
+app.use(express.json());
+
 SUPER PRIORITY (sirs comments from mco1)
 - add interactable upvote/downvote in feed ( done in terms of html )
 - add "edited" for edited posts/comments
-- put navbar in login/signup (done)
+✔ put navbar in login/signup (done)
 - add/fix change password
 - change view post from feed from clicking only title to the entire container
 - "some components still use browser default styles. try to replace as much as possible" (?)
-- add sep submit button when editing posts and comments
+- add sep submit button when editing posts and comments (we did pero sige)
 - "sign up forms appear to be the same as login. add a confirm password input field"
-- include comments count of a post in the feed
+✔ include comments count of a post in the feed
 - 404 error page?
+    - connect change password
 
-PRIORITY
-- clean css and html
-- create database
+pages:
+- homepage
+- edit profile
+- profile
+- view post
+- login (prio)
+- register (prio)
+- nav
 
-AFTER
-- change to using reactjs????
-    - fix comment func (comment in comment doesnt work)
-    - fix edit profile func
-    - merge functions
-    - fix login and register
+functions
+1. view all posts
+    unregistered : 15-20 most recent posts (also most popular post)
+                    if add more is clicked (go to log in page)
+    registered: 15-20 most recent posts with add more
+2. register
+    username and password
+3. view user profile
+    username, profile pic, short desc (bio), portion of user's
+    latest posts/comments, can view more
+4. edit profile
+    add/modify profile pic, add bio
+5. login
+    after registering, visitor can log in.
+    given remembered option (every login will extend remembered
+    period by 3 weeks)
+6. logout
+    cut short remember period if exists and clears session data
+7. post
+    text post
+    give title and body
+8. view post
+    can view any post they have a link to
+9. comment
+    can comment on any post and reply to other user's comments
+10. edit/delete post
+    edited posts should have "edited"
+    owner can delete posts
+11. edit/delete comment
+    edited comments should have "edited"
+    owner can delete comments
+12. upvote / downvote
+    only once
+13. search
+    visitors and users can search for posts
+
+
 
 
 DATABASE
-
 users
 - username
 - password
-- avatar pic
+- avatar pic (add)
 - bio
 
 Posts
@@ -40,5 +86,3 @@ Comments
 - user object id
 - votes
 - post object id
-or
-- comment object id

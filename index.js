@@ -256,4 +256,15 @@ app.route("/post")
     .delete((req, res) => {
         res.send("Delete a post")
     })
+
+app.route("/comment")
+    .post((req, res) => {
+        res.send("Create a comment")
+    })
+    .put((req, res) => {
+        res.send("Edit a comment")
+    })
+    .delete((req, res) => {
+        res.send("Delete a comment")
+    })
 */

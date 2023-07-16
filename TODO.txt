@@ -1,13 +1,3 @@
-TEMPORARY
-// Connect MongoDB to Node.js using Mongoose
-const express = require("express");
-const mongoose = require("mongoose");
-const Router = require("./routes");
-
-const app = express();
-
-app.use(express.json());
-
 SUPER PRIORITY (sirs comments from mco1)
 - add interactable upvote/downvote in feed ( done in terms of html )
 - add "edited" for edited posts/comments

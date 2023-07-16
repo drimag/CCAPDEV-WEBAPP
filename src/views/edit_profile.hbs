@@ -3,12 +3,12 @@
 <div class="edit-div flex-column-container">
     <div class="edit-top flex-row-container">
         <div id="edit-picture">
-            <img src="/static/profilepics/{{username}}.jpg" alt="Profile Image" id="profile-image">
+            <img src="/static/profilepics/{{user.username}}.jpg" alt="Profile Image" id="profile-image">
     
         </div>
 
         <div class="edit-userinfo flex-column-container">
-            <label for="username">{{username}}</label>
+            <label for="username">{{user.username}}</label>
             <input type="text" id="username" name="username" form="bio-form" placeholder="enter username">
             <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" onchange="changePFP(this)" hidden/>
             <label for="pfp" id="edit-pfp"> Change Profile Picture </label>
@@ -17,7 +17,7 @@
 
     <div class="edit-bottom flex-column-container"> 
         <div class="edit-bio">
-            <textarea name="bio" form="bio-form" id="bio" placeholder="bio"></textarea>
+            <textarea name="bio" form="bio-form" id="bio" placeholder="{{user.bio}}"></textarea>
         </div>
 
         <div class="edit-submit">

@@ -7,10 +7,10 @@
     <div class="parent">
         <!-- User's Details (Profile picture, username, bio) -->
         <div class="flex-column-container user-details">
-            <img id="profile-img" src="/static/profilepics/ {{#each user_details}}{{username}}{{/each}}.jpg">
-            <div class="username" id="profile-username"> {{#each user_details}}@{{username}}{{/each}} </div>
+            <img id="profile-img" src="/static/profilepics/{{user.username}}.jpg">
+            <div class="username" id="profile-username">@{{user.username}} </div>
             <div class="short-description">
-                <p id="profile-bio"> {{#each user_details}}{{bio}}{{/each}} </p>
+                <p id="profile-bio">{{user.bio}}</p>
             </div>
             <button class="buttons" id="edit-profile">
                 <p> Edit Profile </p>

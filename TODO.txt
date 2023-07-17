@@ -1,6 +1,6 @@
 SUPER PRIORITY (sirs comments from mco1)
 - add interactable upvote/downvote in feed ( done in terms of html )
-- add "edited" for edited posts/comments
+✔ add "edited" for edited posts/comments
 ✔ put navbar in login/signup (done)
 - add/fix change password
 - change view post from feed from clicking only title to the entire container

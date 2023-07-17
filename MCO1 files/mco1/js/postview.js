@@ -274,8 +274,9 @@ $(document).ready(function() {
 			event.preventDefault();
 			let editedText = textarea.val();
 
-			let newParagraph = $('<p>').text(editedText);
+			let newParagraph = $('<p>').text(editedText).append("<span style='color:gray'> (edited)</span>");
 			textarea.replaceWith(newParagraph);
+	
 		}
 		});
 	});
@@ -291,7 +292,7 @@ $(document).ready(function() {
 				event.preventDefault();
 				let editedText = textarea.val();
 
-				let newParagraph = $('<p style="font-weight: bold">').text(editedText);
+				let newParagraph = $('<p style="font-weight: bold">').text(editedText).append("<span style='color:gray'> (edited)</span>");
 				textarea.replaceWith(newParagraph);
 			}
 		});
@@ -306,7 +307,7 @@ $(document).ready(function() {
 
 		let postContent = $('#comment'+num);
 		let currentText = postContent.text();
-
+	
 		let textarea = $('<textarea>').val(currentText);
 		postContent.replaceWith(textarea);
 
@@ -315,8 +316,9 @@ $(document).ready(function() {
 				event.preventDefault();
 				let editedText = textarea.val();
 
-				let newParagraph = $('<p>').text(editedText);
+				let newParagraph = $('<p>').text(editedText).append("<span style='color:gray'> (edited)</span>");
 				textarea.replaceWith(newParagraph);
+			
 			}
 		});
   	});

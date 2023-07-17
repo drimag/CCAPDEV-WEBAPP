@@ -21,7 +21,7 @@ pages:
 - nav
 
 functions
-1. view all posts
+1. view all posts 
     unregistered : 15-20 most recent posts (also most popular post)
                     if add more is clicked (go to log in page)
     registered: 15-20 most recent posts with add more
@@ -38,12 +38,12 @@ functions
     period by 3 weeks)
 6. logout
     cut short remember period if exists and clears session data
-7. post
+7. post ✔
     text post
     give title and body
-8. view post
+8. view post ✔
     can view any post they have a link to
-9. comment
+9. comment ✔ (not nested comments tho)
     can comment on any post and reply to other user's comments
 10. edit/delete post
     edited posts should have "edited"

@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="/static/css/post.css">
 <link rel="stylesheet" href="/static/css/user.css">
+<script src="/static/js/viewpost.js" defer></script>
+<script src="/static/js/createComment.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <div class="flex-column-container expanded-container">
     
-    <div class="flex-row-container post">
+    <div class="flex-row-container post" id="post{{ post.num }}">
         <div class="actions-post flex-column-container">
             <button class="upvote"></button>
             <p class="number"> {{post.votes}} </p>
@@ -14,11 +16,11 @@
         <div class="flex-column-container">
             <div class="flex-row-container">
                 <div>
-                    <img class="user" src="/static/profilepics/yunjin.jpg">
+                    <img class="user" src="/static/profilepics/{{author.username}}.jpg">
                 </div>
                 
                 <div class="flex-column-container post-details">
-                    <p class="username"> @Username </p>
+                    <p class="username"> @{{author.username}} </p>
                     <p class="post-title">  {{ post.title }} </p>
                     <p class="home-description">  {{ post.description }} </p>
                 </div>
@@ -38,14 +40,12 @@
 
     <div class="comments flex-column-container">
         <button id="add-comment" class="add-edit-button"> Add a Comment </button>
+        {{> makecomment }}
 
         <div class=" flex-column-container comment-section">
-           
-            {{> comment }}
-            
-            <!--- more comments--->    
-            {{> comment }}
-            {{> comment }}
+            {{#each comments }}
+            {{> comment this authorun=author}}
+            {{/each }}
 
             
         </div>

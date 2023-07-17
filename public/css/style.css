@@ -66,6 +66,11 @@ a:visited, a {
     justify-content: space-evenly;
 }
 
+
+/*
+    Show More Posts Button
+*/
+
 .buttons {
     height: 60px;
     margin: auto;
@@ -87,4 +92,12 @@ a:visited, a {
 
 .show-more {
     margin: 10px auto;
+}
+
+/*
+    "End of feed" text
+*/
+.end-of-feed {
+    font-weight: bold;
+    text-align: center;
 }

@@ -1,29 +1,29 @@
 <div class="flex-row-container">
     <div class="flex-column-container c">
-        <img class="comment-user" src="/static/profilepics/sakura.jpg">
+        <img class="comment-user" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg">
         <div class="line-container"></div>
     </div>
 
     <div class="flex-column-container post-details">
-        <p class="comment-username"> Username </p>
-        <p class="replied-comment"> Replied to @yunjin </p>
-        <p class="comment-desc"> Comment </p>
+        <p class="comment-username"> @{{#each user_details}}{{username}}{{/each}} </p>
+        <p class="replied-comment"> Replied to @{{authorun.username}} <b>Fix This</b> </p>
+        <p class="comment-desc"> {{ comment }} </p>
 
         <div class="actions-comment flex-row-container">
             <div class="flex-row-container">
                 <button class="upvote"></button>
-                <p class="number"> 123 </p>
+                <p class="number"> {{ votes }} </p>
                 <button class="downvote"></button>
             </div>
 
             <div class="flex-row-container">
                 <button class="comment"></button>
-                <p class="number"> 10 </p>
+                <p class="number"> {{ num_comments }} </p>
             </div>
 
             <div class="flex-row-container">
                 <button id="edit-comment" class="add-edit-button"> Edit </button>
-                <button id="delete-post" class="add-edit-button"> Delete </button>
+                <button id="delete-comment" class="add-edit-button"> Delete </button>
             </div>
         </div>
         <div class="comment-section">

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { getDb } from '../models/conn.js';
 import profileRouter from '../routes/profileRouter.js';
+import postRouter from '../routes/postRouter.js';
 
 const router = Router();
 const db = getDb();
@@ -44,13 +45,12 @@ router.get("/homepage", (req, res) => {
 });
 
 router.use(profileRouter);
+router.use(postRouter);
 
-/*
+
 // TODO: Error 404 Page
 router.use((req, res) => {
-    res.render("error", {
-        title: "Page not Found."
-    });
+    res.send("error");
 });
-*/
+
 export default router;

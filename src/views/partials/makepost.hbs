@@ -1,13 +1,14 @@
 <div class="post-creation-container flex-column-container">
-    <form id="postform" onsubmit="return false">
-        <div class="title-container">
-            <input type="text" id="new-post-title" name="new-post-title" placeholder="Title" required/>
-        </div>
-        <div class="textbox-container">
-            <textarea form="postform" name="new-post-description" id="new-post-description" class="text" placeholder="What's on your mind?" required></textarea>
-        </div>
-        <div class="post-button">
-            <button type="submit" id="submit-post" value="Post"> Post </button>
-        </div>
+    <form id="createPostForm" name="createPostForm" onsubmit="return false">
+        <fieldset>
+            <legend> Create Post </legend>
+            <label for="newtitle"> Title </label> <br>
+            <input type="text" name="newtitle" id="newtitle" placeholder="Enter Title..." required /> <br>
+            <label for="newdesc"> Description </label> <br>
+            <textarea name="newdesc" id="newdesc" class="text" placeholder="What's on your mind?" required></textarea> <br>
+            <button id="createPost" type="submit"> Submit </button>
+            <button id="clearPost" type="reset"> Clear </button>
+        </fieldset>
+        
     </form>
 </div>

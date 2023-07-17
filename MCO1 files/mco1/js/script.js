@@ -184,7 +184,7 @@ function getInputs(user) {
 
 /*
     Write Post function
-*/
+ */
 function writePost(user, post) {
     const postContainer = document.querySelector("#posts-feed");
     const item =

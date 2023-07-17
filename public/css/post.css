@@ -14,48 +14,74 @@
     background-color: lavender;
 }
 
-.title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.title-container input {
+#newtitle {
     margin: 10px;
     border-radius: 10px;
     border: 2px solid #888;
     font-family: Karla, sans-serif;
-    text-align: center;
-    width: 80%;
+    width: 50%;
     height: 20px;
+    padding: 12px 20px;
 }
 
-#postform {
+#createPostForm {
     width: 100%;
-}
-
-
-.textbox-container {
-    width: 100%;
-}
-
-.post-button {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
-#submit-post {
+#createPostForm legend {
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#createPostForm label, #createCommentForm label {
+    font-weight: bold;
+}
+
+fieldset {
+    border: none;
+    width: 100%;
+}
+
+#createPost, #clearPost {
     width: 100px;
     height: 30px;
     border-radius: 15px;
     font-family: Karla, sans-serif;
     font-size: 15px;
     font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.textbox-container textarea {
+#createComment, #clearComment {
+    width: 100px;
+    height: 25px;
+    border-radius: 15px;
+    font-family: Karla, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#comment {
+    width: 93%;
     height: 100px;
-    width: 89.9%;
+    margin: 10px;
+    padding: 12px 20px;
+    resize: none;
+    border: 2px solid #888;
+    border-radius: 10px;
+    font-family: Karla, sans-serif;
+}
+
+#newdesc {
+    width: 94%;
+    height: 100px;
     margin: 10px;
     padding: 12px 20px;
     resize: none;
@@ -182,10 +208,6 @@ p.number {
 
 .show-more {
     margin: 10px auto;
-}
-
-.post {
-    display: none;
 }
 
 .post:nth-last-child(1), .post:nth-last-child(2), .post:nth-last-child(3),

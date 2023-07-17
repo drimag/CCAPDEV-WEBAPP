@@ -65,7 +65,7 @@ profileRouter.get("/profile/:username", async (req, res) => {
             {
                 '$lookup': {
                 'from': 'users', 
-                'localField': 'user_id', 
+                'localField': 'user_id ', 
                 'foreignField': '_id', 
                 'as': 'user_details'
                 }

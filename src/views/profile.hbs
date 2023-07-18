@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/static/css/post.css">
 <link rel="stylesheet" href="/static/css/user.css">
+<script src="/static/js/profile.js" defer></script>
 
 <!-- Outer Container -->
 <div class="flex-row-container page">
@@ -32,13 +33,15 @@
         <!-- User's Latest Posts -->
         <div class="posts flex-column-container" id="latest-feed-posts">
             {{#each posts}}
-            {{> post this}}
+            {{> post this }}
             {{/each}}
         </div>
 
         <!-- User's Latest Comments -->
         <div class="posts flex-column-container" id="latest-feed-comments">
-            
+            {{#each comments}}
+            {{> alt_comment this }}
+            {{/each}}
         </div>
         
         <!-- "Show More" button -->

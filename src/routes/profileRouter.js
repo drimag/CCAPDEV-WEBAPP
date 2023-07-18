@@ -5,6 +5,8 @@ const profileRouter = Router();
 const db = getDb();
 const users = db.collection("users");
 const posts = db.collection("posts");
+const comments = db.collection("comments");
+
 
 // Profile
 /*
@@ -65,7 +67,7 @@ profileRouter.get("/profile/:username", async (req, res) => {
             {
                 '$lookup': {
                 'from': 'users', 
-                'localField': 'user_id ', 
+                'localField': 'user_id', 
                 'foreignField': '_id', 
                 'as': 'user_details'
                 }
@@ -73,13 +75,29 @@ profileRouter.get("/profile/:username", async (req, res) => {
         ]
     ).toArray();
 
-    console.log(postsArray)
+    const commentsArray = await comments.aggregate(
+        [
+            { 
+                $match: { user_id : user._id }
+            },
+            {
+                '$lookup': {
+                'from': 'users', 
+                'localField': 'user_id', 
+                'foreignField': '_id', 
+                'as': 'user_details'
+                }
+            }
+        ]
+    ).toArray();
+
+    console.log(postsArray);
     
     res.render("profile", {
         user: user,
-        posts: postsArray
+        posts: postsArray,
+        comments: commentsArray
     });
 });
-
 
 export default profileRouter;

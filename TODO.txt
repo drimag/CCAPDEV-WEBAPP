@@ -3,13 +3,12 @@ SUPER PRIORITY (sirs comments from mco1)
 ✔ add "edited" for edited posts/comments
 ✔ put navbar in login/signup (done)
 - add/fix change password
-- change view post from feed from clicking only title to the entire container
+✔ change view post from feed from clicking only title to the entire container
 - "some components still use browser default styles. try to replace as much as possible" (?)
 - add sep submit button when editing posts and comments (we did pero sige)
 - "sign up forms appear to be the same as login. add a confirm password input field"
 ✔ include comments count of a post in the feed
 - 404 error page?
-    - connect change password
 
 // mongodb_uri had to change to mongodb://127.0.0.1:27017 from mongodb://localhost:27017 to work on my laptop lol
 
@@ -23,15 +22,15 @@ pages:
 - nav
 
 functions
-1. view all posts 
+1. view all posts
     unregistered : 15-20 most recent posts (also most popular post)
                     if add more is clicked (go to log in page)
     registered: 15-20 most recent posts with add more
-2. register
+2. register 
     username and password
-3. view user profile
+3. view user profile ✔
     username, profile pic, short desc (bio), portion of user's
-    latest posts/comments, can view more
+    latest posts/comments, can view more (not yet added) + edit profile button
 4. edit profile
     add/modify profile pic, add bio
 5. login

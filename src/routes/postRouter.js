@@ -61,7 +61,7 @@ postRouter.post("/post", async (req, res) => {
     console.log("POST request received for /post");
     console.log(req.body);
 
-    const user = await users.findOne({username: "yunjin"}); // For Testing
+    const user = await users.findOne({username: req.query.loggedIn}); // For Testing
     const size = await posts.countDocuments({});
 
     try {

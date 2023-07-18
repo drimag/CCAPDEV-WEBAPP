@@ -68,7 +68,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#comment {
+#new-comment {
     width: 93%;
     height: 100px;
     margin: 10px;
@@ -91,6 +91,16 @@ fieldset {
 }
 
 .post {
+    width: 70%;
+    border: solid 1px #ced1c8;
+    align-self: center;
+    margin: 5px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.comment-list {
     width: 70%;
     border: solid 1px #ced1c8;
     align-self: center;
@@ -270,4 +280,9 @@ p.number {
     background-color: lavender;
     border-radius: 10px;
     padding: 5px;
+}
+
+.one-line {
+    height: 20px;
+    overflow:hidden;
 }

@@ -58,7 +58,7 @@ export async function addSampleData (callback) {
                 username: "manchae",
                 password: "1234",
                 bio: "hi! i'm manchae"
-            }
+            },
         ]);
         
         console.log("User Documents inserted successfully");
@@ -73,10 +73,10 @@ export async function addSampleData (callback) {
             {
                 num: 1,
                 user_id: list_users[0]._id,
-                title: "test 1",
-                description: "test 1",
-                votes: 0,
-                num_comments: 0,
+                title: "In Bloom made everyone shine",
+                description: "After watching this multiples times and slept on it I feel like I can finally give my full opinion on this debut. Honestly because it was W1 and history of kpop groups having members that are rarely utilised my expectations for everyone except Haobin + matthew was pretty low but they gave everyone such good lines and parts in the MV?? I was legit shocked by how they decided to distribute the lines for each member but it turned out so good!!",
+                votes: 215,
+                num_comments: 1,
                 edited: false
             },
             {
@@ -94,14 +94,14 @@ export async function addSampleData (callback) {
                 title: "Thoughts on Jungkook Seven MV",
                 description: "Okay, I love it. The MV was so fun to watch, especially when he was in the casket and it opened and soohee went \"can yOU NOT!\" I love the song. I love the rhythm and Jungkook's voice and how it carries so smoothly and I just know he's going to devour it when he performs it live because those vocals of his are just that extraordinary. Also, it's catchy. I have a love-hate relationship with catchy songs but goddamn Jeon Jungkook he just never misses. Also LATTO'S PART???? Ive never listened to her music but holy I loved her part, I know what I'm gonna be repeating like a broken CD player for the next few weeks lol",
                 votes: 131,
-                num_comments: 0,
+                num_comments: 2,
                 edited: false
             },
             {
                 num: 4,
                 user_id: list_users[3]._id,
-                title: "test 4",
-                description: "test 4",
+                title: "Enhypen Fate World Tour",
+                description: "So I haven't gone to any concert before and everything just confuses me. I really want to go to this because they are my ults. Do you guys know when the tickets will go on sale or if they have already? I have looked it up and stuff but haven't found anything. I will probably be going to the Chicago one but I don't have info on it. Also ticket master says there's no info on it either. Ticket master overall is confusing. Help please😭",
                 votes: 0,
                 num_comments: 0,
                 edited: false
@@ -121,6 +121,8 @@ export async function addSampleData (callback) {
         console.log(result2);
 
         const post = await posts.findOne({title: "'Super Shy' for Song Of The Year and that's that."});
+        const post2 = await posts.findOne({title: "In Bloom made everyone shine"});
+        const post3 = await posts.findOne({title: "Thoughts on Jungkook Seven MV"});
         // 5 Comments
         const result3 = await comments.insertMany([
             {
@@ -136,6 +138,33 @@ export async function addSampleData (callback) {
                 user_id: list_users[2]._id,
                 post_id: post._id,
                 comment: "I didn't enjoy newjeans music apart from Ditto and I don't like Super Shy but I'm in the minority. I don't think catchiness is necessary in a song so I don't get why this \"I can't get this out of my head\" is used as a compliment but I'm probably in the minority again",
+                votes: 1,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[4]._id,
+                post_id: post2._id,
+                comment: "WE GOT VOCALBASEONE FOR REAL 😭",
+                votes: 38,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[2]._id,
+                post_id: post3._id,
+                comment: "The explicit version, BYE.",
+                votes: 1,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "I'm sorry but I cannot with songs that list the days of the week in the chorus. It's a no for me.",
                 votes: 0,
                 num_comments: 0,
                 comments_id: [],

@@ -1,12 +1,43 @@
-
 // View Post
 $(document).ready(function() {
-    $("div.post").click(async function() {
+
+    // Hide Create Post Func From Guest
+    let currentUser = $("#current-username").text();
+    currentUser = currentUser.substring(2, currentUser.length - 1);
+    console.log(currentUser);
+
+    const login = "/login";
+
+    $("#visitor-note").hide();
+
+    if(currentUser === "guest") {
+        console.log("Hidden for Vistor");
+        $(".post-creation-container").hide();
+        $("#visitor-note").show();
+        $(".home-description").addClass("one-line");
+    }
+
+    
+    // Upvote
+    $("button.upvote").click(function() {
+        alert("Upvoted! (Work on this, it seems to still access the div.post click)");
+    });
+
+    // Downvote
+    $("button.downvote").click(function() {
+        alert("Downvoted! (Work on this, it seems to still access the div.post click)");
+    });
+
+    $("div.post").click(function() {
         console.log("View Post");
         const id = $(this).attr('id');
         console.log(id);
         
-        location.href = "/posts/" + id.substring(4, id.length);
+        if(currentUser === "guest") {
+            location.href = login;
+        } else {
+            location.href = "/posts/" + id.substring(4, id.length) + "?loggedIn=" + currentUser;
+        }
         
     });
 
@@ -14,7 +45,19 @@ $(document).ready(function() {
         $(this).css('cursor', 'pointer');
     });
 
-    $(".current-user").hover(function() {
+    // View Current User Profile
+    $("div.current-user").click(function() {
+        console.log('View Profile');
+        console.log(currentUser);
+
+        if(currentUser === "guest") {
+            location.href = login;
+        } else {
+            location.href = "/profile/" + currentUser + "?loggedIn=" + currentUser;
+        }
+    });
+
+    $("div.current-user").hover(function() {
         $(this).css('cursor', 'pointer');
     });
 
@@ -23,30 +66,24 @@ $(document).ready(function() {
     });
 
     // Guests and users are limited to seeing 20 latest posts
-    const posts = $(".post");
     let numOfPosts = $(".posts .post").length;
 
-    posts.hide();
-    posts.slice(numOfPosts - 20, numOfPosts).show();
+    $(".post").hide();
+    $(".post").slice(numOfPosts - 20, numOfPosts).show();
     
     /*
      "Show More Posts" button
         Allows the user to see older posts
      */
-    const showMoreBtn = $("#home-show-more");
-    const endOfFeedTxt = $(".end-of-feed");
-    const hiddenPosts = $(".post:hidden");
-    let noOfHiddenPosts = hiddenPosts.length;
-        
     // Show button when there are hidden posts
-    if(noOfHiddenPosts > 0) {
-        showMoreBtn.show();
-        endOfFeedTxt.hide();
+    if(hiddenPosts.length > 0) {
+        $("#home-show-more").show();
+        $(".end-of-feed").hide();
     } else {
-        emptyFeed(showMoreBtn, endOfFeedTxt);
+        emptyFeed($("#home-show-more"), $(".end-of-feed"));
     }
 
-    /* ill go to my laptop
+    /*
     const searchParams = new URLSearchParams(new URL("/home").search);
     const currentUser = searchParams.get("username");
 
@@ -60,12 +97,12 @@ $(document).ready(function() {
     }
     */
     // Functionality
-    showMoreBtn.on("click", function() {
-        hiddenPosts.slice(0, 20).show().css("display", "flex");
+    $("#home-show-more").on("click", function() {
+        $(".post:hidden").slice(0, 20).show().css("display", "flex");
 
         // Hide "Show More Posts" button when no more posts are hidden
-        if(noOfHiddenPosts <= 20) {
-            emptyFeed(showMoreBtn, endOfFeedTxt);
+        if(hiddenPosts.length <= 20) {
+            emptyFeed($("#home-show-more"), $(".end-of-feed"));
         }
     });
     

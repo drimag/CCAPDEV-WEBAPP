@@ -1,0 +1,26 @@
+<div class="flex-row-container comment-list">
+    <div class="actions-post flex-column-container">
+            <button class="upvote"></button>
+            <p class="number"> {{ votes }} </p>
+            <button class="downvote"></button>
+        </div>
+
+    <div class="flex-column-container post-container">
+        <div class="flex-row-container">
+            <div>
+                <img class="user" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg">
+            </div>
+
+            <div class="flex-column-container post-details">
+                <p class="username">{{#each user_details}}@{{username}}{{/each}} </p>
+                <p class="post-title"> Replied to @{{authorun.username}} <b>Fix This</b> </p>
+                <p class="home-description"> {{ comment }} </p>
+            </div>
+        </div>
+        
+        <div class="actions-post flex-row-container">
+            <button class="comment"></button>
+            <p class="number"> {{ num_comments }} </p>
+        </div>
+    </div>
+</div>

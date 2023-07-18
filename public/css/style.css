@@ -101,3 +101,16 @@ a:visited, a {
     font-weight: bold;
     text-align: center;
 }
+
+#visitor-note {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(202, 70, 70);
+    border-radius: 25px;
+    background-color: rgb(243, 133, 133);
+    margin: 10px;
+}
+
+#visitor-note p {
+    font-weight: bold;
+}

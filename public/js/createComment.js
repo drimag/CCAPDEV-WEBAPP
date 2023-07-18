@@ -11,9 +11,12 @@ submitBtn?.addEventListener("click", async (e) => {
     // const postID = document.querySelector(".post").getElementById('id');
     console.log(postID);
 
+    // const currentUser = ;
+
+
     const data = {
         id: postID,
-        comment: formData.get("comment")
+        comment: formData.get("new-comment")
     };
     
     console.log(data);

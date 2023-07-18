@@ -9,15 +9,20 @@ const users = db.collection("users");
 const posts = db.collection("posts");
 
 // HomePage
-router.get("/", (req, res) => {
-    res.redirect("/home");
-});
-
-router.get("/home", async (req, res) => {
+router.get(["/", "/home", "/homepage"], async (req, res) => {
     console.log("Request to home received.");
 
-    const user = await users.findOne({username: "manchae"}); // For Testing: Should be Current User
-    
+    let currentUser = req.query.loggedIn;
+    console.log("Current User: " + currentUser);
+
+    if(currentUser == null || currentUser === "guest") {
+        currentUser = { username: "guest" };
+    } else {
+        currentUser = await users.findOne({username: req.query.loggedIn});
+    }
+
+    console.log("Current User: " + currentUser);
+
     // Get Posts For Display
     // TODO: Limit Posts to 15-20 for guest and for users add a show more button
     const postsArray = await posts.aggregate(
@@ -35,13 +40,9 @@ router.get("/home", async (req, res) => {
 
     res.render("index", {
         pagetitle: "Home",
-        user: user,
+        user: currentUser,
         posts: postsArray
     });
-});
-
-router.get("/homepage", (req, res) => {
-    res.redirect("/home");
 });
 
 router.use(profileRouter);

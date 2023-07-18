@@ -11,6 +11,8 @@ SUPER PRIORITY (sirs comments from mco1)
 - 404 error page?
     - connect change password
 
+// mongodb_uri had to change to mongodb://127.0.0.1:27017 from mongodb://localhost:27017 to work on my laptop lol
+
 pages:
 - homepage
 - edit profile

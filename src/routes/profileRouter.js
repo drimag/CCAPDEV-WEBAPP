@@ -36,7 +36,6 @@ profileRouter.get("/edit-profile", async (req, res) => {
     res.render("edit_profile", {
         user: user
     });
-
 });
 
 /*

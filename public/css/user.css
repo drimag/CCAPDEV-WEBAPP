@@ -17,6 +17,17 @@ div.users {
     border: solid 1px #8B8C89;
 }
 
+.hidden {
+    display:none;
+}
+
+.nav-user {
+    height: 45px;
+    width: 45px;
+    border-radius: 50px;
+    border: solid 1px #8B8C89;
+}
+
 .current-user img:hover {
     color: #8B8C89;
     opacity: 90%;

@@ -8,24 +8,11 @@ const posts = db.collection("posts");
 const comments = db.collection("comments");
 
 
-// Profile
 /*
-profileRouter.get("/profile", async (req, res) => { 
-// Current User's Profile
-    console.log("Request to profile received.");
-
-    const user = await users.findOne(req.params);
-    const postsArray = await posts.find({user: user._id}).toArray();
+profileRouter.get(["/profile", "/myprofile"], async (req, res) => { 
+    // Current User's Profile
     
-    res.render("profile", {
-        user: currentUser?, // current user (seems redundant)
-        posts: postsArray
-    });
 });
-
-profileRouter.get("/myprofile", (req, res) => {
-    res.redirect("/profile");
-})
 */
 
 // Edit Profile
@@ -58,11 +45,21 @@ profileRouter.put("/idkidk/:postId", async (req, res) => {
 
 profileRouter.get("/profile/:username", async (req, res) => {
     console.log("Request to " + req.params.username + "'s profile received.");
-    const user = await users.findOne(req.params);
+    
+    let curr = req.query.loggedIn;
+
+    if(curr == null) {
+        curr = {username: "guest"};
+    } else {
+        curr = await users.findOne({username: curr});
+    }
+
+    const currentUser = curr;
+    const view_user = await users.findOne(req.params);
     const postsArray = await posts.aggregate(
         [
             { 
-                $match: { user_id : user._id }
+                $match: { user_id : view_user._id }
             },
             {
                 '$lookup': {
@@ -78,7 +75,7 @@ profileRouter.get("/profile/:username", async (req, res) => {
     const commentsArray = await comments.aggregate(
         [
             { 
-                $match: { user_id : user._id }
+                $match: { user_id : view_user._id }
             },
             {
                 '$lookup': {
@@ -95,7 +92,8 @@ profileRouter.get("/profile/:username", async (req, res) => {
     
     res.render("profile", {
         pagetitle: req.params.username + "'s Profile",
-        user: user,
+        user: currentUser,
+        view_user: view_user,
         posts: postsArray,
         comments: commentsArray
     });

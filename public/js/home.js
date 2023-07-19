@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // Hide Create Post Func From Guest
     let currentUser = $("#current-username").text();
-    currentUser = currentUser.substring(2, currentUser.length - 1);
+    currentUser = currentUser.substring(2).trimEnd();
     console.log(currentUser);
 
     const login = "/login";
@@ -20,15 +20,59 @@ $(document).ready(function() {
     
     // Upvote
     $("button.upvote").click(function() {
-        alert("Upvoted! (Work on this, it seems to still access the div.post click)");
+        // TODO:
+         //var made to find this upvote's corresponding downvote button
+         let downvoteButton = $(this).nextAll("button.downvote").first();
+
+         // Removes vote if clicked again
+         if ($(this).hasClass('clicked')) {
+             //decrease vote count here by 1
+             
+             $(this).removeClass('clicked');
+         }
+         // Removes effect of opposite vote if clicked
+         else if (downvoteButton.hasClass('clicked')){
+             //increase the vote count by 2,because it nullifies the downvote
+
+             $(this).addClass('clicked');
+             downvoteButton.removeClass('clicked');
+         }   
+         //When no vote was clicked
+         else{
+             //increase vote count here by 1
+
+             $(this).addClass('clicked');
+         }
     });
 
     // Downvote
     $("button.downvote").click(function() {
-        alert("Downvoted! (Work on this, it seems to still access the div.post click)");
+        // TODO:
+        //var made to find this downvote's corresponding upvote button
+        let upvoteButton = $(this).prevAll("button.upvote").first();
+
+        //removes vote if clicked again  
+        if ($(this).hasClass('clicked')) {
+            //increase vote count here by 1
+
+            $(this).removeClass('clicked');
+        }
+        //removes effect of opposite vote if clicked
+        else if (upvoteButton.hasClass('clicked')){
+            //decrease the vote count by 2,because it nullifies the upvote
+
+            $(this).addClass('clicked');
+            upvoteButton.removeClass('clicked');
+        }
+        //when no vote was clicked
+        else{
+            //decrease vote count here by 1
+
+            $(this).addClass('clicked');
+        }
     });
 
-    $("div.post").click(function() {
+    $("div.post-container").click(function() {
         console.log("View Post");
         const id = $(this).attr('id');
         console.log(id);
@@ -36,12 +80,12 @@ $(document).ready(function() {
         if(currentUser === "guest") {
             location.href = login;
         } else {
-            location.href = "/posts/" + id.substring(4, id.length) + "?loggedIn=" + currentUser;
+            location.href = "/posts/" + id.substring(1).trimEnd() + "?loggedIn=" + currentUser;
         }
         
     });
 
-    $("div.post").hover(function() {
+    $("div.post-container").hover(function() {
         $(this).css('cursor', 'pointer');
     });
 

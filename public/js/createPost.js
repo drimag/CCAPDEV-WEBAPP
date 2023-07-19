@@ -8,7 +8,7 @@ submitBtn?.addEventListener("click", async (e) => {
     console.log("Submit Data");
 
     let currentUser = document.getElementById("current-username").innerText;
-    currentUser = currentUser.substring(1, currentUser.length);
+    currentUser = currentUser.substring(1).trimEnd();
     console.log(currentUser);
 
     const data = {

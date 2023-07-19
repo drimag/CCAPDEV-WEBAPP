@@ -169,6 +169,61 @@ export async function addSampleData (callback) {
                 num_comments: 0,
                 comments_id: [],
                 edited: false
+            },
+
+            // DELETE: Testing purposes
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "1",
+                votes: 0,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "2",
+                votes: 0,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "3",
+                votes: 0,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "4",
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "5",
+                votes: 0,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
+            },
+            {
+                user_id: list_users[1]._id,
+                post_id: post3._id,
+                comment: "6",
+                votes: 0,
+                num_comments: 0,
+                comments_id: [],
+                edited: false
             }
         ])
         console.log("Comment Documents inserted successfully");

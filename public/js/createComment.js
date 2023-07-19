@@ -7,11 +7,11 @@ submitBtn?.addEventListener("click", async (e) => {
     console.log("Submit Comment Data");
 
     let postID = $(".post").attr("id");
-    postID = postID.substring(4, postID.length);
+    postID = postID.substring(4).trimEnd();
     // const postID = document.querySelector(".post").getElementById('id');
     console.log(postID);
 
-    // const currentUser = ;
+    const currentUser =$("#currentUser-navuser").text();
 
 
     const data = {
@@ -24,7 +24,7 @@ submitBtn?.addEventListener("click", async (e) => {
     console.log(jString);
     
     try {
-        const response = await fetch("/posts/" + postID + "/comment", {
+        const response = await fetch("/posts/" + postID + "/comment?loggedIn=" + currentUser, {
             method: 'POST',
             body: jString,
             headers: {

@@ -3,25 +3,29 @@ import { getDb } from '../models/conn.js';
 
 const postRouter = Router();
 const db = getDb();
-const users = db.collection("users"); // For Testing
+const users = db.collection("users");
 const posts = db.collection("posts");
 const comments = db.collection("comments");
+
+
+// TODO: Redirect to login if logged in is guest!
+
+// TODO: Fix Status Codes
 
 // postRouter.get("/post") 
 
 // Get a Post ( add /:username?/ if possible)
 postRouter.get("/posts/:postID", async(req, res) => {
     console.log("Request to post number " + req.params.postID + " received.");
+
     const post = await posts.findOne({ 
         num: { $eq: parseInt(req.params.postID) }
     });
-    const author = await users.findOne({_id: post.user_id});
 
-    console.log(author);
-    console.log(post);
-    console.log(post._id);
+    const author = await users.findOne({_id: post.user_id});
+    const currentUser = await users.findOne({username: req.query.loggedIn});
+
     try {
-        // const commentsArray = await comments.find({post_id: post._id}).toArray();
         const commentsArray = await comments.aggregate(
             [
                 { 
@@ -44,6 +48,7 @@ postRouter.get("/posts/:postID", async(req, res) => {
 
         let data = {
             pagetitle: "View Post",
+            user: currentUser,
             author: author,
             post: post,
             comments: commentsArray
@@ -53,13 +58,12 @@ postRouter.get("/posts/:postID", async(req, res) => {
 
     } catch (err) {
         console.error(err);
-        res.status(404);
+        res.status(404); // fix
     }
 });
 
 postRouter.post("/post", async (req, res) => {
     console.log("POST request received for /post");
-    console.log(req.body);
 
     const user = await users.findOne({username: req.query.loggedIn}); // For Testing
     const size = await posts.countDocuments({});
@@ -79,7 +83,7 @@ postRouter.post("/post", async (req, res) => {
         res.sendStatus(200);
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(500); // fix
     }
 });
 
@@ -88,14 +92,14 @@ postRouter.post("/posts/:postID/comment", async (req, res) => {
     console.log("POST request received for /comment");
     console.log(req.body);
 
-    const user = await users.findOne({username: "yunjin"}); // For Testing
+    const user = await users.findOne({username: req.query.loggedIn});
     console.log(user);
     const post = await posts.findOne({num: parseInt(req.body.id)});
     console.log(post);
     
     try {
         const result = await comments.insertOne({
-            user_id: user._id, // Should be logged in user
+            user_id: user._id,
             post_id: post._id,
             comment: req.body.comment,
             votes: 0,
@@ -111,12 +115,8 @@ postRouter.post("/posts/:postID/comment", async (req, res) => {
         res.sendStatus(200);
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(500); // fix
     }
-});
-
-postRouter.patch("/comment", async (req, res) => {
-
 });
 
 export default postRouter;

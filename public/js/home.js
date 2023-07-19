@@ -66,17 +66,17 @@ $(document).ready(function() {
     });
 
     // Guests and users are limited to seeing 20 latest posts
-    let numOfPosts = $(".posts .post").length;
+    //let numOfPosts = $(".posts .post").length;
 
     $(".post").hide();
-    $(".post").slice(numOfPosts - 20, numOfPosts).show();
+    $(".post").slice(-20).show();
     
     /*
      "Show More Posts" button
         Allows the user to see older posts
      */
     // Show button when there are hidden posts
-    if(hiddenPosts.length > 0) {
+    if($(".post:hidden").length > 0) {
         $("#home-show-more").show();
         $(".end-of-feed").hide();
     } else {
@@ -96,12 +96,13 @@ $(document).ready(function() {
         if the if statement is ok na
     }
     */
+
     // Functionality
     $("#home-show-more").on("click", function() {
         $(".post:hidden").slice(0, 20).show().css("display", "flex");
 
         // Hide "Show More Posts" button when no more posts are hidden
-        if(hiddenPosts.length <= 20) {
+        if($(".post:hidden").length <= 20) {
             emptyFeed($("#home-show-more"), $(".end-of-feed"));
         }
     });

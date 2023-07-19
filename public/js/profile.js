@@ -3,7 +3,30 @@ $(document).ready(function() {
     
     const currentUser = $("#currentUser-navuser").text();
 
-    // TODO: View Comment Opens the Post
+    ///////////////////////////////////////////////
+
+    // Show Edit Profile Button if profile view is current user
+    let userProfile = $("#profile-username").text();
+    console.log("userProfile = " + userProfile);
+    userProfile = userProfile.substring(1).trimEnd();
+    console.log("userProfile = " + userProfile);
+    
+    if(userProfile === currentUser) {
+        $("#edit-profile").show();
+    } else {
+        $("#edit-profile").hide();
+    }
+
+    //////////////////////////////////////////////
+    
+    // TODO:  View One Post From Comment !!!
+    $("div.comment-container").click(function() {
+
+    });
+
+    $("div.comment-container").hover(function() {
+        $(this).css('cursor', 'pointer');
+    });
     
     // View One Post
     $("div.post-container").click(function() {
@@ -12,14 +35,13 @@ $(document).ready(function() {
         console.log(id);
         location.href = "/posts/" + id.substring(1).trimEnd() + "?loggedIn=" + currentUser;
         
-        
     });
 
     $("div.post-container").hover(function() {
         $(this).css('cursor', 'pointer');
     });
-
-    // TODO: View One Post From Comment !!!
+    
+    ////////////////////////////////////////////
     
     // View Latest Comments
     $("#latest-comments").click(function() {
@@ -37,49 +59,38 @@ $(document).ready(function() {
         $("#latest-comments").removeClass("active");
     });
 
-    // TODO: Show Edit Profile Button if profile view is current user !!!
-    let userProfile = $("#profile-username").text();
-    console.log("userProfile = " + userProfile);
-    userProfile = userProfile.substring(1).trimEnd();
-    console.log("userProfile = " + userProfile);
+    ////////////////////////////////////////////
     
-    if(userProfile === currentUser) {
-        $("#edit-profile").show();
-    } else {
-        $("#edit-profile").hide();
-    }
-
     // TODO: Limit Posts/Comments Seen On Profile !!!
     /*
      "Show More Posts" button
         Allows the user to see older posts
      */
+    const showMoreBtn = $("#profile-show-more");
+    const endOfFeedTxt = $(".end-of-feed");
     let showingPosts = $("#latest-feed-posts").is(':visible');
     let showingComments = $("#latest-feed-comments").is(':visible');
 
-    // Show button when there are hidden posts/comments
+    // Show "Show More" button when there are hidden posts
     if(showingPosts) {
 
-        // Visitors are limited to seeing 5 latest posts
-        $(".post").hide();
-        $(".post").slice(-5).show();
+        limitPosts($(".post"));
 
         if($(".post:hidden").length > 0) {
-            showBtn($("#profile-show-more"), $(".end-of-feed"));
+            showBtn(showMoreBtn, endOfFeedTxt);
         } else {
-            hideBtn($("#profile-show-more"), $(".end-of-feed"));
+            hideBtn(showMoreBtn, endOfFeedTxt);
         }
 
+    // TODO: Show "Show More" button when there are hidden comments
     } else if(showingComments) {
-        
-        // Visitors are limited to seeing 5 latest comments
-        $(".comment-list").hide();
-        $(".comment-list").slice(-5).show();
 
+        limitPosts($(".comment-list"));
+        
         if($(".comment-list:hidden").length > 0) {
-            showBtn($("#profile-show-more"), $(".end-of-feed"));
+            showBtn(showMoreBtn, endOfFeedTxt);
         } else {
-            hideBtn($("#profile-show-more"), $(".end-of-feed"));
+            hideBtn(showMoreBtn, endOfFeedTxt);
         }
     }
     /*
@@ -91,16 +102,25 @@ $(document).ready(function() {
         hideBtn($("#profile-show-more"), $(".end-of-feed"));
     }*/
     // Show More Button Functionality
-    $("#profile-show-more").on("click", function() {
+    showMoreBtn.on("click", function() {
         $(".post:hidden").slice(-5).show().css("display", "flex");
         $(".comment-list:hidden").slice(-5).show().css("display", "flex");
 
-        // Hide "Show More" button when no more posts/comments are hidden
-        if($(".post:hidden").length <= 5 || $(".comment-list:hidden").length <= 5) {
-            hideBtn($("#profile-show-more"), $(".end-of-feed"));
+        // TODO double check: Hide "Show More" button when no more posts/comments are hidden
+        if(showingPosts && $(".post:hidden").length === 0) {
+            hideBtn(showMoreBtn, endOfFeedTxt);
+
+        } else if(showingComments && $(".comment-list:hidden").length === 0) {
+            hideBtn(showMoreBtn, endOfFeedTxt);
         }
     });
 });
+
+// Limit posts/comments the vistor sees when visiting profile at first
+function limitPosts(cls) {
+    cls.hide();
+    cls.slice(-5).show();
+}
 
 function showBtn(btn, txt) {
     btn.show();

@@ -1,3 +1,11 @@
+import { Router } from 'express';
+import { getDb } from '../models/conn.js';
+
+const router = Router();
+const db = getDb();
+const users = db.collection("users");
+const posts = db.collection("posts");
+
 /*
   JS File for NavBar
 */
@@ -52,9 +60,11 @@ window.onclick = function(event) {
 function handleSignOut(event) {
   event.preventDefault();
   
+
+  // set current user to guest
   sessionStorage.setItem("currentUser", JSON.stringify(userGuest));
   location.reload();
-  window.location.href = "index.html";
+  window.location.href = "/home";
 }
 
 /*
@@ -96,20 +106,22 @@ function handleViewProfile(){
 
 
 function loadDropdown() {
-  console.log("gmaing>");
   const guestDropdown = [
-	{ label: "Sign Up", link: "login.html" },
+	{ label: "Sign Up", link: "login.html" },// /register
   ];
 
   const userDropdown = [
-	{ label: "Edit Profile", link: "edit_profile.html" },
-	{ label: "Switch Account", link: "login.html" },
-	{ label: "Sign Out", link: "index.html" },
-	{ label: "Change Password", link: "change_password.html" },
-	{ label: "View Profile", link: "profile.html"}
+	{ label: "Edit Profile", link: "edit_profile.html" },// /edit_profile
+	{ label: "Switch Account", link: "login.html" },// /login
+	{ label: "Sign Out", link: "index.html" },// /home
+	{ label: "Change Password", link: "change_password.html" },// /remove?
+	{ label: "View Profile", link: "profile.html"}// /profile
   ];
 
-  let user = JSON.parse(sessionStorage.getItem("currentUser"));
+
+  // take the current user
+  //let user = JSON.parse(sessionStorage.getItem("currentUser"));
+  let user = req.query.loggedIn;
 
   let isLoggedIn = !(user.lname === "guest");
   console.log(user.lname);
@@ -150,7 +162,7 @@ function clearSearch(){
 /*
 
 	Setting the posts that will pop-up based on the currentSearch
-
+	TO DO: 
  */
 function setSearchPosts(){
 	let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));

@@ -140,3 +140,5 @@ function emptyFeed(btn, txt) {
     btn.hide();
     txt.show();
 }
+
+// TODO: sort posts by popularity (votes descending)

@@ -1,6 +1,6 @@
-<div class="flex-row-container">
+<div class="flex-row-container" id="comment{{ num }}">
     <div class="flex-column-container c">
-        <img class="comment-user" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg">
+        <img class="comment-user {{#each user_details}}{{username}}{{/each}}" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg">
         <div class="line-container"></div>
     </div>
 
@@ -17,7 +17,7 @@
             </div>
 
             <div class="flex-row-container">
-                <button class="comment"></button>
+                <button class="comment" id="{{ num }}"></button>
                 <p class="number"> {{ num_comments }} </p>
             </div>
 
@@ -26,9 +26,11 @@
                 <button id="delete-comment" class="add-edit-button"> Delete </button>
             </div>
         </div>
+        <div class="reply-pop">
+            {{> makereply }}
+        </div>
         <div class="comment-section">
             <!--- nested comments--->   
-            
         </div>
     </div>
 </div>

@@ -126,6 +126,7 @@ export async function addSampleData (callback) {
         // 5 Comments
         const result3 = await comments.insertMany([
             {
+                num: 1,
                 user_id: list_users[0]._id,
                 post_id: post._id,
                 comment: "Right now I am underwhelmed by the song, it's way too repetitive and boring for me.",
@@ -135,6 +136,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 2,
                 user_id: list_users[2]._id,
                 post_id: post._id,
                 comment: "I didn't enjoy newjeans music apart from Ditto and I don't like Super Shy but I'm in the minority. I don't think catchiness is necessary in a song so I don't get why this \"I can't get this out of my head\" is used as a compliment but I'm probably in the minority again",
@@ -144,6 +146,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 3,
                 user_id: list_users[4]._id,
                 post_id: post2._id,
                 comment: "WE GOT VOCALBASEONE FOR REAL 😭",
@@ -153,6 +156,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 4,
                 user_id: list_users[2]._id,
                 post_id: post3._id,
                 comment: "The explicit version, BYE.",
@@ -162,6 +166,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 5,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "I'm sorry but I cannot with songs that list the days of the week in the chorus. It's a no for me.",
@@ -173,6 +178,7 @@ export async function addSampleData (callback) {
 
             // DELETE: Testing purposes
             {
+                num: 6,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "1",
@@ -182,6 +188,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 7,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "2",
@@ -191,6 +198,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 8,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "3",
@@ -200,6 +208,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 9,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "4",
@@ -208,6 +217,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 10,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "5",
@@ -217,6 +227,7 @@ export async function addSampleData (callback) {
                 edited: false
             },
             {
+                num: 11,
                 user_id: list_users[1]._id,
                 post_id: post3._id,
                 comment: "6",

@@ -57,7 +57,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#createComment, #clearComment {
+#createComment, #clearComment, #createReply, #clearReply {
     width: 100px;
     height: 25px;
     border-radius: 15px;
@@ -68,7 +68,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#new-comment {
+#new-comment, #new-reply {
     width: 93%;
     height: 100px;
     margin: 10px;
@@ -110,7 +110,7 @@ fieldset {
     padding: 5px;
 }
 
-.post-container {
+.post-container, .comment-container{
     width: 90%;
     margin: 5px;
     padding: 5px;

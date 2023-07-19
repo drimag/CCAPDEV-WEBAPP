@@ -1,10 +1,13 @@
-const submitBtn = document.querySelector("#createComment");
-const commentForm = document.forms.createCommentForm;
+// TODO: Nested Comments !!!
 
+const submitBtn = document.querySelector("#createReply");
+const replyForm = document.forms.createReplyForm;
 submitBtn?.addEventListener("click", async (e) => {
     e.preventDefault();
-    const formData = new FormData(commentForm);
-    console.log("Submit Comment Data");
+    const formData = new FormData(replyForm);
+    console.log("Submit Reply Data");
+    /*
+    // CreateComment Function Copied VVVVV
 
     let postID = $(".post").attr("id");
     postID = postID.substring(4).trimEnd();
@@ -24,7 +27,7 @@ submitBtn?.addEventListener("click", async (e) => {
     console.log(jString);
     
     try {
-        const response = await fetch("/comment?loggedIn=" + currentUser, {
+        const response = await fetch("/posts/" + postID + "/comment?loggedIn=" + currentUser, {
             method: 'POST',
             body: jString,
             headers: {
@@ -42,4 +45,5 @@ submitBtn?.addEventListener("click", async (e) => {
     } catch (err) {
         console.error(err);
     }
+    */
 });

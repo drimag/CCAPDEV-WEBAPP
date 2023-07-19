@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { getDb } from '../models/conn.js';
 import profileRouter from '../routes/profileRouter.js';
 import postRouter from '../routes/postRouter.js';
+import loginRouter from '../routes/loginRouter.js';
+import commentRouter from '../routes/commentRouter.js';
 
 const router = Router();
 const db = getDb();
@@ -45,8 +47,10 @@ router.get(["/", "/home", "/homepage"], async (req, res) => {
     });
 });
 
+router.use(loginRouter);
 router.use(profileRouter);
 router.use(postRouter);
+router.use(commentRouter);
 
 
 // TODO: Error 404 Page

@@ -7,7 +7,7 @@ $(document).ready(function() {
         const id = $(this).attr('id');
         console.log(id);
         
-        location.href = "/posts/" + id.substring(4, id.length - 1);
+        location.href = "/posts/" + id.substring(4, id.length);
         
     });
 

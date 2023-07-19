@@ -74,7 +74,7 @@ $(document).ready(function() {
     
     // Show 3 latest posts
     $(".post").hide();
-    $(".post").slice(numOfPosts - 3, numOfPosts).show();
+    $(".post").slice(-3).show();
 
     // Show more posts when "Show More" button is clicked
     $("#profile-show-more").on("click", function() {

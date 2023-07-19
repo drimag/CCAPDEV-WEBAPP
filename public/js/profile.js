@@ -34,34 +34,37 @@ $(document).ready(function() {
     });
 
     // TODO: Limit Posts/Comments Seen On Profile !!!
+    // Visitors are limited to seeing 5 latest posts
+    $(".post").hide();
+    $(".post").slice(-5).show();
 
     // TODO: Show Edit Profile Button if profile view is current user !!!
-    let userProfile = $("#profile-img"); // FIXXXXXX: the profile pic of the visitee
+    /*let userProfile = $("#profile-img"); // FIXXXXXX: the profile pic of the visitee
     let currUser = $(".fa-user-circle").img; // FIX: the logged in user profile pic on the navbar
     
     if(userProfile === currUser) {
         $("#edit-profile").show();
     } else {
         $("#edit-profile").hide();
-    }
+    }*/
 
-    // TODO: Show More Button !!!
     /*
      "Show More Posts" button
         Allows the user to see older posts
      */
     // Show button when there are hidden posts
-    if(hiddenPosts.length > 0) {
-        $("#profile-show-more").hide();
+    if($(".post:hidden").length > 0) {
+        $("#profile-show-more").show();
+        $(".end-of-feed").hide();
     } else {
         emptyFeed($("#profile-show-more"), $(".end-of-feed"));
     }
     // Functionality
     $("#profile-show-more").on("click", function() {
-        $(".post:hidden").slice(0, 20).show().css("display", "flex");
+        $(".post:hidden").slice(-5).show().css("display", "flex");
 
         // Hide "Show More Posts" button when no more posts are hidden
-        if(hiddenPosts.length <= 20) {
+        if($(".post:hidden").length <= 5) {
             emptyFeed($("#profile-show-more"), $(".end-of-feed"));
         }
     });

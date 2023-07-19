@@ -34,6 +34,7 @@ profileRouter.get("/edit-profile", async (req, res) => {
     const user = await users.findOne({username: "manchae"}); // Just For Testing
 
     res.render("edit_profile", {
+        pagetitle: "Edit Profile",
         user: user
     });
 });
@@ -93,6 +94,7 @@ profileRouter.get("/profile/:username", async (req, res) => {
     console.log(postsArray);
     
     res.render("profile", {
+        pagetitle: req.params.username + "'s Profile",
         user: user,
         posts: postsArray,
         comments: commentsArray

@@ -7,6 +7,24 @@ const users = db.collection("users");
 const posts = db.collection("posts");
 const comments = db.collection("comments");
 
+// Delete Comment
+commentRouter.delete("/comment", async (req, res) => {
+    console.log("DELETE request received for /comment");
+    console.log(req.body);
+
+    try {
+        const result = await comments.deleteOne({num: parseInt(req.body.id)});
+
+        console.log(result);
+        res.sendStatus(200);
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500); // fix
+    }
+});
+
+// Post Comment
 commentRouter.post("/comment", async (req, res) => {
     console.log("POST request received for /comment");
     console.log(req.body);

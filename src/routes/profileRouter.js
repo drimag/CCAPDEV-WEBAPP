@@ -100,3 +100,17 @@ profileRouter.get("/profile/:username", async (req, res) => {
 });
 
 export default profileRouter;
+
+/*
+async function showMore() {
+    posts.find().limit(5).forEach((post) => {
+        console.log("Showing 5 more posts/comments");
+    });
+}
+
+async function limitInitial() {
+    posts.find().sort( {votes:-1} ).forEach((post) => {
+        console.log("Showing 5 latest posts/comments");
+    });
+}
+ */

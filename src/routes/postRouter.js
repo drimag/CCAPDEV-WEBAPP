@@ -62,6 +62,7 @@ postRouter.get("/posts/:postID", async(req, res) => {
     }
 });
 
+// Post post
 postRouter.post("/post", async (req, res) => {
     console.log("POST request received for /post");
 

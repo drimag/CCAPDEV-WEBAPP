@@ -132,6 +132,4 @@ $(document).ready(function() {
 
     // TODO: Edit Comment
 
-    // TODO: Delete Comment
-
 });

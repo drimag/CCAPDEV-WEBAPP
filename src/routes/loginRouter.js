@@ -4,7 +4,7 @@ import { getDb } from '../models/conn.js';
 const loginRouter = Router();
 const db = getDb();
 
-loginRouter.get("/login", (req, res) => {
+loginRouter.get("/login", async (req, res) => {
     res.render("login", {
         pagetitle: "Login"
     });

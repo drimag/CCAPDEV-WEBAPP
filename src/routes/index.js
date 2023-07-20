@@ -40,10 +40,34 @@ router.get(["/", "/home", "/homepage"], async (req, res) => {
         ]
     ).toArray();
 
+    //logic for determining the links for the dropdown menu
+    //tentative, might put somewhere else
+    
+    let dropdowns;
+
+    if (currentUser == null || currentUser === "guest") {
+        dropdowns = [ { label: 'Sign Up'} ];
+        console.log("dropdown guest")
+    } else {
+        dropdowns = [
+            
+            { label: 'Edit Profile'},
+            { label: 'View Profile' },
+            { label: 'Sign Out' }
+            //{ label: 'Change Password'},
+            
+        ];
+
+        console.log("dropdown in")
+        console.log(dropdowns);
+    }
+
+    
     res.render("index", {
         pagetitle: "Home",
         user: currentUser,
-        posts: postsArray
+        posts: postsArray,
+        dropdownLinks: dropdowns //added for navbar (tentative)
     });
 });
 

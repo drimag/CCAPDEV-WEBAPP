@@ -2,6 +2,15 @@
   JS File for NavBar
 */
 
+// take logged in user from query param and put it into user
+const dropdownLinks = document.querySelectorAll(".dropdown-link");
+const currentURL = window.location.href;
+const params = new URLSearchParams(new URL(currentURL).search);
+const user = params.get("loggedIn");
+
+console.log("currentuser: " + user);
+
+
 let prevScrollpos = window.scrollY;
 
 window.onscroll = function() {
@@ -24,7 +33,6 @@ function clickDrop() {
 	let dropdown = document.getElementById('dropdown');
 	console.log(dropdown);
 	dropdown.style.display = "block";
-	console.log("deez nuts");
 }
    
 /*
@@ -51,50 +59,25 @@ window.onclick = function(event) {
 			
 			if (openDropdown.style.display === "block") {
 				openDropdown.style.display = "none";
-				console.log("joe mama");
 			}
 		}
   	}
 };
 
-/*
-	
-	Sign Out Function
-	
- */
-function handleSignOut(event) {
-  event.preventDefault();
-  
 
-  // set current user to guest
-  sessionStorage.setItem("currentUser", JSON.stringify(userGuest));
-  location.reload();
-  window.location.href = "/home";
-}
 
 /*
 
-	Display dropdown items
+	Handler for clicking home button
 
- */
-// function dropdownItems(toDropdown) {
+*/
 
-// 	toDropdown.forEach(item => {
-// 		const menuItem = document.createElement("a");
-// 		menuItem.href = item.link;
-// 		menuItem.textContent = item.label;
+const homeButton = document.querySelector(".home-button");
+homeButton.addEventListener("click", function() {
+	window.location.href = "/home?loggedIn=" + user;
+});
 
-// 		if (item.label === "Sign Out") {
-// 			menuItem.addEventListener("click", handleSignOut);
-// 		}
 
-// 		if (item.label === "View Profile") {
-// 			menuItem.addEventListener("click", handleViewProfile);
-// 		}
-
-// 		dropdown.appendChild(menuItem);
-// 	});
-// }
 
 
 
@@ -108,6 +91,143 @@ function handleViewProfile(){
   sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
   viewUserProfile(viewingUser);
 }
+
+
+
+/*
+
+	Clearing the current search
+
+ */
+function clearSearch(){
+	sessionStorage.setItem("currentSearch", JSON.stringify(""));
+	console.log(JSON.parse(sessionStorage.getItem("currentSearch")));
+	setSearchPosts();
+}
+
+/*
+
+	Redirect the user after clicking on a dropdown option
+
+*/
+
+
+
+dropdownLinks.forEach(link => {
+	link.addEventListener("click", () => {
+		const id = link.id; // id of the dropdown option
+		console.log("clickd dropdown id: " + id);
+	
+	  // Redirect the user to the appropriate location based on the link's ID
+		switch (id) {
+			case "Edit Profile":
+				window.location.href = "/edit_profile?loggedIn=" + user;
+				console.log("clickd dropdown id: " + id);
+				break;
+
+			case "Sign Up":
+				window.location.href = "/register?loggedIn=" + user;
+				console.log("clickd dropdown id: " + id);
+				break;
+
+			case "View Profile":
+				window.location.href = "/profile?loggedIn=" + user;
+				console.log("clickd dropdown id: " + id);
+				break;
+
+			case "Log In":
+				window.location.href = "/login?loggedIn=" + user;
+				console.log("clickd dropdown id: " + id);
+				break;
+
+			case "Sign Out":
+				window.location.href = "/home?loggedIn=guest"
+				console.log("clickd dropdown id: " + id);
+				break;
+
+			default:
+				window.location.href = "/home?loggedIn=" + user;
+				console.log("clickd dropdown id: " + id);
+				break;
+	  	}
+	});
+});
+
+
+/*
+
+	Enter Search
+
+ */
+function enterSearch(event){
+	event.preventDefault();
+
+	let searchInput = document.getElementById("search");
+	let searchTerms = searchInput.value;
+
+	// let currentUser = $("#currentUser-navuser").text();
+	// console.log(currentUser);
+	console.log("home button user:" + user);
+
+	if(user == "")
+        user = "guest";
+
+	window.location.href = "home?loggedIn=" + user + `&search=${encodeURIComponent(searchTerms)}`; // add logged in?
+
+	//setSearch(searchTerms); // sets the currentSearch
+	
+	//setSearchPosts(); // should set currentSearchPosts in sessionStorage 
+	//might have to be done in another part of the program
+
+	// let a = JSON.parse(sessionStorage.getItem("currentSearch"));
+	// let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
+	// console.log(a);
+	// console.log(b);
+
+	//window.location.href = "index.html"; // redirect user to index
+
+}
+
+
+
+// /*
+	
+// 	Sign Out Function
+	
+//  */
+// function handleSignOut(event) {
+//   event.preventDefault();
+  
+
+//   // set current user to guest
+//   sessionStorage.setItem("currentUser", JSON.stringify(userGuest));
+//   location.reload();
+//   window.location.href = "/home";
+// }
+
+/*
+
+	Setting the posts that will pop-up based on the currentSearch
+	TO DO: 
+ */
+// function setSearchPosts(){
+// 	let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));
+// 	let posts = JSON.parse(sessionStorage.getItem("currentPosts"));
+
+// 	searchTerms = searchTerms.toLowerCase();
+
+// 	let searchPosts = posts.filter(function(post) {
+
+// 		let postTitle = post.title.toLowerCase(); 
+// 		let postDescription = post.description.toLowerCase();
+
+// 		// Check if the title or description content contains the search term
+// 		return (postTitle.includes(searchTerms) || postDescription.includes(searchTerms));
+// 	});
+
+// 	sessionStorage.setItem("currentSearchPosts", JSON.stringify(searchPosts));
+// }
+
 
 /*
 
@@ -150,69 +270,24 @@ load dropdown to be done somewhere else
 
 /*
 
-	Clearing the current search
+	Display dropdown items
 
  */
-function clearSearch(){
-	sessionStorage.setItem("currentSearch", JSON.stringify(""));
-	console.log(JSON.parse(sessionStorage.getItem("currentSearch")));
-	setSearchPosts();
-}
+// function dropdownItems(toDropdown) {
 
+// 	toDropdown.forEach(item => {
+// 		const menuItem = document.createElement("a");
+// 		menuItem.href = item.link;
+// 		menuItem.textContent = item.label;
 
-/*
+// 		if (item.label === "Sign Out") {
+// 			menuItem.addEventListener("click", handleSignOut);
+// 		}
 
-	Setting the posts that will pop-up based on the currentSearch
-	TO DO: 
- */
-// function setSearchPosts(){
-// 	let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));
-// 	let posts = JSON.parse(sessionStorage.getItem("currentPosts"));
+// 		if (item.label === "View Profile") {
+// 			menuItem.addEventListener("click", handleViewProfile);
+// 		}
 
-// 	searchTerms = searchTerms.toLowerCase();
-
-// 	let searchPosts = posts.filter(function(post) {
-
-// 		let postTitle = post.title.toLowerCase(); 
-// 		let postDescription = post.description.toLowerCase();
-
-// 		// Check if the title or description content contains the search term
-// 		return (postTitle.includes(searchTerms) || postDescription.includes(searchTerms));
+// 		dropdown.appendChild(menuItem);
 // 	});
-
-// 	sessionStorage.setItem("currentSearchPosts", JSON.stringify(searchPosts));
 // }
-
-/*
-
-	Enter Search
-
- */
-function enterSearch(event){
-	event.preventDefault();
-
-	let searchInput = document.getElementById("search");
-	let searchTerms = searchInput.value;
-
-	let currentUser = $("#currentUser-navuser").text();
-	console.log(currentUser);
-
-	if(currentUser == "" || currentUser === "guest")
-        currentUser = "guest";
-
-	location.href = "home?loggedIn=" + currentUser + `&search=${encodeURIComponent(searchTerms)}`; // add logged in?
-
-	//setSearch(searchTerms); // sets the currentSearch
-	
-	//setSearchPosts(); // should set currentSearchPosts in sessionStorage 
-	//might have to be done in another part of the program
-
-	// let a = JSON.parse(sessionStorage.getItem("currentSearch"));
-	// let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
-	// console.log(a);
-	// console.log(b);
-
-	//window.location.href = "index.html"; // redirect user to index
-
-}
-

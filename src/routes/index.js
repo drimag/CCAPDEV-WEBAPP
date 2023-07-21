@@ -42,26 +42,28 @@ router.get(["/", "/home", "/homepage"], async (req, res) => {
 
     //logic for determining the links for the dropdown menu
     //tentative, might put somewhere else
-    
     let dropdowns;
 
-    if (currentUser == null || currentUser === "guest") {
-        dropdowns = [ { label: 'Sign Up'} ];
+    if (currentUser.username == null || currentUser.username === "guest") {
+        dropdowns = [ 
+            { label: 'Sign Up'},
+            { label: 'Log In'}
+        ];
         console.log("dropdown guest")
     } else {
         dropdowns = [
             
             { label: 'Edit Profile'},
             { label: 'View Profile' },
-            { label: 'Sign Out' }
             //{ label: 'Change Password'},
+            { label: 'Sign Out' }
             
         ];
 
         console.log("dropdown in")
         console.log(dropdowns);
     }
-
+    // end of logic for dropdown menu 
     
     res.render("index", {
         pagetitle: "Home",

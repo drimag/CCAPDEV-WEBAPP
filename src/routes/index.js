@@ -4,6 +4,8 @@ import profileRouter from '../routes/profileRouter.js';
 import postRouter from '../routes/postRouter.js';
 import loginRouter from '../routes/loginRouter.js';
 import commentRouter from '../routes/commentRouter.js';
+import { getDropdownLinks } from './navDropdown.js';
+
 
 const router = Router();
 const db = getDb();
@@ -40,36 +42,15 @@ router.get(["/", "/home", "/homepage"], async (req, res) => {
         ]
     ).toArray();
 
-    //logic for determining the links for the dropdown menu
-    //tentative, might put somewhere else
-    let dropdowns;
+    // get dropdown links based on current user
+    const dropdowns = getDropdownLinks(currentUser.username); 
+    console.log("dropdown links: " + dropdowns);
 
-    if (currentUser.username == null || currentUser.username === "guest") {
-        dropdowns = [ 
-            { label: 'Sign Up'},
-            { label: 'Log In'}
-        ];
-        console.log("dropdown guest")
-    } else {
-        dropdowns = [
-            
-            { label: 'Edit Profile'},
-            { label: 'View Profile' },
-            //{ label: 'Change Password'},
-            { label: 'Sign Out' }
-            
-        ];
-
-        console.log("dropdown in")
-        console.log(dropdowns);
-    }
-    // end of logic for dropdown menu 
-    
     res.render("index", {
         pagetitle: "Home",
         user: currentUser,
         posts: postsArray,
-        dropdownLinks: dropdowns //added for navbar (tentative)
+        dropdownLinks: dropdowns // navbar links 
     });
 });
 

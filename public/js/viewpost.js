@@ -37,23 +37,31 @@ $(document).ready(function() {
             //var made to find this upvote's corresponding downvote button
             let downvoteButton = $(this).nextAll("button.downvote").first();
 
+            let postNumber = $(this).closest(".post").attr("id").substring(4); 
+            let votesElement = $(this).siblings(".number"); 
+            let currentVotes = parseInt(votesElement.text()); 
+
             // Removes vote if clicked again
 		    if ($(this).hasClass('clicked')) {
 			    //decrease vote count here by 1
-                
+                newVotes = currentVotes - 1;
+                votesElement.text(newVotes);
+
 			    $(this).removeClass('clicked');
             }
 		    // Removes effect of opposite vote if clicked
 		    else if (downvoteButton.hasClass('clicked')){
 			    //increase the vote count by 2,because it nullifies the downvote
-
+                newVotes = currentVotes + 2;
+                votesElement.text(newVotes);
 			    $(this).addClass('clicked');
 			    downvoteButton.removeClass('clicked');
             }   
 		    //When no vote was clicked
 		    else{
 			    //increase vote count here by 1
-
+                newVotes = currentVotes + 1;
+                votesElement.text(newVotes);
 			    $(this).addClass('clicked');
 		    }
         });
@@ -64,24 +72,32 @@ $(document).ready(function() {
             
             //var made to find this downvote's corresponding upvote button
             let upvoteButton = $(this).prevAll("button.upvote").first();
+            
+
+            let postNumber = $(this).closest(".post").attr("id").substring(4); 
+            let votesElement = $(this).siblings(".number"); 
+            let currentVotes = parseInt(votesElement.text()); 
 
             //removes vote if clicked again  
 		    if ($(this).hasClass('clicked')) {
 			    //increase vote count here by 1
-
+                newVotes = currentVotes + 1;
+                votesElement.text(newVotes);
 			    $(this).removeClass('clicked');
             }
 		    //removes effect of opposite vote if clicked
 		    else if (upvoteButton.hasClass('clicked')){
 			    //decrease the vote count by 2,because it nullifies the upvote
-
+                newVotes = currentVotes - 2;
+                votesElement.text(newVotes);
 			    $(this).addClass('clicked');
 			    upvoteButton.removeClass('clicked');
             }
 		    //when no vote was clicked
             else{
 			    //decrease vote count here by 1
-
+                newVotes = currentVotes - 1;
+                votesElement.text(newVotes);
 			    $(this).addClass('clicked');
 		    }
         });

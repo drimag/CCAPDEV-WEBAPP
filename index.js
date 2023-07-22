@@ -6,9 +6,9 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 
 // Routes modules
-import router from "./src/routes/index.js"
+import router from "./src/routes/router.js"
 // Database modules
-import { connectToMongo } from './src/models/conn.js';
+import { connectToMongo } from './src/models/db.js';
 import { addSampleData } from './src/models/sampledata.js';
 
 async function main () {

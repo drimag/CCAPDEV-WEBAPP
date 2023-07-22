@@ -3,8 +3,11 @@ import { Router } from 'express';
 import controller from '../controllers/controller.js';
 import postController from '../controllers/postController.js';
 import profileController from '../controllers/profileController.js';
+import voteRouter from './voteRouter.js';
 
 const router = Router();
+// Home Routes
+router.get(["/", "/home", "/homepage"], controller.getHome);
 
 // Profile Routes
 router.get("/edit-profile", profileController.getEditProfile);
@@ -22,6 +25,13 @@ router.post("/comment", postController.postComment);
 router.post("/reply",);
 
 // Login Routes
-loginRouter.get("/login", controller.getLogin);
+router.get("/login", controller.getLogin);
+
+router.use(voteRouter);
+
+// TODO: Error 404 Page
+router.use((req, res) => {
+    res.send("error");
+});
 
 export default router;

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getDb } from '../models/conn.js';
+import { getDb } from '../models/db.js';
 
 const voteRouter = Router();
 const db = getDb();

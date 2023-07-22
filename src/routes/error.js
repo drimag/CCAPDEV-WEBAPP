@@ -7,3 +7,4 @@ router.get("/error", (req, res) => {
     const message = "Resource does not exist";
     res.render("error", {statuscode: code, errdesc: message});
 });
+

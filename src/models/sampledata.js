@@ -1,4 +1,4 @@
-import { getDb } from "./conn.js";
+import { getDb } from "./db.js";
 
 const db = getDb();
 

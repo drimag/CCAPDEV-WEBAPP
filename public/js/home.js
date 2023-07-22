@@ -149,6 +149,16 @@ $(document).ready(function() {
             emptyFeed($("#home-show-more"), $(".end-of-feed"));
         }
     });
+
+    // display/hide search notice if user is searching or not
+    const currentURL = window.location.href;
+    const params = new URLSearchParams(new URL(currentURL).search);
+    const searchTerms = params.get("search");
+
+    if(searchTerms == undefined || searchTerms === ""){ //hide for no search
+        console.log("Hidden Search Notice");
+        $("#search-notice").hide();
+    }
 })
 
 function emptyFeed(btn, txt) {

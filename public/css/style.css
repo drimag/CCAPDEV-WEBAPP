@@ -115,3 +115,6 @@ a:visited, a {
     font-weight: bold;
 }
 
+#search-notice {
+    margin: 10px 25px;
+}

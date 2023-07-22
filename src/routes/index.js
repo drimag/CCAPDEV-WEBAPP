@@ -5,7 +5,7 @@ import postRouter from '../routes/postRouter.js';
 import loginRouter from '../routes/loginRouter.js';
 import commentRouter from '../routes/commentRouter.js';
 import { getDropdownLinks } from './navDropdown.js';
-
+import voteRouter from '../routes/voteRouter.js';
 
 const router = Router();
 const db = getDb();
@@ -58,7 +58,7 @@ router.use(loginRouter);
 router.use(profileRouter);
 router.use(postRouter);
 router.use(commentRouter);
-
+router.use(voteRouter);
 
 // TODO: Error 404 Page
 router.use((req, res) => {

@@ -12,11 +12,11 @@ submitBtn1?.addEventListener("click", async (e) => {
     console.log(postID);
 
     const currentUser =$("#currentUser-navuser").text();
+    const new_comment = formData.get("new-comment");
 
-
-    const data = {
+    let data = {
         id: postID,
-        comment: formData.get("new-comment")
+        comment: new_comment
     };
     
     console.log(data);
@@ -41,18 +41,16 @@ submitBtn1?.addEventListener("click", async (e) => {
         }
 
         // update post
-
-        response = await fetch("", {
+        response = await fetch("/post/addedcomment?loggedIn=" + currentUser, {
             method: 'PUT',
             body: jString,
-            
-        })
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-        if(response.status === 200) {
-            location.reload();
-        } else {
-            console.log("Status code received: " + response.status);
-        }
+        console.log("Status code received: " + response.status);
+        
     } catch (err) {
         console.error(err);
     }

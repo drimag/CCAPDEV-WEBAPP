@@ -1,29 +1,32 @@
 TODO List:
 (A) URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
-(A) @Edit-Profile (esp change/modify/add profile pic)
+(A) @Edit-Profile (esp change/modify/add profile pic) !!!
 
-(A) @Create Reply
-(A) @Nested-Comments
-(A) Upvote Downvote Functionality with DB
+(A) @Create Reply !!!
+(A) @Nested-Comments !!!
+x update post document after adding a comment (comment list and num of comments)
+(A) Upvote Downvote Functionality with DB !!!
 x Fix Reply To Pop Up
 
-(B) Fix "Replied to @" Username in Comments
+x Fix "Replied to @" Username in Comments
 (B) @Edit and @Delete Posts
 x   Delete Comments 
 (B) @Edit Comments
 (B) @Edited For Edited Posts/Comments
-
 (B) Status Codes
+(B) only show edit / delete buttons if they are the owner (posts)
+x only show edit / delete buttons if they are the owner (comments)
+
 x Fix Route Handlers
 (C) Fix Fetching
-
+(C) Add Replied To @ in latest comments view
 (C) Fix number of comments shown in profile page (but posts are ok)
     "Show More" button MIGHT not show up
+(C) Change location.href to GET fetch ?
 
 (D) View One Post From Comment (idk if we should add this but eh)
 (D) Sort posts by popularity
 
-etc ( add more so u dont forget which to do ig )
 ---------------------------------------
 Functions CheckList
 (A) view all posts
@@ -47,8 +50,8 @@ x    edit profile button
 x post
 x    text post
 x    give title and body
-(A) view post
-    can view any post they have a link to
+x(A) view post
+x    can view any post they have a link to
 (A) comment 
 x    can comment on any post
     reply to other user's comments
@@ -57,7 +60,7 @@ x    can comment on any post
     owner can delete posts
 (A) edit/delete comment
     edited comments should have "edited"
-    owner can delete comments
+x    owner can delete comments
 (A) upvote / downvote
     only once
 (A) search

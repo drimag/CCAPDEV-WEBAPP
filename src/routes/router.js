@@ -18,8 +18,9 @@ router.get("/profile/:username", profileController.getProfile);
 // TODO: Redirect to login if logged in is guest!
 // postRouter.get("/post") 
 // Get a Post ( add /:username?/ if possible)
-router.get("/posts/:postID", postController.getPost);
+router.get(["/posts/:postID"], postController.getPost);
 router.post("/post", postController.createPost);
+router.put("/post/addedcomment", postController.updatePostCommentList);
 
 // Comment Routes
 router.delete("/comment", postController.deleteComment);

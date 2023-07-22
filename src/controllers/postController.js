@@ -58,15 +58,30 @@ const postController = {
 
     getPost: async function (req, res) {
         console.log("Request to post number " + req.params.postID + " received.");
-
+        console.log(req.query.params);
         try {
-            const post = await posts.findOne({ 
+            let post = await posts.findOne({ 
                 num: { $eq: parseInt(req.params.postID) }
             });
+
+            if(req.query.title == null) {
+                console.log('No Title Given');
+            } else {
+                console.log(decodeURIComponent(req.query.title));
+                console.log("Title Given. Checking if correct");
+                post = await posts.findOne({ 
+                    num: { $eq: parseInt(req.params.postID) }, 
+                    title: decodeURIComponent(req.query.title).trimEnd().trimStart()
+                });  
+                
+                // Title does not match postNum (post doesnt exist)
+                if(post === null) {
+                    res.sendStatus(500); // fix idk whats the status code for this
+                }
+            }
     
             const author = await users.findOne({_id: post.user_id});
             const currentUser = await users.findOne({username: req.query.loggedIn});
-            //const comment_list = await comments.find({_id: { $in: post }}).toArray();
 
             const commentsArray = await comments.aggregate(
                 [
@@ -82,11 +97,21 @@ const postController = {
                         'foreignField': '_id', 
                         'as': 'user_details'
                         }
+                    },
+                    {
+                        '$unwind': '$user_details'
                     }
                 ]
             ).toArray();
-
+            
             console.log(commentsArray);
+
+            const updatedArray = commentsArray.map((element) => ({
+                ...element,
+                author: author.username,
+                currentUser: currentUser.username
+              }));
+            console.log(updatedArray);
 
             // view comments (nested) (prolly just store the replies itself inside instead of ids)
 
@@ -95,7 +120,7 @@ const postController = {
                 user: currentUser,
                 author: author,
                 post: post,
-                comments: commentsArray
+                comments: updatedArray
             }
         
             res.render("view_post", data);
@@ -133,6 +158,37 @@ const postController = {
     },
     //////////////////////////////////////////
 
+    updatePostCommentList: async function(req, res) {
+        console.log("PUT request received for /post/addedcomment");
+        console.log(req.body);
+        //req.params.postID
+        // req.body
+
+        try {
+            console.log("Entered")
+            const post = await posts.findOne({num: parseInt(req.body.id)});
+            const comment = await comments.findOne({comment: req.body.comment});
+            console.log("POST");
+            console.log(post);
+            console.log("COMMENT");
+            console.log(comment);
+
+            
+            const result = await posts.updateOne(post, 
+                {
+                    $set: {num_comments: post.num_comments + 1},
+                    $push: {comments_id: comment._id}
+                }
+            )
+        
+            console.log(result);
+            res.sendStatus(200);
+
+        } catch(error) {
+            console.error(error);
+            // add status 
+        }
+    }
 }
 
 export default postController;

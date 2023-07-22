@@ -1,12 +1,12 @@
 <div class="flex-row-container" id="comment{{ num }}">
     <div class="flex-column-container c">
-        <img class="comment-user {{#each user_details}}{{username}}{{/each}}" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg">
+        <img class="comment-user {{user_details.username}}" src="/static/profilepics/{{user_details.username}}.jpg">
         <div class="line-container"></div>
     </div>
 
     <div class="flex-column-container post-details">
-        <p class="comment-username"> @{{#each user_details}}{{username}}{{/each}} </p>
-        <p class="replied-comment"> Replied to @{{authorun.username}} <b>Fix This</b> </p>
+        <p class="comment-username"> {{user_details.username}} </p>
+        <p class="replied-comment"> Replied to <b>@{{author}} </b> </p>
         <p class="comment-desc"> {{ comment }} </p>
 
         <div class="actions-comment flex-row-container">
@@ -21,10 +21,12 @@
                 <p class="number"> {{ num_comments }} </p>
             </div>
 
+            {{#ifEqual currentUser user_details.username}}
             <div class="flex-row-container">
                 <button id="edit-comment{{num}}" class="add-edit-button"> Edit </button>
                 <button id="delete-comment{{num}}" class="delete-c add-edit-button"> Delete </button>
             </div>
+            {{/ifEqual}}
         </div>
         <div class="reply-pop">
             {{> makereply }}

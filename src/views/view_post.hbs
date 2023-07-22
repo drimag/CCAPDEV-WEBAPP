@@ -46,8 +46,9 @@
         {{> makecomment }}
 
         <div class=" flex-column-container comment-section">
+            
             {{#each comments }}
-            {{> comment this authorun=author}}
+                {{> comment this }}
             {{/each }}
         </div>
     </div>

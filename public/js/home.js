@@ -91,11 +91,14 @@ $(document).ready(function() {
         console.log("View Post");
         const id = $(this).attr('id');
         console.log(id);
+
+        const title = $(this).find('.post-title').text().trimStart().trimEnd();
+        console.log(title);
         
         if(currentUser === "guest") {
             location.href = login;
         } else {
-            location.href = "/posts/" + id.substring(1).trimEnd() + "?loggedIn=" + currentUser;
+            location.href = "/posts/" + id.substring(1).trimEnd() + "?title="+ title + "&loggedIn=" + currentUser;
         }
         
     });

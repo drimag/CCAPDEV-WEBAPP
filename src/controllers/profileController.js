@@ -19,7 +19,7 @@ const profileController = {
             } else {
                 curr = await users.findOne({username: curr});
             }
-            
+
             const user = await users.findOne(req.params);
             res.render("edit_profile", {
                 pagetitle: "Edit Profile",
@@ -35,12 +35,6 @@ const profileController = {
         console.log("Request to " + req.params.username + "'s profile received.");
         
         let curr = req.query.loggedIn;
-    
-        if(curr == null) {
-            curr = {username: "guest"};
-        } else {
-            curr = await users.findOne({username: curr});
-        }
     
         try {
             if(curr == null) {
@@ -79,6 +73,9 @@ const profileController = {
                         'foreignField': '_id', 
                         'as': 'user_details'
                         }
+                    },
+                    {
+                        '$unwind': '$user_details'
                     }
                 ]
             ).toArray();

@@ -204,8 +204,11 @@ p.number {
 .actions-comment {
     margin-top: 10px;
     margin-bottom: 10px;
-    justify-content: space-between;
+    justify-content: left;
     width: 350px;
+}
+.actions-comment div {
+    margin-right: 70px;
 }
 
 .actions-comment div > button {
@@ -285,4 +288,8 @@ p.number {
 .one-line {
     height: 20px;
     overflow:hidden;
+}
+
+.profile-comment {
+    width: 95%;
 }

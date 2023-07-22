@@ -10,6 +10,7 @@ import router from "./src/routes/router.js"
 // Database modules
 import { connectToMongo } from './src/models/db.js';
 import { addSampleData } from './src/models/sampledata.js';
+import handlebars from 'handlebars';
 
 async function main () {
     const app = express();
@@ -20,6 +21,10 @@ async function main () {
     }));
     app.set("view engine", "hbs");
     app.set("views", "./src/views");
+
+    handlebars.registerHelper('ifEqual', function (arg1, arg2, options) {
+        return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+    });
 
     app.use(express.json());
     app.use(router);

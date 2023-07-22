@@ -1,21 +1,27 @@
 import { Router } from 'express';
 
-import controller from '../controller/controller.js';
+import controller from '../controllers/controller.js';
+import postController from '../controllers/postController.js';
+import profileController from '../controllers/profileController.js';
 
 const router = Router();
 
-// Profile Router
-router.get("/edit-profile", controller.getEditProfile);
-router.get("/profile/:username", controller.getProfile);
+// Profile Routes
+router.get("/edit-profile", profileController.getEditProfile);
+router.get("/profile/:username", profileController.getProfile);
+
 // TODO: Redirect to login if logged in is guest!
 // postRouter.get("/post") 
 // Get a Post ( add /:username?/ if possible)
-postRouter.get("/posts/:postID", controller.getPost);
-postRouter.post("/post", controller.createPost);
+router.get("/posts/:postID", postController.getPost);
+router.post("/post", postController.createPost);
 
-// Comment Router
-router.delete("/comment", controller.deleteComment);
-router.post("/comment", controller.postComment);
+// Comment Routes
+router.delete("/comment", postController.deleteComment);
+router.post("/comment", postController.postComment);
 router.post("/reply",);
+
+// Login Routes
+loginRouter.get("/login", controller.getLogin);
 
 export default router;

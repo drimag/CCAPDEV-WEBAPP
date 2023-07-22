@@ -20,7 +20,7 @@ const postController = {
             res.sendStatus(200);
     
         } catch (err) {
-            console.log(err);
+            console.error(err);
             res.sendStatus(500); // fix
         }
     },
@@ -59,15 +59,15 @@ const postController = {
     getPost: async function (req, res) {
         console.log("Request to post number " + req.params.postID + " received.");
 
-        const post = await posts.findOne({ 
-            num: { $eq: parseInt(req.params.postID) }
-        });
-
-        const author = await users.findOne({_id: post.user_id});
-        const currentUser = await users.findOne({username: req.query.loggedIn});
-        //const comment_list = await comments.find({_id: { $in: post }}).toArray();
-
         try {
+            const post = await posts.findOne({ 
+                num: { $eq: parseInt(req.params.postID) }
+            });
+    
+            const author = await users.findOne({_id: post.user_id});
+            const currentUser = await users.findOne({username: req.query.loggedIn});
+            //const comment_list = await comments.find({_id: { $in: post }}).toArray();
+
             const commentsArray = await comments.aggregate(
                 [
                     {
@@ -109,10 +109,10 @@ const postController = {
     createPost: async function (req, res) {
         console.log("POST request received for /post");
 
-        const user = await users.findOne({username: req.query.loggedIn}); // For Testing
-        const size = await posts.countDocuments({});
-
         try {
+            const user = await users.findOne({username: req.query.loggedIn}); // For Testing
+            const size = await posts.countDocuments({});
+            
             const result = await posts.insertOne({
                 num: 1 + size,
                 user_id: user._id,

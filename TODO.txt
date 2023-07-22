@@ -12,10 +12,9 @@ x Fix Reply To Pop Up
 x   Delete Comments 
 (B) @Edit Comments
 (B) @Edited For Edited Posts/Comments
-(B) @Edit-Profile
 
 (B) Status Codes
-(C) Fix Route Handlers
+x Fix Route Handlers
 (C) Fix Fetching
 
 (C) Fix number of comments shown in profile page (but posts are ok)

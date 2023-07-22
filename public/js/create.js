@@ -24,7 +24,7 @@ submitBtn1?.addEventListener("click", async (e) => {
     console.log(jString);
     
     try {
-        const response = await fetch("/comment?loggedIn=" + currentUser, {
+        let response = await fetch("/comment?loggedIn=" + currentUser, {
             method: 'POST',
             body: jString,
             headers: {
@@ -33,6 +33,20 @@ submitBtn1?.addEventListener("click", async (e) => {
         });
 
         console.log(response);
+
+        if(response.status === 200) {
+            location.reload();
+        } else {
+            console.log("Status code received: " + response.status);
+        }
+
+        // update post
+
+        response = await fetch("", {
+            method: 'PUT',
+            body: jString,
+            
+        })
 
         if(response.status === 200) {
             location.reload();

@@ -41,16 +41,36 @@ router.get(["/", "/home", "/homepage"], async (req, res) => {
             }
         ]
     ).toArray();
+    
 
-    // get dropdown links based on current user
+    // filter posts if there is a search
+    let searchTerms = req.query.search;
+    let searchPosts;
+
+    if(!(searchTerms == undefined || searchTerms === "")){
+        searchPosts = postsArray.filter((post) => {
+            let titleMatch = post.title.toLowerCase().includes(searchTerms.toLowerCase());
+            let descriptionMatch = post.description.toLowerCase().includes(searchTerms.toLowerCase());
+
+            return titleMatch || descriptionMatch;
+        });
+    } else {
+        searchPosts = postsArray;
+    }
+    
+    const searchDetails = { numPosts : searchPosts.length, search : searchTerms };
+    console.log("search Detials: " + searchDetails);
+
+    // get dropdown links based on if user is logged in
     const dropdowns = getDropdownLinks(currentUser.username); 
     console.log("dropdown links: " + dropdowns);
 
     res.render("index", {
         pagetitle: "Home",
         user: currentUser,
-        posts: postsArray,
-        dropdownLinks: dropdowns // navbar links 
+        posts: searchPosts,
+        dropdownLinks: dropdowns, // navbar links 
+        searchDetails: searchDetails
     });
 });
 

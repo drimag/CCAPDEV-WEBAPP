@@ -26,7 +26,9 @@ async function main () {
         return arg1 === arg2 ? options.fn(this) : options.inverse(this);
     });
 
-    app.use(express.json());
+    // for file transfer
+    app.use(express.json({ limit: '10mb' }));
+    app.use(express.urlencoded({ limit: '10mb', extended: true }));
     app.use(router);
 
     // Activate the app

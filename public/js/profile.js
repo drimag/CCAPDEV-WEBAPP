@@ -17,6 +17,14 @@ $(document).ready(function() {
         $("#edit-profile").hide();
     }
 
+    $("#edit-profile").hover(function() {
+        $(this).css('cursor', 'pointer');
+    });
+
+    $("#edit-profile").click(function() {
+        console.log("Edit profile button clicked.");
+        location.href = "/edit-profile?loggedIn=" + currentUser;
+    })
     //////////////////////////////////////////////
     
     // TODO:  View One Post From Comment !!!

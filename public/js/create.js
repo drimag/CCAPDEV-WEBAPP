@@ -49,7 +49,11 @@ submitBtn1?.addEventListener("click", async (e) => {
             }
         });
 
-        console.log("Status code received: " + response.status);
+        if(response.status === 200) {
+            location.reload();
+        } else {
+            console.log("Status code received: " + response.status);
+        }
         
     } catch (err) {
         console.error(err);

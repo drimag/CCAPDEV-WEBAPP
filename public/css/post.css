@@ -122,11 +122,26 @@ fieldset {
 
 .post-details .username {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.post-details {
+    padding-top: 20px;
+}
+
+.post-title {
+    padding-top: 7px;
+    padding-bottom: 2px;
+    word-break: break-word;
+}
+
+.post-details p {
+    margin: 0px;
 }
 
 p.home-description {
     width: 95%;
+    word-break: break-word;
 }
 
 .post-title {
@@ -231,6 +246,14 @@ p.number {
     display: flex;
 }
 
+.viewpost-container {
+    width: 90%;
+}
+
+.viewpost-description {
+    width: 95%;
+    word-break: break-word;
+}
 
 
 /* edited */
@@ -274,6 +297,7 @@ p.number {
     margin: 0px;
     padding-top: 10px;
     padding-bottom: 5px;
+    word-break: break-word;
 }
 
 .comments {
@@ -292,4 +316,5 @@ p.number {
 
 .profile-comment {
     width: 95%;
+    word-break: break-word;
 }

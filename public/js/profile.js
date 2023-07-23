@@ -1,6 +1,22 @@
 $(document).ready(function() {
+
+    const showMorePostsBtn = $("#show-more-posts");
+    const showMoreCommentsBtn = $("#show-more-comments");
+    const endOfFeedTxt = $(".end-of-feed");
+
     $("#latest-feed-comments").hide();
-    
+    showMoreCommentsBtn.hide();
+
+    // Limit posts seen on profile
+    limit($(".post"));
+
+    // Only show "Show More" button when there are hidden posts
+    if($(".post:hidden").length > 0) {
+        showBtn(showMorePostsBtn, endOfFeedTxt, showMoreCommentsBtn);
+    } else {
+        hideBtn(showMorePostsBtn, endOfFeedTxt, showMoreCommentsBtn);
+    }
+
     const currentUser = $("#currentUser-navuser").text();
 
     ///////////////////////////////////////////////
@@ -27,15 +43,6 @@ $(document).ready(function() {
     })
     //////////////////////////////////////////////
     
-    // TODO:  View One Post From Comment !!!
-    $("div.comment-container").click(function() {
-
-    });
-
-    $("div.comment-container").hover(function() {
-        $(this).css('cursor', 'pointer');
-    });
-    
     // View One Post
     $("div.post-container").click(function() {
         console.log("View Post");
@@ -50,14 +57,6 @@ $(document).ready(function() {
     });
     
     ////////////////////////////////////////////
-    
-    // View Latest Comments
-    $("#latest-comments").click(function() {
-        $("#latest-feed-posts").hide();
-        $("#latest-feed-comments").show();
-        $(this).addClass("active");
-        $("#latest-posts").removeClass("active");
-    });
 
     // View Latest Posts
     $("#latest-posts").click(function() {
@@ -65,77 +64,79 @@ $(document).ready(function() {
         $("#latest-feed-posts").show();
         $(this).addClass("active");
         $("#latest-comments").removeClass("active");
+
+        // Limit posts seen on profile
+        limit($(".post"));
+
+        // Only show "Show More" button when there are hidden posts
+        if($(".post:hidden").length > 0) {
+            showBtn(showMorePostsBtn, endOfFeedTxt, showMoreCommentsBtn);
+        } else {
+            hideBtn(showMorePostsBtn, endOfFeedTxt, showMoreCommentsBtn);
+        }
+    });
+
+    // View Latest Comments
+    $("#latest-comments").click(function() {
+        $("#latest-feed-posts").hide();
+        $("#latest-feed-comments").show();
+        $(this).addClass("active");
+        $("#latest-posts").removeClass("active");
+
+        // Limit comments seen on profile
+        limit($(".comment-list"));
+        
+        // Only show "Show More" button when there are hidden comments
+        if($(".comment-list:hidden").length > 0) {
+            showBtn(showMoreCommentsBtn, endOfFeedTxt, showMorePostsBtn);
+        } else {
+            hideBtn(showMoreCommentsBtn, endOfFeedTxt, showMorePostsBtn);
+        }
     });
 
     ////////////////////////////////////////////
-    
-    // TODO: Limit Posts/Comments Seen On Profile !!!
+
     /*
-     "Show More Posts" button
-        Allows the user to see older posts
+     "Show More" button
+        Allows the user to see older posts/comments
      */
-    const showMoreBtn = $("#profile-show-more");
-    const endOfFeedTxt = $(".end-of-feed");
-    let showingPosts = $("#latest-feed-posts").is(':visible');
-    let showingComments = $("#latest-feed-comments").is(':visible');
-
-    // Show "Show More" button when there are hidden posts
-    if(showingPosts) {
-
-        limitPosts($(".post"));
-
-        if($(".post:hidden").length > 0) {
-            showBtn(showMoreBtn, endOfFeedTxt);
-        } else {
-            hideBtn(showMoreBtn, endOfFeedTxt);
-        }
-
-    // TODO: Show "Show More" button when there are hidden comments
-    } else if(showingComments) {
-
-        limitPosts($(".comment-list"));
+    // Show More Posts Button Functionality
+    showMorePostsBtn.on("click", function() {
         
-        if($(".comment-list:hidden").length > 0) {
-            showBtn(showMoreBtn, endOfFeedTxt);
-        } else {
-            hideBtn(showMoreBtn, endOfFeedTxt);
+        $(".post:hidden").slice(-1).show().css("display", "flex");
+        
+        // Hide "Show More" button when no more posts are hidden
+        if($(".post:hidden").length === 0) {
+            hideBtn(showMorePostsBtn, endOfFeedTxt, showMoreCommentsBtn);
+
         }
-    }
-    /*
-    if(($(".post:hidden").length > 0 && commentsHidden) ||
-       ($(".comment-list:hidden").length > 0 && postsHidden)) {
-        $("#profile-show-more").show();
-        $(".end-of-feed").hide();
-    } else {
-        hideBtn($("#profile-show-more"), $(".end-of-feed"));
-    }*/
-    // Show More Button Functionality
-    showMoreBtn.on("click", function() {
-        $(".post:hidden").slice(-5).show().css("display", "flex");
-        $(".comment-list:hidden").slice(-5).show().css("display", "flex");
-
-        // TODO double check: Hide "Show More" button when no more posts/comments are hidden
-        if(showingPosts && $(".post:hidden").length === 0) {
-            hideBtn(showMoreBtn, endOfFeedTxt);
-
-        } else if(showingComments && $(".comment-list:hidden").length === 0) {
-            hideBtn(showMoreBtn, endOfFeedTxt);
+    });
+    
+    // Show More Comments Button Functionality
+    showMoreCommentsBtn.on("click", function() {
+        $(".comment-list:hidden").slice(-1).show().css("display", "flex");
+        
+        // Hide "Show More" button when no more comments are hidden
+        if($(".comment-list:hidden").length === 0) {
+            hideBtn(showMoreCommentsBtn, endOfFeedTxt, showMorePostsBtn);
         }
     });
 });
 
 // Limit posts/comments the vistor sees when visiting profile at first
-function limitPosts(cls) {
+function limit(cls) {
     cls.hide();
-    cls.slice(-5).show();
+    cls.slice(-1).show();
 }
 
-function showBtn(btn, txt) {
+function showBtn(btn, txt, otherBtn) {
     btn.show();
     txt.hide();
+    otherBtn.hide();
 }
 
-function hideBtn(btn, txt) {
+function hideBtn(btn, txt, otherBtn) {
     btn.hide();
     txt.show();
+    otherBtn.hide();
 }

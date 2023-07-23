@@ -42,7 +42,7 @@ const postController = {
             console.log(last_num);
             
             const result = await comments.insertOne({
-                num: last_num + 1,
+                num: 1,
                 user_id: user._id,
                 comment: req.body.comment,
                 votes: 0,
@@ -139,13 +139,9 @@ const postController = {
 
         try {
             const user = await users.findOne({username: req.query.loggedIn}); // For Testing
-            // Get all "nums" in posts
-            const num_array = await posts.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
-
+            
             const result = await posts.insertOne({
-                num: last_num + 1,
+                num: {$inc: {num: 1}},
                 user_id: user._id,
                 title: req.body.title,
                 description: req.body.description,
@@ -167,12 +163,13 @@ const postController = {
     updatePostCommentList: async function(req, res) {
         console.log("PUT request received for /post/addedcomment");
         console.log(req.body);
+        //req.params.postID
+        // req.body
 
         try {
             console.log("Entered")
             const post = await posts.findOne({num: parseInt(req.body.id)});
             const comment = await comments.findOne({}, {sort:{$natural:-1}})
-            
             console.log("POST");
             console.log(post);
             console.log("COMMENT");
@@ -191,7 +188,6 @@ const postController = {
         } catch(error) {
             console.error(error);
             // add status 
-            res.status(500);
         }
     },
 

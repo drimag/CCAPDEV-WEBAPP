@@ -167,12 +167,13 @@ const postController = {
     updatePostCommentList: async function(req, res) {
         console.log("PUT request received for /post/addedcomment");
         console.log(req.body);
+        //req.params.postID
+        // req.body
 
         try {
             console.log("Entered")
             const post = await posts.findOne({num: parseInt(req.body.id)});
             const comment = await comments.findOne({}, {sort:{$natural:-1}})
-            
             console.log("POST");
             console.log(post);
             console.log("COMMENT");
@@ -191,7 +192,6 @@ const postController = {
         } catch(error) {
             console.error(error);
             // add status 
-            res.status(500);
         }
     },
 

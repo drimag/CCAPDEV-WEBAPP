@@ -191,7 +191,7 @@ const postController = {
         } catch(error) {
             console.error(error);
             // add status 
-            res.status(500);
+            res.status()
         }
     },
 

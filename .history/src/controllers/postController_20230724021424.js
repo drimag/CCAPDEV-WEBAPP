@@ -34,15 +34,12 @@ const postController = {
             const user = await users.findOne({username: req.query.loggedIn});
             console.log(user);
             const post = await posts.findOne({num: parseInt(req.body.id)});
+            const size = await comments.countDocuments();
             console.log(post.comments_id);
-            
-            // Get all "nums" in comments
-            const num_array = await comments.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
-            
+        
+            console.log("Number of Comments " + size);
             const result = await comments.insertOne({
-                num: last_num + 1,
+                num: 1 + size,
                 user_id: user._id,
                 comment: req.body.comment,
                 votes: 0,
@@ -139,13 +136,10 @@ const postController = {
 
         try {
             const user = await users.findOne({username: req.query.loggedIn}); // For Testing
-            // Get all "nums" in posts
-            const num_array = await posts.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
-
+            const size = await posts.countDocuments({});
+            
             const result = await posts.insertOne({
-                num: last_num + 1,
+                num: 1 + size,
                 user_id: user._id,
                 title: req.body.title,
                 description: req.body.description,
@@ -167,31 +161,32 @@ const postController = {
     updatePostCommentList: async function(req, res) {
         console.log("PUT request received for /post/addedcomment");
         console.log(req.body);
+        //req.params.postID
+        // req.body
 
         try {
             console.log("Entered")
             const post = await posts.findOne({num: parseInt(req.body.id)});
-            const comment = await comments.findOne({}, {sort:{$natural:-1}})
-            
+            const comment = await comments.findMany({comment: req.body.comment}).toArray();
             console.log("POST");
             console.log(post);
             console.log("COMMENT");
             console.log(comment);
+
             
             const result = await posts.updateOne(post, 
                 {
-                    $inc: {num_comments: 1},
+                    $set: {num_comments: post.num_comments + 1},
                     $push: {comments_id: comment._id}
                 }
             )
-                
+        
             console.log(result);
             res.sendStatus(200);
 
         } catch(error) {
             console.error(error);
             // add status 
-            res.status(500);
         }
     },
 
@@ -208,7 +203,7 @@ const postController = {
 
             const result = await posts.updateOne(post, 
                 {
-                    $inc: {num_comments: -1},
+                    $set: {num_comments: post.num_comments - 1},
                     $pull: {comments_id: comment._id}
                 }
             )

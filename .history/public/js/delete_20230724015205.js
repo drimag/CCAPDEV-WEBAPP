@@ -2,20 +2,17 @@ $(document).ready(function() {
     $(".delete-c").click(async function() {
         try {
             alert("Deleting Comment...");
-            const comment_id = $(this).attr('id').substring(14);
-            const postNum = window.location.pathname.substring(7);
-            const loggedIn = params.get("loggedIn");
+            const comment_id = $(this).attr('id').substring(14).trimEnd();
         
-            let data = {
-                id: comment_id,
-                postNum: postNum
+            const data = {
+                id: comment_id
             };
             console.log(data);
         
-            let jString = JSON.stringify(data);
+            const jString = JSON.stringify(data);
         
             // update post
-            let response = await fetch("/post/removecomment?loggedIn=" + loggedIn, {
+            response = await fetch("/post/addedcomment?loggedIn=" + currentUser, {
                 method: 'PUT',
                 body: jString,
                 headers: {
@@ -23,14 +20,14 @@ $(document).ready(function() {
                 }
             });
 
-            data = {
-                id: comment_id
-            };
-            console.log(data);
-        
-            jString = JSON.stringify(data);
+            if(response.status === 200) {
+                location.reload();
+            } else {
+                console.log("Status code received: " + response.status);
+            }
+            
             // delete comment
-            response = await fetch("/comment", {
+            const response = await fetch("/comment", {
                 method: 'DELETE',
                 body: jString,
                 headers: {
@@ -46,8 +43,6 @@ $(document).ready(function() {
             } else {
                 console.log("Status code received: " + response.status);
             }
-
-            res.render("/posts");
         } catch (error) {
             console.error(error);
         }

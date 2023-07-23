@@ -11,7 +11,7 @@ x Fix Reply To Pop Up
 
 x Fix "Replied to @" Username in Comments
 (B) @Edit and @Delete Posts
-(B) Delete Comments 
+x   Delete Comments 
 x @Edit Comments
 x @Edited For Edited Comments
 (B) @Edited For Edited Posts/Comments

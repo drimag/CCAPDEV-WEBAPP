@@ -2,7 +2,7 @@ $(document).ready(function() {
     $(".delete-c").click(async function() {
         try {
             alert("Deleting Comment...");
-            const comment_id = $(this).attr('id').substring(14);
+            const comment_id = $(this).attr('id').substring(14).trimEnd();
             const postNum = window.location.pathname.substring(7);
             const loggedIn = params.get("loggedIn");
         

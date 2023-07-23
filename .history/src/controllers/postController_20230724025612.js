@@ -34,15 +34,23 @@ const postController = {
             const user = await users.findOne({username: req.query.loggedIn});
             console.log(user);
             const post = await posts.findOne({num: parseInt(req.body.id)});
+            //const comment_num = await comments.find().sort({_id:-1}).limit(1).toArray();
             console.log(post.comments_id);
             
-            // Get all "nums" in comments
-            const num_array = await comments.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
+            const commentArr = await comments.find({}).toArray();
             
+            const last = await comments.aggregate([
+                { $addFields: 
+                    { lastElement: 
+                        { $last: "$commentArr"} 
+                    }
+                }
+            ]).toArray();
+            console.log("////////////////////////////////");
+            console.log(last[-1]);
+            console.log("////////////////////////////////");
             const result = await comments.insertOne({
-                num: last_num + 1,
+                num: 1,
                 user_id: user._id,
                 comment: req.body.comment,
                 votes: 0,
@@ -139,13 +147,9 @@ const postController = {
 
         try {
             const user = await users.findOne({username: req.query.loggedIn}); // For Testing
-            // Get all "nums" in posts
-            const num_array = await posts.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
-
+            
             const result = await posts.insertOne({
-                num: last_num + 1,
+                num: {$inc: {num: 1}},
                 user_id: user._id,
                 title: req.body.title,
                 description: req.body.description,
@@ -167,12 +171,13 @@ const postController = {
     updatePostCommentList: async function(req, res) {
         console.log("PUT request received for /post/addedcomment");
         console.log(req.body);
+        //req.params.postID
+        // req.body
 
         try {
             console.log("Entered")
             const post = await posts.findOne({num: parseInt(req.body.id)});
             const comment = await comments.findOne({}, {sort:{$natural:-1}})
-            
             console.log("POST");
             console.log(post);
             console.log("COMMENT");
@@ -191,7 +196,6 @@ const postController = {
         } catch(error) {
             console.error(error);
             // add status 
-            res.status(500);
         }
     },
 

@@ -2,7 +2,7 @@ $(document).ready(function() {
     $(".delete-c").click(async function() {
         try {
             alert("Deleting Comment...");
-            const comment_id = $(this).attr('id').substring(14);
+            const comment_id = $(this).attr('id').substring(14).trimEnd();
             const postNum = window.location.pathname.substring(7);
             const loggedIn = params.get("loggedIn");
         
@@ -30,7 +30,7 @@ $(document).ready(function() {
         
             jString = JSON.stringify(data);
             // delete comment
-            response = await fetch("/comment", {
+            response = await fetch("/comment?loggedIn=" + currentUser, {
                 method: 'DELETE',
                 body: jString,
                 headers: {

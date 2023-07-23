@@ -3,8 +3,7 @@ import { getDb } from '../models/db.js';
 const db = getDb();
 
 const users = db.collection("users");
-const posts = db.collection("posts");
-const comments = db.collection("comments");
+
 
 const registerController = {
 
@@ -18,16 +17,27 @@ const registerController = {
 
 
         try{
-            const result = await users.insertOne({
-                username: username,
-                password: password,
-                bio: "Write bio here..."
-            });
+
+            const matchingUser = users.find({ username: uname });
+            const matchingUserArr = await matchingUser.toArray();
+            
+
+            if (matchingUserArr.length > 0){
+                //username is taken
+                //throw error
+            }else{
+                const result = await users.insertOne({
+                    username: username,
+                    password: password,
+                    bio: "Write bio here..."
+                });
 
 
-            console.log(result);
-            console.log("register successful!");
-            res.sendStatus(200);
+                console.log(result);
+                console.log("register successful!");
+                res.redirect("/login");
+                res.sendStatus(200);
+            }
         } catch{
             console.error('Failed to create account:', error);
         }

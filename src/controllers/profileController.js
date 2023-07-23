@@ -36,6 +36,11 @@ const profileController = {
         // const { user, newUsername, newBio, newPFP } = req.body;
         const editData = req.body;
 
+        console.log("what " + editData.newUsername);
+        console.log(editData.newBio);
+        console.log(editData.newPFPdata);
+        console.log(editData.newPFPtype);
+
         try {
             db.collection('users').updateOne(
                 { username: editData.currentUser },
@@ -43,7 +48,11 @@ const profileController = {
                   $set: {
                     username: editData.newUsername,
                     bio: editData.newBio,
-                    // pfp: newPFP
+                    pfp: 
+                    {
+                        data: editData.newPFPdata,
+                        contentType: editData.newPFPtype
+                    }
                   },
                 }
               )
@@ -120,69 +129,15 @@ const profileController = {
         }
     },
 
-    getMyProfile: async function (req, res) {
-        console.log("Request to profile received.");
+    /*
+    profileRouter.get(["/profile", "/myprofile"], async (req, res) => { 
+        // Current User's Profile
         
-        let curr = req.query.loggedIn;
-    
-        try {
-            if(curr == null) {
-                curr = await users.findOne({username: "guest"});
-            } else {
-                curr = await users.findOne({username: curr});
-            }
+    });
+    */
+   ////////////////////////////////////////////////////////////
 
-            const currentUser = curr;
-            const view_user = curr;
-            const postsArray = await posts.aggregate(
-                [
-                    { 
-                        $match: { user_id : view_user._id }
-                    },
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    }
-                ]
-            ).toArray();
-        
-            const commentsArray = await comments.aggregate(
-                [
-                    { 
-                        $match: { user_id : view_user._id }
-                    },
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    },
-                    {
-                        '$unwind': '$user_details'
-                    }
-                ]
-            ).toArray();
-        
-            console.log(postsArray);
-            
-            res.render("profile", {
-                pagetitle: currentUser.username + "'s Profile",
-                user: currentUser,
-                view_user: view_user,
-                posts: postsArray,
-                comments: commentsArray
-            })
-        } catch (error) {
-            console.error(error);
-            res.sendStatus(500); // fix
-        }
-    }
+
 }
 
 export default profileController;

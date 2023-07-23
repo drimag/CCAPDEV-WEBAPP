@@ -2,16 +2,15 @@ TODO List:
 x URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
 x @Edit-Profile (esp change/modify) !!!
 (A) edit-profile - profile pic
-
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
-x @Edit Posts
 (A) @Delete Posts
 (A) guests can still vote in the home page 
+(A) search does not work in profile
 
-x @Edited For Edited Posts
 (B) Status Codes
-x only show edit / delete buttons if they are the owner (posts)
+(B) Error Page
+
 (C) Fix Fetching
 (C) Add Replied To @ in latest comments view
 (C) Fix number of comments shown in profile page (but posts are ok)
@@ -23,7 +22,11 @@ x only show edit / delete buttons if they are the owner (posts)
 // Final Steps
 (E) Clean Code
 (E) READ ME
+(E) fix bugs
 
+x @Edit Posts
+x @Edited For Edited Posts
+x only show edit / delete buttons if they are the owner (posts)
 x update post document after adding a comment (comment list and num of comments)
 x Upvote Downvote Functionality with DB !!! (working but the sprite change thing might need mongoose)
 x Fix Reply To Pop Up
@@ -34,7 +37,6 @@ x @Edit Comments
 x @Edited For Edited Comments
 x only show edit / delete buttons if they are the owner (comments)
 x Fix Route Handlers
-
 
 ---------------------------------------
 Functions CheckList
@@ -56,9 +58,9 @@ x    edit profile button
     period by 3 weeks)
 (A) logout
     cut short remember period if exists and clears session data
-x post
-x    text post
-x    give title and body
+x   post
+x   text post
+x   give title and body
 x view post
 x    can view any post they have a link to
 (A) comment 

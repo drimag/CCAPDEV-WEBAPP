@@ -16,7 +16,7 @@ const controller = {
 
         try {
             if(currentUser == null || currentUser === "guest") {
-                currentUser = { username: "guest" };
+                currentUser = await users.findOne({username: "guest"});
             } else {
                 currentUser = await users.findOne({username: req.query.loggedIn});
             }

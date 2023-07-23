@@ -15,7 +15,7 @@ const profileController = {
     
         try {
             if(curr == null) {
-                curr = {username: "guest"};
+                curr = await users.findOne({username: "guest"});
             } else {
                 curr = await users.findOne({username: curr});
             }
@@ -63,7 +63,7 @@ const profileController = {
     
         try {
             if(curr == null) {
-                curr = {username: "guest"};
+                curr = await users.findOne({username: "guest"});
             } else {
                 curr = await users.findOne({username: curr});
             }

@@ -20,7 +20,7 @@ const profileController = {
                 curr = await users.findOne({username: curr});
             }
 
-            const user = await users.findOne(req.params);
+            const user = await users.findOne(curr);
             res.render("edit_profile", {
                 pagetitle: "Edit Profile",
                 user: user

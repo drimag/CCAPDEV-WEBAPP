@@ -5,17 +5,18 @@ x @Edit-Profile (esp change/modify) !!!
 
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
+(A) @Edit Posts
+(A) @Delete Posts
 x update post document after adding a comment (comment list and num of comments)
 x Upvote Downvote Functionality with DB !!! (working but the sprite change thing might need mongoose)
 x Fix Reply To Pop Up
-(A) Delete Comment Update Post Comment Number
+x Delete Comment Update Post Comment Number
 
 x Fix "Replied to @" Username in Comments
-(B) @Edit and @Delete Posts
-(B) Delete Comments 
+x Delete Comments 
 x @Edit Comments
 x @Edited For Edited Comments
-(B) @Edited For Edited Posts/Comments
+(B) @Edited For Edited Posts
 (B) Status Codes
 (B) only show edit / delete buttons if they are the owner (posts)
 x only show edit / delete buttons if they are the owner (comments)

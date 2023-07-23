@@ -145,6 +145,7 @@ fieldset {
 
 .post-details {
     padding-top: 20px;
+    width: 100%;
 }
 
 .post-title {
@@ -316,6 +317,10 @@ p.number {
     padding-top: 10px;
     padding-bottom: 5px;
     word-break: break-word;
+}
+
+.profile-comment {
+    width: 100%;
 }
 
 .comments {

@@ -46,7 +46,7 @@ $(document).ready(function() {
     $("#author-pic").click(function() {
         console.log('View Profile');
         let author = $("#postauthor-username").text();
-        author = author.substring(1).trimEnd();
+        author = author.substring(2).trimEnd();
         console.log(author);
         
         const currentUser = $("#currentUser-navuser").text();
@@ -58,7 +58,7 @@ $(document).ready(function() {
 
     // View Comments User Profile
     $(".comment-user").click(function() {
-        let comment_user = $(this).attr('class').substring(13).trimStart().trimEnd();
+        let comment_user = $(this).attr('class').substring(12).trimStart().trimEnd();
         console.log(comment_user);
 
         console.log('View Profile');

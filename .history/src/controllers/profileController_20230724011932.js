@@ -115,7 +115,7 @@ const profileController = {
                 comments: commentsArray
             })
         } catch (error) {
-            console.error(error);
+            console.error(err);
             res.sendStatus(500); // fix
         }
     },

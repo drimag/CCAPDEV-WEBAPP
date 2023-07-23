@@ -71,7 +71,7 @@ const postController = {
                 console.log("Title Given. Checking if correct");
                 post = await posts.findOne({ 
                     num: { $eq: parseInt(req.params.postID) }, 
-                    title: decodeURIComponent(req.query.title)
+                    title: decodeURIComponent(req.query.title).trimEnd().trimStart()
                 });  
                 
                 // Title does not match postNum (post doesnt exist)

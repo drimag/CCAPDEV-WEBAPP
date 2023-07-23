@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // Hide Create Post Func From Guest
     let currentUser = $("#current-username").text();
-    currentUser = currentUser.substring(1).trimEnd();
+    currentUser = currentUser.substring(2).trimEnd();
     console.log(currentUser);
 
     const login = "/login";

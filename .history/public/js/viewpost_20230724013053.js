@@ -58,7 +58,7 @@ $(document).ready(function() {
 
     // View Comments User Profile
     $(".comment-user").click(function() {
-        let comment_user = $(this).attr('class').substring(13).trimStart().trimEnd();
+        let comment_user = $(this).attr('class').substring(11).trimStart().trimEnd();
         console.log(comment_user);
 
         console.log('View Profile');

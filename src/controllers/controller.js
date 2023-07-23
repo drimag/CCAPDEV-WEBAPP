@@ -8,6 +8,18 @@ const posts = db.collection("posts");
 const comments = db.collection("comments");
 
 const controller = {
+    getDeletedPage: async function(req, res) {
+        try {
+            const user = await users.findOne({username: req.query.loggedIn});
+            res.render("deleted_post", {
+                user: user
+            });
+        } catch (error) {
+            console.error(error);
+            // status code
+        }
+    },
+
     getHome: async function(req, res) {
         console.log("Request to home received.");
     

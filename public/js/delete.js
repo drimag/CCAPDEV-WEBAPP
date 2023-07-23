@@ -51,4 +51,43 @@ $(document).ready(function() {
             console.error(error);
         }
     });
+
+    
+    $("#delete-post").click(async function () {
+        try {
+            const postNum = window.location.pathname.substring(7);
+            const loggedIn = params.get("loggedIn");
+            data = {
+                id: postNum
+            };
+            console.log(data);
+        
+            jString = JSON.stringify(data);
+
+            // Delete post
+            response = await fetch("/post", {
+                method: 'DELETE',
+                body: jString,
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+
+            // ????????????????? Delete comments under post?
+
+            // Awaiting for the resource to be deleted
+            console.log(response);
+
+            if(response.status === 200) {
+                location.reload();
+            } else {
+                console.log("Status code received: " + response.status);
+            }
+
+            location.href = "/deleted?loggedIn=" + loggedIn;
+
+        } catch(err) {
+            console.error(err);
+        }
+    });
 });

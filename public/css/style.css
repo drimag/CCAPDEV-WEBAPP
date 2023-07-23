@@ -9,6 +9,15 @@ body {
     width: 75%;
 }
 
+.deleted-page p {
+    font-weight: bold;
+    font-size: large;
+}
+
+.deleted-page {
+    display: flex;
+    justify-content: center;
+}
 
 .page {
     margin: auto;

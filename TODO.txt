@@ -1,10 +1,9 @@
 TODO List:
-x URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
-x @Edit-Profile (esp change/modify) !!!
+
 (A) edit-profile - profile pic
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
-(A) @Delete Posts
+
 (A) guests can still vote in the home page 
 (A) search does not work in profile
 
@@ -23,6 +22,10 @@ x @Edit-Profile (esp change/modify) !!!
 (E) Clean Code
 (E) READ ME
 (E) fix bugs
+
+x URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
+x @Edit-Profile (esp change/modify) !!!
+x @Delete Posts ( does not delete comments part of the post )
 
 x @Edit Posts
 x @Edited For Edited Posts
@@ -66,9 +69,9 @@ x    can view any post they have a link to
 (A) comment 
 x    can comment on any post
     reply to other user's comments
-(A) edit/delete post
+x edit/delete post
 x    edited posts should have "edited"
-    owner can delete posts
+x    owner can delete posts
 x edit/delete comment
 x    edited comments should have "edited"
 x    owner can delete comments

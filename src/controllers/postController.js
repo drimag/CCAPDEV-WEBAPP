@@ -27,6 +27,7 @@ const postController = {
             const result = await comments.insertOne({
                 num: last_num + 1,
                 user_id: user._id,
+                //post_id: post._id,
                 comment: req.body.comment,
                 votes: 0,
                 comments_id: [],
@@ -214,6 +215,22 @@ const postController = {
             res.render("view_post");
             res.sendStatus(200);
         } catch (error) {
+            console.error(err);
+            res.sendStatus(500); // fix
+        }
+    },
+
+    deletePost: async function (req, res) {
+        console.log("DELETE request received for /post");
+        console.log(req.body);
+    
+        try {
+            const result = await posts.deleteOne({num: parseInt(req.body.id)});
+    
+            console.log(result);
+            res.sendStatus(200);
+    
+        } catch (err) {
             console.error(err);
             res.sendStatus(500); // fix
         }

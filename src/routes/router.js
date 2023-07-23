@@ -4,7 +4,7 @@ import controller from '../controllers/controller.js';
 import postController from '../controllers/postController.js';
 import profileController from '../controllers/profileController.js';
 import voteController from '../controllers/voteController.js';
-
+import registerController from '../controllers/registerController.js';
 const router = Router();
 
 // Home Routes
@@ -32,6 +32,9 @@ router.post("/reply",);
 
 // Login Routes
 router.get("/login", controller.getLogin);
+
+// Register Routes
+router.get("/register", registerController.registerAccount);
 
 // Vote Routes
 router.post('/posts/_id/votes', voteController.postVote);

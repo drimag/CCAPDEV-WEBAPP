@@ -64,7 +64,7 @@ x    owner can delete comments
 (A) upvote / downvote
     only once
 (A) search
-    visitors and users can search for posts
+x   visitors and users can search for posts
 
 ----------------------------------------------------------------------
 

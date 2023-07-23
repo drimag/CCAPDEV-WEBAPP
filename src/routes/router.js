@@ -12,6 +12,7 @@ router.get(["/", "/home", "/homepage"], controller.getHome);
 
 // Profile Routes
 router.get("/edit-profile", profileController.getEditProfile);
+router.post("/edit-profile", profileController.editProfile);
 router.get("/profile/:username", profileController.getProfile);
 
 // Post Routes

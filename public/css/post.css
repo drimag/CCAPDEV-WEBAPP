@@ -52,7 +52,7 @@ fieldset {
     width: 100%;
 }
 
-#createPost, #clearPost {
+#createPost, #clearPost, #editPost {
     width: 100px;
     height: 30px;
     border-radius: 15px;
@@ -63,7 +63,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#createComment, #clearComment, #createReply, #clearReply, .editComment, #clearEditComment, #editPost {
+#createComment, #clearComment, #createReply, #clearReply, .editComment, #clearEditComment {
     width: 100px;
     height: 25px;
     border-radius: 15px;

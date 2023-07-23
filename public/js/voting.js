@@ -1,17 +1,23 @@
-$(document).ready(function(){
+
     // Upvote when viewing a post
     $("button.upvote").click(async function() {
 
         //var made to find this upvote's corresponding downvote button
         let downvoteButton = $(this).nextAll("button.downvote").first();
-
-        let postNumber = $(this).closest(".post").attr("id").slice(-1); 
+        //console.log($(this).closest(".post,[id*=comment]").prop("id"));
+        //let ID = $(this).closest(".post,[id*=comment]").prop("id"); 
         
+        let eNumber = $(this).closest(".post,[id*=comment]").prop("id").slice(-1); 
+        let eType = $(this).closest(".post,[id*=comment]").prop("id").slice(0,-1);
+
+
         let voteCount = $(this).siblings(".number"); 
         let currentVotes = parseInt(voteCount.text()); 
 
+
         // Removes vote if clicked again
 		if ($(this).hasClass('clicked')) {
+       
 			//decrease vote count here by 1
             newVotes = currentVotes - 1;
             voteCount.text(newVotes);
@@ -29,16 +35,18 @@ $(document).ready(function(){
 		//When no vote was clicked
 		else{
 			//increase vote count here by 1
+       
             newVotes = currentVotes + 1;
             voteCount.text(newVotes);
 
 			$(this).addClass('clicked');
 		}
-
+        console.log("new votes::",newVotes);
 
         const data = {
             votes: newVotes,
-            postId: postNumber,
+            type: eType,
+            number: eNumber,
             action: "upvote"
         };
         console.log(data);
@@ -72,7 +80,8 @@ $(document).ready(function(){
         let upvoteButton = $(this).prevAll("button.upvote").first();
             
 
-        let postNumber = $(this).closest(".post").attr("id").slice(-1); 
+        let eNumber = $(this).closest(".post,[id*=comment]").prop("id").slice(-1); 
+        let eType = $(this).closest(".post,[id*=comment]").prop("id").slice(0,-1);
 
         let voteCount = $(this).siblings(".number"); 
         let currentVotes = parseInt(voteCount.text()); 
@@ -103,7 +112,8 @@ $(document).ready(function(){
 
         const data = {
             votes: newVotes,
-            postId: postNumber,
+            type: eType,
+            number: eNumber,
             action: "downvote"
         };
         console.log(data);
@@ -129,4 +139,7 @@ $(document).ready(function(){
     });
      
 
-});
+
+
+
+

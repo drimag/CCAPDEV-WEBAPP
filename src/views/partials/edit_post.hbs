@@ -1,0 +1,10 @@
+<form id="editPostForm" name="editPostForm" onsubmit="return false">
+    <fieldset>
+        <label for="edit-title"> Title </label> <br>
+        <input type="text" name="edit-title" id="edit-title" value="{{post.title}}" required/><br>
+        <label for="edit-desc"> Description </label> <br>
+        <textarea name="edit-desc" id="edit-desc" class="text" required>{{post.description}}</textarea> <br>
+        <button id="editPost" type="submit"> Submit </button>
+        <button id="clearPost" type="reset"> Clear </button>
+    </fieldset>
+</form>

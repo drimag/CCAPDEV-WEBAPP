@@ -22,8 +22,9 @@ router.get("/profile/:username", profileController.getProfile);
 router.get(["/posts/:postID"], postController.getPost);
 router.post("/post", postController.createPost);
 router.put("/post/addedcomment", postController.updatePostCommentList);
-
 router.put("/post/removecomment", postController.updateRemovedComment);
+router.delete("/post", postController.deletePost);
+router.put("/post", postController.editPost);
 
 // Comment Routes
 router.delete("/comment", postController.deleteComment);

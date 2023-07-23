@@ -5,21 +5,24 @@ x @Edit-Profile (esp change/modify) !!!
 
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
-(A) @Edit Posts
+x @Edit Posts
 (A) @Delete Posts
 (A) guests can still vote in the home page 
 
-(B) @Edited For Edited Posts
+x @Edited For Edited Posts
 (B) Status Codes
-(B) only show edit / delete buttons if they are the owner (posts)
+x only show edit / delete buttons if they are the owner (posts)
 (C) Fix Fetching
 (C) Add Replied To @ in latest comments view
 (C) Fix number of comments shown in profile page (but posts are ok)
     "Show More" button MIGHT not show up
-(C) Change location.href to GET fetch ?
 
 (D) View One Post From Comment (idk if we should add this but eh)
 (D) Sort posts by popularity
+
+// Final Steps
+(E) Clean Code
+(E) READ ME
 
 x update post document after adding a comment (comment list and num of comments)
 x Upvote Downvote Functionality with DB !!! (working but the sprite change thing might need mongoose)
@@ -62,7 +65,7 @@ x    can view any post they have a link to
 x    can comment on any post
     reply to other user's comments
 (A) edit/delete post
-    edited posts should have "edited"
+x    edited posts should have "edited"
     owner can delete posts
 x edit/delete comment
 x    edited comments should have "edited"
@@ -76,7 +79,7 @@ x  visitors and users can search for posts
 
 Comments of Sir
 x add interactable upvote/downvote in feed
-(A) add "edited" for edited posts/comments
+x add "edited" for edited posts/comments
 x put navbar in login/signup (done)
 (A) add/fix change password
 x change view post from feed from clicking only title to the entire container

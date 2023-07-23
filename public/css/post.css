@@ -14,7 +14,7 @@
     background-color: lavender;
 }
 
-#newtitle {
+#newtitle, #edit-title {
     margin: 10px;
     border-radius: 10px;
     border: 2px solid #888;
@@ -37,7 +37,7 @@
     padding: 10px;
 }
 
-#createPostForm label, #createCommentForm label, #editCommentForm label {
+#createPostForm label, #createCommentForm label, #editCommentForm label, #editPostForm label {
     font-weight: bold;
 }
 
@@ -63,7 +63,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#createComment, #clearComment, #createReply, #clearReply, .editComment, #clearEditComment {
+#createComment, #clearComment, #createReply, #clearReply, .editComment, #clearEditComment, #editPost {
     width: 100px;
     height: 25px;
     border-radius: 15px;
@@ -85,7 +85,7 @@ fieldset {
     font-family: Karla, sans-serif;
 }
 
-#newdesc {
+#newdesc, #edit-desc {
     width: 94%;
     height: 100px;
     margin: 10px;

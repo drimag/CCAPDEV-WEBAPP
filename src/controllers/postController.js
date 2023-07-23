@@ -8,23 +8,6 @@ const comments = db.collection("comments");
 
 const postController = {
     //////////////////////////////////////////
-    // Delete Comment
-    deleteComment: async function (req, res) {
-        console.log("DELETE request received for /comment");
-        console.log(req.body);
-    
-        try {
-            const result = await comments.deleteOne({num: parseInt(req.body.id)});
-    
-            console.log(result);
-            res.sendStatus(200);
-    
-        } catch (err) {
-            console.error(err);
-            res.sendStatus(500); // fix
-        }
-    },
-
     // Post Comment
     postComment: async function (req, res) {
         console.log("POST request received for /comment");
@@ -57,6 +40,51 @@ const postController = {
             res.sendStatus(500); // fix
         }
     },
+
+    // Delete Comment
+    deleteComment: async function (req, res) {
+        console.log("DELETE request received for /comment");
+        console.log(req.body);
+    
+        try {
+            const result = await comments.deleteOne({num: parseInt(req.body.id)});
+    
+            console.log(result);
+            res.sendStatus(200);
+    
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500); // fix
+        }
+    },
+
+    editComment: async function (req, res) {
+        console.log("PUT Request received for /comment");
+        console.log(req.body);
+
+        const loggedIn = req.body.loggedIn;
+        const commentNum = req.body.num;
+        const edited_comment = req.body.comment;
+        console.log("commentNum" + commentNum);
+
+        try {
+            const comment = await comments.findOne({num: parseInt(commentNum)});
+            console.log("Comment Found");
+            console.log(comment);
+            const result = await comments.updateOne(comment, 
+                {
+                    $set: {comment: edited_comment, edited: true}
+                })
+            
+            console.log("Result:" + result);
+            res.render("view_post");
+            res.sendStatus(200);
+        } catch (error) {
+            console.error(err);
+            res.sendStatus(500); // fix
+        }
+    },
+    
    ////////////////////////////////////////////////////////////
 
     getPost: async function (req, res) {
@@ -163,14 +191,31 @@ const postController = {
         }
     },
 
-    deletePost: async function(req, res) {
-        console.log("DELETE request recieved");
+    editPost: async function (req, res) {
+        console.log("PUT Request received for /post");
         console.log(req.body);
 
-        try {
+        const loggedIn = req.body.loggedIn;
+        const postNum = req.body.num;
+        const edited_title = req.body.title;
+        const edited_description = req.body.description;
+        console.log("postNum" + postNum);
 
-        } catch(err) {
+        try {
+            const post = await posts.findOne({num: parseInt(postNum)});
+            console.log("Post Found");
+            console.log(post);
+            const result = await posts.updateOne(post, 
+                {
+                    $set: {title: edited_title, description: edited_description, edited: true}
+                });
             
+            console.log("Result:" + result);
+            res.render("view_post");
+            res.sendStatus(200);
+        } catch (error) {
+            console.error(err);
+            res.sendStatus(500); // fix
         }
     },
     
@@ -229,32 +274,6 @@ const postController = {
         } catch(error) {
             console.error(error);
             // add status 
-        }
-    },
-
-    editComment: async function (req, res) {
-        console.log("PUT Request received for /comment");
-        console.log(req.body);
-
-        const loggedIn = req.body.loggedIn;
-        const commentNum = req.body.num;
-        const edited_comment = req.body.comment;
-        console.log("commentNum" + commentNum);
-
-        try {
-            const comment = await comments.findOne({num: parseInt(commentNum)});
-            console.log("Comment Found");
-            console.log(comment);
-            const result = await comments.updateOne(comment, 
-                {
-                    $set: {comment: edited_comment, edited: true}
-                })
-            
-            console.log("Result:" + result);
-            res.render("view_post");
-            res.sendStatus(200);
-        } catch (error) {
-
         }
     }
 }

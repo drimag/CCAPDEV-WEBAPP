@@ -1,6 +1,7 @@
 TODO List:
-(A) URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
-(A) @Edit-Profile (esp change/modify/add profile pic) !!!
+x URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
+x @Edit-Profile (esp change/modify) !!!
+(A) edit-profile - profile pic
 
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
@@ -65,8 +66,8 @@ x    edited comments should have "edited"
 x    owner can delete comments
 (A) upvote / downvote
     only once
-(A) search
-x   visitors and users can search for posts
+x  search
+x  visitors and users can search for posts
 
 ----------------------------------------------------------------------
 

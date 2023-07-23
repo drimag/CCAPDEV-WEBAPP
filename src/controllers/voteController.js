@@ -10,28 +10,46 @@ const voteController = {
     
     postVote: async function (req, res) {
         //const { postId, votes } = req.body;
-     
-        const { postId } = req.body;
-        console.log("post id is:",postId);
+        console.log("votecontroller called");
+        const { type } = req.body;
+        console.log("type is:",type);
         /*
         const { action } = req.body;
         console.log("action is:",action);
         */
+        const { number } = req.body;
+        console.log("number is",number);
         const { votes } = req.body;
         console.log("votes are:",votes);
         try {
          
           // Find the post by its ID
-          const post = await posts.findOne({ num: parseInt(req.body.postId)});
-          console.log("post is:",post);
+          //const post = await posts.findOne({ num: parseInt(postId)});
+          //checks if id belongs to a comment or post
+          //let element = id.slice(0,-1);
+          if (type === "comment"){
+            console.log("This is a comment");
+            const comment = await comments.findOne({ num: parseInt(number)});
+            comment.votes = votes;
+            await comments.updateOne({num: parseInt(number) }, { $set: { votes } });
+          }else{
+            console.log("This is a post");
+            const post = await posts.findOne({ num: parseInt(number)});
+
+            // Update the vote count in the post document
+            post.votes = votes;
+
+            // Save the updated post back to the database
+            await posts.updateOne({num: parseInt(number) }, { $set: { votes } });
+            
+          }
+
+          
       
-          // Update the vote count in the post document
-          post.votes = votes;
+
+          //req.body.postId
+        
       
-          // Save the updated post back to the database
-          await posts.updateOne({num: parseInt(req.body.postId) }, { $set: { votes } });
-      
-          // Respond with success status (200) indicating the update was successful
           res.status(200).json({ message: 'Vote updated successfully' });
     
     

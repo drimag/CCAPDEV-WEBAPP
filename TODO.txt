@@ -12,7 +12,8 @@ x Fix Reply To Pop Up
 x Fix "Replied to @" Username in Comments
 (B) @Edit and @Delete Posts
 x   Delete Comments 
-(B) @Edit Comments
+x @Edit Comments
+x @Edited For Edited Comments
 (B) @Edited For Edited Posts/Comments
 (B) Status Codes
 (B) only show edit / delete buttons if they are the owner (posts)
@@ -51,7 +52,7 @@ x    edit profile button
 x post
 x    text post
 x    give title and body
-x(A) view post
+x view post
 x    can view any post they have a link to
 (A) comment 
 x    can comment on any post
@@ -59,8 +60,8 @@ x    can comment on any post
 (A) edit/delete post
     edited posts should have "edited"
     owner can delete posts
-(A) edit/delete comment
-    edited comments should have "edited"
+x edit/delete comment
+x    edited comments should have "edited"
 x    owner can delete comments
 (A) upvote / downvote
     only once

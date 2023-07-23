@@ -9,6 +9,7 @@
         <p class="replied-comment"> Replied to <b>@{{author}} </b> </p>
         <p class="comment-desc"> {{ comment }} </p>
 
+        {{> edit-comment }}
         <div class="actions-comment flex-row-container">
             <div class="flex-row-container">
                 <button class="upvote"></button>
@@ -21,9 +22,10 @@
                 <p class="number"> {{ num_comments }} </p>
             </div>
 
+
             {{#ifEqual currentUser user_details.username}}
             <div class="flex-row-container">
-                <button id="edit-comment{{num}}" class="add-edit-button"> Edit </button>
+                <button id="edit-comment{{num}}" class="add-edit-button edit-comment"> Edit </button>
                 <button id="delete-comment{{num}}" class="delete-c add-edit-button"> Delete </button>
             </div>
             {{/ifEqual}}

@@ -6,6 +6,7 @@ $(document).ready(function() {
     // Create Comment Functions
     $("#createCommentForm").hide();
     $(".reply-pop").hide();
+    $(".editCommentForm").hide();
 
     $("#add-comment").click(function() {
         $("#createCommentForm").show();

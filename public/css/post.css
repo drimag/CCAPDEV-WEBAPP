@@ -37,7 +37,7 @@
     padding: 10px;
 }
 
-#createPostForm label, #createCommentForm label {
+#createPostForm label, #createCommentForm label, #editCommentForm label {
     font-weight: bold;
 }
 
@@ -57,7 +57,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#createComment, #clearComment, #createReply, #clearReply {
+#createComment, #clearComment, #createReply, #clearReply, #editComment, #clearEditComment {
     width: 100px;
     height: 25px;
     border-radius: 15px;
@@ -89,6 +89,18 @@ fieldset {
     border-radius: 10px;
     font-family: Karla, sans-serif;
 }
+
+#edit-textcomment {
+    width: 90%;
+    height: 100px;
+    margin: 10px;
+    padding: 12px 20px;
+    resize: none;
+    border: 2px solid #888;
+    border-radius: 10px;
+    font-family: Karla, sans-serif;
+}
+
 
 .post {
     width: 70%;
@@ -230,7 +242,7 @@ p.number {
     background-color: lavender;
 }
 
-.actions-comment div >button.add-edit-button {
+.actions-comment div > button.add-edit-button {
     border: 1px solid blueviolet;
 }
 

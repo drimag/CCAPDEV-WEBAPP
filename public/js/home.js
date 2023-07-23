@@ -136,11 +136,19 @@ $(document).ready(function() {
         Allows the user to see older posts
      */
     // Show button when there are hidden posts
-    if($(".post:hidden").length > 0) {
-        $("#home-show-more").show();
+    if(currentUser === "guest") {
+        $("#home-show-more").hide();
         $(".end-of-feed").hide();
+        $(".login-to-see-more").show();
     } else {
-        emptyFeed($("#home-show-more"), $(".end-of-feed"));
+        $(".login-to-see-more").hide();
+
+        if($(".post:hidden").length > 0) {
+            $("#home-show-more").show();
+            $(".end-of-feed").hide();
+        } else {
+            emptyFeed($("#home-show-more"), $(".end-of-feed"));
+        }
     }
 
     // Functionality

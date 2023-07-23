@@ -97,10 +97,11 @@ a:visited, a {
 /*
     "End of feed" text
 */
-.end-of-feed {
+.end-of-feed, .login-to-see-more {
     font-weight: bold;
     text-align: center;
 }
+
 
 #visitor-note {
     display: flex;

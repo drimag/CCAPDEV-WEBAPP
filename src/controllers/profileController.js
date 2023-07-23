@@ -31,6 +31,31 @@ const profileController = {
         }
     },
 
+    editProfile: async function (req,res) {
+        console.log("Request to edit profile received.");
+        // const { user, newUsername, newBio, newPFP } = req.body;
+        const editData = req.body;
+
+        try {
+            db.collection('users').updateOne(
+                { username: editData.currentUser },
+                {
+                  $set: {
+                    username: editData.newUsername,
+                    bio: editData.newBio,
+                    // pfp: newPFP
+                  },
+                }
+              )
+
+            res.sendStatus(200);
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+
+    },
+
     getProfile: async function (req, res) {
         console.log("Request to " + req.params.username + "'s profile received.");
         

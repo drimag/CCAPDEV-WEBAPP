@@ -8,7 +8,8 @@
     <div class="parent">
         <!-- User's Details (Profile picture, username, bio) -->
         <div class="flex-column-container user-details">
-            <img id="profile-img" src="/static/profilepics/{{view_user.username}}.jpg">
+            {{!-- <img id="profile-img" src="/static/profilepics/{{view_user.username}}.jpg"> --}}
+            <img id="profile-img" src="data:image/{{ view_user.pfp.contentType }};base64,{{ view_user.pfp.data }}">
             <div class="username" id="profile-username">@{{view_user.username}} </div>
             <div class="short-description">
                 <p id="profile-bio">{{view_user.bio}}</p>

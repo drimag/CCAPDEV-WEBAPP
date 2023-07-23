@@ -5,7 +5,7 @@
 <div class="edit-div flex-column-container">
     <div class="edit-top flex-row-container">
         <div id="edit-picture">
-            <img src="/static/profilepics/{{user.username}}.jpg" alt="Profile Image" id="profile-image">
+            <img src="data:image/{{ user.pfp.contentType }};base64,{{ user.pfp.data }}" alt="Profile Image" id="profile-image">
         </div>
 
         <div class="edit-userinfo flex-column-container">

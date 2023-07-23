@@ -8,7 +8,8 @@
     <div class="flex-column-container comment-container">
         <div class="flex-row-container">
             <div>
-                <img class="user" src="/static/profilepics/{{user_details.username}}.jpg">
+                {{!-- <img class="user" src="/static/profilepics/{{user_details.username}}.jpg"> --}}
+                <img class="user" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
             </div>
 
             <div class="flex-column-container post-details">

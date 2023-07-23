@@ -103,7 +103,7 @@ $(document).ready(function() {
     // Show More Posts Button Functionality
     showMorePostsBtn.on("click", function() {
         
-        $(".post:hidden").slice(-1).show().css("display", "flex");
+        $(".post:hidden").slice(-5).show().css("display", "flex");
         
         // Hide "Show More" button when no more posts are hidden
         if($(".post:hidden").length === 0) {
@@ -114,7 +114,7 @@ $(document).ready(function() {
     
     // Show More Comments Button Functionality
     showMoreCommentsBtn.on("click", function() {
-        $(".comment-list:hidden").slice(-1).show().css("display", "flex");
+        $(".comment-list:hidden").slice(-5).show().css("display", "flex");
         
         // Hide "Show More" button when no more comments are hidden
         if($(".comment-list:hidden").length === 0) {
@@ -126,7 +126,7 @@ $(document).ready(function() {
 // Limit posts/comments the vistor sees when visiting profile at first
 function limit(cls) {
     cls.hide();
-    cls.slice(-1).show();
+    cls.slice(-5).show();
 }
 
 function showBtn(btn, txt, otherBtn) {

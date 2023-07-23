@@ -44,14 +44,14 @@ x Fix Route Handlers
 ---------------------------------------
 Functions CheckList
 (A) view all posts
-    unregistered : 15-20 most recent posts (also most popular post)
-                    if add more is clicked (go to log in page)
-    registered: 15-20 most recent posts with add more
+x   unregistered : 15-20 most recent posts (also most popular post)
+x                   if add more is clicked (go to log in page) (I just hid the button lol)
+x   registered: 15-20 most recent posts with add more
 (A) register
     username and password
-(A) view user profile
+x view user profile
 x    username, profile pic, short desc (bio), portion of user's latest posts/comments, 
-    can view more
+x    can view more
 x    edit profile button
 (A) edit profile
     add/modify profile pic, add bio

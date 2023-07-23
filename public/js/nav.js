@@ -121,7 +121,7 @@ dropdownLinks.forEach(link => {
 	  // Redirect the user to the appropriate location based on the link's ID
 		switch (id) {
 			case "Edit Profile":
-				window.location.href = "/edit_profile?loggedIn=" + user;
+				window.location.href = "/edit-profile?loggedIn=" + user;
 				console.log("clickd dropdown id: " + id);
 				break;
 

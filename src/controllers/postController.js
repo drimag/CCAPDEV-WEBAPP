@@ -162,6 +162,18 @@ const postController = {
             res.sendStatus(500); // fix
         }
     },
+
+    deletePost: async function(req, res) {
+        console.log("DELETE request recieved");
+        console.log(req.body);
+
+        try {
+
+        } catch(err) {
+            
+        }
+    },
+    
     //////////////////////////////////////////
 
     updatePostCommentList: async function(req, res) {
@@ -198,8 +210,6 @@ const postController = {
     updateRemovedComment: async function(req, res) {
         console.log("PUT request received for /post/removecomment");
         console.log(req.body);
-        //req.params.postID
-        // req.body
 
         try {
             console.log("Entered")

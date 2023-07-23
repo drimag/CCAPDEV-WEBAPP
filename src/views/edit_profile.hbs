@@ -11,7 +11,8 @@
         <div class="edit-userinfo flex-column-container">
             <label for="username"> Username </label>
             <input type="text" id="username" name="username" form="bio-form" placeholder="Enter Your New Username" value=" {{user.username}} ">
-            <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" onchange="changePFP(this)" hidden/>
+            {{!-- <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" onchange="changePFP(this)" hidden/> --}}
+            <input type="file" accept="image/*" id="pfp" name="filename" form="bio-form" alt="profile pic" hidden/>
             <label for="pfp" id="edit-pfp"> Change Profile Picture </label>
         </div>
     </div>

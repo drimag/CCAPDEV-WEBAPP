@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $(".edit-comment").click(function() {
         $(this).hide();
-        $(".delete-c").hide();
         
         const comment_id = $(this).attr('id').substring(12).trimEnd();
         console.log(comment_id);
@@ -13,61 +12,55 @@ $(document).ready(function() {
         // Show Edit Container
         const edit_pop = $("div#comment" + comment_id + " form.editCommentForm");
         edit_pop.show();
-
-
     });
-    // cancel edit comment ?
-});
 
+    $(".editComment").click(async function(e) {
+        e.preventDefault();
 
-const submitBtn = document.querySelector("#editComment");
-const editCommentForm = document.forms.editCommentForm;
+        // Get values
+        const commentNum = $(this).attr('id').substring(11);
+        console.log(commentNum);
 
-submitBtn?.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(editCommentForm);
-    console.log("Submit Edit Comment Data");
+        const edited_comment = $("#edit-textcomment" + commentNum).val();
+        console.log(edited_comment);
+       
+        console.log("Submit Edit Comment Data");
 
-    // Get Comment That is being edited
-    const commentNum = submitBtn.parentElement.parentElement.parentElement.id.substring(7);
-    console.log(commentNum);
+        // Get Current User and Post Num
+        const currentUser = params.get("loggedIn"); 
+        //const postNum = window.location.pathname.substring(7);
+        console.log(params.get("title"));
+        //console.log(postNum);
 
-    // Get Current User and Post Num
-    const currentUser = params.get("loggedIn"); 
-    //const postNum = window.location.pathname.substring(7);
-    console.log(params.get("title"));
-    //console.log(postNum);
+        let data = {
+            loggedIn: currentUser,
+            num: commentNum,
+            comment: edited_comment
+        };
 
-    const edited_comment = formData.get("edit-textcomment");
+        console.log(data);
+        const jString = JSON.stringify(data);
+        console.log(jString);
 
-    let data = {
-        loggedIn: currentUser,
-        num: commentNum,
-        comment: edited_comment
-    };
+        try {
+            let response = await fetch("/comment?loggedIn=" + currentUser, {
+                method: 'PUT',
+                body: jString,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-    console.log(data);
-    const jString = JSON.stringify(data);
-    console.log(jString);
+            console.log(response);
 
-    try {
-        let response = await fetch("/comment?loggedIn=" + currentUser, {
-            method: 'PUT',
-            body: jString,
-            headers: {
-                'Content-Type': 'application/json'
+            if(response.status === 200) {
+                location.reload();
+            } else {
+                console.log("Status code received: " + response.status);
             }
-        });
-
-        console.log(response);
-
-        if(response.status === 200) {
-            location.reload();
-        } else {
-            console.log("Status code received: " + response.status);
+            
+        } catch (err) {
+            console.error(err);
         }
-        
-    } catch (err) {
-        console.error(err);
-    }
+    });
 });

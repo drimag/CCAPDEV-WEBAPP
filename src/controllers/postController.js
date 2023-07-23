@@ -241,6 +241,7 @@ const postController = {
                 })
             
             console.log("Result:" + result);
+            res.render("view_post");
             res.sendStatus(200);
         } catch (error) {
 

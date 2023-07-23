@@ -63,7 +63,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#createComment, #clearComment, #createReply, #clearReply, #editComment, #clearEditComment {
+#createComment, #clearComment, #createReply, #clearReply, .editComment, #clearEditComment {
     width: 100px;
     height: 25px;
     border-radius: 15px;
@@ -96,7 +96,7 @@ fieldset {
     font-family: Karla, sans-serif;
 }
 
-#edit-textcomment {
+.edit-textcomment {
     width: 90%;
     height: 100px;
     margin: 10px;

@@ -27,7 +27,7 @@
         <div class="nav-right">
             <li class="nav-dropdown">
                 <button class="dropdown-button" onclick="clickDrop()">
-                    <img id="currentUser-navpic" class="nav-user" src="/static/profilepics/{{user.username}}.jpg">
+                    <img id="currentUser-navpic" class="nav-user" src="data:image/{{ user.pfp.contentType }};base64,{{ user.pfp.data }}">
                     <p id="currentUser-navuser" class="hidden">{{user.username}}</p>
                 </button>
                 <div id="dropdown" class="dropdown-content">

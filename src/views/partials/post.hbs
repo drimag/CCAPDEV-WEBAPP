@@ -8,7 +8,8 @@
     <div class="flex-column-container post-container" id="p{{ num }}">
         <div class="flex-row-container">
             <div>
-                <img class="user" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg">
+                {{!-- <img class="user" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg"> --}}
+                <img class="user" src="data:image/{{#each user_details}}{{ pfp.contentType }};base64,{{ pfp.data }}{{/each}}">
             </div>
 
             <div class="flex-column-container post-details">

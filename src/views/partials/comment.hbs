@@ -1,6 +1,7 @@
 <div class="flex-row-container" id="comment{{ num }}">
     <div class="flex-column-container c">
-        <img class="comment-user {{user_details.username}}" src="/static/profilepics/{{user_details.username}}.jpg">
+        {{!-- <img class="comment-user {{user_details.username}}" src="/static/profilepics/{{user_details.username}}.jpg"> --}}
+        <img class="comment-user {{user_details.username}}" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
         <div class="line-container"></div>
     </div>
 

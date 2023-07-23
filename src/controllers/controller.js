@@ -1,5 +1,5 @@
 import { getDb } from '../models/db.js';
-import { getDropdownLinks } from '../controllers/navDropdown.js';
+import { getDropdownLinks } from '../middleware/navDropdown.js';
 
 const db = getDb();
 

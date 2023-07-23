@@ -5,7 +5,7 @@ TODO List:
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
 x update post document after adding a comment (comment list and num of comments)
-x Upvote Downvote Functionality with DB !!!
+x Upvote Downvote Functionality with DB !!! (working but the sprite change thing might need mongoose)
 x Fix Reply To Pop Up
 
 x Fix "Replied to @" Username in Comments

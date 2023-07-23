@@ -26,6 +26,7 @@ div.users {
     width: 45px;
     border-radius: 50px;
     border: solid 1px #8B8C89;
+    object-fit: cover;
 }
 
 .current-user img:hover {

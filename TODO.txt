@@ -7,6 +7,7 @@ TODO List:
 x update post document after adding a comment (comment list and num of comments)
 x Upvote Downvote Functionality with DB !!! (working but the sprite change thing might need mongoose)
 x Fix Reply To Pop Up
+(A) Delete Comment Update Post Comment Number
 
 x Fix "Replied to @" Username in Comments
 (B) @Edit and @Delete Posts

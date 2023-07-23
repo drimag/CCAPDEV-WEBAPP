@@ -26,6 +26,7 @@ router.put("/post/addedcomment", postController.updatePostCommentList);
 // Comment Routes
 router.delete("/comment", postController.deleteComment);
 router.post("/comment", postController.postComment);
+router.put("/comment", postController.editComment);
 
 // Reply Routes
 router.post("/reply",);

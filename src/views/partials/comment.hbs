@@ -5,21 +5,28 @@
     </div>
 
     <div class="flex-column-container post-details">
-        <p class="comment-username"> {{user_details.username}} </p>
-        <p class="replied-comment"> Replied to <b>@{{author}} </b> </p>
-        <p class="comment-desc"> {{ comment }} </p>
+        <p class="comment-username">@{{user_details.username}}</p>
+        <p class="replied-comment">Replied to <b>@{{author}}</b></p>
+        <p class="comment-desc">{{ comment }} </p>
 
-        {{> edit-comment }}
+        <div id="editdiv{{num}}">
+            {{> edit_comment }}
+        </div>
+
+        {{#if edited }}
+        <p class="edited-mark"> (edited)</p>
+        {{/if}}
+
         <div class="actions-comment flex-row-container">
             <div class="flex-row-container">
                 <button class="upvote"></button>
-                <p class="number"> {{ votes }} </p>
+                <p class="number">{{ votes }}</p>
                 <button class="downvote"></button>
             </div>
 
             <div class="flex-row-container">
                 <button class="comment" id="{{ num }}"></button>
-                <p class="number"> {{ num_comments }} </p>
+                <p class="number">{{ num_comments }}</p>
             </div>
 
 

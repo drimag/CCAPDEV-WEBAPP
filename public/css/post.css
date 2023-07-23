@@ -41,6 +41,12 @@
     font-weight: bold;
 }
 
+.edited-mark {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 fieldset {
     border: none;
     width: 100%;

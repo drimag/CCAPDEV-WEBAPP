@@ -188,6 +188,31 @@ const postController = {
             console.error(error);
             // add status 
         }
+    },
+
+    editComment: async function (req, res) {
+        console.log("PUT Request received for /comment");
+        console.log(req.body);
+
+        const loggedIn = req.body.loggedIn;
+        const commentNum = req.body.num;
+        const edited_comment = req.body.comment;
+        console.log("commentNum" + commentNum);
+
+        try {
+            const comment = await comments.findOne({num: parseInt(commentNum)});
+            console.log("Comment Found");
+            console.log(comment);
+            const result = await comments.updateOne(comment, 
+                {
+                    $set: {comment: edited_comment, edited: true}
+                })
+            
+            console.log("Result:" + result);
+            res.sendStatus(200);
+        } catch (error) {
+
+        }
     }
 }
 

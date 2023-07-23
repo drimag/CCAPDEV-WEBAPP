@@ -1,7 +1,7 @@
 <div class="flex-row-container post" id="post{{ num }}">
     <div class="actions-post flex-column-container">
             <button class="upvote"></button>
-            <p class="number"> {{ votes }} </p>
+            <p class="number">{{ votes }}</p>
             <button class="downvote"></button>
         </div>
 
@@ -13,14 +13,14 @@
 
             <div class="flex-column-container post-details">
                 <p class="username">{{#each user_details}}@{{username}}{{/each}} </p>
-                <p class="post-title"> {{ title }} </p>
-                <p class="home-description"> {{ description}} </p>
+                <p class="post-title">{{ title }}</p>
+                <p class="home-description">{{ description}}</p>
             </div>
         </div>
         
         <div class="actions-post flex-row-container">
             <button class="comment"></button>
-            <p class="number"> {{ num_comments }} </p>
+            <p class="number">{{ num_comments }}</p>
         </div>
     </div>
 </div>

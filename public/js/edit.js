@@ -14,12 +14,12 @@ $(document).ready(function() {
         const edit_pop = $("div#comment" + comment_id + " form.editCommentForm");
         edit_pop.show();
 
-        // PUT Request
+
     });
     // cancel edit comment ?
 });
 
-/*
+
 const submitBtn = document.querySelector("#editComment");
 const editCommentForm = document.forms.editCommentForm;
 
@@ -28,21 +28,28 @@ submitBtn?.addEventListener("click", async (e) => {
     const formData = new FormData(editCommentForm);
     console.log("Submit Edit Comment Data");
 
-    id = comment_id;
-    console.log(id);
+    // Get Comment That is being edited
+    const commentNum = submitBtn.parentElement.parentElement.parentElement.id.substring(7);
+    console.log(commentNum);
 
-    const currentUser =$("#currentUser-navuser").text();
-    const new_comment = formData.get("new-comment");
+    // Get Current User and Post Num
+    const currentUser = params.get("loggedIn"); 
+    //const postNum = window.location.pathname.substring(7);
+    console.log(params.get("title"));
+    //console.log(postNum);
+
+    const edited_comment = formData.get("edit-textcomment");
 
     let data = {
-        id: postID,
-        comment: new_comment
+        loggedIn: currentUser,
+        num: commentNum,
+        comment: edited_comment
     };
-    
+
     console.log(data);
     const jString = JSON.stringify(data);
     console.log(jString);
-    
+
     try {
         let response = await fetch("/comment?loggedIn=" + currentUser, {
             method: 'PUT',
@@ -59,24 +66,8 @@ submitBtn?.addEventListener("click", async (e) => {
         } else {
             console.log("Status code received: " + response.status);
         }
-
-        // update post
-        response = await fetch("/post/addedcomment?loggedIn=" + currentUser, {
-            method: 'PUT',
-            body: jString,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if(response.status === 200) {
-            location.reload();
-        } else {
-            console.log("Status code received: " + response.status);
-        }
         
     } catch (err) {
         console.error(err);
     }
 });
-*/

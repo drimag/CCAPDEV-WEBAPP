@@ -65,26 +65,108 @@ const voteController = {
 
 		let curr = req.query.loggedIn;
 		console.log(curr);
-		const user = await users.findOne({username: curr});
-
-		const votes = { 
-			upvoteComments: user.upvoteComments,  
-			downvoteComments: user.downvoteComments,
-			upvotePosts: user.upvotePosts,
-			downvotePosts: user.downvotePosts
-		}
-		
-		console.log("sending this as user's votes': " + votes);
 
 		try {
+			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") {
+				curr = await users.findOne({username: "guest"});
+			} else {
+				curr = await users.findOne({username: curr});
+			}
 
-            console.log("sending this as user's votes': " + votes);
+			const votes = { 
+				upvoteComments: curr.upvoteComments,  
+				downvoteComments: curr.downvoteComments,
+				upvotePosts: curr.upvotePosts,
+				downvotePosts: curr.downvotePosts
+			}
+
+			console.log("sending this as user's votes': " + votes);
             res.send(votes);
 
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500); 
         }
+	}, 
+
+	updateVotes: async function (req, res) {
+		console.log("call to update votes received")
+
+		let curr = req.query.loggedIn;
+		let newVotes = req.body;
+
+		console.log(newVotes.toString());
+
+		try {
+			if(!curr) return res.status(400).send("No logged in user");
+
+			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") 
+				return res.status(400).send("No logged in user");
+
+            // look for user with matching username
+            const user = await users.findOne({username: curr});
+
+            // if user does not exist
+            if(!user) return res.status(404).send("User not found");
+
+			if(newVotes.type === "comment") {
+				try {
+					console.log("changing comment votes");
+					comments.updateOne(
+						{ num: newVotes.num },
+						{$set:
+							{ votes: newVotes.votes }
+						}).then( val => {
+                   			console.log("voting successful: " + val);
+						}).catch(err => {
+							res.status(500).send("Error voting");
+							console.log("voting error: " + err);
+						});
+				} catch (error) { 
+					console.error(error);
+					res.sendStatus(500);
+				}
+				
+			} else if(newVotes.type === "post") {
+				try {
+					console.log("changing post votes");
+					posts.updateOne(
+						{ num: newVotes.num },
+						{$set:
+							{ votes: newVotes.votes }
+						}).then( val => {
+                   			console.log("voting successful: " + val);
+						}).catch(err => {
+							res.status(500).send("Error voting");
+							console.log("voting error: " + err);
+						});
+				} catch (error) { 
+					console.error(error);
+					res.sendStatus(500);
+				}
+			}
+
+			users.updateOne(
+                {username: curr},
+                {$set: 
+                    { 
+						upvoteComments: newVotes.upvoteComments,
+						downvoteComments: newVotes.downvoteComments,
+						upvotePosts: newVotes.upvotePosts,
+						downvotePosts: newVotes.downvotePosts
+					}
+                }).then( val => {
+                    res.status(200).send("Votes updated successfully");
+                    console.log("voting successful: " + val);
+                }).catch(err => {
+                    res.status(500).send("Error voting");
+                    console.log("voting error: " + err);
+            	});
+
+		} catch (error) { 
+			console.error(error);
+            res.sendStatus(500);
+		}
 	}
 }
 

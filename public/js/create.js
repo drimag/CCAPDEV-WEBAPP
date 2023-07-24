@@ -8,7 +8,6 @@ submitBtn1?.addEventListener("click", async (e) => {
 
     let postID = $(".post").attr("id");
     postID = postID.substring(4).trimEnd();
-    // const postID = document.querySelector(".post").getElementById('id');
     console.log(postID);
 
     const currentUser =$("#currentUser-navuser").text();

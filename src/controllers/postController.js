@@ -251,6 +251,7 @@ const postController = {
                 title: req.body.title,
                 description: req.body.description,
                 num_comments: 0,
+                votes: 0,
                 comments_id: [],
                 edited: false
             });

@@ -3,15 +3,37 @@ $(".register-button").click(async function(){
     console.log("register button pressed");
     let uname = $('#username').val();
     let pass = $('#password').val();
-    
-    if (uname === '' || pass === '') {
-      alert('Please enter both username and password.');
-      
+    let cpass = $('#cpassword').val();
+
+    let isValid = true;
+    let errorMessage;
+    if (uname === '' || pass === ''|| cpass === '') {
+        errorMessage = '**Incomplete credentials.';
+      isValid = false;
       return;
+    }
+    else if(pass.length > 15) {  
+        errorMessage  = "**Password length must not exceed 15 characters";  
+        isValid = false;
+    }
+    
+    else if(pass.length < 4) {  
+        errorMessage = "**Password length must be atleast 4 characters";  
+        isValid = false;  
+    }
+
+    else if(pass != cpass){
+        errorMessage = "**Password Mismatch";  
+        isValid = false;
     }
 
 
-    const data = {
+    if(!isValid){
+
+        document.getElementById("message").innerHTML = errorMessage;
+    }else{
+
+        const data = {
         username: uname,
         password: pass,
         bio: "Write bio here...",
@@ -20,19 +42,19 @@ $(".register-button").click(async function(){
             contentType: "jpeg"
         }
           
-    };
-    console.log(data);
+        };
+        console.log(data);
 
-    const jString = JSON.stringify(data);
+        const jString = JSON.stringify(data);
 
-    const response = await fetch("/register", {
+        const response = await fetch("/register", {
         method: 'POST',
         body: jString,
         headers: {
             'Content-type': 'application/json'
         }
-    });
+        });
 
-    window.location.href = "/login";
-
+        window.location.href = "/login";
+    }
 });

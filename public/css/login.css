@@ -71,3 +71,9 @@
     font-weight: 800;
     cursor: pointer;
 }
+
+.register-button{
+    cursor: pointer;
+    display: block;
+    text-align: center;
+} 

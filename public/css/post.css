@@ -63,7 +63,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#createComment, #clearComment, #createReply, #clearReply, .editComment, #clearEditComment {
+#createComment, #clearComment, .createReply, #clearReply, .editComment, #clearEditComment {
     width: 100px;
     height: 25px;
     border-radius: 15px;
@@ -74,7 +74,7 @@ fieldset {
     margin-right: 10px;
 }
 
-#new-comment, #new-reply {
+#new-comment, .new-reply {
     width: 93%;
     height: 100px;
     margin: 10px;

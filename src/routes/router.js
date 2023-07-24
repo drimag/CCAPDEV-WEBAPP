@@ -33,6 +33,7 @@ router.delete("/comment", postController.deleteComment);
 router.post("/comment", postController.postComment);
 router.put("/comment", postController.editComment);
 router.get("/comment:commentNum/postNum", postController.findPostNum);
+router.put("/comment/reply", postController.postReply);
 
 // Reply Routes
 router.post("/reply",);

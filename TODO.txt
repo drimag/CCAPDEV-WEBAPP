@@ -11,8 +11,7 @@ x search does not work in profile
 (B) Status Codes
 (B) Error Page
 
-x Fix number of comments shown in profile page (but posts are ok)
-    "Show More" button MIGHT not show up
+x Fix number of comments shown in profile page
 
 x View One Post From Comment
 (D) Sort posts by popularity

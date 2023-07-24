@@ -60,7 +60,6 @@ submitBtn1?.addEventListener("click", async (e) => {
     }
 });
 
-
 const submitBtn2 = document.querySelector("#createPost");
 const postForm = document.forms.createPostForm;
 
@@ -103,52 +102,49 @@ submitBtn2?.addEventListener("click", async (e) => {
     }
 });
 
-// TODO: Nested Comments !!!
+$(document).ready(function() {
+    $(".createReply").click(async function(e) {
+        e.preventDefault();
+        const commentNum = $(this).attr('id').substring(11);
+        console.log(commentNum)
 
-const submitBtn3 = document.querySelector("#createReply");
-const replyForm = document.forms.createReplyForm;
-submitBtn3?.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(replyForm);
-    console.log("Submit Reply Data");
-    /*
-    // CreateComment Function Copied VVVVV
+        const new_reply = $("#new-reply" + commentNum).val();
+        console.log(new_reply);
 
-    let postID = $(".post").attr("id");
-    postID = postID.substring(4).trimEnd();
-    // const postID = document.querySelector(".post").getElementById('id');
-    console.log(postID);
+        console.log("Submit Reply Data");
+        const currentUser = params.get("loggedIn"); 
 
-    const currentUser =$("#currentUser-navuser").text();
-
-
-    const data = {
-        id: postID,
-        comment: formData.get("new-comment")
-    };
-    
-    console.log(data);
-    const jString = JSON.stringify(data);
-    console.log(jString);
-    
-    try {
-        const response = await fetch("/posts/" + postID + "/comment?loggedIn=" + currentUser, {
-            method: 'POST',
-            body: jString,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        console.log(response);
-
-        if(response.status === 200) {
-            location.reload();
-        } else {
-            console.log("Status code received: " + response.status);
+        let data = {
+            loggedIn: currentUser,
+            num: commentNum,
+            reply: new_reply
         }
-    } catch (err) {
-        console.error(err);
-    }
-    */
+        
+        console.log(data);
+        const jString = JSON.stringify(data);
+        console.log(jString);
+
+        // Update Comment (add comment in array)
+        
+        try {
+            let response = await fetch("/comment/reply?loggedIn=" + currentUser, {
+                method: 'PUT',
+                body: jString,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log(response);
+            
+            if(response.status === 200) {
+                location.reload();
+            } else {
+                console.log("Status code received: " + response.status);
+            }
+            
+        } catch (err) {
+            console.error(err);
+        }
+    })
 });

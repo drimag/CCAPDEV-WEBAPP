@@ -126,7 +126,7 @@ dropdownLinks.forEach(link => {
 				break;
 
 			case "Sign Up":
-				window.location.href = "/register?loggedIn=" + user;
+				window.location.href = "/register?loggedIn=guest";
 				console.log("clickd dropdown id: " + id);
 				break;
 
@@ -136,7 +136,7 @@ dropdownLinks.forEach(link => {
 				break;
 
 			case "Log In":
-				window.location.href = "/login?loggedIn=" + user;
+				window.location.href = "/login?loggedIn=guest";
 				console.log("clickd dropdown id: " + id);
 				break;
 

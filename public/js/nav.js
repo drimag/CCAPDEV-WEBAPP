@@ -145,6 +145,11 @@ dropdownLinks.forEach(link => {
 				console.log("clickd dropdown id: " + id);
 				break;
 
+			case "Change Password":
+				window.location.href = "/change-password?loggedIn=" + user;
+				console.log("clickd dropdown id: " + id);
+				break;
+
 			default:
 				window.location.href = "/home?loggedIn=" + user;
 				console.log("clickd dropdown id: " + id);

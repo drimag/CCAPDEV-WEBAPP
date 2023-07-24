@@ -1,6 +1,10 @@
 $(document).ready(function() {
     $("form.editCommentForm").hide();
 
+    $("button").hover(function() {
+        $(this).css("cursor", "pointer");
+    });
+
     // View Post From Comment In Profile
     $(".comment-info").click(async function() {
         // Comment Number

@@ -6,6 +6,7 @@ import profileController from '../controllers/profileController.js';
 import voteController from '../controllers/voteController.js';
 import registerController from '../controllers/registerController.js';
 import loginController from '../controllers/loginController.js';
+import changepasswordController from '../controllers/changepasswordController.js';
 const router = Router();
 
 // Home Routes

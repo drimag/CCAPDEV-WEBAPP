@@ -53,8 +53,19 @@ $(".register-button").click(async function(){
         headers: {
             'Content-type': 'application/json'
         }
-        });
+        })
+        .then((response) => response.json())
+        .then((data => {
+        if(data.result === true){
+            
+            document.getElementById("message").innerHTML = "**Username is already taken.";
+           
+        }else{
+            alert("Register Successful!");
+            window.location.href = "/login";
+        }
+        }))
 
-        window.location.href = "/login";
+        
     }
 });

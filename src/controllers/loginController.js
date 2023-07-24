@@ -35,7 +35,7 @@ const loginController = {
     getLogin: async function (req, res) {
         // dropdown links for navbar
         let currentUser = req.query.loggedIn;
-        if(currentUser == null || currentUser === "" || currentUser == undefined) currentUser = await users.findOne({username: "guest"});
+        if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await users.findOne({username: "guest"});
         const dropdowns = getDropdownLinks(currentUser.username);
         
         res.render("login", {

@@ -14,13 +14,13 @@ const changepasswordController = {
         let curr = req.query.loggedIn;
 
         try {
-            // if no login param in url
+            // No login param in URL
             if(!curr) return res.status(400).send("No logged in user");
 
-            // look for user with matching username
+            // Look for user with matching username
             const user = await users.findOne({username: curr});
 
-            // if user does not exist
+            // User does not exist
             if(!user) return res.status(404).send("User not found");
             
             const dropdowns = getDropdownLinks(user.username); 
@@ -32,7 +32,7 @@ const changepasswordController = {
             })
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -42,22 +42,22 @@ const changepasswordController = {
         let curr = req.query.loggedIn;
 
         try {
-            // if no login param in url
+            // No login param in url
             if(!curr) return res.status(400).send("No logged in user");
 
-            // look for user with matching username
+            // Look for user with matching username
             const user = await users.findOne({username: curr});
 
-            // if user does not exist
+            // User does not exist
             if(!user) return res.status(404).send("User not found");
 
-            // send the password
+            // Send the password
             console.log("sending this as user password: " + user)
             res.send(user.password);
 
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -68,16 +68,16 @@ const changepasswordController = {
         let newPassword = req.body;
 
         try {
-            // if no login param in url
+            // No login param in url
             if(!currentUser) return res.status(400).send("No logged in user");
 
-            // look for user with matching username
+            // Look for user with matching username
             const user = await users.findOne({username: currentUser});
 
-            // if user does not exist
+            // User does not exist
             if(!user) return res.status(404).send("User not found");
 
-            // change the password
+            // Change the password
             users.updateOne(
                 {username: currentUser},
                 {$set: 
@@ -93,7 +93,7 @@ const changepasswordController = {
 
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     }
 

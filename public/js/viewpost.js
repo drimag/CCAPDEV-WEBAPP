@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+
     // Create Comment Functions
     $("#createCommentForm").hide();
     $(".reply-pop").hide();
@@ -14,7 +15,7 @@ $(document).ready(function() {
         $(this).css('cursor', 'pointer');
     });
 
-    // TODO: Comment on a Comment (Nested Comments)
+    // Comment on a Comment
     $("button.comment").click(function() {
         const comment_id = $(this).attr('id');
         console.log(comment_id);
@@ -58,5 +59,4 @@ $(document).ready(function() {
     $(".comment-user").hover(function() {
         $(this).css('cursor', 'pointer');
     })
-
 });

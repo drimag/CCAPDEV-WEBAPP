@@ -13,7 +13,6 @@ $(".login-button").click(async function(){
         return;
       }
   
-  
       const data = {
           username: uname,
           password: pass
@@ -39,7 +38,4 @@ $(".login-button").click(async function(){
             return;
         }
       }))
-
-    
-
 });

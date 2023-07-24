@@ -1,6 +1,3 @@
-// let currentURL = window.location.href;
-// let params = new URLSearchParams(new URL(currentURL).search);
-// let user = params.get("loggedIn");
 let ucvote;
 let dcvote;
 let upvote;
@@ -273,7 +270,6 @@ $("button.downvote").click(async function() {
 
 });
 
-
 async function getVotes() {
     const currentURL = window.location.href;
     const params = new URLSearchParams(new URL(currentURL).search);
@@ -298,7 +294,3 @@ async function getVotes() {
         console.error('Error:', err);
     }
 }
-
-
-
-

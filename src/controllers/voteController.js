@@ -9,14 +9,9 @@ const comments = db.collection("comments");
 const voteController = {
     
     postVote: async function (req, res) {
-        //const { postId, votes } = req.body;
         console.log("votecontroller called");
         const { type } = req.body;
         console.log("type is:",type);
-        /*
-        const { action } = req.body;
-        console.log("action is:",action);
-        */
         const { number } = req.body;
         console.log("number is",number);
         const { votes } = req.body;
@@ -24,9 +19,6 @@ const voteController = {
         try {
 			
 			// Find the post by its ID
-			//const post = await posts.findOne({ num: parseInt(postId)});
-			//checks if id belongs to a comment or post
-			//let element = id.slice(0,-1);
 			if (type === "comment"){
 				console.log("This is a comment");
 				const comment = await comments.findOne({ num: parseInt(number)});
@@ -43,15 +35,8 @@ const voteController = {
 				await posts.updateOne({num: parseInt(number) }, { $set: { votes } });
 				
 			}
-
-          
-      
-
-          //req.body.postId
-        
       
        	   	res.status(200).json({ message: 'Vote updated successfully' });
-    
     
         } catch (error) {
         	console.error('Failed to update vote:', error);
@@ -103,10 +88,10 @@ const voteController = {
 			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") 
 				return res.status(400).send("No logged in user");
 
-            // look for user with matching username
+            // Look for user with matching username
             const user = await users.findOne({username: curr});
 
-            // if user does not exist
+            // User does not exist
             if(!user) return res.status(404).send("User not found");
 
 			if(newVotes.type === "comment") {

@@ -9,12 +9,11 @@
     <div class="flex-column-container comment-container">
         <div class="flex-row-container comment-info">
             <div>
-                {{!-- <img class="user" src="/static/profilepics/{{user_details.username}}.jpg"> --}}
                 <img class="user" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
             </div>
 
             <div class="flex-column-container post-details">
-                <p class="username">@{{user_details.username}} </p>
+                <p class="username">@{{ user_details.username }} </p>
                 <p class="post-title"> Replied to a post </p>
                 <p class="profile-comment">{{ comment }}</p>
                 {{#ifEqual currentUser user_details.username}}

@@ -1,13 +1,12 @@
 <div class="flex-row-container" id="comment{{ num }}">
     <div class="flex-column-container c">
-        {{!-- <img class="comment-user {{user_details.username}}" src="/static/profilepics/{{user_details.username}}.jpg"> --}}
         <img class="comment-user {{user_details.username}}" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
         <div class="line-container"></div>
     </div>
 
     <div class="flex-column-container post-details">
-        <p class="comment-username">@{{user_details.username}}</p>
-        <p class="replied-comment">Replied to <b>@{{author}}</b></p>
+        <p class="comment-username">@{{ user_details.username }}</p>
+        <p class="replied-comment">Replied to <b>@{{ author }}</b></p>
         <p class="comment-desc">{{ comment }} </p>
 
         <div id="editdiv{{num}}">
@@ -42,7 +41,7 @@
             {{> makereply }}
         </div>
         <div class="comment-section">
-            <!--- nested comments--->   
+            <!--- Nested comments--->   
             {{#each comments_id }}
                 {{> comment this }}
             {{/each }}

@@ -14,5 +14,5 @@ const getDropdownLinks = (currentUser) => {
     }
   };
   
-  // Export the function to make it accessible from other files
-  export { getDropdownLinks };
+// Export the function to make it accessible from other files
+export { getDropdownLinks };

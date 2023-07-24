@@ -8,7 +8,7 @@ const posts = db.collection("posts");
 const comments = db.collection("comments");
 
 const postController = {
-    //////////////////////////////////////////
+    
     postReply: async function (req, res) {
         console.log("PUT request received for /comment/reply");
         console.log(req.body);
@@ -40,7 +40,7 @@ const postController = {
                     $push: {comments_id: data}
                 })
             
-            // dropdown links for navbar
+            // Dropdown links for navbar
             if(loggedIn == null || loggedIn === "" || loggedIn == undefined) loggedIn = "guest";
             let dropdowns = getDropdownLinks(loggedIn);
             
@@ -49,7 +49,7 @@ const postController = {
             res.sendStatus(200);
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -72,7 +72,6 @@ const postController = {
             const result = await comments.insertOne({
                 num: last_num + 1,
                 user_id: user._id,
-                //post_id: post._id,
                 comment: req.body.comment,
                 votes: 0,
                 comments_id: [],
@@ -83,7 +82,7 @@ const postController = {
             res.sendStatus(200);
         } catch (err) {
             console.error(err);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -100,7 +99,7 @@ const postController = {
     
         } catch (err) {
             console.error(err);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -123,7 +122,7 @@ const postController = {
                     $set: {comment: edited_comment, edited: true}
                 })
             
-            // dropdown links for navbar
+            // Dropdown links for navbar
             if(loggedIn == null || loggedIn === "" || loggedIn == undefined) loggedIn = "guest";
             let dropdowns = getDropdownLinks(loggedIn);
             
@@ -132,11 +131,11 @@ const postController = {
             res.sendStatus(200);
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
     
-   ////////////////////////////////////////////////////////////
+   /**************************************************/
 
     findPostNum: async function (req, res) {
         console.log("Request to find Post Num received.");
@@ -151,7 +150,7 @@ const postController = {
             res.sendStatus(200);
         } catch(error) {
             console.error(error);
-            // status code
+            res.sendStatus(404);
         }
     },
 
@@ -175,7 +174,6 @@ const postController = {
                     num: { $eq: parseInt(req.params.postID) }, 
                     title: decodeURIComponent(req.query.title)
                 });  
-                
                 
                 // Title does not match postNum (post doesnt exist)
                 if(post === null) {
@@ -215,10 +213,8 @@ const postController = {
                 currentUser: currentUser.username
               }));
             console.log(updatedArray);
-
-            // view comments (nested) (prolly just store the replies itself inside instead of ids)
             
-            //dropdown links for navbar
+            // Dropdown links for navbar
             let dropdowns = getDropdownLinks(currentUser.username);
 
             let data = {
@@ -234,7 +230,7 @@ const postController = {
 
         } catch (err) {
             console.error(err);
-            res.status(404); // fix
+            res.status(404);
         }
     },
 
@@ -242,7 +238,8 @@ const postController = {
         console.log("POST request received for /post");
 
         try {
-            const user = await users.findOne({username: req.query.loggedIn}); // For Testing
+            const user = await users.findOne({username: req.query.loggedIn});
+
             // Get all "nums" in posts
             const num_array = await posts.distinct("num");
             const last_num = num_array[num_array.length - 1];
@@ -253,7 +250,6 @@ const postController = {
                 user_id: user._id,
                 title: req.body.title,
                 description: req.body.description,
-                votes: 0,
                 num_comments: 0,
                 comments_id: [],
                 edited: false
@@ -263,7 +259,7 @@ const postController = {
             res.sendStatus(200);
         } catch (err) {
             console.error(err);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -286,7 +282,7 @@ const postController = {
                     $set: {title: edited_title, description: edited_description, edited: true}
                 });
 
-            // dropdown links for navbar
+            // Dropdown links for navbar
             if(loggedIn == null || loggedIn === "" || loggedIn == undefined) loggedIn = "guest";
             let dropdowns = getDropdownLinks(loggedIn);
             
@@ -295,7 +291,7 @@ const postController = {
             res.sendStatus(200);
         } catch (error) {
             console.error(err);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -311,11 +307,11 @@ const postController = {
     
         } catch (err) {
             console.error(err);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
     
-    //////////////////////////////////////////
+    /**************************************************/
 
     updatePostCommentList: async function(req, res) {
         console.log("PUT request received for /post/addedcomment");
@@ -343,7 +339,6 @@ const postController = {
 
         } catch(error) {
             console.error(error);
-            // add status 
             res.status(500);
         }
     },
@@ -369,7 +364,7 @@ const postController = {
 
         } catch(error) {
             console.error(error);
-            // add status 
+            res.status(500);
         }
     }
 }

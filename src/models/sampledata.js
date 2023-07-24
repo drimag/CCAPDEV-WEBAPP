@@ -127,7 +127,7 @@ export async function addSampleData (callback) {
 
         console.log("Users Found");
 
-        // 5 Comments
+        // 5 Initialized Comments
         const result3 = await comments.insertMany([
             {
                 num: 1,
@@ -178,7 +178,7 @@ export async function addSampleData (callback) {
         const comment4 = await comments.findOne({num: 4});
         const comment5 = await comments.findOne({num: 5});
 
-        // 5 Posts
+        // 5 Initalized Posts
         const result2 = await posts.insertMany([
             {
                 num: 1,

@@ -12,7 +12,7 @@ const controller = {
         try {
             const user = await users.findOne({username: req.query.loggedIn});
             
-            // dropdown links for navbar
+            // Dropdown links for navbar
             let dropdowns = getDropdownLinks(user.username);
             res.render("deleted_post", {
                 user: user,
@@ -20,7 +20,7 @@ const controller = {
             });
         } catch (error) {
             console.error(error);
-            // status code
+            res.status(500);
         }
     },
 
@@ -40,7 +40,6 @@ const controller = {
             console.log("Current User: " + currentUser);
         
             // Get Posts For Display
-            // TODO: Limit Posts to 15-20 for guest and for users add a show more button
             const postsArray = await posts.aggregate(
                 [
                     {
@@ -57,7 +56,7 @@ const controller = {
                 ]
             ).toArray();
             
-            // filter posts if there is a search
+            // Filter posts if there is a search
             let searchTerms = req.query.search;
             let searchPosts;
         
@@ -75,7 +74,7 @@ const controller = {
             const searchDetails = { numPosts : searchPosts.length, search : searchTerms };
             console.log("search Detials: " + searchDetails);
         
-            // get dropdown links based on if user is logged in
+            // Get dropdown links based on if user is logged in
             const dropdowns = getDropdownLinks(currentUser.username); 
             console.log("dropdown links: " + dropdowns);
         
@@ -83,17 +82,17 @@ const controller = {
                 pagetitle: "Home",
                 user: currentUser,
                 posts: searchPosts,
-                dropdownLinks: dropdowns, // navbar links 
+                dropdownLinks: dropdowns, // Navbar links 
                 searchDetails: searchDetails
             });
         } catch (err) {
             console.error(err);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
     
     getLogin: async function (req, res) {
-        // dropdown links for navbar
+        // Dropdown links for navbar
         let currentUser = req.query.loggedIn;
         if(currentUser == null || currentUser === "" || currentUser == undefined) currentUser = "guest";
         const dropdowns = getDropdownLinks(currentUser);
@@ -105,7 +104,6 @@ const controller = {
 
         console.log("page does not exist");
     }
-
 }
 
 export default controller;

@@ -2,14 +2,13 @@
   JS File for NavBar
 */
 
-// take logged in user from query param and put it into user
+// Take logged in user from query param and put it into user
 const dropdownLinks = document.querySelectorAll(".dropdown-link");
 const currentURL = window.location.href;
 const params = new URLSearchParams(new URL(currentURL).search);
 const user = params.get("loggedIn");
 
 console.log("currentuser: " + user);
-
 
 let prevScrollpos = window.scrollY;
 
@@ -64,35 +63,26 @@ window.onclick = function(event) {
   	}
 };
 
-
-
 /*
 
 	Handler for clicking home button
 
 */
-
 const homeButton = document.querySelector(".home-button");
 homeButton.addEventListener("click", function() {
 	window.location.href = "/home?loggedIn=" + user;
 });
 
+/*
 
-
-
-
-/**
- * 
- * Dropdown links to Display for User
- * 
+	Dropdown links to Display for User
+  
  */
 function handleViewProfile(){
   viewingUser = currentUser;
   sessionStorage.setItem("viewingUser", JSON.stringify(viewingUser));
   viewUserProfile(viewingUser);
 }
-
-
 
 /*
 
@@ -110,9 +100,6 @@ function clearSearch(){
 	Redirect the user after clicking on a dropdown option
 
 */
-
-
-
 dropdownLinks.forEach(link => {
 	link.addEventListener("click", () => {
 		const id = link.id; // id of the dropdown option
@@ -176,7 +163,6 @@ function enterSearch(event){
 
 	if(currentUser === "") currentUser = "guest";
 
-	//location.href = "/home?loggedIn=" + user + `&search=${encodeURIComponent(searchTerms)}`; 
 	const redirect = `/home?loggedIn=${currentUser}&search=${searchTerms}`;
 	window.location.href = redirect;
 }

@@ -1,6 +1,5 @@
 import { getDb } from '../models/db.js';
 import { getDropdownLinks } from '../middleware/navDropdown.js';
-//import controller from '../controllers/controller.js';
 
 const db = getDb();
 
@@ -12,15 +11,14 @@ const loginController = {
         console.log("checkCredential");
         const { username, password } = req.body;
 
-        //checks if credentials are in db
-
+        // Checks if credentials are in db
         try{
             const user = await users.findOne({ username, password });
             if(user){
                 console.log("user is:",user);
                 console.log('Login successful:', user);
-                //transport user to home
-                //controller.getHome(user);
+
+                // Transport user to home
                 res.status(200).json({ result:true });
             }else{
                 console.log("INVALID USERNAME/PASSWORD");
@@ -33,7 +31,7 @@ const loginController = {
     },
 
     getLogin: async function (req, res) {
-        // dropdown links for navbar
+        // Dropdown links for navbar
         let currentUser = req.query.loggedIn;
         if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await users.findOne({username: "guest"});
         const dropdowns = getDropdownLinks(currentUser.username);

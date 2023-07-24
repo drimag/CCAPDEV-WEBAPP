@@ -16,16 +16,16 @@ const profileController = {
         console.log(curr);
     
         try {
-            // if no login param in url
+            // No login param in url
             if(!curr) return res.status(400).send("No logged in user");
 
-            // look for user with matching username
+            // Look for user with matching username
             const user = await users.findOne({username: curr});
 
-            // if user does not exist
+            // User does not exist
             if(!user) return res.status(404).send("ERROR 404. User not found");
 
-            // dropdown links for navbar
+            // Dropdown links for navbar
             const dropdowns = getDropdownLinks(user.username); 
 
             res.render("edit_profile", {
@@ -35,13 +35,12 @@ const profileController = {
             });
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
     editProfile: async function (req,res) {
         console.log("Request to edit profile contents received.");
-        // const { user, newUsername, newBio, newPFP } = req.body;
         const editData = req.body;
 
         console.log("what " + editData.newUsername);
@@ -70,7 +69,6 @@ const profileController = {
             console.error(err);
             res.sendStatus(500);
         }
-
     },
 
     getProfile: async function (req, res) {
@@ -143,7 +141,7 @@ const profileController = {
 
             console.log(postsArray);
             
-            // dropdown links for navbar
+            // Dropdown links for navbar
             const dropdowns = getDropdownLinks(currentUser.username);
 
             res.render("profile", {
@@ -156,7 +154,7 @@ const profileController = {
             })
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     },
 
@@ -224,7 +222,8 @@ const profileController = {
               }));
 
             console.log(postsArray);
-            // dropdown links for navbar
+            
+            // Dropdown links for navbar
             const dropdowns = getDropdownLinks(currentUser.username);
             
             res.render("profile", {
@@ -237,7 +236,7 @@ const profileController = {
             })
         } catch (error) {
             console.error(error);
-            res.sendStatus(500); // fix
+            res.sendStatus(500);
         }
     }
 }

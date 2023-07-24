@@ -147,10 +147,10 @@ const postController = {
             const postNum = post.num;
             
             res.json({postNum});
-            res.sendStatus(200);
+            //res.sendStatus(200);
         } catch(error) {
             console.error(error);
-            res.sendStatus(404);
+            //res.sendStatus(404);
         }
     },
 

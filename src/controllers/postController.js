@@ -60,6 +60,7 @@ const postController = {
         }
     },
 
+    // Edit Comment
     editComment: async function (req, res) {
         console.log("PUT Request received for /comment");
         console.log(req.body);

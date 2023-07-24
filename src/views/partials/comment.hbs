@@ -43,6 +43,9 @@
         </div>
         <div class="comment-section">
             <!--- nested comments--->   
+            {{#each comments_id }}
+                {{> comment this }}
+            {{/each }}
         </div>
     </div>
 </div>

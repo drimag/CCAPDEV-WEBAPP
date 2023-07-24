@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
     $(".delete-c").click(async function() {
         try {
@@ -10,10 +12,10 @@ $(document).ready(function() {
                 postNum: postNum
             };
             console.log(data);
-        
+
+            // Update Post (Remove Comment from Array)
             let jString = JSON.stringify(data);
-        
-            // update post
+
             let response = await fetch("/post/removecomment?loggedIn=" + loggedIn, {
                 method: 'PUT',
                 body: jString,
@@ -22,13 +24,17 @@ $(document).ready(function() {
                 }
             });
 
+            console.log(response);
+            console.log("Status code received: " + response.status);
+
             data = {
                 id: comment_id
             };
             console.log(data);
-        
+            
+            // Delete Comment
             jString = JSON.stringify(data);
-            // delete comment
+    
             response = await fetch("/comment", {
                 method: 'DELETE',
                 body: jString,
@@ -36,8 +42,7 @@ $(document).ready(function() {
                     'Content-type': 'application/json'
                 }
             });
-        
-            // Awaiting for the resource to be deleted
+
             console.log(response);
         
             if(response.status === 200) {
@@ -73,7 +78,6 @@ $(document).ready(function() {
                 }
             });
 
-            // ????????????????? Delete comments under post?
 
             // Awaiting for the resource to be deleted
             console.log(response);

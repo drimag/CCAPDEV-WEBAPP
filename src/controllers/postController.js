@@ -9,11 +9,54 @@ const comments = db.collection("comments");
 
 const postController = {
     //////////////////////////////////////////
+    postReply: async function (req, res) {
+        console.log("PUT request received for /comment/reply");
+        console.log(req.body);
+
+        const loggedIn = req.body.loggedIn;
+        const commentNum = req.body.num;
+        const reply = req.body.reply;
+        console.log("commentNum" + commentNum);
+
+        try {
+            const user = await users.findOne({username: loggedIn});
+            const data = {
+                user_details: {
+                    _id: user._id,
+                    username: user.username,
+                    pfp: user.pfp
+                },
+                comment: reply,
+                votes: 0,
+                edited: false
+            }
+
+            const comment = await comments.findOne({num: parseInt(commentNum)});
+            console.log("Comment Found");
+            console.log(comment);
+            const result = await comments.updateOne(comment, 
+                {
+                    $push: {comments_id: data}
+                })
+            
+            // dropdown links for navbar
+            if(loggedIn == null || loggedIn === "" || loggedIn == undefined) loggedIn = "guest";
+            let dropdowns = getDropdownLinks(loggedIn);
+            
+            console.log("Result:" + result);
+            res.render("view_post", { dropdownLinks: dropdowns });
+            res.sendStatus(200);
+        } catch (error) {
+            console.error(error);
+            res.sendStatus(500); // fix
+        }
+    },
+
     // Post Comment
     postComment: async function (req, res) {
         console.log("POST request received for /comment");
         console.log(req.body);
-    
+        
         try {
             const user = await users.findOne({username: req.query.loggedIn});
             console.log(user);
@@ -34,7 +77,7 @@ const postController = {
                 comments_id: [],
                 edited: false
             });
-    
+            
             console.log(result);
             res.sendStatus(200);
         } catch (err) {
@@ -50,7 +93,7 @@ const postController = {
     
         try {
             const result = await comments.deleteOne({num: parseInt(req.body.id)});
-    
+
             console.log(result);
             res.sendStatus(200);
     
@@ -87,7 +130,7 @@ const postController = {
             res.render("view_post", { dropdownLinks: dropdowns });
             res.sendStatus(200);
         } catch (error) {
-            console.error(err);
+            console.error(error);
             res.sendStatus(500); // fix
         }
     },
@@ -104,6 +147,7 @@ const postController = {
             const postNum = post.num;
             
             res.json({postNum});
+            res.sendStatus(200);
         } catch(error) {
             console.error(error);
             // status code
@@ -118,6 +162,9 @@ const postController = {
                 num: { $eq: parseInt(req.params.postID) }
             });
 
+            // Post does not exist
+            if(!post) return res.status(404).send("ERROR 404. Post not found");
+            
             if(req.query.title == null) {
                 console.log('No Title Given');
             } else {
@@ -128,10 +175,21 @@ const postController = {
                     title: decodeURIComponent(req.query.title)
                 });  
                 
+                
                 // Title does not match postNum (post doesnt exist)
                 if(post === null) {
-                    res.sendStatus(500); // fix idk whats the status code for this
+                    res.sendStatus(204); 
+                    /*  CHECK!! AEDRTFHBNSERTNTNASZENTN
+                        204 No content
+                        No content to send for the request
+
+                        or
+
+                        400 Bad Request
+                        Server could not understand the request due to invalid syntax
+                     */
                 }
+                
             }
     
             const author = await users.findOne({_id: post.user_id});

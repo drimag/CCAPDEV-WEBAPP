@@ -19,9 +19,6 @@ router.get("/profile", profileController.getMyProfile);
 router.get("/profile/:username", profileController.getProfile);
 
 // Post Routes
-// TODO: Redirect to login if logged in is guest!
-// postRouter.get("/post") 
-// Get a Post ( add /:username?/ if possible)
 router.get(["/posts/:postID"], postController.getPost);
 router.post("/post", postController.createPost);
 router.put("/post/addedcomment", postController.updatePostCommentList);
@@ -35,6 +32,9 @@ router.get("/deleted", controller.getDeletedPage);
 router.delete("/comment", postController.deleteComment);
 router.post("/comment", postController.postComment);
 router.put("/comment", postController.editComment);
+router.get("/comment:commentNum/postNum", postController.findPostNum);
+router.put("/comment/reply", postController.postReply);
+
 
 // Reply Routes
 router.post("/reply",);

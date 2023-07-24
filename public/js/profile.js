@@ -19,8 +19,6 @@ $(document).ready(function() {
 
     const currentUser = $("#currentUser-navuser").text();
 
-    ///////////////////////////////////////////////
-
     // Show Edit Profile Button if profile view is current user
     let userProfile = $("#profile-username").text();
     console.log("userProfile = " + userProfile);
@@ -41,7 +39,7 @@ $(document).ready(function() {
         console.log("Edit profile button clicked.");
         location.href = "/edit-profile?loggedIn=" + currentUser;
     })
-    //////////////////////////////////////////////
+
     
     // View One Post
     $("div.post-container").click(function() {

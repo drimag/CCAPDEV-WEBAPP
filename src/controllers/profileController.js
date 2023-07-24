@@ -23,7 +23,7 @@ const profileController = {
             const user = await users.findOne({username: curr});
 
             // if user does not exist
-            if(!user) return res.status(404).send("User not found");
+            if(!user) return res.status(404).send("ERROR 404. User not found");
 
             // dropdown links for navbar
             const dropdowns = getDropdownLinks(user.username); 
@@ -32,7 +32,7 @@ const profileController = {
                 pagetitle: "Edit Profile",
                 user: user,
                 dropdownLinks: dropdowns
-            })
+            });
         } catch (error) {
             console.error(error);
             res.sendStatus(500); // fix
@@ -79,14 +79,18 @@ const profileController = {
         let curr = req.query.loggedIn;
     
         try {
+
             if(curr == null) {
                 curr = await users.findOne({username: "guest"});
             } else {
                 curr = await users.findOne({username: curr});
             }
-
+            
             const currentUser = curr;
             const view_user = await users.findOne(req.params);
+
+            if(!view_user) return res.status(404).send("ERROR 404. Profile not found");
+
             const postsArray = await posts.aggregate(
                 [
                     { 

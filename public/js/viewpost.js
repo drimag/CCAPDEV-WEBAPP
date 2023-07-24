@@ -1,8 +1,5 @@
 
 $(document).ready(function() {
-
-    /////////////////////////////////////////////////
-
     // Create Comment Functions
     $("#createCommentForm").hide();
     $(".reply-pop").hide();
@@ -30,14 +27,6 @@ $(document).ready(function() {
         }
     });
 
-    ////////////////////////////////////////////////
-
-
-
-
-
-    ///////////////////////////////////////////
-
     // View Author Profile
     $("#author-pic").hover(function() {
         $(this).css('cursor', 'pointer');
@@ -54,8 +43,6 @@ $(document).ready(function() {
         location.href = "/profile/" + author + "?loggedIn=" + currentUser;
     });
 
-    ////////////////////////////////////////////
-
     // View Comments User Profile
     $(".comment-user").click(function() {
         let comment_user = $(this).attr('class').substring(13).trimStart().trimEnd();
@@ -71,7 +58,5 @@ $(document).ready(function() {
     $(".comment-user").hover(function() {
         $(this).css('cursor', 'pointer');
     })
-
-    ////////////////////////////////////////////
 
 });

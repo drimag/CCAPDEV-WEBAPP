@@ -36,7 +36,7 @@ const controller = {
             } else {
                 currentUser = await users.findOne({username: req.query.loggedIn});
             }
-        
+
             console.log("Current User: " + currentUser);
         
             // Get Posts For Display
@@ -57,7 +57,6 @@ const controller = {
                 ]
             ).toArray();
             
-        
             // filter posts if there is a search
             let searchTerms = req.query.search;
             let searchPosts;
@@ -103,6 +102,8 @@ const controller = {
             pagetitle: "Login",
             dropdownLinks: dropdowns
         });
+
+        console.log("page does not exist");
     }
 
 }

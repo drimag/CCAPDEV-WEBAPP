@@ -48,10 +48,15 @@ const registerController = {
     getRegister: async function (req,res){
         // dropdown links for navbar
         let currentUser = req.query.loggedIn;
-        if(currentUser == null || currentUser === "" || currentUser == undefined) currentUser = "guest";
+        if(currentUser == null || currentUser === "" || currentUser == undefined) currentUser = await users.findOne({username: "guest"});
         const dropdowns = getDropdownLinks(currentUser.username);
         
-        res.render("register", { dropdownLinks: dropdowns });
+        res.render("register", 
+        { 
+            pagetitle: "Register",
+            dropdownLinks: dropdowns,
+            user: currentUser 
+        });
     }
 }
 

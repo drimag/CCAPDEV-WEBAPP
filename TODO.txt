@@ -1,6 +1,6 @@
 TODO List:
 
-(A) edit-profile - profile pic
+x edit-profile - profile pic
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
 
@@ -54,8 +54,8 @@ x view user profile
 x    username, profile pic, short desc (bio), portion of user's latest posts/comments, 
 x    can view more
 x    edit profile button
-(A) edit profile
-    add/modify profile pic, add bio
+x edit profile
+x   add/modify profile pic, add bio
 (A) login
     after registering, visitor can log in.
     given remembered option (every login will extend remembered
@@ -87,7 +87,7 @@ Comments of Sir
 x add interactable upvote/downvote in feed
 x add "edited" for edited posts/comments
 x put navbar in login/signup (done)
-(A) add/fix change password
+x add/fix change password
 x change view post from feed from clicking only title to the entire container
 x "some components still use browser default styles. try to replace as much as possible" (?)
 x add sep submit button when editing posts and comments (we did pero sige)

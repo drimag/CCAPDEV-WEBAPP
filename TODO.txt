@@ -3,7 +3,7 @@ TODO List:
 x edit-profile - profile pic
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
-(A) Add Delete / Edit Functions in Profile
+x Add Delete / Edit Functions in Profile
 
 (A) guests can still vote in the home page 
 x search does not work in profile
@@ -11,12 +11,10 @@ x search does not work in profile
 (B) Status Codes
 (B) Error Page
 
-(C) Fix Fetching
-(C) Add Replied To @ in latest comments view
-(C) Fix number of comments shown in profile page (but posts are ok)
+x Fix number of comments shown in profile page (but posts are ok)
     "Show More" button MIGHT not show up
 
-(D) View One Post From Comment (idk if we should add this but eh)
+x View One Post From Comment
 (D) Sort posts by popularity
 
 // Final Steps
@@ -46,7 +44,7 @@ x Fix Route Handlers
 
 ---------------------------------------
 Functions CheckList
-(A) view all posts
+x view all posts
 x   unregistered : 15-20 most recent posts (also most popular post)
 x                   if add more is clicked (go to log in page) (I just hid the button lol)
 x   registered: 15-20 most recent posts with add more

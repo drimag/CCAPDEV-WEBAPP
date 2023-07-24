@@ -8,17 +8,17 @@ const users = db.collection("users");
 const registerController = {
 
     registerAccount: async function (req,res){
-
+        
         console.log("registering account..");
         console.log(req.body);
         
         const { username } = req.body;
         const { password } = req.body;
-
-
+        const { bio } = req.body;
+        const { pfp } = req.body;
         try{
 
-            const matchingUser = users.find({ username: uname });
+            const matchingUser = users.find({ username: username });
             const matchingUserArr = await matchingUser.toArray();
             
 
@@ -29,19 +29,30 @@ const registerController = {
                 const result = await users.insertOne({
                     username: username,
                     password: password,
-                    bio: "Write bio here..."
+                    bio: bio,
+                    pfp: pfp       
                 });
 
 
-                console.log(result);
+                console.log("result:",result);
                 console.log("register successful!");
-                res.redirect("/login");
+                //return res.redirect("/login");
                 res.sendStatus(200);
             }
-        } catch{
-            console.error('Failed to create account:', error);
+        } catch(err){
+            console.error('Failed to create account:',err);
         }
+    },
+    
+    getRegister: async function (req,res){
+      
+        res.render("register");
     }
 }
 
+
+
 export default registerController;
+
+
+

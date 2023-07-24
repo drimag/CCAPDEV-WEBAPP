@@ -19,7 +19,6 @@ $('#save-changes-btn').click(function (event) {
         if(oldPSW != currentPassword ){                                                            
             document.getElementById("message").innerHTML = "**Old Password Incorrect";  
             isValid = false;
-            alert("tite");
         } 
 
         else if(newPSW.length > 15) {  

@@ -8,7 +8,7 @@ const getDropdownLinks = (currentUser) => {
       return [
         { label: 'Edit Profile' },
         { label: 'View Profile' },
-        //{ label: 'Change Password' },
+        { label: 'Change Password' },
         { label: 'Sign Out' }
       ];
     }

@@ -182,9 +182,19 @@ const profileController = {
                         'foreignField': '_id', 
                         'as': 'user_details'
                         }
+                    },
+                    {
+                        '$unwind': '$user_details'
                     }
                 ]
             ).toArray();
+
+            
+            const updatedPostsArray = postsArray.map((element) => ({
+                ...element,
+                currentUser: currentUser.username
+              }));
+            console.log(updatedPostsArray);
         
             const commentsArray = await comments.aggregate(
                 [
@@ -204,7 +214,7 @@ const profileController = {
                     }
                 ]
             ).toArray();
-        
+            
             console.log(postsArray);
             // dropdown links for navbar
             const dropdowns = getDropdownLinks(currentUser.username);
@@ -213,7 +223,7 @@ const profileController = {
                 pagetitle: currentUser.username + "'s Profile",
                 user: currentUser,
                 view_user: view_user,
-                posts: postsArray,
+                posts: updatedPostsArray,
                 comments: commentsArray,
                 dropdownLinks: dropdowns
             })

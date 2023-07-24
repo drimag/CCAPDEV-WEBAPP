@@ -41,7 +41,7 @@ router.post("/reply",);
 
 // Login Routes
 router.get("/login", loginController.getLogin);
-router.get("/login", loginController.checkCredentials);
+router.post("/login", loginController.checkCredentials);
 
 
 // Register Routes

@@ -35,7 +35,6 @@ router.get("/deleted", controller.getDeletedPage);
 router.delete("/comment", postController.deleteComment);
 router.post("/comment", postController.postComment);
 router.put("/comment", postController.editComment);
-router.get("/comment:commentNum/postNum", postController.findPostNum);
 
 // Reply Routes
 router.post("/reply",);
@@ -51,11 +50,14 @@ router.post("/register", registerController.registerAccount);
 
 // Vote Routes
 router.post('/posts/_id/votes', voteController.postVote);
+router.get("/votes", voteController.getUserVotes);
 
 // Change Password Routes
 router.get("/change-password", changepasswordController.getChangePassword);
 router.get("/get-password", changepasswordController.getCurrentPassword);
 router.put("/change-password", changepasswordController.changePassword);
+
+
 
 // TODO: Error 404 Page
 router.use((req, res) => {

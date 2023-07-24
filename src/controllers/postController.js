@@ -1,4 +1,5 @@
 import { getDb } from '../models/db.js';
+import { getDropdownLinks } from '../middleware/navDropdown.js';
 
 const db = getDb();
 
@@ -77,8 +78,11 @@ const postController = {
                     $set: {comment: edited_comment, edited: true}
                 })
             
+            // dropdown links for navbar
+            let dropdowns = getDropdownLinks(loggedIn);
+            
             console.log("Result:" + result);
-            res.render("view_post");
+            res.render("view_post", { dropdownLinks: dropdowns });
             res.sendStatus(200);
         } catch (error) {
             console.error(err);
@@ -146,13 +150,17 @@ const postController = {
             console.log(updatedArray);
 
             // view comments (nested) (prolly just store the replies itself inside instead of ids)
+            
+            //dropdown links for navbar
+            let dropdowns = getDropdownLinks(currentUser.username);
 
             let data = {
                 pagetitle: "View Post",
                 user: currentUser,
                 author: author,
                 post: post,
-                comments: updatedArray
+                comments: updatedArray,
+                dropdownLinks: dropdowns
             }
         
             res.render("view_post", data);
@@ -210,9 +218,12 @@ const postController = {
                 {
                     $set: {title: edited_title, description: edited_description, edited: true}
                 });
+
+            // dropdown links for navbar
+            let dropdowns = getDropdownLinks(loggedIn);
             
             console.log("Result:" + result);
-            res.render("view_post");
+            res.render("view_post", { dropdownLinks: dropdowns });
             res.sendStatus(200);
         } catch (error) {
             console.error(err);

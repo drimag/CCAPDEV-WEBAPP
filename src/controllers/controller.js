@@ -11,8 +11,12 @@ const controller = {
     getDeletedPage: async function(req, res) {
         try {
             const user = await users.findOne({username: req.query.loggedIn});
+            
+            // dropdown links for navbar
+            let dropdowns = getDropdownLinks(user.username);
             res.render("deleted_post", {
-                user: user
+                user: user,
+                dropdownLinks: dropdowns
             });
         } catch (error) {
             console.error(error);
@@ -87,8 +91,13 @@ const controller = {
     },
     
     getLogin: async function (req, res) {
+        // dropdown links for navbar
+        let currentUser = req.query.loggedIn;
+        const dropdowns = getDropdownLinks(currentUser.username);
+
         res.render("login", {
-            pagetitle: "Login"
+            pagetitle: "Login",
+            dropdownLinks: dropdowns
         });
     }
 

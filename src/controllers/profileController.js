@@ -25,6 +25,7 @@ const profileController = {
             // if user does not exist
             if(!user) return res.status(404).send("User not found");
 
+            // dropdown links for navbar
             const dropdowns = getDropdownLinks(user.username); 
 
             res.render("edit_profile", {
@@ -123,12 +124,16 @@ const profileController = {
         
             console.log(postsArray);
             
+            // dropdown links for navbar
+            const dropdowns = getDropdownLinks(currentUser.username);
+
             res.render("profile", {
                 pagetitle: req.params.username + "'s Profile",
                 user: currentUser,
                 view_user: view_user,
                 posts: postsArray,
-                comments: commentsArray
+                comments: commentsArray,
+                dropdownLinks: dropdowns
             })
         } catch (error) {
             console.error(error);
@@ -186,13 +191,16 @@ const profileController = {
             ).toArray();
         
             console.log(postsArray);
+            // dropdown links for navbar
+            const dropdowns = getDropdownLinks(currentUser.username);
             
             res.render("profile", {
                 pagetitle: currentUser.username + "'s Profile",
                 user: currentUser,
                 view_user: view_user,
                 posts: postsArray,
-                comments: commentsArray
+                comments: commentsArray,
+                dropdownLinks: dropdowns
             })
         } catch (error) {
             console.error(error);

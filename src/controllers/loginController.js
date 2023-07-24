@@ -1,4 +1,5 @@
 import { getDb } from '../models/db.js';
+import { getDropdownLinks } from '../middleware/navDropdown.js';
 //import controller from '../controllers/controller.js';
 
 const db = getDb();
@@ -32,8 +33,11 @@ const loginController = {
     },
     
     getLogin: async function (req,res){
-
-        res.render("login");
+        // dropdown links for navbar
+        let currentUser = req.query.loggedIn;
+        const dropdowns = getDropdownLinks(currentUser.username);
+        
+        res.render("login", { dropdownLinks: dropdowns });
     },
 
 

@@ -15,6 +15,7 @@ div.users {
     margin: 10px;
     border-radius: 50px;
     border: solid 1px #8B8C89;
+    object-fit: cover;
 }
 
 .hidden {

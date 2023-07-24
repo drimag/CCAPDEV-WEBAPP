@@ -341,3 +341,7 @@ p.number {
     width: 95%;
     word-break: break-word;
 }
+
+#profile-img {
+    object-fit: cover;
+}

@@ -4,8 +4,7 @@
 
         //var made to find this upvote's corresponding downvote button
         let downvoteButton = $(this).nextAll("button.downvote").first();
-        //console.log($(this).closest(".post,[id*=comment]").prop("id"));
-        //let ID = $(this).closest(".post,[id*=comment]").prop("id"); 
+
         
         let eNumber = $(this).closest(".post,[id*=comment]").prop("id").slice(-1); 
         let eType = $(this).closest(".post,[id*=comment]").prop("id").slice(0,-1);
@@ -64,7 +63,7 @@
 
 
         if(response.status === 200) {
-            //location.reload();
+            location.reload();
         } else {
             console.log("Status code received: " + response.status);
         }
@@ -131,7 +130,7 @@
     
     
         if(response.status === 200) {
-            //location.reload();
+            location.reload();
         } else {
             console.log("Status code received: " + response.status);
         }

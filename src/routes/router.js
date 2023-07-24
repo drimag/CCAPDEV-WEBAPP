@@ -51,6 +51,7 @@ router.post("/register", registerController.registerAccount);
 // Vote Routes
 router.post('/posts/_id/votes', voteController.postVote);
 router.get("/votes", voteController.getUserVotes);
+router.put("/votes", voteController.updateVotes);
 
 // Change Password Routes
 router.get("/change-password", changepasswordController.getChangePassword);

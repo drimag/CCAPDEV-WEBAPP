@@ -26,7 +26,7 @@ const profileController = {
                 user: user
             })
         } catch (error) {
-            console.error(err);
+            console.error(error);
             res.sendStatus(500); // fix
         }
     },

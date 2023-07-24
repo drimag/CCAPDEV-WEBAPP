@@ -170,129 +170,13 @@ function enterSearch(event){
 	let searchInput = document.getElementById("search");
 	let searchTerms = searchInput.value;
 
-	// let currentUser = $("#currentUser-navuser").text();
-	// console.log(currentUser);
 	console.log("home button user:" + user);
 
-	if(user == "")
-        user = "guest";
+	let currentUser = user;
 
-	window.location.href = "home?loggedIn=" + user + `&search=${encodeURIComponent(searchTerms)}`; // add logged in?
+	if(currentUser === "") currentUser = "guest";
 
-	//setSearch(searchTerms); // sets the currentSearch
-	
-	//setSearchPosts(); // should set currentSearchPosts in sessionStorage 
-	//might have to be done in another part of the program
-
-	// let a = JSON.parse(sessionStorage.getItem("currentSearch"));
-	// let b = JSON.parse(sessionStorage.getItem("currentSearchPosts"));
-	// console.log(a);
-	// console.log(b);
-
-	//window.location.href = "index.html"; // redirect user to index
-
+	//location.href = "/home?loggedIn=" + user + `&search=${encodeURIComponent(searchTerms)}`; 
+	const redirect = `/home?loggedIn=${currentUser}&search=${searchTerms}`;
+	window.location.href = redirect;
 }
-
-
-
-// /*
-	
-// 	Sign Out Function
-	
-//  */
-// function handleSignOut(event) {
-//   event.preventDefault();
-  
-
-//   // set current user to guest
-//   sessionStorage.setItem("currentUser", JSON.stringify(userGuest));
-//   location.reload();
-//   window.location.href = "/home";
-// }
-
-/*
-
-	Setting the posts that will pop-up based on the currentSearch
-	TO DO: 
- */
-// function setSearchPosts(){
-// 	let searchTerms = JSON.parse(sessionStorage.getItem("currentSearch"));
-// 	let posts = JSON.parse(sessionStorage.getItem("currentPosts"));
-
-// 	searchTerms = searchTerms.toLowerCase();
-
-// 	let searchPosts = posts.filter(function(post) {
-
-// 		let postTitle = post.title.toLowerCase(); 
-// 		let postDescription = post.description.toLowerCase();
-
-// 		// Check if the title or description content contains the search term
-// 		return (postTitle.includes(searchTerms) || postDescription.includes(searchTerms));
-// 	});
-
-// 	sessionStorage.setItem("currentSearchPosts", JSON.stringify(searchPosts));
-// }
-
-
-/*
-
-load dropdown to be done somewhere else
-
-*/
-
-
-// function loadDropdown() {
-//   const guestDropdown = [
-// 	{ label: "Sign Up", link: "login.html" },// /register
-//   ];
-
-//   const userDropdown = [
-// 	{ label: "Edit Profile", link: "edit_profile.html" },// /edit_profile
-// 	{ label: "Switch Account", link: "login.html" },// /login
-// 	{ label: "Sign Out", link: "index.html" },// /home MAKE THE USER ACTUALLY LOG OUT
-// 	{ label: "Change Password", link: "change_password.html" },// /remove?
-// 	{ label: "View Profile", link: "profile.html"}// /profile
-//   ];
-
-
-//   // take the current user
-//   //let user = JSON.parse(sessionStorage.getItem("currentUser"));
-//   let currentUser =$("#currentUser-navuser").text();
-//   console.log()
-
-//   let isLoggedIn = !(currentUser === "guest");
-//   console.log(currentUser);
-//   console.log(isLoggedIn);
-
-//   if(isLoggedIn){
-// 	dropdownItems(userDropdown);
-//   } else{
-// 	dropdownItems(guestDropdown);
-//   }
-// }
-
-// loadDropdown();
-
-/*
-
-	Display dropdown items
-
- */
-// function dropdownItems(toDropdown) {
-
-// 	toDropdown.forEach(item => {
-// 		const menuItem = document.createElement("a");
-// 		menuItem.href = item.link;
-// 		menuItem.textContent = item.label;
-
-// 		if (item.label === "Sign Out") {
-// 			menuItem.addEventListener("click", handleSignOut);
-// 		}
-
-// 		if (item.label === "View Profile") {
-// 			menuItem.addEventListener("click", handleViewProfile);
-// 		}
-
-// 		dropdown.appendChild(menuItem);
-// 	});
-// }

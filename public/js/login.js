@@ -28,6 +28,18 @@ $(".login-button").click(async function(){
           headers: {
               'Content-type': 'application/json'
           }
-      });
+      })
+      .then((response) => response.json())
+      .then((data => {
+        if(data.result === true){
+            window.location.href = "/home/?loggedIn="+uname;
+        }
+        else{
+            alert('Invalid username or password.');
+            return;
+        }
+      }))
+
+    
 
 });

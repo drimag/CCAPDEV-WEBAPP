@@ -93,6 +93,22 @@ const postController = {
     
    ////////////////////////////////////////////////////////////
 
+    findPostNum: async function (req, res) {
+        console.log("Request to find Post Num received.");
+        console.log(req.params);
+        try {
+            const comment = await comments.findOne({num: parseInt(req.params.commentNum)});
+            console.log(comment);
+            const post = await posts.findOne({comments_id: comment._id});
+            const postNum = post.num;
+            
+            res.json({postNum});
+        } catch(error) {
+            console.error(error);
+            // status code
+        }
+    },
+
     getPost: async function (req, res) {
         console.log("Request to post number " + req.params.postID + " received.");
         console.log(req.query.params);

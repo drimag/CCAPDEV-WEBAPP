@@ -13,17 +13,17 @@ $(".register-button").click(async function(){
       return;
     }
     else if(pass.length > 15) {  
-        errorMessage  = "**New Password length must not exceed 15 characters";  
+        errorMessage  = "**Password length must not exceed 15 characters";  
         isValid = false;
     }
     
     else if(pass.length < 4) {  
-        errorMessage = "**New Password length must be atleast 4 characters";  
+        errorMessage = "**Password length must be atleast 4 characters";  
         isValid = false;  
     }
 
     else if(pass != cpass){
-        errorMessage = "**New Password Mismatch";  
+        errorMessage = "**Password Mismatch";  
         isValid = false;
     }
 

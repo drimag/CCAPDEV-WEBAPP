@@ -5,7 +5,7 @@ x edit-profile - profile pic
 (A) @Nested-Comments !!!
 
 (A) guests can still vote in the home page 
-(A) search does not work in profile
+x search does not work in profile
 
 (B) Status Codes
 (B) Error Page

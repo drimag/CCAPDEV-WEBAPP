@@ -36,6 +36,7 @@ const postController = {
             console.log(comment);
             const result = await comments.updateOne(comment, 
                 {
+                    $inc: {num_comments: 1},
                     $push: {comments_id: data}
                 })
             
@@ -178,18 +179,8 @@ const postController = {
                 
                 // Title does not match postNum (post doesnt exist)
                 if(post === null) {
-                    res.sendStatus(204); 
-                    /*  CHECK!! AEDRTFHBNSERTNTNASZENTN
-                        204 No content
-                        No content to send for the request
-
-                        or
-
-                        400 Bad Request
-                        Server could not understand the request due to invalid syntax
-                     */
+                    res.sendStatus(404);
                 }
-                
             }
     
             const author = await users.findOne({_id: post.user_id});

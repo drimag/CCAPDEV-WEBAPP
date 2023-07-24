@@ -50,6 +50,9 @@ const controller = {
                         'foreignField': '_id', 
                         'as': 'user_details'
                         }
+                    },
+                    {
+                        '$unwind': '$user_details'
                     }
                 ]
             ).toArray();

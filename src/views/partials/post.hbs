@@ -9,13 +9,16 @@
         <div class="flex-row-container">
             <div>
                 {{!-- <img class="user" src="/static/profilepics/{{#each user_details}}{{username}}{{/each}}.jpg"> --}}
-                <img class="user" src="data:image/{{#each user_details}}{{ pfp.contentType }};base64,{{ pfp.data }}{{/each}}">
+                <img class="user" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
             </div>
 
             <div class="flex-column-container post-details">
-                <p class="username">{{#each user_details}}@{{username}}{{/each}} </p>
+                <p class="username">@{{user_details.username}} </p>
                 <p class="post-title">{{ title }}</p>
                 <p class="home-description">{{ description}}</p>
+                {{#if edited }}
+                <p class="edited-mark"> (edited)</p>
+                {{/if}}
             </div>
         </div>
         
@@ -23,5 +26,12 @@
             <button class="comment"></button>
             <p class="number">{{ num_comments }}</p>
         </div>
+
+        {{#ifEqual currentUser user_details.username}}
+        <div>
+            <button id="edit-post" class="add-edit-button edit-post"> Edit Post </button>
+            <button id="delete-post" class="add-edit-button delete-post"> Delete </button>
+        </div>
+        {{/ifEqual}}
     </div>
 </div>

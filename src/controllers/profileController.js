@@ -99,6 +99,9 @@ const profileController = {
                         'foreignField': '_id', 
                         'as': 'user_details'
                         }
+                    },
+                    {
+                        '$unwind': '$user_details'
                     }
                 ]
             ).toArray();
@@ -121,7 +124,19 @@ const profileController = {
                     }
                 ]
             ).toArray();
-        
+            
+            const updatedPostsArray = postsArray.map((element) => ({
+                ...element,
+                currentUser: currentUser.username
+              }));
+            console.log(updatedPostsArray);
+
+            const updatedArray = commentsArray.map((element) => ({
+                ...element,
+                currentUser: currentUser.username
+              }));
+            console.log(updatedArray);
+
             console.log(postsArray);
             
             // dropdown links for navbar
@@ -131,8 +146,8 @@ const profileController = {
                 pagetitle: req.params.username + "'s Profile",
                 user: currentUser,
                 view_user: view_user,
-                posts: postsArray,
-                comments: commentsArray,
+                posts: updatedPostsArray,
+                comments: updatedArray,
                 dropdownLinks: dropdowns
             })
         } catch (error) {

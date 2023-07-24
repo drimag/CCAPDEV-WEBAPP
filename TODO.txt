@@ -3,6 +3,7 @@ TODO List:
 x edit-profile - profile pic
 (A) @Create Reply !!!
 (A) @Nested-Comments !!!
+(A) Add Delete / Edit Functions in Profile
 
 (A) guests can still vote in the home page 
 x search does not work in profile

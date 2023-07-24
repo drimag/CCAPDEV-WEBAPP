@@ -39,10 +39,12 @@ router.put("/comment", postController.editComment);
 router.post("/reply",);
 
 // Login Routes
-router.get("/login", controller.getLogin);
-router.get("/login",loginController.getRegister);
+router.get("/login", loginController.getLogin);
+
+
 
 // Register Routes
+router.get("/register", registerController.getRegister);
 router.post("/register", registerController.registerAccount);
 
 // Vote Routes

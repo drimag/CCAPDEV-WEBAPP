@@ -70,13 +70,7 @@ $(document).ready(function() {
         try {
             const comment_id = $(this).attr('id').substring(14);
             const loggedIn = params.get("loggedIn");
-        
-            let data = {
-                id: comment_id
-            };
-            console.log(data);
-        
-            let jString = JSON.stringify(data);
+
             // get post number
             let response = await fetch("/comment" + comment_id + "/postNum?loggedIn=" + loggedIn, {
                 method: 'GET'
@@ -84,6 +78,14 @@ $(document).ready(function() {
             
             const result = await response.json();
             const postNum = result.postNum;
+
+            let data = {
+                postNum: postNum,
+                id: comment_id
+            };
+            console.log(data);
+        
+            let jString = JSON.stringify(data);
             
             // update post
             response = await fetch("/post/removecomment?loggedIn=" + loggedIn, {

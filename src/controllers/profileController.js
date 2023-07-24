@@ -1,4 +1,5 @@
 import { getDb } from '../models/db.js';
+import { getDropdownLinks } from '../middleware/navDropdown.js';
 
 const db = getDb();
 
@@ -10,20 +11,26 @@ const profileController = {
     
     // Edit Profile
     getEditProfile: async function (req, res) {
-        console.log("Request to edit profile received.");
+        console.log("Request to edit profile page received.");
         let curr = req.query.loggedIn;
+        console.log(curr);
     
         try {
-            if(curr == null) {
-                curr = await users.findOne({username: "guest"});
-            } else {
-                curr = await users.findOne({username: curr});
-            }
+            // if no login param in url
+            if(!curr) return res.status(400).send("No logged in user");
 
-            const user = await users.findOne(curr);
+            // look for user with matching username
+            const user = await users.findOne({username: curr});
+
+            // if user does not exist
+            if(!user) return res.status(404).send("User not found");
+
+            const dropdowns = getDropdownLinks(user.username); 
+
             res.render("edit_profile", {
                 pagetitle: "Edit Profile",
-                user: user
+                user: user,
+                dropdownLinks: dropdowns
             })
         } catch (error) {
             console.error(error);
@@ -32,7 +39,7 @@ const profileController = {
     },
 
     editProfile: async function (req,res) {
-        console.log("Request to edit profile received.");
+        console.log("Request to edit profile contents received.");
         // const { user, newUsername, newBio, newPFP } = req.body;
         const editData = req.body;
 

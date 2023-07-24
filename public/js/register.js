@@ -1,18 +1,21 @@
-$("button.register").click(async function(){
+$(".register-button").click(async function(){
 
-
+    console.log("register button pressed");
     let uname = $('#username').val();
     let pass = $('#password').val();
     
     if (uname === '' || pass === '') {
       alert('Please enter both username and password.');
+      
       return;
     }
 
 
     const data = {
         username: uname,
-        password: pass
+        password: pass,
+        bio: "Write bio here...",
+        pfp: null
     };
     console.log(data);
 
@@ -26,5 +29,6 @@ $("button.register").click(async function(){
         }
     });
 
+    window.location.href = "/login";
 
 });

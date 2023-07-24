@@ -218,7 +218,11 @@ const profileController = {
                     }
                 ]
             ).toArray();
-            
+            const updatedArray = commentsArray.map((element) => ({
+                ...element,
+                currentUser: currentUser.username
+              }));
+
             console.log(postsArray);
             // dropdown links for navbar
             const dropdowns = getDropdownLinks(currentUser.username);
@@ -228,7 +232,7 @@ const profileController = {
                 user: currentUser,
                 view_user: view_user,
                 posts: updatedPostsArray,
-                comments: commentsArray,
+                comments: updatedArray,
                 dropdownLinks: dropdowns
             })
         } catch (error) {

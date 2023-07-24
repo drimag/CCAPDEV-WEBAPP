@@ -32,7 +32,7 @@ const profileController = {
                 pagetitle: "Edit Profile",
                 user: user,
                 dropdownLinks: dropdowns
-            })
+            });
         } catch (error) {
             console.error(error);
             res.sendStatus(500); // fix
@@ -79,10 +79,12 @@ const profileController = {
         let curr = req.query.loggedIn;
     
         try {
+
             if(curr == null) {
                 curr = await users.findOne({username: "guest"});
             } else {
                 curr = await users.findOne({username: curr});
+                if(!curr) return res.status(404).send("User not found");
             }
 
             const currentUser = curr;

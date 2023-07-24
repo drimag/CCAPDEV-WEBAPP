@@ -1,72 +1,3 @@
-/*
-    Returns Post Number Of Comment
- */
-async function getPostNum(comment_id, loggedIn) {
-    try {
-        // get post number
-        let response = await fetch("/comment" + comment_id + "/postNum?loggedIn=" + loggedIn, {
-            method: 'GET'
-        });
-        
-        console.log(response);
-        console.log("Status code received: " + response.status);
-
-        const result = await response.json();
-        const postNum = result.postNum;
-        
-        return postNum;
-    } catch(error) {
-        console.error(error);
-        // status code
-    }
-}
-
-/*
-    Updates Post
- */
-async function updatePost(data) {
-    let jString = JSON.stringify(data);
-            
-    try {
-        // update post
-        const response = await fetch("/post/removecomment?loggedIn=" + loggedIn, {
-            method: 'PUT',
-            body: jString,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        console.log(response);
-        console.log("Status code received: " + response.status);
-    } catch (error) {
-        console.error(error);
-        // status code
-    }
-}
-
-/*
-    Deletes Comment
- */
-async function deleteComment(data) {
-    let jString = JSON.stringify(data);
-    // delete comment
-    try {
-        const response = await fetch("/comment", {
-            method: 'DELETE',
-            body: jString,
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
-
-        console.log(response);
-        console.log("Status code received: " + response.status);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 $(document).ready(function() {
     $("form.editCommentForm").hide();
 
@@ -81,7 +12,17 @@ $(document).ready(function() {
         console.log(loggedIn);
         
         // Get Post Num
-        const postNum = await getPostNum(comment_id, loggedIn);
+        // Get post number
+        let response = await fetch("/comment" + comment_id + "/postNum?loggedIn=" + loggedIn, {
+            method: 'GET'
+        });
+        
+        console.log(response);
+        console.log("Status code received: " + response.status);
+
+        const result = await response.json();
+        const postNum = result.postNum;
+
         console.log(postNum);
         
         location.href = "/posts/" + postNum + "?loggedIn=" + loggedIn;
@@ -96,7 +37,7 @@ $(document).ready(function() {
         $(this).hide();
         
         const comment_id = $(this).attr('id').substring(12).trimEnd();
-        console.log(comment_id);
+        //console.log(comment_id);
 
         // Hide Comment Container
         const desc_container = $("div#comment" + comment_id + " p.profile-comment");
@@ -160,9 +101,17 @@ $(document).ready(function() {
             const comment_id = $(this).attr('id').substring(14);
             const loggedIn = params.get("loggedIn");
             
-            // Get Post Number
-            const postNum = await getPostNum(comment_id, loggedIn);
+            // Get post number
+            let response = await fetch("/comment" + comment_id + "/postNum?loggedIn=" + loggedIn, {
+                method: 'GET'
+            });
             
+            console.log(response);
+            console.log("Status code received: " + response.status);
+
+            const result = await response.json();
+            const postNum = result.postNum;
+        
             let data = {
                 postNum: postNum,
                 id: comment_id
@@ -170,8 +119,19 @@ $(document).ready(function() {
             console.log(data);
 
             // Update Post (Remove Comment from Array)
-            let response = await updatePost(data);
+            let jString = JSON.stringify(data);
+            
+            // update post
+            response = await fetch("/post/removecomment?loggedIn=" + loggedIn, {
+                method: 'PUT',
+                body: jString,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
             console.log(response);
+            console.log("Status code received: " + response.status);
 
             data = {
                 id: comment_id
@@ -179,16 +139,25 @@ $(document).ready(function() {
             console.log(data);
             
             // Delete Comment
-            response = await deleteComment(data);
+            response = await fetch("/comment", {
+                method: 'DELETE',
+                body: jString,
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+    
             console.log(response);
-        
+            console.log("Status code received: " + response.status);
+    
             if(response.status === 200) {
                 location.reload();
             } else {
                 console.log("Status code received: " + response.status);
             }
 
-            res.render("/posts");
+            //res.render("/posts");
+            //location.href = "/posts";
         } catch (error) {
             console.error(error);
         }

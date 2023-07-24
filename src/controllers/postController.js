@@ -87,7 +87,7 @@ const postController = {
             res.render("view_post", { dropdownLinks: dropdowns });
             res.sendStatus(200);
         } catch (error) {
-            console.error(err);
+            console.error(error);
             res.sendStatus(500); // fix
         }
     },
@@ -104,6 +104,7 @@ const postController = {
             const postNum = post.num;
             
             res.json({postNum});
+            res.sendStatus(200);
         } catch(error) {
             console.error(error);
             // status code
@@ -118,6 +119,9 @@ const postController = {
                 num: { $eq: parseInt(req.params.postID) }
             });
 
+            // Post does not exist
+            if(!post) return res.status(404).send("Post not found");
+            
             if(req.query.title == null) {
                 console.log('No Title Given');
             } else {

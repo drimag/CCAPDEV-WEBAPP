@@ -32,7 +32,7 @@ $(".login-button").click(async function(){
       .then((response) => response.json())
       .then((data => {
         if(data.result === true){
-            window.location.href = "/home/?loggedIn="+uname;
+            window.location.href = "/home?loggedIn="+uname;
         }
         else{
             alert('Invalid username or password.');

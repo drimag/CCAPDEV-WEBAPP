@@ -80,6 +80,7 @@ $(document).ready(function() {
     $("#latest-comments").click(function() {
         $("#latest-feed-posts").hide();
         $("#latest-feed-comments").show();
+        $(".editdiv").hide();
         $(this).addClass("active");
         $("#latest-posts").removeClass("active");
 

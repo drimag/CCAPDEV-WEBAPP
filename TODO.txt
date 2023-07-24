@@ -23,6 +23,7 @@ TODO List:
 (E) READ ME
 (E) fix bugs
 
+x register and adding to db
 x URL or Images in the DB for Users (need asap so we can adjust the format for images for all pages and functions) !!!
 x @Edit-Profile (esp change/modify) !!!
 x @Delete Posts ( does not delete comments part of the post )

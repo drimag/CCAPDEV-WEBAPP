@@ -50,6 +50,11 @@ router.post("/register", registerController.registerAccount);
 // Vote Routes
 router.post('/posts/_id/votes', voteController.postVote);
 
+// Change Password Routes
+router.get("/change-password", changepasswordController.getChangePassword);
+router.get("/get-password", changepasswordController.getCurrentPassword);
+router.put("/change-password", changepasswordController.changePassword);
+
 // TODO: Error 404 Page
 router.use((req, res) => {
     res.send("error");

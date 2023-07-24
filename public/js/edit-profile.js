@@ -49,19 +49,6 @@ pfpInput.addEventListener("change", function (e) {
   
  */
 
-async function readFileAsDataURL(file) {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onload = function (e) {
-			resolve(e.target.result);
-		};
-		reader.onerror = function (error) {
-			reject(error);
-		};
-		reader.readAsDataURL(file);
-	});
-}
-
 $(document).ready(function() {
 	async function saveProfileEdit(event) {
 		event.preventDefault();
@@ -71,59 +58,19 @@ $(document).ready(function() {
 		let newUsername = form.elements["username"].value.trim();
 		let newBio = form.elements["bio"].value;
 
-		let pfpInput = form.elements["pfp"];
+		// take img info from displayed pfp
+		let newPFPsrc = document.getElementById('profile-image').src;
+		console.log("newPFPsrc thing: " + newPFPsrc);
 
-		let newPFPtype;
-		let newPFPdata;
+		let [newPFPcontent, newPFPdata] = newPFPsrc.split(",");
+		let newPFPtype = newPFPcontent.replace("data:image/", "");
 
 		// take the currently logged in user
 		const currentURL = window.location.href;
 		const params = new URLSearchParams(new URL(currentURL).search);
 		const currentUser = params.get("loggedIn");
 
-		// take the base64 encoded image and filetype
-
-		// if (pfpInput.files.length > 0) {
-		// 	let reader = new FileReader();
-			
-		// 	reader.onload = function(e) {
-		// 		let PFPdata = e.target.result;
-		// 		let PFPtype = pfpInput.files[0].type;
-
-		// 		let dataIndex = PFPdata.indexOf(",") + 1;
-		// 		let typeIndex = PFPtype.indexOf("/") + 1;
-
-		// 		newPFPdata = PFPdata.substring(dataIndex);
-		// 		newPFPtype = PFPtype.substring(typeIndex);
-		// 	};
-			
-		// 	//Start reading the selected file as a data URL
-		// 	reader.readAsDataURL(pfpInput.files[0]);
-		// } else {
-		// 	// No new pfp
-		// 	console.log("no new pfp")
-		// }
-
-		try {
-			let PFPdata = await readFileAsDataURL(pfpInput.files[0]);
-			let PFPtype = pfpInput.files[0].type;
-
-			let dataIndex = PFPdata.indexOf(",") + 1;
-			let typeIndex = PFPtype.indexOf("/") + 1;
-
-			newPFPdata = PFPdata.substring(dataIndex);
-			newPFPtype = PFPtype.substring(typeIndex);
-
-		} catch (error) {
-			console.log("error reading file upload" + error);
-		}
-		
-
-		console.log("newpfp data: " + newPFPdata);
-		console.log("newpfp type: " + newPFPtype);
-
 		// Make a POST request to the server with the data
-
 		const data = {
 			currentUser: currentUser,
 			newUsername: newUsername,
@@ -131,7 +78,6 @@ $(document).ready(function() {
 			newPFPdata: newPFPdata,
 			newPFPtype: newPFPtype
 		};
-
 		const jString = JSON.stringify(data);
 
 		try {
@@ -145,7 +91,7 @@ $(document).ready(function() {
 
 			if(response.status === 200) {
 				console.log("Profile Edit Successful");
-				//location.href = "/home?loggedIn=" + newUsername;
+				location.href = "/home?loggedIn=" + newUsername;
 			} else {
 				console.log("Status code received: " + response.status);
 			}
@@ -202,4 +148,5 @@ $(document).ready(function() {
 
   // sessionStorage.setItem("currentUser", JSON.stringify(theUser));
 
-  // window.location.href = "index.html";
+  // window.location.href = "index.html";<img class="user" id="user-selected" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASA">
+  

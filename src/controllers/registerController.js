@@ -31,7 +31,11 @@ const registerController = {
                     username: username,
                     password: password,
                     bio: bio,
-                    pfp: pfp       
+                    pfp: pfp,
+                    upvoteComments: [],
+                    downvoteComments: [],
+                    upvotePosts: [],
+                    downvotePosts: []            
                 });
 
 

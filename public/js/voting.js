@@ -175,14 +175,11 @@ $("button.upvote").click(async function() {
     }
 });
 
-
-
 // Downvote when viewing a post
 $("button.downvote").click(async function() {
         
-    //var made to find this downvote's corresponding upvote button
+    // var made to find this downvote's corresponding upvote button
     let upvoteButton = $(this).prevAll("button.upvote").first();
-        
 
     let eNumber = $(this).closest(".post,[id*=comment]").prop("id").slice(-1); 
     let eType = $(this).closest(".post,[id*=comment]").prop("id").slice(0,-1);
@@ -196,9 +193,9 @@ $("button.downvote").click(async function() {
     let newUPVote = upvote;
     let newDPVote = dpvote;
 
-    //removes vote if clicked again  
+    // Removes vote if clicked again  
     if ($(this).hasClass('clicked')) {
-        //increase vote count here by 1
+        // Increase vote count here by 1
         newVotes = currentVotes + 1;
         if(eType === "post") {
             newDPVote = dpvote.filter((num) => num != parseInt(eNumber));
@@ -207,9 +204,9 @@ $("button.downvote").click(async function() {
             console.log("remove comment upvote");
         }
     }
-    //removes effect of opposite vote if clicked
+    // Removes effect of opposite vote if clicked
     else if (upvoteButton.hasClass('clicked')){
-        //decrease the vote count by 2,because it nullifies the upvote
+        // Decrease the vote count by 2, because it nullifies the upvote
         newVotes = currentVotes - 2;
         console.log("test: " + eNumber);
         if(eType === "post") {
@@ -221,9 +218,9 @@ $("button.downvote").click(async function() {
         }
         console.log("test: " + newVotes + newUPVote);
     }
-    //when no vote was clicked
+    // When no vote was clicked
     else{
-        //decrease vote count here by 1
+        // Decrease vote count by 1
         newVotes = currentVotes - 1;
         if(eType === "post") {
             newDPVote = [ ...dpvote , parseInt(eNumber)];
@@ -231,7 +228,6 @@ $("button.downvote").click(async function() {
             newDCVote = [ ...dcvote , parseInt(eNumber)];
         }
     }
-
 
     const data = {
         upvoteComments: newUCVote,

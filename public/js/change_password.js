@@ -4,7 +4,7 @@ $('#save-changes-btn').click(function (event) {
     async function changePasswordHandler(){
         let currentPassword;
 
-        // call getPassword as a fetch request to controller
+        // Call getPassword as a fetch request to controller
         try {
             currentPassword = await getPassword();
         } catch (error) {
@@ -37,8 +37,8 @@ $('#save-changes-btn').click(function (event) {
         }
 
         if(isValid) {
-            // make a post request remember to put current user 
-
+            
+            // Make a post request remember to put current user 
             const jString = JSON.stringify({password: newPSW});
 
             const currentURL = window.location.href;

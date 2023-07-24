@@ -79,6 +79,7 @@ const postController = {
                 })
             
             // dropdown links for navbar
+            if(loggedIn == null || loggedIn === "" || loggedIn == undefined) loggedIn = "guest";
             let dropdowns = getDropdownLinks(loggedIn);
             
             console.log("Result:" + result);
@@ -220,6 +221,7 @@ const postController = {
                 });
 
             // dropdown links for navbar
+            if(loggedIn == null || loggedIn === "" || loggedIn == undefined) loggedIn = "guest";
             let dropdowns = getDropdownLinks(loggedIn);
             
             console.log("Result:" + result);

@@ -31,7 +31,7 @@ const controller = {
         console.log("Current User: " + currentUser);
 
         try {
-            if(currentUser == null || currentUser === "guest") {
+            if(currentUser == null || currentUser === "guest" || currentUser == undefined) {
                 currentUser = await users.findOne({username: "guest"});
             } else {
                 currentUser = await users.findOne({username: req.query.loggedIn});
@@ -93,8 +93,9 @@ const controller = {
     getLogin: async function (req, res) {
         // dropdown links for navbar
         let currentUser = req.query.loggedIn;
-        const dropdowns = getDropdownLinks(currentUser.username);
-
+        if(currentUser == null || currentUser === "" || currentUser == undefined) currentUser = "guest";
+        const dropdowns = getDropdownLinks(currentUser);
+        
         res.render("login", {
             pagetitle: "Login",
             dropdownLinks: dropdowns

@@ -29,8 +29,34 @@ const postController = {
         // Get Current User
         const loggedIn = await User.findOne({username: loggedInUser}).lean().exec();
         
-        // Populate Comments
-        const foundData = await Post.findOne({postNum: postNum}).lean().exec();
+        // Populate Comments (3 Levels only)
+        const foundData = await Post.findOne({postNum: postNum})
+        .populate({
+            path: 'user_id'
+        })
+        .populate({
+            path: 'comments_id',
+            populate: 
+            [
+                { path: 'user_id' },
+                {
+                    path: 'comments_id',
+                    populate: 
+                    [
+                        { path: 'user_id' },
+                        {
+                            path: 'comments_id',
+                            populate: {
+                                path: 'user_id'
+                            }
+                        }
+                    ]
+                }
+            ]
+        })
+        .lean().exec();
+
+        console.log(foundData);
 
         if (foundData) {
             // Display Post

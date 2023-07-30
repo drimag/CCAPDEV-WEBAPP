@@ -49,6 +49,30 @@ async function addSampleData() {
         await newUser5.save();
         await guest.save();
 
+        const newComment = new Comment ({
+            commentNum: 3,
+            user_id: newUser._id,
+            comment: "test nested nested comment!"
+        });
+
+        const newComment2 = new Comment ({
+            commentNum: 2,
+            user_id: newUser2._id,
+            comment: "test nested comment!",
+            comments_id: [newComment._id]
+        });
+
+        const newComment3 = new Comment ({
+            commentNum: 1,
+            user_id: newUser3._id,
+            comment: "test comment!",
+            comments_id: [newComment2._id]
+        });
+
+        await newComment.save();
+        await newComment2.save();
+        await newComment3.save();
+
         const newPost = new Post ({
             postNum: 1,
             user_id: newUser._id,
@@ -84,7 +108,8 @@ async function addSampleData() {
             user_id: newUser5._id,
             title: "'Super Shy' for Song Of The Year and that's that.",
             description: "I'm all for people and their opinions but let's face the facts. I might be making this statement a little too fast but I'm super shy super shy has kinda already gotten glued to my head and I'm not sure I'll be able to remove it anytime now. It just has the perfect catchiness, bubbly upbeat funness to be a hit. I'm all here for it. It sounds very 'beabadoobee'.",
-            votes: 5
+            votes: 5,
+            comments_id: [newComment3._id]
         });
 
         await newPost.save();

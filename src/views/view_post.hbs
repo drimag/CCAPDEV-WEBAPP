@@ -56,8 +56,8 @@
 
         <div class=" flex-column-container comment-section">
             
-            {{#each comments }}
-                {{> comment this }}
+            {{#each post.comments_id }}
+                {{> comment this replied_to=@root.author.username}}
             {{/each }}
         </div>
     </div>

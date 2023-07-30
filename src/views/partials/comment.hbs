@@ -5,11 +5,11 @@
     </div>
 
     <div class="flex-column-container post-details">
-        <p class="comment-username">@{{ user_details.username }}</p>
-        <p class="replied-comment">Replied to <b>@{{ author }}</b></p>
+        <p class="comment-username">@{{ user_id.username }}</p>
+        <p class="replied-comment">Replied to <b>@{{ replied_to }}</b></p>
         <p class="comment-desc">{{ comment }} </p>
 
-        <div id="editdiv{{num}}">
+        <div id="editdiv{{commentNum}}">
             {{> edit_comment }}
         </div>
 
@@ -25,15 +25,15 @@
             </div>
 
             <div class="flex-row-container">
-                <button class="comment" id="{{ num }}"></button>
+                <button class="comment" id="{{ commentNum }}"></button>
                 <p class="number">{{ num_comments }}</p>
             </div>
 
 
             {{#ifEqual currentUser user_details.username}}
             <div class="flex-row-container comment-buttons">
-                <button id="edit-comment{{num}}" class="add-edit-button edit-comment"> Edit </button>
-                <button id="delete-comment{{num}}" class="delete-c add-edit-button"> Delete </button>
+                <button id="edit-comment{{commentNum}}" class="add-edit-button edit-comment"> Edit </button>
+                <button id="delete-comment{{commentNum}}" class="delete-c add-edit-button"> Delete </button>
             </div>
             {{/ifEqual}}
         </div>
@@ -43,7 +43,7 @@
         <div class="comment-section">
             <!--- Nested comments--->   
             {{#each comments_id }}
-                {{> comment this }}
+                {{> comment this replied_to=../user_id.username}}
             {{/each }}
         </div>
     </div>

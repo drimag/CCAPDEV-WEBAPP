@@ -29,7 +29,8 @@ const commentSchema = new Schema({
         type: [{
             type: SchemaTypes.ObjectId,
             ref: 'Comment'
-        }]
+        }],
+        default: []
     },
     edited: {
         type: SchemaTypes.Boolean,
@@ -38,6 +39,6 @@ const commentSchema = new Schema({
     }
 });
 
-const Comment = model('comment', commentSchema);
+const Comment = model('Comment', commentSchema);
 
 module.exports = Comment;

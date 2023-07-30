@@ -4,7 +4,8 @@ const userSchema = new Schema({
     // place code
     username: {
         type: SchemaTypes.String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: SchemaTypes.String,

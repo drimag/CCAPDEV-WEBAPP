@@ -17,18 +17,30 @@ $(document).ready(function() {
         $(".home-description").addClass("one-line");
     }
 
-    $("div.post-container").click(function() {
+    $("div.post-container").click(async function() {
         console.log("View Post");
         const id = $(this).attr('id');
         console.log(id);
 
         const title = $(this).find('.post-title').text().trimStart().trimEnd();
         console.log(title);
-        
-        if(currentUser === "guest") {
-            location.href = login;
+
+        // Check if postNum exists
+        const result = await fetch('/post?postNum=' + id.substring(1), {
+            method: 'GET'
+        })
+
+        console.log(result);
+
+        if (result.status === 200) {
+            // Successful
+            if(currentUser === "guest") {
+                location.href = login;
+            } else {
+                location.href = "/viewpost?postNum=" + id.substring(1) + "&title="+ title + "&loggedIn=" + currentUser;
+            }
         } else {
-            location.href = "/posts/" + id.substring(1).trimEnd() + "?title="+ title + "&loggedIn=" + currentUser;
+            // Bad Status Code
         }
     });
 

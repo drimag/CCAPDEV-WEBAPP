@@ -8,8 +8,8 @@ const Comment = require('./Comment.js');
 async function addSampleData() {
     try {
         await User.deleteMany({});
-        //await Post.deleteMany({});
-        //await Comment.deleteMany({});
+        await Post.deleteMany({});
+        await Comment.deleteMany({});
         
         // TODO: Add PFPs
         const newUser = new User ({
@@ -36,12 +36,39 @@ async function addSampleData() {
             username: 'manchae',
             password: '1234'
         });
+        
+        const guest = new User ({
+            username: 'guest',
+            password: 'guest'
+        });
 
         await newUser.save();
         await newUser2.save();
         await newUser3.save();
         await newUser4.save();
         await newUser5.save();
+        await guest.save();
+
+        const newPost = new Post ({
+            postNum: 1,
+            user_id: newUser._id,
+            title: 'test',
+            description: 'test',
+            votes: 5,
+            comments_id: [],
+        });
+
+        const newPost2 = new Post ({
+            postNum: 2,
+            user_id: newUser2._id,
+            title: 'test2',
+            description: 'test2',
+            votes: 0,
+            comments_id: [],
+        });
+
+        await newPost.save();
+        await newPost2.save();
         
     } catch (error) {
         console.error(error);

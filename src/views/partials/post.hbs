@@ -1,18 +1,18 @@
-<div class="flex-row-container post" id="post{{ num }}">
+<div class="flex-row-container post" id="post{{ postNum }}">
     <div class="actions-post flex-column-container">
             <button class="upvote"></button>
             <p class="number">{{ votes }}</p>
             <button class="downvote"></button>
         </div>
 
-    <div class="flex-column-container post-container" id="p{{ num }}">
+    <div class="flex-column-container post-container" id="p{{ postNum }}">
         <div class="flex-row-container">
             <div>
                 <img class="user" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
             </div>
 
             <div class="flex-column-container post-details">
-                <p class="username">@{{ user_details.username }} </p>
+                <p class="username">@{{ user_id.username }} </p>
                 <p class="post-title">{{ title }}</p>
                 <p class="home-description">{{ description}}</p>
                 {{#if edited }}
@@ -26,7 +26,7 @@
             <p class="number">{{ num_comments }}</p>
         </div>
 
-        {{#ifEqual currentUser user_details.username}}
+        {{#ifEqual @root.user.username user_id.username}}
         <div>
             <button id="edit-post" class="add-edit-button edit-post"> Edit Post </button>
             <button id="delete-post" class="add-edit-button delete-post"> Delete </button>

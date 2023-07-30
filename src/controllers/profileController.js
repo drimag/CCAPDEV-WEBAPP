@@ -7,6 +7,7 @@ const users = db.collection("users");
 const posts = db.collection("posts");
 const comments = db.collection("comments");
 
+// GET USER
 const profileController = {
     
     // Edit Profile

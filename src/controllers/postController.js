@@ -1,3 +1,109 @@
+const User = require('../models/User.js');
+const Post = require('../models/Post.js');
+
+const postController = {
+    /*
+            This function checks if the post exists.
+    */
+    getCheckPost: async function (req, res) {
+        const postNum = req.query.postNum;
+
+        const foundData = Post.findOne({postNum: postNum});
+
+        console.log(foundData);
+
+        if (foundData) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(400);
+        }
+    },
+
+    /*
+            This displays 'view_post.hbs' with the post clicked.
+    */
+    getViewPost: async function (req, res) {
+        const postNum = req.query.postNum;
+        const loggedInUser = req.query.loggedIn;
+
+        // Get Current User
+        const loggedIn = await User.findOne({username: loggedInUser}).lean().exec();
+        
+        // Populate Comments
+        const foundData = await Post.findOne({postNum: postNum}).lean().exec();
+
+        if (foundData) {
+            // Display Post
+            console.log("Post Exists");
+
+            const author = await User.findOne({_id: foundData.user_id}).lean().exec();
+
+            res.render("view_post", {
+                pagetitle: "View Post",
+                user: loggedIn,
+                author: author,
+                post: foundData,
+                //comments: updatedArray,
+                //dropdownLinks: dropdowns
+            });
+        } else {
+            // Post not found
+        }
+    },
+
+
+    /*
+            This function adds a post to the database
+    */
+    createPost: async function (req, res) {
+        const loggedIn = req.query.loggedIn;
+        const loggedInUser = await User.findOne({username: loggedIn}).exec();
+
+        console.log(req.body);
+
+        const postNums = await Post.find({}).distinct("postNum");
+        const newPost = new Post ({
+            postNum: postNums[postNums.length - 1] + 1,
+            user_id: loggedInUser._id,
+            title: req.body.title,
+            description: req.body.description
+        });
+
+        // Could remove this with the session thing
+        if (loggedInUser) {
+            try {
+                const result = await newPost.save()
+                console.log("Post Successful");
+                console.log(result);
+                res.sendStatus(200);
+            } catch (error) {
+                console.log("Post Unsuccessful");
+                console.error(error);
+                res.sendStatus(500);
+            }
+        } else {
+            console.log("User logged in does not exist");
+        }
+    },
+
+    /*
+            This function edits a post in the database
+    */
+    editPost: async function (req, res) {
+
+    },
+    
+    /*
+            This function deletes a post in the database
+    */
+    deletePost: async function (req, res) {
+
+    },
+}
+
+module.exports = postController;
+
+/*
 import { getDb } from '../models/db.js';
 import { getDropdownLinks } from '../middleware/navDropdown.js';
 
@@ -135,7 +241,6 @@ const postController = {
         }
     },
     
-   /**************************************************/
 
     findPostNum: async function (req, res) {
         console.log("Request to find Post Num received.");
@@ -311,8 +416,7 @@ const postController = {
             res.sendStatus(500);
         }
     },
-    
-    /**************************************************/
+
 
     updatePostCommentList: async function(req, res) {
         console.log("PUT request received for /post/addedcomment");
@@ -371,3 +475,4 @@ const postController = {
 }
 
 export default postController;
+*/

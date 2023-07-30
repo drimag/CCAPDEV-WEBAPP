@@ -2,6 +2,16 @@ const { Router } = require('express');
 
 const router = Router();
 
+const controller = require('../controllers/controller');
+const postController = require('../controllers/postController');
+
+
+
+router.get("/", controller.getHome);
+router.get("/post", postController.getCheckPost);
+router.get("/viewpost", postController.getViewPost);
+router.post("/post", postController.createPost);
+
 /*
 import controller from '../controllers/controller.js';
 import postController from '../controllers/postController.js';

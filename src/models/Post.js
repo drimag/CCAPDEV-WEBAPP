@@ -1,4 +1,6 @@
 const { Schema, SchemaTypes, model } = require('mongoose');
+const User = require('./User.js');
+const Comment = require('./Comment.js')
 
 const postSchema = new Schema({
     // place code
@@ -8,7 +10,7 @@ const postSchema = new Schema({
     },
     user_id: {
         type: SchemaTypes.ObjectId,
-        ref: 'User',
+        ref: User,
         required: true
     },
     title: {
@@ -33,7 +35,8 @@ const postSchema = new Schema({
         type: [{
             type: SchemaTypes.ObjectId,
             ref: 'Comment'
-        }]
+        }],
+        default: []
     },
     edited: {
         type: SchemaTypes.Boolean,

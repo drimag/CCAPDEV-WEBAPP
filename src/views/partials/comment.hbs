@@ -1,4 +1,4 @@
-<div class="flex-row-container" id="comment{{ num }}">
+<div class="flex-row-container" id="comment{{ commentNum }}">
     <div class="flex-column-container c">
         <img class="comment-user {{user_details.username}}" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
         <div class="line-container"></div>
@@ -37,7 +37,7 @@
             </div>
             {{/ifEqual}}
         </div>
-        <div class="reply-pop">
+        <div class="reply-pop{{commentNum}}">
             {{> makereply }}
         </div>
         <div class="comment-section">

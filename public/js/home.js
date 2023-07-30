@@ -12,8 +12,11 @@ $(document).ready(function() {
 
     if(currentUser === "guest") {
         console.log("Hidden for Vistor");
-        $(".post-creation-container").hide();
-        $("#visitor-note").show();
+        $(".post-creation-container").html(
+            `<div id="visitor-note">
+                <p> You are currently logged in as a guest. Create an account or Login to get started! </p>
+            </div>`);
+            
         $(".home-description").addClass("one-line");
     }
 

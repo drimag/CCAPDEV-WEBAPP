@@ -88,7 +88,10 @@ $(document).ready(function() {
                 console.log("Status code received: " + response.status);
             }
 
-            location.href = "/deleted?loggedIn=" + loggedIn;
+            $(".expanded-container").html(`
+                <div class="page deleted-page">
+                    <p> Post was deleted. </p>
+                </div>`);
 
         } catch(err) {
             console.error(err);

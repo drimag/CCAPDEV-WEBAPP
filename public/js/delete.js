@@ -28,7 +28,7 @@ $(document).ready(function() {
             console.log("Status code received: " + response.status);
 
             data = {
-                id: comment_id
+                commentNum: comment_id
             };
             console.log(data);
             
@@ -58,12 +58,13 @@ $(document).ready(function() {
     });
 
     
+    // Delete Post
     $("#delete-post").click(async function () {
         try {
-            const postNum = window.location.pathname.substring(7);
-            const loggedIn = params.get("loggedIn");
+            const postNum = params.get('postNum');
+
             data = {
-                id: postNum
+                postNum: postNum
             };
             console.log(data);
         
@@ -83,15 +84,13 @@ $(document).ready(function() {
             console.log(response);
 
             if(response.status === 200) {
-                location.reload();
-            } else {
-                console.log("Status code received: " + response.status);
-            }
-
-            $(".expanded-container").html(`
+                $(".expanded-container").html(`
                 <div class="page deleted-page">
                     <p> Post was deleted. </p>
                 </div>`);
+            } else {
+                console.log("Status code received: " + response.status);
+            }
 
         } catch(err) {
             console.error(err);

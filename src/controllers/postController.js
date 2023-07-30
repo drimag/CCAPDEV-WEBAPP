@@ -1,5 +1,6 @@
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
+const Comment = require('../models/Comment.js');
 
 const postController = {
     /*
@@ -30,6 +31,7 @@ const postController = {
         const loggedIn = await User.findOne({username: loggedInUser}).lean().exec();
         
         // Populate Comments (3 Levels only)
+        // TODO: Potential Idea: Add a Load More Button?
         const foundData = await Post.findOne({postNum: postNum})
         .populate({
             path: 'user_id'
@@ -98,7 +100,7 @@ const postController = {
         // Could remove this with the session thing
         if (loggedInUser) {
             try {
-                const result = await newPost.save()
+                const result = await newPost.save();
                 console.log("Post Successful");
                 console.log(result);
                 res.sendStatus(200);
@@ -109,6 +111,7 @@ const postController = {
             }
         } else {
             console.log("User logged in does not exist");
+            // TODO: res.sendStatus(500); (not sure for the status code of this)
         }
     },
 
@@ -123,7 +126,80 @@ const postController = {
             This function deletes a post in the database
     */
     deletePost: async function (req, res) {
+        const postNum = req.body.postNum;
+        console.log(req.body);
+    
+        try {
+            const result = await Post.deleteOne({postNum: postNum}).exec();
+            console.log("Delete Successful.");
+            console.log(result);
+            res.sendStatus(200);
+        } catch (err) {
+            console.log("Delete Unsuccessful.");
+            console.error(err);
+            res.sendStatus(500); // Not sure if this is the right status code
+        }
+        
+    },
 
+    createComment: async function (req, res) {
+        console.log(req.body);
+        // const postNum = req.body.id;
+
+        const loggedIn = await User.findOne({username: req.query.loggedIn}).exec();
+        console.log(loggedIn);
+
+        const commentNums = await Comment.find({}).distinct("commentNum");
+        const newComment = new Comment ({
+            // parent_id: postNum,
+            commentNum: commentNums[commentNums.length - 1] + 1,
+            user_id: loggedIn._id,
+            comment: req.body.comment
+        });
+        
+        // Could remove this with the session thing
+        if (loggedIn) {
+            try {
+                const result = await newComment.save();
+                console.log("Comment Successful");
+                console.log(result);
+                res.sendStatus(200);
+            } catch (error) {
+                console.log("Comment Unsuccessful");
+                console.error(error);
+                res.sendStatus(500);
+            }
+        } else {
+            console.log("User logged in does not exist");
+            // TODO: res.sendStatus(500); (not sure for the status code of this)
+        }
+    },
+
+    /*
+            This function edits a comment in the database
+    */
+    editComment: async function (req, res) {
+
+    },
+            
+    /*
+            This function deletes a comment in the database
+    */
+    deleteComment: async function (req, res) {
+        console.log(req.body);
+        const commentNum = req.body.commentNum;
+    
+        try {
+            const result = await Comment.deleteOne({num: commentNum});
+            console.log("Delete Successful");
+            console.log(result);
+            res.sendStatus(200);
+    
+        } catch (err) {
+            console.log("Delete Unsuccessful");
+            console.error(err);
+            res.sendStatus(500);
+        }
     },
 }
 
@@ -181,56 +257,6 @@ const postController = {
             res.sendStatus(200);
         } catch (error) {
             console.error(error);
-            res.sendStatus(500);
-        }
-    },
-
-    // Post Comment
-    postComment: async function (req, res) {
-        console.log("POST request received for /comment");
-        console.log(req.body);
-        
-        try {
-            const user = await users.findOne({username: req.query.loggedIn});
-            console.log(user);
-            const post = await posts.findOne({num: parseInt(req.body.id)});
-            console.log(post.comments_id);
-            
-            // Get all "nums" in comments
-            const num_array = await comments.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
-            
-            const result = await comments.insertOne({
-                num: last_num + 1,
-                user_id: user._id,
-                comment: req.body.comment,
-                votes: 0,
-                comments_id: [],
-                edited: false
-            });
-            
-            console.log(result);
-            res.sendStatus(200);
-        } catch (err) {
-            console.error(err);
-            res.sendStatus(500);
-        }
-    },
-
-    // Delete Comment
-    deleteComment: async function (req, res) {
-        console.log("DELETE request received for /comment");
-        console.log(req.body);
-    
-        try {
-            const result = await comments.deleteOne({num: parseInt(req.body.id)});
-
-            console.log(result);
-            res.sendStatus(200);
-    
-        } catch (err) {
-            console.error(err);
             res.sendStatus(500);
         }
     },
@@ -362,36 +388,6 @@ const postController = {
         } catch (err) {
             console.error(err);
             res.status(404);
-        }
-    },
-
-    createPost: async function (req, res) {
-        console.log("POST request received for /post");
-
-        try {
-            const user = await users.findOne({username: req.query.loggedIn});
-
-            // Get all "nums" in posts
-            const num_array = await posts.distinct("num");
-            const last_num = num_array[num_array.length - 1];
-            console.log(last_num);
-
-            const result = await posts.insertOne({
-                num: last_num + 1,
-                user_id: user._id,
-                title: req.body.title,
-                description: req.body.description,
-                num_comments: 0,
-                votes: 0,
-                comments_id: [],
-                edited: false
-            });
-
-            console.log(result);
-            res.sendStatus(200);
-        } catch (err) {
-            console.error(err);
-            res.sendStatus(500);
         }
     },
 

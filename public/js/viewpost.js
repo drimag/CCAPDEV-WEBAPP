@@ -19,7 +19,7 @@ $(document).ready(function() {
     $("button.comment").click(function() {
         const comment_id = $(this).attr('id');
         console.log(comment_id);
-        const reply_pop = $("div#comment" + comment_id + " div.reply-pop" + comment_id);
+        const reply_pop = $("div#comment" + comment_id + " div#reply-pop" + comment_id);
         const visible = reply_pop.is(":visible");
         if(visible) {
             reply_pop.hide();

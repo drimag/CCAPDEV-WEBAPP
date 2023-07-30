@@ -1,3 +1,4 @@
+/*
 import { MongoClient } from 'mongodb';
 
 const mongoURI = process.env.MONGODB_URI;
@@ -24,3 +25,12 @@ function signalHandler() {
 process.on('SIGINT', signalHandler);
 process.on('SIGTERM', signalHandler);
 process.on('SIGQUIT', signalHandler);
+*/
+
+const mongoose = require('mongoose');
+
+function connect() {
+    return mongoose.connect(process.env.MONGODB_URI);
+}
+
+module.exports = connect;

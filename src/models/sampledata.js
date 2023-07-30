@@ -1,8 +1,57 @@
-import { getDb } from "./db.js";
+// import { getDb } from "./db.js";
+// const db = getDb();
 
-const db = getDb();
+const User = require('./User.js');
+const Post = require('./Post.js');
+const Comment = require('./Comment.js');
 
+async function addSampleData() {
+    try {
+        await User.deleteMany({});
+        //await Post.deleteMany({});
+        //await Comment.deleteMany({});
+        
+        // TODO: Add PFPs
+        const newUser = new User ({
+            username: 'kkura',
+            password: '1234'
+        });
+
+        const newUser2 = new User ({
+            username: 'chaechae',
+            password: '1234'
+        });
+
+        const newUser3 = new User ({
+            username: 'yunjin',
+            password: '1234'
+        });
+
+        const newUser4 = new User ({
+            username: 'zuha',
+            password: '1234'
+        });
+
+        const newUser5 = new User ({
+            username: 'manchae',
+            password: '1234'
+        });
+
+        await newUser.save();
+        await newUser2.save();
+        await newUser3.save();
+        await newUser4.save();
+        await newUser5.save();
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+module.exports = addSampleData;
+/*
 export async function addSampleData (callback) {
+    
     // Create Collections
     const users = db.collection("users");
     const posts = db.collection("posts");
@@ -239,3 +288,4 @@ export async function addSampleData (callback) {
         callback(err);
     }
 }
+*/

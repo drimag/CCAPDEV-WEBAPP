@@ -12,6 +12,7 @@ router.get("/post", postController.getCheckPost);
 router.get("/viewpost", postController.getViewPost);
 router.post("/post", postController.createPost);
 router.delete("/post", postController.deletePost);
+router.post("/updatepost", postController.editPost);
 
 router.post("/comment", postController.createComment);
 router.delete("/comment", postController.deleteComment);

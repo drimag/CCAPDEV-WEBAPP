@@ -1,6 +1,29 @@
 
 $(document).ready(function() {
+    $("#edit-post-container").hide();
 
+    $(".edit-comment").click(function() {
+        $(this).hide();
+        
+        const comment_id = $(this).attr('id').substring(12).trimEnd();
+        console.log(comment_id);
+
+        // Hide Comment Container
+        const desc_container = $("div#comment" + comment_id + " p.comment-desc");
+        desc_container.hide();
+
+        // Show Edit Container
+        const edit_pop = $("div#comment" + comment_id + " form.editCommentForm");
+        edit_pop.show();
+    });
+
+    $("#edit-post").click(function() {
+        $(this).hide();
+        $(".post-title").hide();
+        $(".viewpost-description").hide();
+        $("#edit-post-container").show();
+    });
+    
     // Create Comment Functions
     $("#createCommentForm").hide();
     $(".reply-pop").hide();

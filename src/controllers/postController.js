@@ -111,7 +111,7 @@ const postController = {
             }
         } else {
             console.log("User logged in does not exist");
-            // TODO: res.sendStatus(500); (not sure for the status code of this)
+            res.sendStatus(400);
         }
     },
 
@@ -119,7 +119,25 @@ const postController = {
             This function edits a post in the database
     */
     editPost: async function (req, res) {
-
+        console.log(req.body);
+        
+        const foundData = await Post.findOne({postNum: req.body.postNum});
+        console.log(foundData);
+    
+        if (foundData) {
+            try {
+                const result = await Post.updateOne({postNum: req.body.postNum},
+                    {title: req.body.title, description: req.body.description, edited: true});
+                console.log("Update Successful");
+                console.log(result);
+                res.sendStatus(200);
+            } catch (error) {
+                console.error(error);
+                res.sendStatus(500);
+            }
+        } else {
+            res.sendStatus(400);
+        }
     },
     
     /*
@@ -128,7 +146,8 @@ const postController = {
     deletePost: async function (req, res) {
         const postNum = req.body.postNum;
         console.log(req.body);
-    
+        
+        // TODO: Put an if statement here to check if post exists to send a res
         try {
             const result = await Post.deleteOne({postNum: postNum}).exec();
             console.log("Delete Successful.");

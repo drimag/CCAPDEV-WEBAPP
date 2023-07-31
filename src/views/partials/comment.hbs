@@ -1,4 +1,5 @@
 <div class="flex-row-container" id="comment{{ commentNum }}">
+
     <div class="flex-column-container c">
         <img class="comment-user {{user_details.username}}" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
         <div class="line-container"></div>
@@ -30,7 +31,7 @@
             </div>
 
 
-            {{#ifEqual currentUser user_details.username}}
+            {{#ifEqual @root.user.username user_id.username}}
             <div class="flex-row-container comment-buttons">
                 <button id="edit-comment{{commentNum}}" class="add-edit-button edit-comment"> Edit </button>
                 <button id="delete-comment{{commentNum}}" class="delete-c add-edit-button"> Delete </button>

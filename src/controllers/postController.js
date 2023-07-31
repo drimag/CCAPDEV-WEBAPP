@@ -234,7 +234,7 @@ const postController = {
         const commentNum = req.body.commentNum;
     
         try {
-            const result = await Comment.deleteOne({num: commentNum});
+            const result = await Comment.deleteOne({commentNum: commentNum});
             console.log("Delete Successful");
             console.log(result);
             res.sendStatus(200);

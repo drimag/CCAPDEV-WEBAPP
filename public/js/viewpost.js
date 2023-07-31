@@ -12,7 +12,7 @@ $(document).ready(function() {
         desc_container.hide();
 
         // Show Edit Container
-        const edit_pop = $("div#comment" + comment_id + " form.editCommentForm");
+        const edit_pop = $("div#editdiv" + comment_id);
         edit_pop.show();
     });
 

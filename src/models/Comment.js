@@ -18,7 +18,8 @@ const commentSchema = new Schema({
     },
     parent_id: {
         type: SchemaTypes.ObjectId,
-        ref: 'Comment'
+        ref: 'Comment',
+        default: null
     },
     comment: {
         type: SchemaTypes.String,

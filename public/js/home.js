@@ -12,13 +12,30 @@ $(document).ready(function() {
 
     if(currentUser === "guest") {
         console.log("Hidden for Vistor");
+        $("#opf-container").html(``);
         $(".post-creation-container").html(
             `<div id="visitor-note">
                 <p> You are currently logged in as a guest. Create an account or Login to get started! </p>
             </div>`);
             
         $(".home-description").addClass("one-line");
+    } else {
+        $(".post-creation-container").hide();
     }
+
+    $("#openpostform").click(function() {
+        $(this).hide();
+        $(".post-creation-container").show();
+    });
+
+    $("#createPostForm legend").click(function() {
+        $(".post-creation-container").hide();
+        $("#openpostform").show();
+    });
+
+    $("#createPostForm legend").hover(function() {
+        $(this).css('cursor', 'pointer');
+    });
 
     $("div.post-container").click(async function() {
         console.log("View Post");

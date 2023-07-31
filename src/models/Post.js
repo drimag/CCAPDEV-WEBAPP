@@ -11,6 +11,11 @@ const postSchema = new Schema({
         ref: 'User',
         required: true
     },
+    date: {
+        type: SchemaTypes.Date,
+        default: Date.now(),
+        required: true
+    },
     title: {
         type: SchemaTypes.String,
         required: true

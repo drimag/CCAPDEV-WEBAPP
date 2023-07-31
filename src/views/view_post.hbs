@@ -28,9 +28,13 @@
                     <div id="edit-post-container">
                         {{> edit_post }}
                     </div>
+
                     {{#if post.edited }}
                     <p class="edited-mark"> (edited)</p>
                     {{/if}}
+
+                    <br>
+                    <p class="date">{{ post.date }} </p>
                 </div>
             </div>
             

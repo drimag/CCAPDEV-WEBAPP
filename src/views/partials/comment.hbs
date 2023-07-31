@@ -1,7 +1,7 @@
 <div class="flex-row-container" id="comment{{ commentNum }}">
 
     <div class="flex-column-container c">
-        <img class="comment-user {{user_details.username}}" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
+        <img class="comment-user {{user_id.username}}" src="data:image/{{ user_id.pfp.contentType }};base64,{{ user_id.pfp.data }}">
         <div class="line-container"></div>
     </div>
 
@@ -9,6 +9,7 @@
         <p class="comment-username">@{{ user_id.username }}</p>
         <p class="replied-comment">Replied to <b>@{{ replied_to }}</b></p>
         <p class="comment-desc">{{ comment }} </p>
+        <p class="date">{{ date }} </p>
 
         <div id="editdiv{{commentNum}}">
             {{> edit_comment }}

@@ -30,11 +30,21 @@
     justify-content: center;
 }
 
-#createPostForm legend {
+.date {
+    font-size: 13px;
+    color: rgb(88, 84, 84);
+}
+
+#createPostForm legend, #openpostform {
     font-weight: bold;
     background-color: white;
     border-radius: 10px;
     padding: 10px;
+}
+
+#openpostform {
+    display: flex;
+    justify-self: center;
 }
 
 #createPostForm label, #createCommentForm label, #editCommentForm label, #editPostForm label {

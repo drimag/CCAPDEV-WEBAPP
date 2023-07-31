@@ -17,8 +17,25 @@ const userSchema = new Schema({
         default: ""
     },
     pfp: {
-        type: Schema.Types.String,
-        data: SchemaTypes.Buffer
+        data: SchemaTypes.Buffer,
+        contentType: SchemaTypes.String
+        // TODO: maybe add a default img if none added?
+    },
+    upvoteComments: {
+        type: [SchemaTypes.Number],
+        default: []
+    },
+    downvoteComments: {
+        type: [SchemaTypes.Number],
+        default: []
+    },
+    upvoteComments: {
+        type: [SchemaTypes.Number],
+        default: []
+    },
+    downvoteComments: {
+        type: [SchemaTypes.Number],
+        default: []
     }
 });
 

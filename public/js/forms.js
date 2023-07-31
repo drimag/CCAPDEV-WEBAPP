@@ -1,12 +1,11 @@
 // Currently Editing!
+// TODO: Add Error Message when Input is EMPTY! (create + edit)
 
 // Buttons
 const createPostBtn = document.querySelector("#createPost");
 const createCommentBtn = document.querySelector("#createComment");
 
 const editPostBtn = document.querySelector("#editPost");
-// TODO: Edit Comment
-
 const deletePostBtn = document.querySelector("#delete-post");
 
 // Forms
@@ -57,7 +56,7 @@ createPostBtn?.addEventListener("click", async (e) => {
 });
 
 /*
-    This function sends data to the route '/updatepost' via a POST request.
+    This function sends data to the route '/post' via a PUT request.
 */
 editPostBtn?.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -81,8 +80,8 @@ editPostBtn?.addEventListener("click", async (e) => {
 
     const jString = JSON.stringify(data);
 
-    let response = await fetch("/updatepost?loggedIn=" + loggedIn, {
-        method: 'POST',
+    let response = await fetch("/post?loggedIn=" + loggedIn, {
+        method: 'PUT',
         body: jString,
         headers: {
             'Content-Type': 'application/json'
@@ -101,6 +100,9 @@ editPostBtn?.addEventListener("click", async (e) => {
     }
 });
 
+/*
+    This function sends data to the route '/post' via a DELETE request.
+*/
 deletePostBtn?.addEventListener("click", async (e) => {
     const postNum = params.get('postNum');
 
@@ -132,7 +134,7 @@ deletePostBtn?.addEventListener("click", async (e) => {
     }
 });
 /*
-    TODO:   This function sends data to the route '/comment' via a POST request.
+    This function sends data to the route '/comment' via a POST request.
 */
 createCommentBtn?.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -167,28 +169,10 @@ createCommentBtn?.addEventListener("click", async (e) => {
     if(response.status === 200) {
         console.log("Comment Successful");
         location.reload();
-        // TODO: update post comment count (?)
-        /*
-        response = await fetch("/post/addedcomment?loggedIn=" + currentUser, {
-            method: 'PUT',
-            body: jString,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if(response.status === 200) {
-            location.reload();
-        } else {
-            console.log(`received response: ${response.status}`);
-        }
-        */
     } else {
         console.log(`received response: ${response.status}`);
     }
 });
-
-// Edit Comment
 
 /*
 $(".editComment").click(async function(e) {
@@ -243,7 +227,9 @@ $(".editComment").click(async function(e) {
 */
 
 $(document).ready(function() {
-    // Delete Comment
+    /*
+            This function sends data to the route '/comment' via a DELETE request.
+    */
     $(".delete-c").click(async function() {
         console.log("clicked delete button");
         const commentNum = $(this).attr('id').substring(14);
@@ -266,6 +252,9 @@ $(document).ready(function() {
         }
     });
 
+    /*
+            This adds a popup note when hovering over delete button
+    */
     $(".delete-c").on({
         mouseover: function() {
             const commentNum = $(this).attr('id').substring(14);
@@ -280,7 +269,9 @@ $(document).ready(function() {
     // TODO: Edit Comment
 
 
-    // Create Reply
+    /*
+            This function sends data to the route '/reply' via a POST request.
+    */
     $(".createReply").click(async function(e) {
         e.preventDefault();
         console.log("clicked add reply");
@@ -296,7 +287,6 @@ $(document).ready(function() {
         const comment = $("#new-reply" + commentNum).val();
 
         if (comment === '') {
-            // TODO: Add Error Message / Add Input
             $("#noinputmsg" + commentNum).text('Reply cannot be empty!');
         } else {
             let data = {
@@ -322,11 +312,9 @@ $(document).ready(function() {
             if(response.status === 200) {
                 console.log("Reply Successful");
                 location.reload();
-                // TODO: update comment comment count (?)
-        
             } else {
                 console.log(`received response: ${response.status}`);
-                // Add error message
+                // TODO: Add error message
             }
         }
     });

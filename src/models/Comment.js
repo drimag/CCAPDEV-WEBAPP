@@ -21,6 +21,11 @@ const commentSchema = new Schema({
         ref: 'Comment',
         default: null
     },
+    date: {
+        type: SchemaTypes.Date,
+        default: Date.now(),
+        required: true
+    },
     comment: {
         type: SchemaTypes.String,
         required: true

@@ -1,0 +1,19 @@
+Comments from MCO2:
+- allow user to create posts with image attachments
+- redirect the user to login on succesful register, 
+    and/or inform the user that the registration was successful
+
+done: 
+x include date of post / comment create in post and comment components 
+x would be better if create post form fields are hidden until a button is pressed
+
+----------------------------------------------------------------------------------------
+TODO: (dont mind this its just for jaeme's todo)
+- format date
+- edit comment
+- clean + adjust profile funcs (controller + js + hbs)
+- status codes
+- merge createcomment + createreply
+- fix format for makereply + makecomment (form peeking out of div)
+- fix sample data input thing (?)
+- render - application deployment

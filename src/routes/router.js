@@ -5,19 +5,58 @@ const router = Router();
 const controller = require('../controllers/controller');
 const postController = require('../controllers/postController');
 
+// Home Route ✔️
+router.get(["/", "/home", "/homepage"], controller.getHome);
 
-
-router.get("/", controller.getHome);
+// Post Routes ✔️
 router.get("/post", postController.getCheckPost);
-router.get("/viewpost", postController.getViewPost);
 router.post("/post", postController.createPost);
 router.delete("/post", postController.deletePost);
-router.post("/updatepost", postController.editPost);
+router.put("/post", postController.editPost);
+router.get("/viewpost", postController.getViewPost);
+// TODO: maybe seperate the update num comments from create+delete like in MCO2 (will not implement yet)
 
+// Comment Routes
 router.post("/comment", postController.createComment);
 router.delete("/comment", postController.deleteComment);
+router.post("/reply", postController.createReply); // may delete bc merged
+// TODO: router.put("/comment", postController.editComment);
 
-router.post("/reply", postController.createReply);
+
+/*
+// Write cookies
+router.get("/", function(req, res) {
+    res.cookie("foo", "bar", {
+        maxAge: 60*60*1000,
+        httpOnly: true
+    })
+})
+
+// Read cookies
+const cookieparser = require("cookie-parser");
+app.use(cookieparser());
+app.get("/", function(req, res) {
+    let cookiefoo = req.cookies.foo
+
+    if(cookiefoo) {
+        console.log("foo: " + cookiefoo)
+    }
+})
+
+// Read/write session
+const session = require("express-session");
+
+app.use(session({
+    secret: "testing testing",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000*60*60*24*30,
+        httpOnly: true
+    }
+}))
+
+*/
 
 /*
 import controller from '../controllers/controller.js';
@@ -86,3 +125,9 @@ export default router;
 */
 
 module.exports = router;
+
+/*
+
+
+
+ */

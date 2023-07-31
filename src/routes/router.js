@@ -4,6 +4,7 @@ const router = Router();
 
 const controller = require('../controllers/controller');
 const postController = require('../controllers/postController');
+const profileController = require('../controllers/profileController');
 
 // Home Route ✔️
 router.get(["/", "/home", "/homepage"], controller.getHome);
@@ -22,6 +23,15 @@ router.delete("/comment", postController.deleteComment);
 router.post("/reply", postController.createReply); // may delete bc merged
 // TODO: router.put("/comment", postController.editComment);
 
+// TODO: Profile Routes
+router.get("/profile/:username", profileController.getProfile);
+/*
+    OLD ROUTES:
+    router.get("/edit-profile", profileController.getEditProfile);
+    router.post("/edit-profile", profileController.editProfile);
+    router.get("/profile", profileController.getMyProfile);
+    router.get("/profile/:username", profileController.getProfile);
+*/
 
 /*
 // Write cookies

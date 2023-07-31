@@ -1,3 +1,4 @@
+/*
 import { getDb } from '../models/db.js';
 import { getDropdownLinks } from '../middleware/navDropdown.js';
 
@@ -6,8 +7,25 @@ const db = getDb();
 const users = db.collection("users");
 const posts = db.collection("posts");
 const comments = db.collection("comments");
+*/
 
-// GET USER
+const User = require('../models/User.js');
+const Post = require('../models/Post.js');
+const Comment = require('../models/Comment.js');
+
+const profileController = {
+    getProfile: async function (req, res) {
+        // add code
+        res.render("profile");
+    },
+
+}
+
+//export default profileController;
+module.exports = profileController;
+
+/*
+
 const profileController = {
     
     // Edit Profile
@@ -241,5 +259,4 @@ const profileController = {
         }
     }
 }
-
-export default profileController;
+*/

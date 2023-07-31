@@ -176,6 +176,8 @@ const postController = {
                 });
 
                 const result = await newComment.save();
+                // update num of comments count
+                await Post.updateOne({postNum: req.body.postNum}, {$inc: {num_comments: 1}});
                 console.log("Comment Successful");
                 console.log(result);
                 res.sendStatus(200);
@@ -205,7 +207,16 @@ const postController = {
         const commentNum = req.body.commentNum;
         
         try {
+            const comment = await Comment.findOne({commentNum: commentNum});
             const result = await Comment.deleteOne({commentNum: commentNum});
+
+            if (comment.parent_id == null) {
+                // updates count of post
+                await Post.updateOne({_id: comment.post_id}, {$inc: {num_comments: -1}});
+            } else {
+                // updates count of comment
+                await Comment.updateOne({_id: comment.parent_id}, {$inc: {num_comments: -1}});
+            }
             console.log("Delete Successful");
             console.log(result);
             res.sendStatus(200);
@@ -239,6 +250,8 @@ const postController = {
                 });
 
                 const result = await newComment.save();
+                // update num of comments count
+                await Comment.updateOne({commentNum: req.body.commentNum}, {$inc: {num_comments: 1}});
                 console.log("Reply Successful");
                 console.log(result);
                 res.sendStatus(200);

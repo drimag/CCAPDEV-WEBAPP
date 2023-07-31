@@ -57,10 +57,11 @@ $(document).ready(function() {
             if(currentUser === "guest") {
                 location.href = login;
             } else {
-                location.href = "/viewpost?postNum=" + id.substring(1) + "&title="+ title + "&loggedIn=" + currentUser;
+                // TODO: add title like in MCO2 (dont implement yet)
+                location.href = "/viewpost?postNum=" + id.substring(1) + "&loggedIn=" + currentUser;
             }
         } else {
-            // Bad Status Code
+            // TODO: Bad Status Code
         }
     });
 
@@ -137,5 +138,3 @@ function emptyFeed(btn, txt) {
     btn.hide();
     txt.show();
 }
-
-// TODO: sort posts by popularity (votes descending)

@@ -155,6 +155,10 @@ const postController = {
         
     },
 
+    /*
+            This function adds a comment to the database and updates
+            the post document's number of comments
+    */
     createComment: async function (req, res) {
         console.log(req.body);
         // const postNum = req.body.id;
@@ -193,7 +197,7 @@ const postController = {
     },
 
     /*
-            This function edits a comment in the database
+            TODO: This function edits a comment in the database
     */
     editComment: async function (req, res) {
 
@@ -228,6 +232,11 @@ const postController = {
         }
     },
 
+    /*
+            This function adds a comment to the database and updates
+            the replied to comment document's number of comments
+            TODO: merge to createComment
+    */
     createReply: async function (req, res) {
         console.log(req.body);
 

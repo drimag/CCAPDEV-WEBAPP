@@ -3,6 +3,9 @@ const Post = require('../models/Post.js');
 // const Comment = require('../models/Comment.js');
 
 const controller = {
+    /*
+            This displays 'index.hbs' with all posts in the database.
+    */
     getHome: async function (req, res) {
         console.log('getHome received');
 
@@ -92,27 +95,31 @@ const controller = {
         */
     },
 
-    getLogin: async function (req, res) {
-        // Dropdown links for navbar
-        /*
-        let currentUser = req.query.loggedIn;
-        if(currentUser == null || currentUser === "" || currentUser == undefined) currentUser = "guest";
-        const dropdowns = getDropdownLinks(currentUser);
-        
-        res.render("login", {
-            pagetitle: "Login",
-            dropdownLinks: dropdowns
-        });
-
-        console.log("page does not exist");
-        */
-    },
-
+    /*
+            TODO: This displays 'profile.hbs' of a user.
+    */
     getProfile: async function (req, res) {
         // add code
         res.render("profile");
     },
+
+    /*
+            TODO: This displays 'edit_profile.hbs' of a user.
+    */
+    getEditProfile: async function(req, res) {
+        //add code
+        res.render("edit_profile");
+    },
+
+    /*
+            TODO: This function edits a user profile in the database
+    */
+    editProfile: async function (req, res) {
+        // add code
+        
+    }
 }
+
 
 module.exports = controller;
 
@@ -258,88 +265,6 @@ const profileController = {
 
             res.render("profile", {
                 pagetitle: req.params.username + "'s Profile",
-                user: currentUser,
-                view_user: view_user,
-                posts: updatedPostsArray,
-                comments: updatedArray,
-                dropdownLinks: dropdowns
-            })
-        } catch (error) {
-            console.error(error);
-            res.sendStatus(500);
-        }
-    },
-
-    getMyProfile: async function (req, res) {
-        console.log("Request to profile received.");
-        
-        let curr = req.query.loggedIn;
-    
-        try {
-            if(curr == null) {
-                curr = await users.findOne({username: "guest"});
-            } else {
-                curr = await users.findOne({username: curr});
-            }
-
-            const currentUser = curr;
-            const view_user = curr;
-            const postsArray = await posts.aggregate(
-                [
-                    { 
-                        $match: { user_id : view_user._id }
-                    },
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    },
-                    {
-                        '$unwind': '$user_details'
-                    }
-                ]
-            ).toArray();
-
-            
-            const updatedPostsArray = postsArray.map((element) => ({
-                ...element,
-                currentUser: currentUser.username
-              }));
-            console.log(updatedPostsArray);
-        
-            const commentsArray = await comments.aggregate(
-                [
-                    { 
-                        $match: { user_id : view_user._id }
-                    },
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    },
-                    {
-                        '$unwind': '$user_details'
-                    }
-                ]
-            ).toArray();
-            const updatedArray = commentsArray.map((element) => ({
-                ...element,
-                currentUser: currentUser.username
-              }));
-
-            console.log(postsArray);
-            
-            // Dropdown links for navbar
-            const dropdowns = getDropdownLinks(currentUser.username);
-            
-            res.render("profile", {
-                pagetitle: currentUser.username + "'s Profile",
                 user: currentUser,
                 view_user: view_user,
                 posts: updatedPostsArray,

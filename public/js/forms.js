@@ -147,7 +147,7 @@ createCommentBtn?.addEventListener("click", async (e) => {
     console.log(postNum);
 
     let data = {
-        // postNum = postNum,
+        postNum: postNum,
         comment: formData.get("new-comment")
     }
     

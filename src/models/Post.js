@@ -29,13 +29,6 @@ const postSchema = new Schema({
         required: true,
         default: 0
     },
-    comments_id: {
-        type: [{
-            type: SchemaTypes.ObjectId,
-            ref: 'Comment'
-        }],
-        default: []
-    },
     edited: {
         type: SchemaTypes.Boolean,
         required: true,

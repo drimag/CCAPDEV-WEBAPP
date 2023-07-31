@@ -2,6 +2,19 @@ const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
 
+async function findReplies(comment) {
+    let replies = await Comment.find({parent_id: comment._id})
+    .populate({path: 'user_id'})
+    .lean().exec();
+
+    if (replies.length > 0) {
+        comment.replies = replies;
+        for (const reply of comment.replies) {
+            await findReplies(reply);
+        }
+    }
+  }
+
 const postController = {
     /*
             This function checks if the post exists.
@@ -32,7 +45,9 @@ const postController = {
         
         // Populate Comments (3 Levels only)
         // TODO: Potential Idea: Add a Load More Button?
-        const foundData = await Post.findOne({postNum: postNum})
+        const foundData = await Post.findOne({postNum: postNum}).lean().exec();
+        // TODO: Get Updated List of Comment Values
+        /*
         .populate({
             path: 'user_id'
         })
@@ -57,7 +72,7 @@ const postController = {
             ]
         })
         .lean().exec();
-
+        */
         console.log(foundData);
 
         if (foundData) {
@@ -65,20 +80,28 @@ const postController = {
             console.log("Post Exists");
 
             const author = await User.findOne({_id: foundData.user_id}).lean().exec();
+            
+            // Get Comments Level 1
+            const comments = await Comment.find({post_id: foundData._id, parent_id: null})
+            .populate({ path: 'user_id'})
+            .lean().exec();
+
+            for(const comment of comments) {
+                await findReplies(comment);
+            }
 
             res.render("view_post", {
                 pagetitle: "View Post",
                 user: loggedIn,
                 author: author,
                 post: foundData,
-                //comments: updatedArray,
+                comments: comments,
                 //dropdownLinks: dropdowns
             });
         } else {
             // Post not found
         }
     },
-
 
     /*
             This function adds a post to the database
@@ -168,17 +191,19 @@ const postController = {
         const loggedIn = await User.findOne({username: req.query.loggedIn}).exec();
         console.log(loggedIn);
 
-        const commentNums = await Comment.find({}).distinct("commentNum");
-        const newComment = new Comment ({
-            // parent_id: postNum,
-            commentNum: commentNums[commentNums.length - 1] + 1,
-            user_id: loggedIn._id,
-            comment: req.body.comment
-        });
+        const post = await Post.findOne({postNum: req.body.postNum}).exec();
         
         // Could remove this with the session thing
-        if (loggedIn) {
+        if (loggedIn || post) {
             try {
+                const commentNums = await Comment.find({}).distinct("commentNum");
+                const newComment = new Comment ({
+                    commentNum: commentNums[commentNums.length - 1] + 1,
+                    user_id: loggedIn._id,
+                    post_id: post._id,
+                    comment: req.body.comment
+                });
+
                 const result = await newComment.save();
                 console.log("Comment Successful");
                 console.log(result);

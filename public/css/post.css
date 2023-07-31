@@ -286,6 +286,17 @@ p.number {
     margin-left: 0px;
 }
 
+.load-replies {
+    border: 1px solid blueviolet;
+    font-family: Karla, sans-serif;
+    border-radius: 10px;
+    background-color: lavender;
+    color: blueviolet;
+    margin: 5px;
+    margin-left: 0px;
+    font-size: 17px;
+}
+
 #add-comment {
     font-size: 20px;
     height: 50px;

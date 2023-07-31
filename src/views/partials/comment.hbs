@@ -40,9 +40,9 @@
         <div class="reply-pop" id="reply-pop{{commentNum}}">
             {{> makereply }}
         </div>
-        <div class="comment-section">
+        <div class="comment-section" id="cs-{{commentNum}}">
             <!--- Nested comments--->   
-            {{#each comments_id }}
+            {{#each replies }}
                 {{> comment this replied_to=../user_id.username}}
             {{/each }}
         </div>

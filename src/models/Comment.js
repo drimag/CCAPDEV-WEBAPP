@@ -11,6 +11,15 @@ const commentSchema = new Schema({
         ref: 'User',
         required: true
     },
+    post_id: {
+        type: SchemaTypes.ObjectId,
+        ref: 'Post',
+        required: true
+    },
+    parent_id: {
+        type: SchemaTypes.ObjectId,
+        ref: 'Comment'
+    },
     comment: {
         type: SchemaTypes.String,
         required: true
@@ -24,13 +33,6 @@ const commentSchema = new Schema({
         type: SchemaTypes.Number,
         required: true,
         default: 0
-    },
-    comments_id: {
-        type: [{
-            type: SchemaTypes.ObjectId,
-            ref: 'Comment'
-        }],
-        default: []
     },
     edited: {
         type: SchemaTypes.Boolean,

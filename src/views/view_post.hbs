@@ -52,9 +52,9 @@
         <button id="add-comment" class="add-edit-button"> Add a Comment </button>
         {{> makecomment }}
 
-        <div class=" flex-column-container comment-section">
+        <div class=" flex-column-container comment-section" id="post_comments">
             
-            {{#each post.comments_id }}
+            {{#each comments }}
                 {{> comment this replied_to=@root.author.username}}
             {{/each }}
         </div>

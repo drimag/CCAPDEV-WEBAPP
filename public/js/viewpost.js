@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     $("#edit-post-container").hide();
 

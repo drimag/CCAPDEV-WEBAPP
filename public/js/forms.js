@@ -8,7 +8,6 @@ const editPostBtn = document.querySelector("#editPost");
 // TODO: Edit Comment
 
 const deletePostBtn = document.querySelector("#delete-post");
-// TODO: Delete Comment
 
 // Forms
 const postForm = document.forms.createPostForm;
@@ -243,109 +242,93 @@ $(".editComment").click(async function(e) {
     });
 */
 
-// Create Reply
-/*
-$(".createReply").click(async function(e) {
-        e.preventDefault();
-        const commentNum = $(this).attr('id').substring(11);
-        console.log(commentNum)
+$(document).ready(function() {
+    // Delete Comment
+    $(".delete-c").click(async function() {
+        console.log("clicked delete button");
+        const commentNum = $(this).attr('id').substring(14);
+        console.log(commentNum);
 
-        const new_reply = $("#new-reply" + commentNum).val();
-        console.log(new_reply);
-
-        console.log("Submit Reply Data");
-        const currentUser = params.get("loggedIn"); 
-
-        let data = {
-            loggedIn: currentUser,
-            num: commentNum,
-            reply: new_reply
-        }
-        
-        console.log(data);
-        const jString = JSON.stringify(data);
-        console.log(jString);
-
-        // Update Comment (add comment in array)
-        
-        try {
-            let response = await fetch("/comment/reply?loggedIn=" + currentUser, {
-                method: 'PUT',
-                body: jString,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            console.log(response);
-            
-            if(response.status === 200) {
-                location.reload();
-            } else {
-                console.log("Status code received: " + response.status);
+        const response = await fetch('/comment', {
+            method: 'DELETE',
+            body: JSON.stringify({
+                commentNum: commentNum
+            }),
+            headers: {
+                'Content-type': 'application/json'
             }
-            
-        } catch (err) {
-            console.error(err);
-        }
-    })
-*/
+        });
 
-// Delete Comment
-/*
- $(".delete-c").click(async function() {
-        try {
-            const comment_id = $(this).attr('id').substring(14);
-            const postNum = window.location.pathname.substring(7);
-            const loggedIn = params.get("loggedIn");
-        
-            let data = {
-                id: comment_id,
-                postNum: postNum
-            };
-            console.log(data);
-
-            // Update Post (Remove Comment from Array)
-            let jString = JSON.stringify(data);
-
-            let response = await fetch("/post/removecomment?loggedIn=" + loggedIn, {
-                method: 'PUT',
-                body: jString,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            console.log(response);
-            console.log("Status code received: " + response.status);
-
-            data = {
-                commentNum: comment_id
-            };
-            console.log(data);
-            
-            // Delete Comment
-            jString = JSON.stringify(data);
-    
-            response = await fetch("/comment", {
-                method: 'DELETE',
-                body: jString,
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
-
-            console.log(response);
-        
-            if(response.status === 200) {
-                location.reload();
-            } else {
-                console.log("Status code received: " + response.status);
-            }
-
-            res.render("/posts");
-        } catch (error) {
-            console.error(error);
+        if (response.status === 200) {
+            location.reload();
+        } else {
+            // Not Deleted!
         }
     });
-*/
+
+    $(".delete-c").on({
+        mouseover: function() {
+            const commentNum = $(this).attr('id').substring(14);
+            $("#note" + commentNum).text('Note: Deleting a comment will remove the entire view of the thread');
+        },
+        mouseout: function() {
+            const commentNum = $(this).attr('id').substring(14);
+            $("#note" + commentNum).text('');
+        }
+    });
+
+    // TODO: Edit Comment
+
+
+    // Create Reply
+    $(".createReply").click(async function(e) {
+        e.preventDefault();
+        console.log("clicked add reply");
+
+        const replyForm = document.forms.createReplyForm;
+
+        // Get values
+        const loggedIn = params.get('loggedIn');
+        const postNum = params.get('postNum');
+        const commentNum = $(this).attr('id').substring(11);
+        console.log(commentNum);
+
+        const comment = $("#new-reply" + commentNum).val();
+
+        if (comment === '') {
+            // TODO: Add Error Message / Add Input
+            $("#noinputmsg" + commentNum).text('Reply cannot be empty!');
+        } else {
+            let data = {
+                postNum: postNum,
+                commentNum: commentNum,
+                comment: comment
+            }
+            
+            const jString = JSON.stringify(data);
+            console.log(jString);
+    
+            const response = await fetch("/reply?loggedIn=" + loggedIn, {
+                method: 'POST',
+                body: jString,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            replyForm.reset();
+            console.log(response);
+    
+            if(response.status === 200) {
+                console.log("Reply Successful");
+                location.reload();
+                // TODO: update comment comment count (?)
+        
+            } else {
+                console.log(`received response: ${response.status}`);
+                // Add error message
+            }
+        }
+    });
+    
+});

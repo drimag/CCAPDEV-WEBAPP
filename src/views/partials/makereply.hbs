@@ -1,9 +1,7 @@
-<form id="createReplyForm" name="createReplyForm" onsubmit="return false" autocomplete="off">
+<form id="createReplyForm" name="createReplyForm" autocomplete="off">
     <fieldset>
-        <textarea name="new-reply" id="new-reply{{num}}" class="text new-reply" placeholder="Reply..." required></textarea> <br>
-        <button id="createReply{{num}}" class="createReply" type="submit"> Submit </button>
+        <textarea name="new-reply{{commentNum}}" id="new-reply{{commentNum}}" class="text new-reply" placeholder="Reply..." required></textarea> <br>
+        <button id="createReply{{commentNum}}" class="createReply" type="submit"> Submit </button>
         <button id="clearReply" type="reset"> Clear </button>
-        
     </fieldset>
-    
 </form>

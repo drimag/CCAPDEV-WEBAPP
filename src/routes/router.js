@@ -17,6 +17,8 @@ router.post("/updatepost", postController.editPost);
 router.post("/comment", postController.createComment);
 router.delete("/comment", postController.deleteComment);
 
+router.post("/reply", postController.createReply);
+
 /*
 import controller from '../controllers/controller.js';
 import postController from '../controllers/postController.js';

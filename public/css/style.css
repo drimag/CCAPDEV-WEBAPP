@@ -128,3 +128,15 @@ a:visited, a {
 #search-notice {
     margin: 10px 25px;
 }
+
+.note {
+    font-size: 10px;
+    font-weight: bold;
+    background-color: rgb(233, 198, 198);
+    width: 310px;
+}
+
+.noinputmsg {
+    font-weight: bold;
+    color: rgb(163, 28, 28);
+}

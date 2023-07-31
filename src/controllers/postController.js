@@ -42,37 +42,7 @@ const postController = {
 
         // Get Current User
         const loggedIn = await User.findOne({username: loggedInUser}).lean().exec();
-        
-        // Populate Comments (3 Levels only)
-        // TODO: Potential Idea: Add a Load More Button?
         const foundData = await Post.findOne({postNum: postNum}).lean().exec();
-        // TODO: Get Updated List of Comment Values
-        /*
-        .populate({
-            path: 'user_id'
-        })
-        .populate({
-            path: 'comments_id',
-            populate: 
-            [
-                { path: 'user_id' },
-                {
-                    path: 'comments_id',
-                    populate: 
-                    [
-                        { path: 'user_id' },
-                        {
-                            path: 'comments_id',
-                            populate: {
-                                path: 'user_id'
-                            }
-                        }
-                    ]
-                }
-            ]
-        })
-        .lean().exec();
-        */
         console.log(foundData);
 
         if (foundData) {
@@ -100,6 +70,7 @@ const postController = {
             });
         } else {
             // Post not found
+            res.sendStatus(400);
         }
     },
 
@@ -194,7 +165,7 @@ const postController = {
         const post = await Post.findOne({postNum: req.body.postNum}).exec();
         
         // Could remove this with the session thing
-        if (loggedIn || post) {
+        if (loggedIn && post) {
             try {
                 const commentNums = await Comment.find({}).distinct("commentNum");
                 const newComment = new Comment ({
@@ -232,7 +203,7 @@ const postController = {
     deleteComment: async function (req, res) {
         console.log(req.body);
         const commentNum = req.body.commentNum;
-    
+        
         try {
             const result = await Comment.deleteOne({commentNum: commentNum});
             console.log("Delete Successful");
@@ -245,6 +216,43 @@ const postController = {
             res.sendStatus(500);
         }
     },
+
+    createReply: async function (req, res) {
+        console.log(req.body);
+
+        const loggedIn = await User.findOne({username: req.query.loggedIn}).exec();
+        console.log(loggedIn);
+
+        const post = await Post.findOne({postNum: req.body.postNum});
+        const comment = await Comment.findOne({commentNum: req.body.commentNum}).exec();
+        
+        // Could remove this with the session thing
+        if (loggedIn && post && comment) {
+            try {
+                const commentNums = await Comment.find({}).distinct("commentNum");
+                const newComment = new Comment ({
+                    commentNum: commentNums[commentNums.length - 1] + 1,
+                    user_id: loggedIn._id,
+                    post_id: post._id,
+                    parent_id: comment._id,
+                    comment: req.body.comment
+                });
+
+                const result = await newComment.save();
+                console.log("Reply Successful");
+                console.log(result);
+                res.sendStatus(200);
+            } catch (error) {
+                console.log("Reply Unsuccessful");
+                console.error(error);
+                res.sendStatus(500);
+            }
+        } else {
+            console.log("User logged in does not exist");
+            // TODO: res.sendStatus(500); (not sure for the status code of this)
+        }
+
+    }
 }
 
 module.exports = postController;

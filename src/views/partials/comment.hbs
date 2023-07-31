@@ -38,8 +38,13 @@
             </div>
             {{/ifEqual}}
         </div>
+        
+        <p class="note" id="note{{commentNum}}"> </p>
+
+        
         <div class="reply-pop" id="reply-pop{{commentNum}}">
             {{> makereply }}
+            <p id="noinputmsg{{commentNum}}" class="noinputmsg"></p>
         </div>
         <div class="comment-section" id="cs-{{commentNum}}">
             <!--- Nested comments--->   

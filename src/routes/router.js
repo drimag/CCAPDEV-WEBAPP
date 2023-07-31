@@ -4,7 +4,6 @@ const router = Router();
 
 const controller = require('../controllers/controller');
 const postController = require('../controllers/postController');
-const profileController = require('../controllers/profileController');
 
 // Home Route ✔️
 router.get(["/", "/home", "/homepage"], controller.getHome);
@@ -24,7 +23,7 @@ router.post("/reply", postController.createReply); // may delete bc merged
 // TODO: router.put("/comment", postController.editComment);
 
 // TODO: Profile Routes
-router.get("/profile/:username", profileController.getProfile);
+router.get("/profile/:username", controller.getProfile);
 /*
     OLD ROUTES:
     router.get("/edit-profile", profileController.getEditProfile);

@@ -1,7 +1,7 @@
 Comments from MCO2:
 - allow user to create posts with image attachments
 - redirect the user to login on succesful register, 
-    and/or inform the user that the registration was successful
+    and/or inform the user that the registration was successful (already implemented tho?)
 
 done: 
 x include date of post / comment create in post and comment components 

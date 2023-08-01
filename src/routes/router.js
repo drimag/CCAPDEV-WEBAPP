@@ -5,6 +5,9 @@ const router = Router();
 const controller = require('../controllers/controller');
 const postController = require('../controllers/postController');
 
+const registerController = require('../controllers/registerController.js');
+const loginController = require('../controllers/loginController.js');
+
 // Home Route ✔️
 router.get(["/", "/home", "/homepage"], controller.getHome);
 
@@ -32,6 +35,10 @@ router.get("/profile/:username", controller.getProfile);
     router.get("/profile/:username", profileController.getProfile);
 */
 
+
+/*
+    Cookies and Sessions
+ */
 /*
 // Write cookies
 router.get("/", function(req, res) {
@@ -43,8 +50,8 @@ router.get("/", function(req, res) {
 
 // Read cookies
 const cookieparser = require("cookie-parser");
-app.use(cookieparser());
-app.get("/", function(req, res) {
+router.use(cookieparser());
+router.get("/", function(req, res) {
     let cookiefoo = req.cookies.foo
 
     if(cookiefoo) {
@@ -55,7 +62,7 @@ app.get("/", function(req, res) {
 // Read/write session
 const session = require("express-session");
 
-app.use(session({
+router.use(session({
     secret: "testing testing",
     resave: false,
     saveUninitialized: true,
@@ -64,7 +71,6 @@ app.use(session({
         httpOnly: true
     }
 }))
-
 */
 
 /*

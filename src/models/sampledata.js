@@ -71,7 +71,12 @@ async function addSampleData() {
 
         const newPost = new Post ({
             postNum: 1,
-            user_id: newUser._id,
+            user_id: newUser._id,/*
+            date: {
+                year: 2023,
+                month: "Aug",
+                day: 1
+            },*/
             title: "In Bloom made everyone shine",
             description: "After watching this multiples times and slept on it I feel like I can finally give my full opinion on this debut. Honestly because it was W1 and history of kpop groups having members that are rarely utilised my expectations for everyone except Haobin + matthew was pretty low but they gave everyone such good lines and parts in the MV?? I was legit shocked by how they decided to distribute the lines for each member but it turned out so good!!",
             votes: -5,

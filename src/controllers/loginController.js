@@ -1,9 +1,14 @@
+/*
 import { getDb } from '../models/db.js';
 import { getDropdownLinks } from '../middleware/navDropdown.js';
 
 const db = getDb();
 
 const users = db.collection("users");
+*/
+const User = require('../models/User.js');
+
+// TODO: Adjust Functions to Mongoose
 
 const loginController = {
 
@@ -44,4 +49,22 @@ const loginController = {
     }
 }
 
-export default loginController;
+module.exports = loginController;
+
+/*
+
+const LocalStrategy = require('passport-local').LocalStrategy
+
+function initialize(passport) {
+    const authenticateUser = (email, password, done) =>
+    {
+        const user = getUserById(id)
+        if(user == null) {
+            return done(null, false, { message: "Username does not exist" })
+        }
+    }
+}
+
+passport
+
+ */

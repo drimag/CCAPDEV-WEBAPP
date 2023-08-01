@@ -10,12 +10,13 @@ const postSchema = new Schema({
         type: SchemaTypes.ObjectId,
         ref: 'User',
         required: true
-    },
+    },/*
     date: {
-        type: SchemaTypes.Date,
-        default: Date.now(),
-        required: true
-    },
+        year: { type: SchemaTypes.Number },
+        month: { type: SchemaTypes.String },
+        day: { type: SchemaTypes.Number },
+        required: true,
+    },*/
     title: {
         type: SchemaTypes.String,
         required: true

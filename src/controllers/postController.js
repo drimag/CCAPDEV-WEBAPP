@@ -120,10 +120,18 @@ const postController = {
     
         if (foundData) {
             try {
-                const result = await Post.updateOne({postNum: req.body.postNum},
-                    {title: req.body.title, description: req.body.description, edited: true});
-                console.log("Update Successful");
-                console.log(result);
+                const edited_title = req.body.title;
+                const edited_description = req.body.description;
+
+                if(edited_title === foundData.title && edited_description === foundData.description) {
+                    // No change
+                    console.log("No change in title and description");
+                } else {
+                    const result = await Post.updateOne({postNum: req.body.postNum},
+                        {title: edited_title, description: edited_description, edited: true});
+                    console.log("Update Successful");
+                    console.log(result);
+                }
                 res.sendStatus(200);
             } catch (error) {
                 console.error(error);
@@ -200,7 +208,33 @@ const postController = {
             TODO: This function edits a comment in the database
     */
     editComment: async function (req, res) {
+        console.log(req.body);
+        
+        const foundData = await Comment.findOne({commentNum: req.body.commentNum});
+        console.log(foundData);
+    
+        if (foundData) {
+            try {
+                const edited_comment = req.body.comment;
 
+                if(edited_comment === foundData.comment) {
+                    // No change in comment
+                    console.log("No change in comment");
+                } else {
+                    const result = await Comment.updateOne({commentNum: req.body.commentNum},
+                        {comment: edited_comment, edited: true});
+                    
+                    console.log("Update Successful");
+                    console.log(result);
+                }
+                res.sendStatus(200);
+            } catch (error) {
+                console.error(error);
+                res.sendStatus(500);
+            }
+        } else {
+            res.sendStatus(400);
+        }
     },
             
     /*
@@ -273,7 +307,6 @@ const postController = {
             console.log("User logged in does not exist");
             // TODO: res.sendStatus(500); (not sure for the status code of this)
         }
-
     }
 }
 

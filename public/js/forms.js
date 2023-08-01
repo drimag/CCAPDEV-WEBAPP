@@ -1,5 +1,6 @@
 // Currently Editing!
 // TODO: Add Error Message when Input is EMPTY! (create + edit)
+// TODO: Try Catch? if ever worst case
 
 // Buttons
 const createPostBtn = document.querySelector("#createPost");
@@ -67,36 +68,40 @@ editPostBtn?.addEventListener("click", async (e) => {
     console.log(postNum);
 
     const formData = new FormData(editPostForm);
-
-    // Get Current User and Post Num
     const loggedIn = params.get("loggedIn"); 
-
-    let data = {
-        loggedIn: loggedIn,
-        postNum: postNum,
-        title: formData.get("edit-title"),
-        description: formData.get("edit-desc")
-    };
-
-    const jString = JSON.stringify(data);
-
-    let response = await fetch("/post?loggedIn=" + loggedIn, {
-        method: 'PUT',
-        body: jString,
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-
-    editPostForm.reset();
-    console.log(response);
-
-    if (response.status == 200) {
-        console.log("Edit Post Successful");
-        location.reload();
-        //location.href = window.location.pathname + "?title=" + edited_title + "&loggedIn=" + currentUser;
+    const title = formData.get("edit-title");
+    const description = formData.get("edit-desc");
+    
+    if(title === '' || description == '') {
+        document.getElementById('noeditpostinput' + postNum).innerText = 'Cannot be empty!';
     } else {
-        console.log(`received response: ${response.status}`);
+        let data = {
+            loggedIn: loggedIn,
+            postNum: postNum,
+            title: title,
+            description: description
+        };
+    
+        const jString = JSON.stringify(data);
+    
+        let response = await fetch("/post?loggedIn=" + loggedIn, {
+            method: 'PUT',
+            body: jString,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        editPostForm.reset();
+        console.log(response);
+    
+        if (response.status == 200) {
+            console.log("Edit Post Successful");
+            location.reload();
+            //location.href = window.location.pathname + "?title=" + edited_title + "&loggedIn=" + currentUser;
+        } else {
+            console.log(`received response: ${response.status}`);
+        }
     }
 });
 
@@ -131,6 +136,7 @@ deletePostBtn?.addEventListener("click", async (e) => {
         </div>`;
     } else {
         console.log("Status code received: " + response.status);
+        // TODO: Add Error Message
     }
 });
 /*
@@ -171,60 +177,9 @@ createCommentBtn?.addEventListener("click", async (e) => {
         location.reload();
     } else {
         console.log(`received response: ${response.status}`);
+        // TODO: Add Error Message
     }
 });
-
-/*
-$(".editComment").click(async function(e) {
-        e.preventDefault();
-
-        // Get values
-        const commentNum = $(this).attr('id').substring(11);
-        console.log(commentNum);
-
-        const edited_comment = $("#edit-textcomment" + commentNum).val();
-        console.log(edited_comment);
-       
-        console.log("Submit Edit Comment Data");
-
-        // Get Current User and Post Num
-        const currentUser = params.get("loggedIn"); 
-        //const postNum = window.location.pathname.substring(7);
-        console.log(params.get("title"));
-        //console.log(postNum);
-
-        let data = {
-            loggedIn: currentUser,
-            num: commentNum,
-            comment: edited_comment
-        };
-
-        console.log(data);
-        const jString = JSON.stringify(data);
-        console.log(jString);
-
-        try {
-            let response = await fetch("/comment?loggedIn=" + currentUser, {
-                method: 'PUT',
-                body: jString,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            console.log(response);
-
-            if(response.status === 200) {
-                location.reload();
-            } else {
-                console.log("Status code received: " + response.status);
-            }
-            
-        } catch (err) {
-            console.error(err);
-        }
-    });
-*/
 
 $(document).ready(function() {
     /*
@@ -266,8 +221,54 @@ $(document).ready(function() {
         }
     });
 
-    // TODO: Edit Comment
+    /*
+            This function sends data to the route '/comment' via a PUT request.
+    */
+    $(".editComment").click(async function(e) {
+        e.preventDefault();
+        console.log("clicked edit comment");
 
+        const editCommentForm = document.forms.editCommentForm;
+
+        // Get values
+        const commentNum = $(this).attr('id').substring(11);
+        console.log(commentNum);
+
+        const edited_comment = $("#edit-textcomment" + commentNum).val();
+        console.log(edited_comment);
+        
+        const loggedIn = params.get("loggedIn"); 
+        if (edited_comment === '') {
+            $("#noeditinput" + commentNum).text('Edited reply cannot be empty!');
+        } else {
+            let data = {
+                loggedIn: loggedIn,
+                commentNum: commentNum,
+                comment: edited_comment
+            };
+
+            const jString = JSON.stringify(data);
+
+            let response = await fetch("/comment?loggedIn=" + loggedIn, {
+                method: 'PUT',
+                body: jString,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        
+            editCommentForm.reset();
+            console.log(response);
+        
+            if (response.status == 200) {
+                console.log("Edit Comment Successful");
+                location.reload();
+            } else {
+                console.log(`received response: ${response.status}`);
+                // TODO: Add error message
+            }
+        }
+    });
 
     /*
             This function sends data to the route '/reply' via a POST request.

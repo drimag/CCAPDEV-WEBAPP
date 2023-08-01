@@ -11,8 +11,9 @@
         <p class="comment-desc">{{ comment }} </p>
         <p class="date">{{ date }} </p>
 
-        <div id="editdiv{{commentNum}}">
+        <div id="editdiv{{commentNum}}" class="editdiv">
             {{> edit_comment }}
+            <p id="noeditinput{{commentNum}}" class="noinputmsg"></p>
         </div>
 
         {{#if edited }}

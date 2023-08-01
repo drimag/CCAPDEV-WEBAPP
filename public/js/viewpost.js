@@ -26,7 +26,7 @@ $(document).ready(function() {
     // Create Comment Functions
     $("#createCommentForm").hide();
     $(".reply-pop").hide();
-    $(".editCommentForm").hide();
+    $(".editdiv").hide();
 
     $("#add-comment").click(function() {
         $("#createCommentForm").show();

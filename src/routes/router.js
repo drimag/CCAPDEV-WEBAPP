@@ -20,7 +20,7 @@ router.get("/viewpost", postController.getViewPost);
 router.post("/comment", postController.createComment);
 router.delete("/comment", postController.deleteComment);
 router.post("/reply", postController.createReply); // may delete bc merged
-// TODO: router.put("/comment", postController.editComment);
+router.put("/comment", postController.editComment);
 
 // TODO: Profile Routes
 router.get("/profile/:username", controller.getProfile);

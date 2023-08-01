@@ -10,6 +10,7 @@ x would be better if create post form fields are hidden until a button is presse
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
 - format date
+- css for new post img file button and save to db
 - clean + adjust profile funcs (controller + js + hbs)
 - status codes
 - fix sample data input thing (?)

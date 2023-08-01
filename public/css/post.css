@@ -366,3 +366,13 @@ p.number {
 #profile-img {
     object-fit: cover;
 }
+
+#displaynewpostimg {
+    background-color: white;
+    width: 375px;
+    height: 211px;
+    border: 2px solid #888;
+    background-position: center;
+    background-size: cover;
+    margin: 5px;
+}

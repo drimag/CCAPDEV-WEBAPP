@@ -182,6 +182,12 @@ createCommentBtn?.addEventListener("click", async (e) => {
 });
 
 $(document).ready(function() {
+
+    $('#displaynewpostimg').hide();
+
+    $("#clearPost").click(function() {
+        $('#displaynewpostimg').hide();
+    });
     /*
             This function sends data to the route '/comment' via a DELETE request.
     */
@@ -320,4 +326,21 @@ $(document).ready(function() {
         }
     });
     
+});
+
+
+// Testing!
+
+const image_input = document.querySelector('#newpostpic');
+let uploaded_image = "";
+
+image_input.addEventListener("change", function() {
+    console.log(image_input.value);
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        uploaded_image = reader.result;
+        document.querySelector("#displaynewpostimg").style = "display: in-line block";
+        document.querySelector("#displaynewpostimg").style.backgroundImage = `url(${uploaded_image})`;
+    });
+    reader.readAsDataURL(this.files[0]);
 });

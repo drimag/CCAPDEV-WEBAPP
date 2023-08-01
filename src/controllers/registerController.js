@@ -29,7 +29,8 @@ const registerController = {
 
             if (matchingUserArr.length > 0){
                 //username is taken
-                res.status(200).json({ result:true });
+                //res.status(200).json({ result:true });
+                res.sendStatus(400);
             }else{
                 const result = await users.insertOne({
                     username: username,
@@ -46,7 +47,8 @@ const registerController = {
                 console.log("result:",result);
                 console.log("register successful!");
                 
-                res.sendStatus(200).json({ result:false });
+                //res.sendStatus(200).json({ result:false });
+                res.sendStatus(400);
             }
         } catch(err){
             console.error('Failed to create account:',err);

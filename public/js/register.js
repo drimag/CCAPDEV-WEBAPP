@@ -54,6 +54,16 @@ $(".register-button").click(async function(){
             'Content-type': 'application/json'
         }
         })
+
+        if(response.status == 400){
+            document.getElementById("message").innerHTML = "**Username is already taken.";
+
+        }else if (response.status == 200){
+            alert("Register Successful!");
+            window.location.href = "/login";
+            
+        }
+        /*
         .then((response) => response.json())
         .then((data => {
         if(data.result === true){
@@ -65,7 +75,7 @@ $(".register-button").click(async function(){
             window.location.href = "/login";
         }
         }))
-
+        */
         
     }
 });

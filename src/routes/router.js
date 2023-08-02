@@ -27,6 +27,16 @@ router.put("/comment", postController.editComment);
 
 // TODO: Profile Routes
 router.get("/profile/:username", controller.getProfile);
+
+// Login Routes
+router.get("/login", loginController.getLogin);
+router.post("/login", loginController.checkCredentials);
+
+
+// Register Routes
+router.get("/register", registerController.getRegister);
+router.post("/register", registerController.registerAccount);
+
 /*
     OLD ROUTES:
     router.get("/edit-profile", profileController.getEditProfile);

@@ -118,7 +118,7 @@ dropdownLinks.forEach(link => {
 				break;
 
 			case "View Profile":
-				window.location.href = "/profile?loggedIn=" + user;
+				window.location.href = "/profile/" + user + "?loggedIn=" + user;
 				console.log("clickd dropdown id: " + id);
 				break;
 

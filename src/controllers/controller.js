@@ -1,6 +1,7 @@
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
+const getDropdownLinks = require('../middleware/navDropdown.js');
 
 const controller = {
     /*
@@ -39,17 +40,16 @@ const controller = {
             
             const searchDetails = { numPosts : searchPosts.length, search : searchTerms };
             console.log("search Detials: " + searchDetails);
-        
-            // Get dropdown links based on if user is logged in
-            const dropdowns = getDropdownLinks(currentUser.username); 
-            console.log("dropdown links: " + dropdowns);
         */
+        // Get dropdown links based on if user is logged in
+        const dropdowns = getDropdownLinks(loggedIn.username); 
+        console.log("dropdown links: " + dropdowns);
 
         res.render('index', {
             pagetitle: "Home",
             user: loggedIn,
             posts: posts,
-            //dropdownLinks: dropdowns, // Navbar links 
+            dropdownLinks: dropdowns, // Navbar links 
             //searchDetails: searchDetails
         });
     },
@@ -81,7 +81,7 @@ const controller = {
                 console.log(comments);
 
                 // Dropdown links for navbar
-                // TODO: const dropdowns = getDropdownLinks(currentUser.username);
+                const dropdowns = getDropdownLinks(loggedIn.username);
 
                 res.render("profile", {
                     pagetitle: req.params.username + "'s Profile",
@@ -110,12 +110,12 @@ const controller = {
 
         if (loggedIn && loggedIn.username != "guest") {
             // Dropdown links for navbar
-            // TODO: const dropdowns = getDropdownLinks(loggedIn.username); 
+            const dropdowns = getDropdownLinks(loggedIn.username); 
 
             res.render("edit_profile", {
                 pagetitle: "Edit Profile",
                 user: loggedIn,
-                // dropdownLinks: dropdowns
+                dropdownLinks: dropdowns
             });
         } else {
             // User does not exist

@@ -24,6 +24,10 @@ const postSchema = new Schema({
         type: SchemaTypes.String,
         required: true
     },
+    image: {
+        data: SchemaTypes.Buffer,
+        contentType: SchemaTypes.String
+    },
     votes: {
         type: SchemaTypes.Number,
         required: true,

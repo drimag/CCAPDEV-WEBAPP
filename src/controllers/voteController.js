@@ -161,5 +161,4 @@ const voteController = {
 	}
 }
 
-// export default voteController;
 module.exports = voteController;

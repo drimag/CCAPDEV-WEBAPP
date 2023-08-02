@@ -1,14 +1,4 @@
-/*
-import { getDb } from '../models/db.js';
-import { getDropdownLinks } from '../middleware/navDropdown.js';
-
-const db = getDb();
-
-const users = db.collection("users");
-*/
 const User = require('../models/User.js');
-
-// TODO: Adjust Functions to Mongoose
 
 const loginController = {
 

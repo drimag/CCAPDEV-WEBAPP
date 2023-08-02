@@ -312,17 +312,16 @@ const postController = {
         console.log(req.body);
 
         const comment = await Comment.findOne({commentNum: req.query.commentNum}).exec();
+        const post = await Post.findOne({_id: comment.post_id}).exec();
 
-        if (comment) {
-            const post = await Post.findOne({_id: comment.post_id}).exec();
+        if (comment && post) {
             const data = {
                 postNum: post.postNum
             }
 
             res.json(data);
         } else {
-            // Comment does not exist
-            res.status(404).json("Comment Not Found");
+            res.status(404).json("Does not exist");
         }
     }
 }

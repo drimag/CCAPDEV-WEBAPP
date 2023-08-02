@@ -29,6 +29,7 @@ $(document).ready(function() {
             location.href = "/viewpost?postNum=" + postNum + "&loggedIn=" + loggedIn;
         } else {
             // Comment does not exist
+            $(this).find('.post-title').append(" [deleted]").css("color", "red");
             console.log("Status code received: " + response.status);
         }
     });
@@ -37,13 +38,12 @@ $(document).ready(function() {
         $(this).css("cursor", "pointer");
     });
 
-    /*
+    
     // Show Edit Text Area When Clicked
     $(".edit-comment").click(function() {
         $(this).hide();
         
         const comment_id = $(this).attr('id').substring(12).trimEnd();
-        //console.log(comment_id);
 
         // Hide Comment Container
         const desc_container = $("div#comment" + comment_id + " p.profile-comment");
@@ -54,9 +54,14 @@ $(document).ready(function() {
         edit_pop.show();
     });
 
-    // Edit Comment In Profile
+    /*
+            This function sends data to the route '/comment' via a PUT request.
+    */
     $(".editComment").click(async function(e) {
         e.preventDefault();
+        console.log("clicked edit comment");
+
+        const editCommentForm = document.forms.editCommentForm;
 
         // Get values
         const commentNum = $(this).attr('id').substring(11);
@@ -64,44 +69,38 @@ $(document).ready(function() {
 
         const edited_comment = $("#edit-textcomment" + commentNum).val();
         console.log(edited_comment);
-       
-        console.log("Submit Edit Comment Data");
+        
+        const loggedIn = params.get("loggedIn"); 
+        if (edited_comment === '') {
+            $("#noeditinput" + commentNum).text('Edited reply cannot be empty!');
+        } else {
+            let data = {
+                loggedIn: loggedIn,
+                commentNum: commentNum,
+                comment: edited_comment
+            };
 
-        const currentUser = params.get("loggedIn"); 
+            const jString = JSON.stringify(data);
 
-        let data = {
-            loggedIn: currentUser,
-            num: commentNum,
-            comment: edited_comment
-        };
-
-        console.log(data);
-        const jString = JSON.stringify(data);
-        console.log(jString);
-
-        // Update Comment
-        try {
-            let response = await fetch("/comment?loggedIn=" + currentUser, {
+            let response = await fetch("/comment?loggedIn=" + loggedIn, {
                 method: 'PUT',
                 body: jString,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-
+        
+            editCommentForm.reset();
             console.log(response);
-
-            if(response.status === 200) {
+        
+            if (response.status == 200) {
+                console.log("Edit Comment Successful");
                 location.reload();
             } else {
-                console.log("Status code received: " + response.status);
+                console.log(`received response: ${response.status}`);
             }
-            
-        } catch (err) {
-            console.error(err);
         }
     });
-    */
     
     /*
             This function sends data to the route '/comment' via a DELETE request.
@@ -124,7 +123,7 @@ $(document).ready(function() {
         if (response.status === 200) {
             location.reload();
         } else {
-            // Not Deleted!
+            console.log(`received response: ${response.status}`);
         }
     });
 });

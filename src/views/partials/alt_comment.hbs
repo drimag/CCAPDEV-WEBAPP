@@ -30,6 +30,7 @@
 
         {{#ifEqual @root.user.username user_id.username}}
         {{> edit_comment }}
+        <p id="noeditinput{{commentNum}}" class="noinputmsg"></p>
         {{/ifEqual}}
         
         <div class="actions-post flex-row-container">

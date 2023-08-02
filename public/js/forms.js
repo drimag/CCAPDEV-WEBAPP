@@ -136,7 +136,6 @@ deletePostBtn?.addEventListener("click", async (e) => {
         </div>`;
     } else {
         console.log("Status code received: " + response.status);
-        // TODO: Add Error Message
     }
 });
 /*
@@ -177,7 +176,6 @@ createCommentBtn?.addEventListener("click", async (e) => {
         location.reload();
     } else {
         console.log(`received response: ${response.status}`);
-        // TODO: Add Error Message
     }
 });
 
@@ -209,7 +207,7 @@ $(document).ready(function() {
         if (response.status === 200) {
             location.reload();
         } else {
-            // Not Deleted!
+            console.log(`received response: ${response.status}`);
         }
     });
 
@@ -271,7 +269,6 @@ $(document).ready(function() {
                 location.reload();
             } else {
                 console.log(`received response: ${response.status}`);
-                // TODO: Add error message
             }
         }
     });
@@ -321,7 +318,6 @@ $(document).ready(function() {
                 location.reload();
             } else {
                 console.log(`received response: ${response.status}`);
-                // TODO: Add error message
             }
         }
     });

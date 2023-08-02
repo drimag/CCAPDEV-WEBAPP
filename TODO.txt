@@ -3,16 +3,18 @@ Comments from MCO2:
 - redirect the user to login on succesful register, 
     and/or inform the user that the registration was successful (already implemented tho?)
 
+reminder:
+- vote functionality on profile
+
 done: 
 x include date of post / comment create in post and comment components 
 x would be better if create post form fields are hidden until a button is pressed
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
-- format date
 - css for new post img file button and save to db
-- edit/delete comment functionality on profile (+ vote also if possible)
 - status codes
 - fix sample data input thing (?)
+- change dates in sample data
 - render - application deployment
 - remove nodemon

@@ -64,6 +64,7 @@ $(document).ready(function() {
 
 		let [newPFPcontent, newPFPdata] = newPFPsrc.split(",");
 		let newPFPtype = newPFPcontent.replace("data:image/", "");
+		newPFPtype = newPFPtype.replace(";base64", "");
 
 		// take the currently logged in user
 		const currentURL = window.location.href;
@@ -82,16 +83,16 @@ $(document).ready(function() {
 
 		try {
 			const response = await fetch('/edit-profile', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json', },
-			body: jString
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', },
+				body: jString
 			})
 
 			console.log(response);
 
 			if(response.status === 200) {
 				console.log("Profile Edit Successful");
-				location.href = "/home?loggedIn=" + newUsername;
+				location.href = "/profile/"+ newUsername + "?loggedIn=" + newUsername;
 			} else {
 				console.log("Status code received: " + response.status);
 			}

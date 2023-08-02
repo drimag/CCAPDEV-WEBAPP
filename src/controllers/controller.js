@@ -1,6 +1,6 @@
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
-// const Comment = require('../models/Comment.js');
+const Comment = require('../models/Comment.js');
 
 const controller = {
     /*
@@ -11,7 +11,7 @@ const controller = {
 
         let loggedIn = await User.findOne({username: req.query.loggedIn}).lean().exec();
         
-        if(loggedIn === null) {
+        if(!loggedIn) {
             // only guest (does not include if the username doesnt exist)
             loggedIn = await User.findOne({username: "guest"}).lean().exec();
         }
@@ -21,45 +21,8 @@ const controller = {
         }).lean().exec();
 
         console.log(posts);
-
-        res.render('index', {
-            pagetitle: "Home",
-            user: loggedIn,
-            posts: posts,
-            //dropdownLinks: dropdowns, // Navbar links 
-            //searchDetails: searchDetails
-        });
-
         /*
-        let currentUser = req.query.loggedIn;
-
-        try {
-            if(currentUser == null || currentUser === "guest" || currentUser == undefined) {
-                currentUser = await users.findOne({username: "guest"});
-            } else {
-                currentUser = await users.findOne({username: req.query.loggedIn});
-            }
-
-            console.log("Current User: " + currentUser);
-        
-            // Get Posts For Display
-            const postsArray = await posts.aggregate(
-                [
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    },
-                    {
-                        '$unwind': '$user_details'
-                    }
-                ]
-            ).toArray();
-            
-            // Filter posts if there is a search
+        // Filter posts if there is a search
             let searchTerms = req.query.search;
             let searchPosts;
         
@@ -80,201 +43,123 @@ const controller = {
             // Get dropdown links based on if user is logged in
             const dropdowns = getDropdownLinks(currentUser.username); 
             console.log("dropdown links: " + dropdowns);
-        
-            res.render("index", {
-                pagetitle: "Home",
-                user: currentUser,
-                posts: searchPosts,
-                dropdownLinks: dropdowns, // Navbar links 
-                searchDetails: searchDetails
-            });
-        } catch (err) {
-            console.error(err);
-            res.sendStatus(500);
-        }
         */
+
+        res.render('index', {
+            pagetitle: "Home",
+            user: loggedIn,
+            posts: posts,
+            //dropdownLinks: dropdowns, // Navbar links 
+            //searchDetails: searchDetails
+        });
     },
 
     /*
-            TODO: This displays 'profile.hbs' of a user.
+            This displays 'profile.hbs' of a user.
     */
     getProfile: async function (req, res) {
-        // add code
-        res.render("profile");
+        let loggedIn = await User.findOne({username: req.query.loggedIn}).lean().exec();
+        const view_user = await User.findOne({username: req.params.username}).lean().exec();
+
+        if (!loggedIn) {
+            loggedIn = await User.findOne({username: "guest"}).lean().exec();
+        } 
+
+        if (view_user) {
+            // User Exists
+            try {
+                const posts = await Post.find({user_id: view_user._id}).populate({
+                    path: 'user_id'
+                }).lean().exec();
+        
+                console.log(posts);
+    
+                const comments = await Comment.find({user_id: view_user._id}).populate({
+                    path: 'user_id'
+                }).lean().exec();
+    
+                console.log(comments);
+
+                // Dropdown links for navbar
+                // TODO: const dropdowns = getDropdownLinks(currentUser.username);
+
+                res.render("profile", {
+                    pagetitle: req.params.username + "'s Profile",
+                    user: loggedIn,
+                    view_user: view_user,
+                    posts: posts,
+                    comments: comments,
+                    //dropdownLinks: dropdowns
+                });
+            } catch (error) {
+                console.error(error);
+                res.sendStatus(500);
+            }
+
+        } else {
+            // No user found
+            res.status(404).json("User Not Found");
+        }
     },
 
     /*
             TODO: This displays 'edit_profile.hbs' of a user.
     */
     getEditProfile: async function(req, res) {
-        //add code
-        res.render("edit_profile");
-    },
+        const loggedIn = await User.findOne({username: req.query.loggedIn}).lean().exec();
 
-    /*
-            TODO: This function edits a user profile in the database
-    */
-    editProfile: async function (req, res) {
-        // add code
-        
-    }
-}
-
-
-module.exports = controller;
-
-
-/*
-
-const profileController = {
-    
-    // Edit Profile
-    getEditProfile: async function (req, res) {
-        console.log("Request to edit profile page received.");
-        let curr = req.query.loggedIn;
-        console.log(curr);
-    
-        try {
-            // No login param in url
-            if(!curr) return res.status(400).send("No logged in user");
-
-            // Look for user with matching username
-            const user = await users.findOne({username: curr});
-
-            // User does not exist
-            if(!user) return res.status(404).send("ERROR 404. User not found");
-
+        if (loggedIn && loggedIn.username != "guest") {
             // Dropdown links for navbar
-            const dropdowns = getDropdownLinks(user.username); 
+            // TODO: const dropdowns = getDropdownLinks(loggedIn.username); 
 
             res.render("edit_profile", {
                 pagetitle: "Edit Profile",
-                user: user,
-                dropdownLinks: dropdowns
+                user: loggedIn,
+                // dropdownLinks: dropdowns
             });
-        } catch (error) {
-            console.error(error);
-            res.sendStatus(500);
+        } else {
+            // User does not exist
+            res.status(404).json("User Not Found");
         }
     },
 
-    editProfile: async function (req,res) {
+    /*
+            This function edits a user profile in the database
+    */
+    editProfile: async function (req, res) {
         console.log("Request to edit profile contents received.");
         const editData = req.body;
 
-        console.log("what " + editData.newUsername);
+        console.log(editData.newUsername);
         console.log(editData.newBio);
-        console.log(editData.newPFPdata);
+        //console.log(editData.newPFPdata);
         console.log(editData.newPFPtype);
 
         try {
-            db.collection('users').updateOne(
-                { username: editData.currentUser },
+            const result = await User.updateOne({
+                username: editData.currentUser
+            },
+            {
+                username: editData.newUsername,
+                bio: editData.newBio,
+                pfp: 
                 {
-                  $set: {
-                    username: editData.newUsername,
-                    bio: editData.newBio,
-                    pfp: 
-                    {
-                        data: editData.newPFPdata,
-                        contentType: editData.newPFPtype
-                    }
-                  },
+                    data: editData.newPFPdata,
+                    contentType: editData.newPFPtype
                 }
-              )
+                
+            }).exec();
 
+            //console.log(result);
+
+            console.log("Edit Profile Update Successful");
             res.sendStatus(200);
         } catch (err) {
+            console.log("Edit Profile Update Unsuccessful");
             console.error(err);
-            res.sendStatus(500);
-        }
-    },
-
-    getProfile: async function (req, res) {
-        console.log("Request to " + req.params.username + "'s profile received.");
-        
-        let curr = req.query.loggedIn;
-    
-        try {
-
-            if(curr == null) {
-                curr = await users.findOne({username: "guest"});
-            } else {
-                curr = await users.findOne({username: curr});
-            }
-            
-            const currentUser = curr;
-            const view_user = await users.findOne(req.params);
-
-            if(!view_user) return res.status(404).send("ERROR 404. Profile not found");
-
-            const postsArray = await posts.aggregate(
-                [
-                    { 
-                        $match: { user_id : view_user._id }
-                    },
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    },
-                    {
-                        '$unwind': '$user_details'
-                    }
-                ]
-            ).toArray();
-        
-            const commentsArray = await comments.aggregate(
-                [
-                    { 
-                        $match: { user_id : view_user._id }
-                    },
-                    {
-                        '$lookup': {
-                        'from': 'users', 
-                        'localField': 'user_id', 
-                        'foreignField': '_id', 
-                        'as': 'user_details'
-                        }
-                    },
-                    {
-                        '$unwind': '$user_details'
-                    }
-                ]
-            ).toArray();
-            
-            const updatedPostsArray = postsArray.map((element) => ({
-                ...element,
-                currentUser: currentUser.username
-              }));
-            console.log(updatedPostsArray);
-
-            const updatedArray = commentsArray.map((element) => ({
-                ...element,
-                currentUser: currentUser.username
-              }));
-            console.log(updatedArray);
-
-            console.log(postsArray);
-            
-            // Dropdown links for navbar
-            const dropdowns = getDropdownLinks(currentUser.username);
-
-            res.render("profile", {
-                pagetitle: req.params.username + "'s Profile",
-                user: currentUser,
-                view_user: view_user,
-                posts: updatedPostsArray,
-                comments: updatedArray,
-                dropdownLinks: dropdowns
-            })
-        } catch (error) {
-            console.error(error);
             res.sendStatus(500);
         }
     }
 }
-*/
+
+module.exports = controller;

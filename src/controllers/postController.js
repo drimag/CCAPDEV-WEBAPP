@@ -22,14 +22,14 @@ const postController = {
     getCheckPost: async function (req, res) {
         const postNum = req.query.postNum;
 
-        const foundData = Post.findOne({postNum: postNum});
+        const foundData = await Post.findOne({postNum: postNum}).exec();
 
         console.log(foundData);
 
         if (foundData) {
             res.sendStatus(200);
         } else {
-            res.sendStatus(400);
+            res.sendStatus(404);
         }
     },
 
@@ -69,8 +69,7 @@ const postController = {
                 //dropdownLinks: dropdowns
             });
         } else {
-            // Post not found
-            res.sendStatus(400);
+            res.status(404).json("Post does not exist");
         }
     },
 
@@ -83,7 +82,7 @@ const postController = {
 
         console.log(req.body);
 
-        const postNums = await Post.find({}).distinct("postNum");
+        const postNums = await Post.find({}).distinct("postNum").exec();
         const newPost = new Post ({
             postNum: postNums[postNums.length - 1] + 1,
             user_id: loggedInUser._id,
@@ -105,7 +104,7 @@ const postController = {
             }
         } else {
             console.log("User logged in does not exist");
-            res.sendStatus(400);
+            res.status(404).json("User Not Found");
         }
     },
 
@@ -115,7 +114,7 @@ const postController = {
     editPost: async function (req, res) {
         console.log(req.body);
         
-        const foundData = await Post.findOne({postNum: req.body.postNum});
+        const foundData = await Post.findOne({postNum: req.body.postNum}).exec();
         console.log(foundData);
     
         if (foundData) {
@@ -138,7 +137,7 @@ const postController = {
                 res.sendStatus(500);
             }
         } else {
-            res.sendStatus(400);
+            res.status(404).json("Post Not Found");
         }
     },
     
@@ -189,7 +188,7 @@ const postController = {
 
                 const result = await newComment.save();
                 // update num of comments count
-                await Post.updateOne({postNum: req.body.postNum}, {$inc: {num_comments: 1}});
+                await Post.updateOne({postNum: req.body.postNum}, {$inc: {num_comments: 1}}).exec();
                 console.log("Comment Successful");
                 console.log(result);
                 res.sendStatus(200);
@@ -200,7 +199,7 @@ const postController = {
             }
         } else {
             console.log("User logged in does not exist");
-            // TODO: res.sendStatus(500); (not sure for the status code of this)
+            res.status(404).json("User Not Found");
         }
     },
 
@@ -210,7 +209,7 @@ const postController = {
     editComment: async function (req, res) {
         console.log(req.body);
         
-        const foundData = await Comment.findOne({commentNum: req.body.commentNum});
+        const foundData = await Comment.findOne({commentNum: req.body.commentNum}).exec();
         console.log(foundData);
     
         if (foundData) {
@@ -222,7 +221,7 @@ const postController = {
                     console.log("No change in comment");
                 } else {
                     const result = await Comment.updateOne({commentNum: req.body.commentNum},
-                        {comment: edited_comment, edited: true});
+                        {comment: edited_comment, edited: true}).exec();
                     
                     console.log("Update Successful");
                     console.log(result);
@@ -233,7 +232,7 @@ const postController = {
                 res.sendStatus(500);
             }
         } else {
-            res.sendStatus(400);
+            res.status(404).json("Comment Not Found");
         }
     },
             
@@ -250,10 +249,10 @@ const postController = {
 
             if (comment.parent_id == null) {
                 // updates count of post
-                await Post.updateOne({_id: comment.post_id}, {$inc: {num_comments: -1}});
+                await Post.updateOne({_id: comment.post_id}, {$inc: {num_comments: -1}}).exec();
             } else {
                 // updates count of comment
-                await Comment.updateOne({_id: comment.parent_id}, {$inc: {num_comments: -1}});
+                await Comment.updateOne({_id: comment.parent_id}, {$inc: {num_comments: -1}}).exec();
             }
             console.log("Delete Successful");
             console.log(result);
@@ -277,7 +276,7 @@ const postController = {
         const loggedIn = await User.findOne({username: req.query.loggedIn}).exec();
         console.log(loggedIn);
 
-        const post = await Post.findOne({postNum: req.body.postNum});
+        const post = await Post.findOne({postNum: req.body.postNum}).exec();
         const comment = await Comment.findOne({commentNum: req.body.commentNum}).exec();
         
         // Could remove this with the session thing
@@ -294,7 +293,7 @@ const postController = {
 
                 const result = await newComment.save();
                 // update num of comments count
-                await Comment.updateOne({commentNum: req.body.commentNum}, {$inc: {num_comments: 1}});
+                await Comment.updateOne({commentNum: req.body.commentNum}, {$inc: {num_comments: 1}}).exec();
                 console.log("Reply Successful");
                 console.log(result);
                 res.sendStatus(200);
@@ -305,7 +304,25 @@ const postController = {
             }
         } else {
             console.log("User logged in does not exist");
-            // TODO: res.sendStatus(500); (not sure for the status code of this)
+            res.status(404).json("User does not exist");
+        }
+    },
+
+    getCommentPostNum: async function (req, res) {
+        console.log(req.body);
+
+        const comment = await Comment.findOne({commentNum: req.query.commentNum}).exec();
+
+        if (comment) {
+            const post = await Post.findOne({_id: comment.post_id}).exec();
+            const data = {
+                postNum: post.postNum
+            }
+
+            res.json(data);
+        } else {
+            // Comment does not exist
+            res.status(404).json("Comment Not Found");
         }
     }
 }

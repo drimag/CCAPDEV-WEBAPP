@@ -1,5 +1,5 @@
 <script src="/static/js/commentprofile.js" defer></script>
-<div class="flex-row-container comment-list" id="comment{{num}}">
+<div class="flex-row-container comment-list" id="comment{{commentNum}}">
     <div class="actions-post flex-column-container">
             <button class="upvote"></button>
             <p class="number"> {{ votes }} </p>
@@ -9,22 +9,26 @@
     <div class="flex-column-container comment-container">
         <div class="flex-row-container comment-info">
             <div>
-                <img class="user" src="data:image/{{ user_details.pfp.contentType }};base64,{{ user_details.pfp.data }}">
+                <img class="user" src="data:image/{{ user_id.pfp.contentType }};base64,{{ user_id.pfp.data }}">
             </div>
 
             <div class="flex-column-container post-details">
-                <p class="username">@{{ user_details.username }} </p>
-                <p class="post-title"> Replied to a post </p>
+                <p class="username">@{{ user_id.username }} </p>
+                {{#if parent_id}}
+                    <p class="post-title"> Replied to a comment </p>
+                {{else}}
+                    <p class="post-title"> Replied to a post </p>
+                {{/if}}
                 <p class="profile-comment">{{ comment }}</p>
-                {{#ifEqual currentUser user_details.username}}
-                    {{#if edited }}
+                {{#if edited }}
                     <p class="edited-mark"> (edited)</p>
-                    {{/if}}
-                {{/ifEqual}}
+                {{/if}}
+                <br>
+                <p class="date">{{ formatDate date }} </p>
             </div>
         </div>
 
-        {{#ifEqual currentUser user_details.username}}
+        {{#ifEqual @root.user.username user_id.username}}
         {{> edit_comment }}
         {{/ifEqual}}
         
@@ -33,10 +37,10 @@
             <p class="number">{{ num_comments }}</p>
         </div>
 
-        {{#ifEqual currentUser user_details.username}}
+        {{#ifEqual @root.user.username user_id.username}}
         <div class="flex-row-container comment-buttons">
-            <button id="edit-comment{{num}}" class="add-edit-button edit-comment"> Edit </button>
-            <button id="delete-comment{{num}}" class="delete-c add-edit-button"> Delete </button>
+            <button id="edit-comment{{commentNum}}" class="add-edit-button edit-comment"> Edit </button>
+            <button id="delete-comment{{commentNum}}" class="delete-c add-edit-button"> Delete </button>
         </div>
         {{/ifEqual}}
     </div>

@@ -11,7 +11,7 @@ x would be better if create post form fields are hidden until a button is presse
 TODO: (dont mind this its just for jaeme's todo)
 - format date
 - css for new post img file button and save to db
-- clean + adjust profile funcs (controller + js + hbs)
+- edit/delete comment functionality on profile (+ vote also if possible)
 - status codes
 - fix sample data input thing (?)
 - render - application deployment

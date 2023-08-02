@@ -29,11 +29,11 @@ const userSchema = new Schema({
         type: [SchemaTypes.Number],
         default: []
     },
-    upvoteComments: {
+    upvotePosts: {
         type: [SchemaTypes.Number],
         default: []
     },
-    downvoteComments: {
+    upvotePosts: {
         type: [SchemaTypes.Number],
         default: []
     }

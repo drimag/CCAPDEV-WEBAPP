@@ -12,14 +12,14 @@
             </div>
 
             <div class="flex-column-container post-details">
-                <p class="username">{{ user_id.username }} </p>
+                <p class="username">@{{ user_id.username }} </p>
                 <p class="post-title">{{ title }}</p>
                 <p class="home-description">{{ description}}</p>
                 {{#if edited }}
                 <p class="edited-mark"> (edited)</p>
                 {{/if}}
                 <br>
-                <p class="date">@{{ date }} </p>
+                <p class="date">{{ date }} </p>
             </div>
         </div>
         

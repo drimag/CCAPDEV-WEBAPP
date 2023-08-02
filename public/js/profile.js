@@ -42,11 +42,20 @@ $(document).ready(function() {
 
     
     // View One Post
-    $("div.post-container").click(function() {
+    $("div.post-container").click(async function() {
         console.log("View Post");
         const id = $(this).attr('id');
         console.log(id);
-        location.href = "/posts/" + id.substring(1).trimEnd() + "?loggedIn=" + currentUser;
+
+        const response = await fetch("/post?postNum=" + id.substring(1).trimEnd());
+
+        if (response.status === 200) {
+            location.href = "/viewpost?postNum=" + id.substring(1).trimEnd() + "&loggedIn=" + currentUser;
+        } else {
+            // Post Does Not Exist
+            // TODO: Page goes to Does not exist or deleted?
+            $(this).text('Post does not exist!');
+        }
         
     });
 

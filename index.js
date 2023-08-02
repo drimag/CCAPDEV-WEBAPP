@@ -43,26 +43,6 @@ async function main () {
             console.log("Connection to MongoDB failed: ");;
             console.error(err);
         }
-        
-        /*
-        connectToMongo((err) => {
-            if (err) {
-                console.log("An error has occurred: ");
-                console.error(err);
-                return;
-            }
-            console.log("Connected to Mongodb");
-        });
-
-        addSampleData((err) => {
-            if (err) {
-                console.log("An error has occurred: ");
-                console.error(err);
-                return;
-            }
-            console.log("Inserted Sample Data");
-        });
-        */
     });
 }
 

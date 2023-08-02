@@ -22,11 +22,14 @@ router.get("/viewpost", postController.getViewPost);
 // Comment Routes
 router.post("/comment", postController.createComment);
 router.delete("/comment", postController.deleteComment);
-router.post("/reply", postController.createReply); // may delete bc merged
+router.post("/reply", postController.createReply);
 router.put("/comment", postController.editComment);
+router.get("/comment/postNum", postController.getCommentPostNum);
 
 // TODO: Profile Routes
 router.get("/profile/:username", controller.getProfile);
+router.get("/edit-profile", controller.getEditProfile);
+router.post("/edit-profile", controller.editProfile);
 
 // Login Routes
 router.get("/login", loginController.getLogin);
@@ -145,14 +148,6 @@ router.put("/change-password", changepasswordController.changePassword);
 router.use((req, res) => {
     res.send("error");
 });
-
-export default router;
 */
 
 module.exports = router;
-
-/*
-
-
-
- */

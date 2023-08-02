@@ -18,7 +18,7 @@ const loginController = {
 
         // Checks if credentials are in db
         try{
-            const user = await users.findOne({ username, password });
+            const user = await User.find({ username, password });
             if(user){
                 console.log("user is:",user);
                 console.log('Login successful:', user);
@@ -35,15 +35,23 @@ const loginController = {
         }
     },
 
-    getLogin: async function (req, res) {
-        // Dropdown links for navbar
-        let currentUser = req.query.loggedIn;
-        if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await users.findOne({username: "guest"});
-        const dropdowns = getDropdownLinks(currentUser.username);
+    // getLogin: async function (req, res) {
+    //     // Dropdown links for navbar
+    //     let currentUser = req.query.loggedIn;
+    //     if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await users.findOne({username: "guest"});
+    //     const dropdowns = getDropdownLinks(currentUser.username);
         
+    //     res.render("login", {
+    //         pagetitle: "Login",
+    //         dropdownLinks: dropdowns,
+    //         user: currentUser
+    //     });
+    // }
+    getLogin: async function (req, res) {
+        let currentUser = req.query.loggedIn;
         res.render("login", {
             pagetitle: "Login",
-            dropdownLinks: dropdowns,
+            //dropdownLinks: dropdowns,
             user: currentUser
         });
     }

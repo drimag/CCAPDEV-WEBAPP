@@ -40,10 +40,7 @@ createPostBtn?.addEventListener("click", async (e) => {
         };
     
         // Get Image
-        let image = document.getElementById('displaynewpostimg')
-        const styles = window.getComputedStyle(image);
-        const url = styles.backgroundImage;
-        const imagesrc = url.slice(5, -2);
+        let imagesrc = document.getElementById('displaynewpostimg').src;
         // console.log(imagesrc);
     
         if (imagesrc) {
@@ -233,7 +230,6 @@ createCommentBtn?.addEventListener("click", async (e) => {
 
 $(document).ready(function() {
 
-    $('#displaynewpostimg').hide();
 
     $("#clearPost").click(function() {
         $('#displaynewpostimg').hide();
@@ -379,16 +375,17 @@ $(document).ready(function() {
 
 // Testing!
 
-const image_input = document.querySelector('#newpostpic');
-let uploaded_image = "";
 
-image_input.addEventListener("change", function() {
-    console.log(image_input.value);
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        uploaded_image = reader.result;
-        document.querySelector("#displaynewpostimg").style = "display: in-line block";
-        document.querySelector("#displaynewpostimg").style.backgroundImage = `url(${uploaded_image})`;
-    });
-    reader.readAsDataURL(this.files[0]);
+const image_input = document.querySelector('#newpostpic');
+
+image_input.addEventListener("change", function (e) {
+	let reader = new FileReader();
+
+	reader.onload = function(e) {
+		let uploaded_image = document.getElementById("displaynewpostimg");
+        $('#displaynewpostimg').show();
+		uploaded_image.src = e.target.result;
+	}
+
+	reader.readAsDataURL(this.files[0]);
 });

@@ -5,17 +5,18 @@
             <label for="newtitle"> Title </label> <br>
             <input type="text" name="newtitle" id="newtitle" placeholder="Enter Title..." required /> <br>
             
+            <p id="notitle" class="noinputmsg"></p>
+
             <label for="newdesc"> Description </label> <br>
             <textarea name="newdesc" id="newdesc" class="text" placeholder="What's on your mind?" required></textarea> <br>
 
+            <p id="nodesc" class="noinputmsg"></p>
             <input type="file" name="newpostpic" id="newpostpic" accept="image/png, image/jpg, image/jpeg"/>
             FIX THIS CSS!
             <br>
 
             <img id="displaynewpostimg"></img>
-            <br><br>
-            <p id="notitle" class="noinputmsg"></p>
-            <p id="nodesc" class="noinputmsg"></p>
+            <br>
 
             <button id="createPost" type="submit"> Submit </button>
             <button id="clearPost" type="reset"> Clear </button>

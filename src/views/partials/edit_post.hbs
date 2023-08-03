@@ -2,8 +2,18 @@
     <fieldset>
         <label for="edit-title"> Title </label> <br>
         <input type="text" name="edit-title" id="edit-title" value="{{post.title}}" required/><br>
+        <p id="notitle" class="noinputmsg"></p>
+
         <label for="edit-desc"> Description </label> <br>
         <textarea name="edit-desc" id="edit-desc" class="text" required>{{post.description}}</textarea> <br>
+        <p id="nodesc" class="noinputmsg"></p>
+        
+        <input type="file" name="newpostpic" id="newpostpic" accept="image/png, image/jpg, image/jpeg"/>
+            FIX THIS CSS!
+        <br>
+        <img id="displaynewpostimg" src="data:image/{{ post.image.contentType }};base64,{{ post.image.data }}"></img>
+
+        <p id="noeditpostinput{{post.postNum}}" class="noinputmsg"></p> <br>
         <button id="editPost" type="submit"> Submit </button>
         <button id="clearPost" type="reset"> Clear </button>
     </fieldset>

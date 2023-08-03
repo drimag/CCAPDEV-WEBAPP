@@ -20,6 +20,8 @@ $(document).ready(function() {
         $(this).hide();
         $(".post-title").hide();
         $(".viewpost-description").hide();
+        
+        $(".post-image").hide();
         $("#edit-post-container").show();
     });
     

@@ -18,6 +18,9 @@ const editPostForm = document.forms.editPostForm;
 const postContainer = document.querySelector(".expanded-container");
 const titleContainer = document.querySelector('#newtitle');
 const descContainer = document.querySelector("#newdesc");
+const edittitleContainer = document.querySelector("#edit-title");
+const editdescContainer = document.querySelector("#edit-desc");
+
 
 /*
     This function sends data to the route '/post' via a POST request.
@@ -104,6 +107,29 @@ descContainer?.addEventListener("keyup", async (e) => {
     }
 });
 
+edittitleContainer?.addEventListener("keyup", async (e) => {
+    e.preventDefault();
+
+    if (edittitleContainer.value === "") {
+        document.getElementById('notitle').innerText = 'Title cannot be empty!';
+        document.getElementById('notitle').style.color = "red";
+    } else {
+        document.getElementById('notitle').innerText = '';
+    }
+});
+
+
+editdescContainer?.addEventListener("keyup", async (e) => {
+    e.preventDefault();
+
+    if (editdescContainer.value === "") {
+        document.getElementById('nodesc').innerText = 'Description cannot be empty!';
+        document.getElementById('nodesc').style.color = "red";
+    } else {
+        document.getElementById('nodesc').innerText = '';
+    }
+});
+
 
 /*
     This function sends data to the route '/post' via a PUT request.
@@ -130,6 +156,25 @@ editPostBtn?.addEventListener("click", async (e) => {
             title: title,
             description: description
         };
+
+        // Get Image
+        let imagesrc = document.getElementById('displaynewpostimg').src;
+        // console.log(imagesrc);
+    
+        if (imagesrc) {
+            let [imagecontent, imagedata] = imagesrc.split(",");
+            let imagetype = imagecontent.replace("data:image/", "");
+            imagetype = imagetype.replace(";base64", "");
+    
+            data = {
+                loggedIn: loggedIn,
+                postNum: postNum,
+                title: title,
+                description: description,
+                imagedata: imagedata,
+                imagetype: imagetype
+            };
+        }
     
         const jString = JSON.stringify(data);
     

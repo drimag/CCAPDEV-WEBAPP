@@ -139,24 +139,31 @@ const postController = {
             This function edits a post in the database
     */
     editPost: async function (req, res) {
-        console.log(req.body);
+        //console.log(req.body);
         
         const foundData = await Post.findOne({postNum: req.body.postNum}).exec();
-        console.log(foundData);
+        //console.log(foundData);
     
         if (foundData) {
             try {
                 const edited_title = req.body.title;
                 const edited_description = req.body.description;
+                const edited_image = {
+                    data: req.body.imagedata,
+                    contentType: req.body.imagetype
+                }
 
-                if(edited_title === foundData.title && edited_description === foundData.description) {
+                if(edited_title === foundData.title && edited_description === foundData.description && foundData.image === edited_image) {
                     // No change
                     console.log("No change in title and description");
                 } else {
                     const result = await Post.updateOne({postNum: req.body.postNum},
-                        {title: edited_title, description: edited_description, edited: true});
+                        {title: edited_title, 
+                            description: edited_description, 
+                            image: edited_image,
+                            edited: true});
                     console.log("Update Successful");
-                    console.log(result);
+                    // console.log(result);
                 }
                 res.sendStatus(200);
             } catch (error) {

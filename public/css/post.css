@@ -56,6 +56,10 @@
     font-weight: bold;
 }
 
+#editPostForm {
+    max-width: 95%;
+}
+
 .edited-mark {
     font-size: 12px;
     font-weight: bold;
@@ -87,6 +91,10 @@ fieldset {
     font-weight: bold;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.reply-pop {
+    width: 300px;
 }
 
 #new-comment, .new-reply {

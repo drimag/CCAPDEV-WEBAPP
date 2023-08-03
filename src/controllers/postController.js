@@ -25,7 +25,7 @@ const postController = {
 
         const foundData = await Post.findOne({postNum: postNum}).exec();
 
-        console.log(foundData);
+        // console.log(foundData);
 
         if (foundData) {
             res.sendStatus(200);
@@ -44,7 +44,7 @@ const postController = {
         // Get Current User
         const loggedIn = await User.findOne({username: loggedInUser}).lean().exec();
         const foundData = await Post.findOne({postNum: postNum}).lean().exec();
-        console.log(foundData);
+        // console.log(foundData);
 
         if (foundData) {
             // Display Post
@@ -102,14 +102,19 @@ const postController = {
         const loggedIn = req.query.loggedIn;
         const loggedInUser = await User.findOne({username: loggedIn}).exec();
 
-        console.log(req.body);
+        // console.log(req.body);
 
         const postNums = await Post.find({}).distinct("postNum").exec();
         const newPost = new Post ({
             postNum: postNums[postNums.length - 1] + 1,
             user_id: loggedInUser._id,
             title: req.body.title,
-            description: req.body.description
+            description: req.body.description,
+            image: 
+            {
+                data: req.body.imagedata,
+                contentType: req.body.imagetype
+            }
         });
 
         // Could remove this with the session thing
@@ -117,7 +122,7 @@ const postController = {
             try {
                 const result = await newPost.save();
                 console.log("Post Successful");
-                console.log(result);
+                // console.log(result);
                 res.sendStatus(200);
             } catch (error) {
                 console.log("Post Unsuccessful");

@@ -6,6 +6,11 @@
     background-color: beige;
 }
 
+.post-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .post-creation-container {
     margin: 10px 25px;
     padding: 20px;

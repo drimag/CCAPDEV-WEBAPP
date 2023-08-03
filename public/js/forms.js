@@ -16,6 +16,8 @@ const editPostForm = document.forms.editPostForm;
 
 // Containers
 const postContainer = document.querySelector(".expanded-container");
+const titleContainer = document.querySelector('#newtitle');
+const descContainer = document.querySelector("#newdesc");
 
 /*
     This function sends data to the route '/post' via a POST request.
@@ -28,33 +30,83 @@ createPostBtn?.addEventListener("click", async (e) => {
     let currentUser = document.getElementById("current-username").innerText;
     currentUser = currentUser.substring(1).trimEnd();
 
-    const data = {
-        title: formData.get("newtitle"),
-        description: formData.get("newdesc")
-    };
+    const title = formData.get("newtitle");
+    const desc = formData.get("newdesc");
+
+    if (title && desc) {
+        let data = {
+            title: title,
+            description: desc
+        };
     
-    const jString = JSON.stringify(data);
-    console.log(jString);
+        // Get Image
+        let image = document.getElementById('displaynewpostimg')
+        const styles = window.getComputedStyle(image);
+        const url = styles.backgroundImage;
+        const imagesrc = url.slice(5, -2);
+        // console.log(imagesrc);
     
-    const response = await fetch("/post?loggedIn=" + currentUser, {
-        method: 'POST',
-        body: jString,
-        headers: {
-            'Content-Type': 'application/json'
+        if (imagesrc) {
+            let [imagecontent, imagedata] = imagesrc.split(",");
+            let imagetype = imagecontent.replace("data:image/", "");
+            imagetype = imagetype.replace(";base64", "");
+    
+            data = {
+                title: formData.get("newtitle"),
+                description: formData.get("newdesc"),
+                imagedata: imagedata,
+                imagetype: imagetype
+            };
         }
-    });
-
-    postForm.reset();
-
-    console.log(response);
-
-    if (response.status == 200) {
-        console.log("Post Successful");
-        location.reload();
-    } else {
-        console.log(`received response: ${response.status}`);
+        
+        const jString = JSON.stringify(data);
+        
+        const response = await fetch("/post?loggedIn=" + currentUser, {
+            method: 'POST',
+            body: jString,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        postForm.reset();
+    
+        // console.log(response);
+    
+        if (response.status == 200) {
+            console.log("Post Successful");
+            location.reload();
+        } else {
+            image.style.backgroundImage = "";
+            image.style.display = "none";
+            console.log(`received response: ${response.status}`);
+        }
     }
 });
+
+titleContainer?.addEventListener("keyup", async (e) => {
+    e.preventDefault();
+
+    if (titleContainer.value === "") {
+        document.getElementById('notitle').innerText = 'Title cannot be empty!';
+        document.getElementById('notitle').style.color = "red";
+    } else {
+        document.getElementById('notitle').innerText = '';
+    }
+});
+
+
+descContainer?.addEventListener("keyup", async (e) => {
+    e.preventDefault();
+
+    if (descContainer.value === "") {
+        document.getElementById('nodesc').innerText = 'Description cannot be empty!';
+        document.getElementById('nodesc').style.color = "red";
+    } else {
+        document.getElementById('nodesc').innerText = '';
+    }
+});
+
 
 /*
     This function sends data to the route '/post' via a PUT request.

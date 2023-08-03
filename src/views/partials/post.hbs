@@ -13,8 +13,14 @@
 
             <div class="flex-column-container post-details">
                 <p class="username">@{{ user_id.username }} </p>
-                <p class="post-title">{{ title }}</p>
+                <p class="post-title">{{ title }}</p> <br>
                 <p class="home-description">{{ description}}</p>
+                {{#if image}}
+                <br>
+                <div>
+                    <img class="post-image" src="data:image/{{ image.contentType }};base64,{{ image.data }}">
+                </div>
+                {{/if}}
                 {{#if edited }}
                 <p class="edited-mark"> (edited)</p>
                 {{/if}}

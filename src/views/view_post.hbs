@@ -24,7 +24,14 @@
                 <div class="flex-column-container post-details">
                     <p id="postauthor-username" class="username">@{{ author.username }}</p>
                     <p class="post-title">{{ post.title }}</p>
+                    <br>
                     <p class="viewpost-description">{{ post.description }}</p>
+                    {{#if post.image}}
+                    <br>
+                    <div>
+                        <img class="post-image" src="data:image/{{ post.image.contentType }};base64,{{ post.image.data }}">
+                    </div>
+                    {{/if}}
                     <div id="edit-post-container">
                         {{> edit_post }}
                         <p id="noeditpostinput{{post.postNum}}" class="noinputmsg"></p>

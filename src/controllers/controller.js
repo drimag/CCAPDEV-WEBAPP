@@ -20,8 +20,6 @@ const controller = {
         const posts = await Post.find({}).populate({
             path: 'user_id'
         }).lean().exec();
-
-        console.log(posts);
         /*
         // Filter posts if there is a search
             let searchTerms = req.query.search;
@@ -71,14 +69,10 @@ const controller = {
                 const posts = await Post.find({user_id: view_user._id}).populate({
                     path: 'user_id'
                 }).lean().exec();
-        
-                console.log(posts);
     
                 const comments = await Comment.find({user_id: view_user._id}).populate({
                     path: 'user_id'
                 }).lean().exec();
-    
-                console.log(comments);
 
                 // Dropdown links for navbar
                 const dropdowns = getDropdownLinks(loggedIn.username);

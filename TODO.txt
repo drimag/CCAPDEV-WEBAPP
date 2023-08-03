@@ -1,5 +1,4 @@
 Comments from MCO2:
-- allow user to create posts with image attachments
 - redirect the user to login on succesful register, 
     and/or inform the user that the registration was successful (already implemented tho?)
 
@@ -8,13 +7,14 @@ reminder:
 - nav dropdown not working in profile
 
 done: 
-x include date of post / comment create in post and comment components 
-x would be better if create post form fields are hidden until a button is pressed
+x allow user to create posts with image attachments (jaeme)
+x include date of post / comment create in post and comment components (jaeme)
+x would be better if create post form fields are hidden until a button is pressed (jaeme)
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
 - css for new post img file button and save it to db
-- ^^^ adjust create post, edit post funcs for pics
+- ^^^ edit post funcs for pics
 - fix sample data input thing (?)
 - change dates in sample data
 - render - application deployment

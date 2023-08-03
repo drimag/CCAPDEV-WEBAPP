@@ -13,8 +13,9 @@ x would be better if create post form fields are hidden until a button is presse
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
+- add a delete picture in edit post func
 - css for new post img file button
-- ^^^ edit post funcs for pics
+
 - fix sample data input thing (?)
 - change dates in sample data
 - render - application deployment

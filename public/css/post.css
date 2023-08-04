@@ -71,7 +71,7 @@ fieldset {
     width: 100%;
 }
 
-#createPost, #clearPost, #editPost {
+#createPost, #clearPost, #editPost, #selectImage {
     width: 100px;
     height: 30px;
     border-radius: 15px;

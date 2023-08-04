@@ -14,8 +14,7 @@ reminder:
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
-- add a delete picture in edit post func
-- css for new post img file button
+- add a delete picture in edit post func (not that prio, can do last)
 
 - fix sample data input thing (?)
 - change dates in sample data

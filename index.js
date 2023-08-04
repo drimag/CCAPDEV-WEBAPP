@@ -9,8 +9,17 @@ const router = require('./src/routes/router.js');
 // import handlebars from 'handlebars';
 const handlebars = require('handlebars');
 
+/* Server */
+/*
+const bycrypt = require('bycrypt');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
+*/
+
 async function main () {
-    const app = express();
+    const app = express(); //can I bring this out of this function
 
     app.use("/static", express.static("./public"));
     app.engine("hbs", exphbs.engine({
@@ -34,6 +43,43 @@ async function main () {
     
     app.use(router);
 
+    // Session
+    /*
+    app.use(express.urlencoded({ extended: false }));
+    app.use(flash());
+    app.use(session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use(methodOverride('_method'));
+    */
+    app.get("/", checkAuthenticated, (req, res) => {
+        res.render("index.hbs");
+    });
+
+    app.get("/login", checkAuthenticated, (req, res) => {
+        res.render("login.hbs");
+    });
+
+    /*
+    app.post("/login", checkNotAuthenticated, passport.authenticate('local', {
+        successRedirect: "/",
+        failureRedirect: "/login",
+        failureFlash: true
+    }));
+    */
+
+    app.get("/register", checkAuthenticated, (req, res) => {
+        res.render("register.hbs")
+    });
+
+    app.get("/register", checkNotAuthenticated, async (req, res) => {
+        
+    });
+
     // Activate the app
     app.listen(process.env.SERVER_PORT, async function() {
         console.log("Express app is now listening on port " + process.env.SERVER_PORT);
@@ -49,6 +95,21 @@ async function main () {
             console.error(err);
         }
     });
+}
+
+function checkAuthenticated(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+
+    res.redirect("/login");
+}
+
+function checkNotAuthenticated(req, res, next) {
+    if(req.isAuthenticated()) {
+        return res.redirect("/");
+    }
+    next();
 }
 
 main();

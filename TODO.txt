@@ -1,15 +1,16 @@
 Comments from MCO2:
-- redirect the user to login on succesful register, 
-    and/or inform the user that the registration was successful (already implemented tho?)
-
-reminder:
-- vote functionality on profile
-- nav dropdown not working in profile
-
 done: 
+x redirect the user to login on succesful register, and/or inform the user that the registration was successful
 x allow user to create posts with image attachments (jaeme)
 x include date of post / comment create in post and comment components (jaeme)
 x would be better if create post form fields are hidden until a button is pressed (jaeme)
+
+reminder:
+- double check on login and register controllers functionality / error msgs
+- vote functionality (on home, profile, viewpost)
+- nav dropdown not working in profile + sign up + log in
+- sessions
+- password hashing
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)

@@ -20,35 +20,34 @@ const controller = {
         const posts = await Post.find({}).populate({
             path: 'user_id'
         }).lean().exec();
-        /*
+
         // Filter posts if there is a search
             let searchTerms = req.query.search;
             let searchPosts;
         
             if(!(searchTerms == undefined || searchTerms === "")){
-                searchPosts = postsArray.filter((post) => {
+                searchPosts = posts.filter((post) => {
                     let titleMatch = post.title.toLowerCase().includes(searchTerms.toLowerCase());
                     let descriptionMatch = post.description.toLowerCase().includes(searchTerms.toLowerCase());
         
                     return titleMatch || descriptionMatch;
                 });
             } else {
-                searchPosts = postsArray;
+                searchPosts = posts;
             }
             
             const searchDetails = { numPosts : searchPosts.length, search : searchTerms };
             console.log("search Detials: " + searchDetails);
-        */
+        
         // Get dropdown links based on if user is logged in
         const dropdowns = getDropdownLinks(loggedIn.username); 
-        console.log("dropdown links: " + dropdowns);
 
         res.render('index', {
             pagetitle: "Home",
             user: loggedIn,
-            posts: posts,
+            posts: searchPosts,
             dropdownLinks: dropdowns, // Navbar links 
-            //searchDetails: searchDetails
+            searchDetails: searchDetails
         });
     },
 
@@ -83,7 +82,7 @@ const controller = {
                     view_user: view_user,
                     posts: posts,
                     comments: comments,
-                    //dropdownLinks: dropdowns
+                    dropdownLinks: dropdowns
                 });
             } catch (error) {
                 console.error(error);

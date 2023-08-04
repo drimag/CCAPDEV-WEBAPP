@@ -97,6 +97,15 @@ fieldset {
     width: 300px;
 }
 
+#comment-pop {
+    width: 97%;
+}
+
+#noinputcomment {
+    margin: 0px;
+    padding: 0px;
+}
+
 #new-comment, .new-reply {
     width: 93%;
     height: 100px;

@@ -1,7 +1,11 @@
 <form id="createCommentForm" name="createCommentForm" onsubmit="return false" autocomplete="off">
     <fieldset>
         <label for="new-comment"> Post a Comment </label>
-        <textarea name="new-comment" id="new-comment" class="text" placeholder="Reply..." required></textarea> <br>
+        <textarea name="new-comment" id="new-comment" class="text" placeholder="Reply..." required></textarea>
+        
+        <p id="noinputcomment" class="noinputmsg"></p>
+        <br>
+    
         <button id="createComment" type="submit"> Submit </button>
         <button id="clearComment" type="reset"> Clear </button>
     </fieldset>

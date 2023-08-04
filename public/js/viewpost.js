@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $("#edit-post-container").hide();
+    $('#noinputcomment').hide();
 
     $(".edit-comment").click(function() {
         $(this).hide();
@@ -82,5 +83,5 @@ $(document).ready(function() {
 
     $(".comment-user").hover(function() {
         $(this).css('cursor', 'pointer');
-    })
+    });
 });

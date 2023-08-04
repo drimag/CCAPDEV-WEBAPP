@@ -41,7 +41,7 @@ createPostBtn?.addEventListener("click", async (e) => {
             title: title,
             description: desc
         };
-    
+        
         // Get Image
         let imagesrc = document.getElementById('displaynewpostimg').src;
         // console.log(imagesrc);
@@ -80,6 +80,15 @@ createPostBtn?.addEventListener("click", async (e) => {
             image.style.backgroundImage = "";
             image.style.display = "none";
             console.log(`received response: ${response.status}`);
+        }
+    } else {
+        if (title == '') {
+            document.getElementById('notitle').innerText = 'Title cannot be empty!';
+            document.getElementById('notitle').style.color = "red";
+        }
+        if (desc == '') {
+            document.getElementById('nodesc').innerText = 'Description cannot be empty!';
+            document.getElementById('nodesc').style.color = "red";
         }
     }
 });
@@ -251,25 +260,31 @@ createCommentBtn?.addEventListener("click", async (e) => {
         comment: formData.get("new-comment")
     }
     
-    const jString = JSON.stringify(data);
-    console.log(jString);
-
-    const response = await fetch("/comment?loggedIn=" + loggedIn, {
-        method: 'POST',
-        body: jString,
-        headers: {
-            'Content-Type': 'application/json'
+    if (data.comment) {
+        const jString = JSON.stringify(data);
+        console.log(jString);
+    
+        const response = await fetch("/comment?loggedIn=" + loggedIn, {
+            method: 'POST',
+            body: jString,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        commentForm.reset();
+        console.log(response);
+    
+        if(response.status === 200) {
+            console.log("Comment Successful");
+            location.reload();
+        } else {
+            console.log(`received response: ${response.status}`);
         }
-    });
-
-    commentForm.reset();
-    console.log(response);
-
-    if(response.status === 200) {
-        console.log("Comment Successful");
-        location.reload();
     } else {
-        console.log(`received response: ${response.status}`);
+        document.getElementById('noinputcomment').style.display = 'block';
+        document.getElementById('noinputcomment').innerText = 'Comment cannot be empty!';
+        document.getElementById('noinputcomment').style.color = "red";
     }
 });
 

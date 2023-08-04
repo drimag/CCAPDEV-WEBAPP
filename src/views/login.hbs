@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="/static/css/login.css">
 <script src="/static/js/login.js" defer></script>
-<div class="outer-login-container page">
+
+<div class="page">
+    <br>
     <h1 class="login-title"> Welcome to Ourverse! </h1>
     <br>
     <div class="inner-login-container">
         <h2 class="login-title"> Log In </h2>
-        <form>
+        <form onsubmit="return false">
             <div class="login-box" id="username-box">
                 <span class="credential-title"> Username </span>
                 <input class="credential-input" type="text" id="username" name="username" required>
@@ -19,6 +21,7 @@
             <label for="remember"> Remember me </label>
             <input type="checkbox" id="remember" />
             <br>
+            <p id="logincheck" class="noinputmsg" style="margin: 0px; padding: 0px;"></p>
             <div class="submit-box">
                 <input class="login-button" type="submit" value="Log In">
             </div>

@@ -11,6 +11,9 @@ const loginController = require('../controllers/loginController.js');
 // Home Route ✔️
 router.get(["/", "/home", "/homepage"], controller.getHome);
 
+// User Route
+router.get("/user", controller.getCheckUser);
+
 // Post Routes ✔️
 router.get("/post", postController.getCheckPost);
 router.post("/post", postController.createPost);

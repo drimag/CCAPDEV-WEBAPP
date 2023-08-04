@@ -4,24 +4,18 @@ const loginController = {
 
     checkCredentials: async function (req,res){
         console.log("checkCredential");
-        const { username, password } = req.body;
-
+        console.log(req.body);
+        const user = await User.findOne({username: req.body.username, password: req.body.password}).exec();
         // Checks if credentials are in db
-        try{
-            const user = await User.find({ username, password });
-            if(user){
-                console.log("user is:",user);
-                console.log('Login successful:', user);
+        if (user) {
+            console.log("user is:",user);
+            console.log('Login successful:', user);
 
-                // Transport user to home
-                res.status(200).json({ result:true });
-            }else{
-                console.log("INVALID USERNAME/PASSWORD");
-                res.status(200).json({ result:false });
-            }
-
-        }catch(err){
-            console.error('Login failed:',err);
+            // Transport user to home
+            res.sendStatus(200);
+        } else {
+            console.log("INVALID USERNAME/PASSWORD");
+            res.sendStatus(400);
         }
     },
 
@@ -38,10 +32,15 @@ const loginController = {
     //     });
     // }
     getLogin: async function (req, res) {
-        let currentUser = req.query.loggedIn;
+        let currentUser = await User.findOne({username: req.query.loggedIn}).lean().exec();
+
+        if (!currentUser) {
+            currentUser = await User.findOne({username: "guest"}).lean().exec();
+        }
+
         res.render("login", {
             pagetitle: "Login",
-            //dropdownLinks: dropdowns,
+            //TODO: dropdownLinks: dropdowns,
             user: currentUser
         });
     }

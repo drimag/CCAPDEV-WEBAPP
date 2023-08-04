@@ -12,17 +12,13 @@ const registerController = {
         const { password } = req.body;
         const { bio } = req.body;
         const { pfp } = req.body;
+
         try{
+            const matchingUser = await User.findOne({ username: username });
 
-            const matchingUser = User.findOne({ username: username });
-
-            
-            if (!matchingUser){
-                //username is taken
-
+            if(matchingUser) {
                 res.sendStatus(400);
-            }else{
-
+            } else {
                 const newUser = new User({
                     username: username,
                     password: password,
@@ -33,18 +29,16 @@ const registerController = {
                     upvotePosts: [],
                     downvotePosts: [] 
                 })
-
-
-
+    
                 const result = await newUser.save();
                 console.log("result:", result);
                 console.log("register successful!");
                 
-   
                 res.sendStatus(200);
             }
         } catch(err){
             console.error('Failed to create account:',err);
+            res.sendStatus(500);
         }
     },
     
@@ -62,11 +56,15 @@ const registerController = {
     //     });
     // }
     getRegister: async function (req,res){
-        let currentUser = req.query.loggedIn;
+        let currentUser = await User.findOne({username: req.query.loggedIn}).lean().exec();
+
+        if (!currentUser) {
+            currentUser = await User.findOne({username: "guest"}).lean().exec();
+        }
         res.render("register", 
         { 
             pagetitle: "Register",
-            //dropdownLinks: dropdowns,
+            //TODO: dropdownLinks: dropdowns,
             user: currentUser 
         });
     }

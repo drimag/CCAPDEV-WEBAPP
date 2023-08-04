@@ -1,31 +1,35 @@
 <script src="/static/js/register.js" defer></script>
 <link rel="stylesheet" href="/static/css/login.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<div class="outer-login-container page">
-            <br>
-            <div class="inner-login-container">
-                <h2 class="login-title"> Create an Account </h2>
-                <form class="registration-form">
-                    <div class="login-box" id="username-box">
-                        <span class="credential-title"> Username </span>
-                        <input class="credential-input" type="text" id="username" name="username" required>
-                    </div>
-                    <br>
-                    <div class="login-box" id="password-box">
-                        <span class="credential-title"> Password </span>
-                        <input class="credential-input" type="password" id="password" name="password" required>
-                    </div>
-                    <br>
-                    <div class="login-box" id="password-box">
-                        <span class="credential-title"> Confirm Password </span>
-                        <input class="credential-input" type="password" id="cpassword" name="password" required>
-                    </div>
-                    <br>
-                    <span id = "message" style="color:red"></span>
-                    <div class="submit-box">
-                        <input class="register-button" value="Register">
-                    </div>
-                </form>
+<div class="page">
+    <br><br>
+    <div class="inner-login-container">
+        <h2 class="login-title"> Create an Account </h2>
+        <form class="registration-form">
+            <div class="login-box" id="username-box">
+                <span class="credential-title"> Username </span>
+                <input class="credential-input" type="text" id="username" name="username" required>
             </div>
-
+            <div>
+                <p id="usercheck" class="noinputmsg" style="display: none; margin: 0px; padding: 0px;"></p>
+            </div>
+            <br>
+            <div class="login-box" id="password-box">
+                <span class="credential-title"> Password </span>
+                <input class="credential-input" type="password" id="password" name="password" required>
+            </div>
+            <p id="passcheck" class="noinputmsg" style="display: none; margin: 0px; padding: 0px;"></p>
+            <br>
+            <div class="login-box" id="password-box">
+                <span class="credential-title"> Confirm Password </span>
+                <input class="credential-input" type="password" id="cpassword" name="password" required>
+            </div>
+            <p id="cpasscheck" class="noinputmsg" style="display: none; margin: 0px; padding: 0px;"></p>
+            <br>
+            <span id = "message" style="color:red"></span>
+            <div class="submit-box">
+                <input class="register-button" type="submit" value="Register">
+            </div>
+        </form>
+    </div>
 </div>

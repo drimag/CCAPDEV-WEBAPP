@@ -4,6 +4,18 @@ const Comment = require('../models/Comment.js');
 const getDropdownLinks = require('../middleware/navDropdown.js');
 
 const controller = {
+
+    getCheckUser: async function (req, res) {
+        const username = req.query.username;
+
+        const foundData = await User.findOne({username: username}).exec();
+
+        if (foundData) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(400);
+        }
+    },
     /*
             This displays 'index.hbs' with all posts in the database.
     */

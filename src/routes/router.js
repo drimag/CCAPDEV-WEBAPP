@@ -8,6 +8,9 @@ const postController = require('../controllers/postController');
 const registerController = require('../controllers/registerController.js');
 const loginController = require('../controllers/loginController.js');
 
+const voteController = require('../controllers/voteController.js');
+const changePasswordController = require('../controllers/changePasswordController.js');
+
 // Home Route ✔️
 router.get(["/", "/home", "/homepage"], controller.getHome);
 
@@ -42,6 +45,16 @@ router.post("/login", loginController.checkCredentials);
 // Register Routes
 router.get("/register", registerController.getRegister);
 router.post("/register", registerController.registerAccount);
+
+// Voting Routes
+router.get("/votes", voteController.getUserVotes);
+router.post('/posts/_id/votes', voteController.postVote); //no longer used???
+router.put("/votes", voteController.updateVotes);
+
+// Change Password Routes
+router.get("/change-password", changePasswordController.getChangePassword);
+router.get("/get-password", changePasswordController.getCurrentPassword);
+router.put("/change-password", changePasswordController.changePassword);
 
 /*
     OLD ROUTES:

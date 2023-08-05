@@ -2,21 +2,22 @@ $('#save-changes-btn').click(function (event) {
     event.preventDefault(); // Prevent the default form submission
 
     async function changePasswordHandler(){
-        let currentPassword;
-
-        // Call getPassword as a fetch request to controller
-        try {
-            currentPassword = await getPassword();
-        } catch (error) {
-            console.error("error fetching password", error);
-        }
+        let isMatching;
 
         let oldPSW = document.getElementById("old-psw").value;
         let newPSW = document.getElementById("new-psw").value;
         let newPSW2 = document.getElementById("new-psw-2").value;
         let isValid = true;
 
-        if(oldPSW != currentPassword ){                                                            
+        // fetch request if inputted PSW matches old
+        try {
+            isMatching = await getIsMatching(oldPSW);
+            console.log("isMatching?: public: " + isMatching);
+        } catch (error) {
+            console.error("error fetching if password matching", error);
+        }
+
+        if(!isMatching){                                                            
             document.getElementById("message").innerHTML = "**Old Password Incorrect";  
             isValid = false;
         } 
@@ -74,24 +75,30 @@ $('#save-changes-btn').click(function (event) {
     changePasswordHandler();  
 });
 
-async function getPassword() {
+async function getIsMatching(oldPSW) {
     const currentURL = window.location.href;
     const params = new URLSearchParams(new URL(currentURL).search);
     const currentUser = params.get("loggedIn");
 
+    const jString = JSON.stringify({ password: oldPSW });
+
     try {
         const response = await fetch("/get-password?loggedIn=" + currentUser, {
-            method: 'GET',
+            method: 'POST',
+            body: jString,
             headers: {
             'Content-Type': 'application/json'
             }
         });
-    
-        if (response.ok) {
-            const password = await response.text();
-            return password;
+
+        if (response.status == 200) {
+            console.log("password matches");
+            return true;
+        } else if (response.status == 403) {
+            return false;
+            console.log('password does not match');
         } else {
-            console.log('Failed to fetch the change password page.');
+            console.log('Failed to fetch the password matching page.');
         }
         
     } catch (err) {

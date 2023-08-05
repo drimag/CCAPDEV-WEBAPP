@@ -53,7 +53,7 @@ router.put("/votes", voteController.updateVotes);
 
 // Change Password Routes
 router.get("/change-password", changePasswordController.getChangePassword);
-router.get("/get-password", changePasswordController.getCurrentPassword);
+router.post("/get-password", changePasswordController.getIsMatchingPassword);
 router.put("/change-password", changePasswordController.changePassword);
 
 /*

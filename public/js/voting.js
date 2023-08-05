@@ -26,6 +26,12 @@ $(document).ready(function() {
         const postDVButton = $("div.flex-row-container.post button.downvote");
         const commentUVButtons = $("div.flex-column-container.comment-section button.upvote");
         const commentDVButtons = $("div.flex-column-container.comment-section button.downvote");
+        const commentUVButtonsProfile = $("div.flex-row-container.comment-list button.upvote");
+        const commentDVButtonsProfile = $("div.flex-row-container.comment-list button.downvote");
+
+        console.log("post votes: "+ JSON.stringify(postUVButton) + "downvotes: " + JSON.stringify(postDVButton))
+
+        console.log("comment votes: " + JSON.stringify(commentUVButtons) + "downvotes: " + JSON.stringify(commentDVButtons));
         
         if(postUVButton !== null && upvote !== null) {
             postUVButton.each(function () {
@@ -66,6 +72,27 @@ $(document).ready(function() {
                 }
             });
         }
+
+        if(commentUVButtonsProfile !== null && ucvote !== null) {
+            commentUVButtonsProfile.each(function () {
+            const eNumber = $(this).closest("[id*=comment]").prop("id").slice(-1);
+            
+            if (ucvote.includes(Number(eNumber))) {
+              $(this).addClass("clicked");
+            }
+            });
+        }
+
+        if(commentDVButtonsProfile !== null && dcvote !== null) {
+            commentDVButtonsProfile.each(function () {
+            const eNumber = $(this).closest("[id*=comment]").prop("id").slice(-1);
+            
+            if (dcvote.includes(Number(eNumber))) {
+              $(this).addClass("clicked");
+            }
+            });
+        }
+
     }
     startVoting();
 });

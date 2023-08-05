@@ -4,11 +4,10 @@ x redirect the user to login on succesful register, and/or inform the user that 
 x allow user to create posts with image attachments (jaeme)
 x include date of post / comment create in post and comment components (jaeme)
 x would be better if create post form fields are hidden until a button is pressed (jaeme)
-x vote functionality for everywhere except comments in viewprofile
+x vote functionality
 
 reminder:
 - double check on login and register controllers functionality / error msgs
-- vote functionality for comments in viewprofile
 - nav dropdown not working in profile + sign up + log in
 - sessions
 - password hashing

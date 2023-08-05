@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const getDropdownLinks = require('../middleware/navDropdown.js');
 
 const registerController = {
 
@@ -42,32 +43,32 @@ const registerController = {
         }
     },
     
-    // getRegister: async function (req,res){
-    //     // dropdown links for navbar
-    //     let currentUser = req.query.loggedIn;
-    //     if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await users.findOne({username: "guest"});
-    //     const dropdowns = getDropdownLinks(currentUser.username);
-        
-    //     res.render("register", 
-    //     { 
-    //         pagetitle: "Register",
-    //         dropdownLinks: dropdowns,
-    //         user: currentUser 
-    //     });
-    // }
     getRegister: async function (req,res){
-        let currentUser = await User.findOne({username: req.query.loggedIn}).lean().exec();
-
-        if (!currentUser) {
-            currentUser = await User.findOne({username: "guest"}).lean().exec();
-        }
+        // dropdown links for navbar
+        let currentUser = req.query.loggedIn;
+        if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await User.findOne({username: "guest"}).lean().exec();
+        const dropdowns = getDropdownLinks(currentUser.username);
+        
         res.render("register", 
         { 
             pagetitle: "Register",
-            //TODO: dropdownLinks: dropdowns,
+            dropdownLinks: dropdowns,
             user: currentUser 
         });
     }
+    // getRegister: async function (req,res){
+    //     let currentUser = await User.findOne({username: req.query.loggedIn}).lean().exec();
+
+    //     if (!currentUser) {
+    //         currentUser = await User.findOne({username: "guest"}).lean().exec();
+    //     }
+    //     res.render("register", 
+    //     { 
+    //         pagetitle: "Register",
+    //         TODO: dropdownLinks: dropdowns,
+    //         user: currentUser 
+    //     });
+    // }
 }
 
 module.exports = registerController;

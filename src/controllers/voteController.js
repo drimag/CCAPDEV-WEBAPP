@@ -27,18 +27,18 @@ const voteController = {
 			// Find the post by its ID
 			if (type === "comment"){
 				console.log("This is a comment");
-				const comment = await Comment.findOne({ num: parseInt(number)}).exec()
+				const comment = await Comment.findOne({ num: parseInt(number)}).exec();
 				comment.votes = votes;
 				await comments.updateOne({num: parseInt(number) }, { $set: { votes } });
 			}else{
 				console.log("This is a post");
-				const post = await Post.findOne({ num: parseInt(number)}).exec()
+				const post = await Post.findOne({ num: parseInt(number)}).exec();
 
 				// Update the vote count in the post document
 				post.votes = votes;
 
 				// Save the updated post back to the database
-				await Post.updateOne({num: parseInt(number) }, { $set: { votes } }).exec()
+				await Post.updateOne({num: parseInt(number) }, { $set: { votes } }).exec();
 				
 			}
       

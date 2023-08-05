@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const getDropdownLinks = require('../middleware/navDropdown.js');
 
 const loginController = {
 
@@ -19,31 +20,31 @@ const loginController = {
         }
     },
 
-    // getLogin: async function (req, res) {
-    //     // Dropdown links for navbar
-    //     let currentUser = req.query.loggedIn;
-    //     if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await users.findOne({username: "guest"});
-    //     const dropdowns = getDropdownLinks(currentUser.username);
-        
-    //     res.render("login", {
-    //         pagetitle: "Login",
-    //         dropdownLinks: dropdowns,
-    //         user: currentUser
-    //     });
-    // }
     getLogin: async function (req, res) {
-        let currentUser = await User.findOne({username: req.query.loggedIn}).lean().exec();
-
-        if (!currentUser) {
-            currentUser = await User.findOne({username: "guest"}).lean().exec();
-        }
-
+        // Dropdown links for navbar
+        let currentUser = req.query.loggedIn;
+        if(currentUser == null || currentUser === "" || currentUser == undefined || currentUser == "guest") currentUser = await User.findOne({username: "guest"}).lean().exec();
+        const dropdowns = getDropdownLinks(currentUser.username);
+        
         res.render("login", {
             pagetitle: "Login",
-            //TODO: dropdownLinks: dropdowns,
+            dropdownLinks: dropdowns,
             user: currentUser
         });
     }
+    // getLogin: async function (req, res) {
+    //     let currentUser = await User.findOne({username: req.query.loggedIn}).lean().exec();
+
+    //     if (!currentUser) {
+    //         currentUser = await User.findOne({username: "guest"}).lean().exec();
+    //     }
+
+    //     res.render("login", {
+    //         pagetitle: "Login",
+    //         //TODO: dropdownLinks: dropdowns,
+    //         user: currentUser
+    //     });
+    // }
 }
 
 module.exports = loginController;

@@ -15,7 +15,7 @@ const Comment = require('../models/Comment.js');
 const voteController = {
     
     postVote: async function (req, res) {
-        console.log("votecontroller called");
+        console.log("postVote called");
         const { type } = req.body;
         console.log("type is:",type);
         const { number } = req.body;
@@ -27,18 +27,18 @@ const voteController = {
 			// Find the post by its ID
 			if (type === "comment"){
 				console.log("This is a comment");
-				const comment = await comments.findOne({ num: parseInt(number)});
+				const comment = await Comment.findOne({ num: parseInt(number)}).exec()
 				comment.votes = votes;
 				await comments.updateOne({num: parseInt(number) }, { $set: { votes } });
 			}else{
 				console.log("This is a post");
-				const post = await posts.findOne({ num: parseInt(number)});
+				const post = await Post.findOne({ num: parseInt(number)}).exec()
 
 				// Update the vote count in the post document
 				post.votes = votes;
 
 				// Save the updated post back to the database
-				await posts.updateOne({num: parseInt(number) }, { $set: { votes } });
+				await Post.updateOne({num: parseInt(number) }, { $set: { votes } }).exec()
 				
 			}
       
@@ -59,9 +59,9 @@ const voteController = {
 
 		try {
 			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") {
-				curr = await users.findOne({username: "guest"});
+				curr = await User.findOne({username: "guest"}).exec()
 			} else {
-				curr = await users.findOne({username: curr});
+				curr = await User.findOne({username: curr}).exec()
 			}
 
 			const votes = { 
@@ -71,7 +71,7 @@ const voteController = {
 				downvotePosts: curr.downvotePosts
 			}
 
-			console.log("sending this as user's votes': " + votes);
+			console.log("sending this as user's votes': " + JSON.stringify(votes));
             res.send(votes);
 
         } catch (error) {
@@ -95,7 +95,7 @@ const voteController = {
 				return res.status(400).send("No logged in user");
 
             // Look for user with matching username
-            const user = await users.findOne({username: curr});
+            const user = await User.findOne({username: curr}).exec()
 
             // User does not exist
             if(!user) return res.status(404).send("User not found");
@@ -103,12 +103,12 @@ const voteController = {
 			if(newVotes.type === "comment") {
 				try {
 					console.log("changing comment votes");
-					comments.updateOne(
-						{ num: newVotes.num },
+					Comment.updateOne(
+						{ commentNum: newVotes.num },
 						{$set:
 							{ votes: newVotes.votes }
-						}).then( val => {
-                   			console.log("voting successful: " + val);
+						}).then( result => {
+                   			console.log("voting successful: " + result);
 						}).catch(err => {
 							res.status(500).send("Error voting");
 							console.log("voting error: " + err);
@@ -121,8 +121,8 @@ const voteController = {
 			} else if(newVotes.type === "post") {
 				try {
 					console.log("changing post votes");
-					posts.updateOne(
-						{ num: newVotes.num },
+					Post.updateOne(
+						{ postNum: newVotes.num },
 						{$set:
 							{ votes: newVotes.votes }
 						}).then( val => {
@@ -137,7 +137,7 @@ const voteController = {
 				}
 			}
 
-			users.updateOne(
+			User.updateOne(
                 {username: curr},
                 {$set: 
                     { 

@@ -1,11 +1,3 @@
-/*
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-}
-*/
-
-const dotenv = require('dotenv');
-dotenv.config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const connect = require('./src/models/db.js');
@@ -13,8 +5,7 @@ const addSampleData = require('./sampledata.js');
 const router = require('./src/routes/router.js');
 const handlebars = require('handlebars');
 
-/* Server will go on my laptop wait */
-/*
+/* Server */
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash');
@@ -28,7 +19,6 @@ initialize(
     // Find user based on username
     username => users.find(user => user.username === username)
 )
-*/
 
 const users = [];
 
@@ -58,7 +48,6 @@ async function main () {
     app.use(router);
 
     // Session
-    /*
     app.use(flash());
     app.use(session({
         secret: process.env.SESSION_SECRET,
@@ -68,7 +57,7 @@ async function main () {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(methodOverride('_method'));
-    */
+
     app.get("/", checkAuthenticated, (req, res) => {
         res.render("index");
     });
@@ -77,13 +66,11 @@ async function main () {
         res.render("login");
     });
 
-    /*
     app.post("/login", checkNotAuthenticated, passport.authenticate('local', {
         successRedirect: "/",
         failureRedirect: "/login",
         failureFlash: true
     }));
-    */
 
     app.get("/register", checkNotAuthenticated, (req, res) => {
         res.render("register")
@@ -105,8 +92,8 @@ async function main () {
     });
 
     // Activate the app
-    app.listen(process.env.SERVER_PORT, async function() {
-        console.log("Express app is now listening on port " + process.env.SERVER_PORT);
+    app.listen(process.env.PORT, async function() {
+        console.log("Express app is now listening...");
         
         try {
             await connect();

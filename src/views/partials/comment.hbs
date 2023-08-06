@@ -11,16 +11,16 @@
         <p class="comment-username">@{{ user_id.username }}</p>
         <p class="replied-comment">Replied to <b>@{{ replied_to }}</b></p>
         <p class="comment-desc">{{ comment }} </p>
+        {{#if edited }}
+        <p class="edited-mark"> (edited)</p>
+        {{/if}}
+        <br>
         <p class="date">{{ formatDate date }} </p>
 
         <div id="editdiv{{commentNum}}" class="editdiv">
             {{> edit_comment }}
             <p id="noeditinput{{commentNum}}" class="noinputmsg"></p>
         </div>
-
-        {{#if edited }}
-        <p class="edited-mark"> (edited)</p>
-        {{/if}}
 
         <div class="actions-comment flex-row-container">
             <div class="flex-row-container">

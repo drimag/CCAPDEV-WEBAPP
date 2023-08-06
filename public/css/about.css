@@ -1,0 +1,26 @@
+body {
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    margin: 0;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 50%;
+}
+
+.about-title {
+    text-align: center;
+}
+
+.about-content {
+    border-radius: 15px;
+    background-color: white;
+    padding: 50px;
+    width: 100%;
+}

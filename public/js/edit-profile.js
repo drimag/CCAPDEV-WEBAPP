@@ -12,6 +12,13 @@
 
 const pfpInput = document.getElementById("pfp");
 pfpInput.addEventListener("change", function (e) {
+	const maxFileSize = 8 * 1024 * 1024; // 8MB in bytes
+
+	if (this.files[0].size > maxFileSize) {
+		alert("Image size exceeds the maximum limit of 8MB.");
+		return;
+	}
+
 	let reader = new FileReader();
 
 	reader.onload = function(e) {
@@ -21,27 +28,6 @@ pfpInput.addEventListener("change", function (e) {
 
 	reader.readAsDataURL(this.files[0]);
 });
-
-// const pfpUpload = document.getElementById("pfp");
-// pfpUpload.addEventListener("change", function (input) {
-// 	if (input.files && input.files[0]) {
-// 		const reader = new FileReader();
-	
-// 		reader.onload = function (e) {
-// 		  const profileImage = document.getElementById("profile-image");
-// 		  console.log(profileImage);
-// 		  profileImage.setAttribute("src", e.target.result);
-// 		  profileImage.style.display = "block"; // Show the image
-// 		};
-	
-// 		reader.readAsDataURL(input.files[0]);
-// 	  }
-// });
-
-
-// TODO: 
-// Leave without saving ? 
-// probably remove everything else
 
 /*
 
@@ -81,7 +67,14 @@ $(document).ready(function() {
 		};
 		const jString = JSON.stringify(data);
 
-		try {
+		if(!((newUsername.length < 20) && (newUsername.length > 0))){
+			alert("username must be between 1 - 20 characters");
+			return;
+		} else if (newBio.length > 160){
+			alert("Bio must be within 160 characters");
+			return;
+		} else {
+			try {
 			const response = await fetch('/edit-profile', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json', },
@@ -95,59 +88,17 @@ $(document).ready(function() {
 				location.href = "/profile/"+ newUsername + "?loggedIn=" + newUsername;
 			} else {
 				console.log("Status code received: " + response.status);
+				location.href = "/home?loggedIn=" + currentUser;
+				alert("There was an error editing your profile");
 			}
-		} catch (err) {
-			console.error(err);
+			} catch (err) {
+				console.error(err);
+			}
 		}
+
+		
 	} 
 
   	$('#bio-form').submit(saveProfileEdit);
 });
-
-/*
-
-//   Changes fields based on the Current User
-  
-//  */
-// let theUser = JSON.parse(sessionStorage.getItem("currentUser"));
-
-// console.log("The Current User is " + theUser.name);
-
-// if(theUser.lname != "guest"){
-//   document.getElementById("profile-image").src = theUser.img;
-//   document.getElementById("username").placeholder = theUser.name;
-//   document.getElementById("bio").value = theUser.bio;
-// }  
-
-  // oldPFP = theUser.img;
-
-  // let reader = new FileReader();
-  // reader.onload = function(e) {
-  //   document.getElementById('profile-image').src = e.target.result;
-  // }
-
-  // if (pfp) {
-  //   reader.readAsDataURL(pfp); // Read the image file as data URL
-  // }
-  
-  // if(!username){
-  //   theUser = new User(theUser.name, theUser.password);
-  // } else {
-  //   theUser = new User(username, theUser.password);
-  // }
-
-  // theUser.bio = bio;
-
-  // let selectedImage = pfp ? URL.createObjectURL(pfp) : theUser.img; // Use selected image or existing image
-  // theUser.img = selectedImage;
-  // theUser.img = "profilepics/IU.png";
-  // if(!pfp){
-  //   theUser.img = oldPFP;
-  // }
-  
-  // sessionStorage.setItem("pfp", JSON.stringify(pfp));
-
-  // sessionStorage.setItem("currentUser", JSON.stringify(theUser));
-
-  // window.location.href = "index.html";<img class="user" id="user-selected" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASA">
   

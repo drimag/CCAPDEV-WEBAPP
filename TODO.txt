@@ -12,6 +12,7 @@ reminder:
 - double check on login and register controllers functionality / error msgs
 - sessions
 - be able to navigate to about page
+- remembered thing for login
 - render - app deployment
 
 

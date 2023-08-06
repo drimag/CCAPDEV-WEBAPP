@@ -129,3 +129,8 @@
 }
 
 .dropdown-content a:hover {background-color: #ddd;}
+
+#about {
+    color: blueviolet;
+    font-weight: bold;
+}

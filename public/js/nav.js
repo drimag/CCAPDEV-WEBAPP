@@ -72,6 +72,17 @@ homeButton.addEventListener("click", function() {
 
 /*
 
+	Handler for clicking about button
+
+*/
+const about = document.querySelector("#about");
+about.addEventListener("click", function() {
+	window.location.href = "/about";
+});
+
+
+/*
+
 	Dropdown links to Display for User
   
  */

@@ -25,10 +25,10 @@
                     <p id="postauthor-username" class="username">@{{ author.username }}</p>
                     <p class="post-title">{{ post.title }}</p>
                     <br>
-                    <p class="viewpost-description">{{ post.description }}</p>
+                    <p class="viewpost-description" id="viewpost-description">{{ post.description }}</p>
                     {{#if post.image}}
                     <br>
-                    <div>
+                    <div class="imgsection">
                         <img class="post-image" src="data:image/{{ post.image.contentType }};base64,{{ post.image.data }}">
                     </div>
                     {{/if}}

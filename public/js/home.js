@@ -26,6 +26,7 @@ $(document).ready(function() {
     $("#openpostform").click(function() {
         $(this).hide();
         $(".post-creation-container").show();
+        $("#displaynewpostimg").hide();
     });
 
     $("#createPostForm legend").click(function() {

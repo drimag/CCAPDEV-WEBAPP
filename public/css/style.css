@@ -119,6 +119,7 @@ a:visited, a {
     border-radius: 25px;
     background-color: rgb(243, 133, 133);
     margin: 10px;
+    width: 80%;
 }
 
 #visitor-note p {

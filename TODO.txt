@@ -15,12 +15,12 @@ reminder:
 - remembered thing for login
 - render - app deployment
 
+current errors:
+- editing a post with an image and not changing anything will still change edited to true
+
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
-- add a delete picture in edit post func (not that prio, can do last)
-- fix image hide thing in create post and edit post
-
 - change dates in sample comments
 - remove nodemon
 - test! (BY SUNDAY.)

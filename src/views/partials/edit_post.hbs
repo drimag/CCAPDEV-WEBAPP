@@ -8,14 +8,11 @@
         <textarea name="edit-desc" id="edit-desc" class="text" required>{{post.description}}</textarea> <br>
         <p id="nodesc" class="noinputmsg"></p>
         
+        {{#if post.image}}
         <input type="file" name="newpostpic" id="newpostpic" accept="image/png, image/jpg, image/jpeg" style="display: none;"/>
         <input type="button" id="selectImage" value="Select Image" onclick="document.getElementById('newpostpic').click();" style="width: 130px;" />
         <br>
-
-        {{#if post.image}}
         <img id="displaynewpostimg" src="data:image/{{ post.image.contentType }};base64,{{ post.image.data }}"></img>
-        {{else}}
-        <img id="displaynewpostimg"></img>
         {{/if}}
         <p id="noeditpostinput{{post.postNum}}" class="noinputmsg"></p> <br>
         <button id="editPost" type="submit"> Submit </button>

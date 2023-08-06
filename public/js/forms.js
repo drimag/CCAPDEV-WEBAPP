@@ -1,7 +1,3 @@
-// Currently Editing!
-// TODO: Add Error Message when Input is EMPTY! (create + edit)
-// TODO: Try Catch? if ever worst case
-
 // Buttons
 const createPostBtn = document.querySelector("#createPost");
 const createCommentBtn = document.querySelector("#createComment");
@@ -167,10 +163,12 @@ editPostBtn?.addEventListener("click", async (e) => {
         };
 
         // Get Image
-        let imagesrc = document.getElementById('displaynewpostimg').src;
-        // console.log(imagesrc);
-    
-        if (imagesrc) {
+        const imageContainer = document.querySelector("#displaynewpostimg");
+        console.log(imageContainer);
+        if (imageContainer) {
+            console.log("has image");
+            let imagesrc = document.getElementById('displaynewpostimg').src;
+
             let [imagecontent, imagedata] = imagesrc.split(",");
             let imagetype = imagecontent.replace("data:image/", "");
             imagetype = imagetype.replace(";base64", "");
@@ -184,6 +182,7 @@ editPostBtn?.addEventListener("click", async (e) => {
                 imagetype: imagetype
             };
         }
+        console.log(data);
     
         const jString = JSON.stringify(data);
     
@@ -201,7 +200,7 @@ editPostBtn?.addEventListener("click", async (e) => {
         if (response.status == 200) {
             console.log("Edit Post Successful");
             location.reload();
-            //location.href = window.location.pathname + "?title=" + edited_title + "&loggedIn=" + currentUser;
+            //TODO: location.href = window.location.pathname + "?title=" + edited_title + "&loggedIn=" + currentUser;
         } else {
             console.log(`received response: ${response.status}`);
         }
@@ -290,11 +289,8 @@ createCommentBtn?.addEventListener("click", async (e) => {
 
 $(document).ready(function() {
 
-    $("#edit-post").click(function() {
-        $('#displaynewpostimg').hide();
-    });
-
     $("#clearPost").click(function() {
+        $('#displaynewpostimg').removeAttr("src");
         $('#displaynewpostimg').hide();
     });
     /*

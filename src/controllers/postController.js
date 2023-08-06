@@ -155,16 +155,28 @@ const postController = {
                     contentType: req.body.imagetype
                 }
                 
-                // TODO: no change in image
-                if(edited_title === foundData.title && edited_description === foundData.description) {
-                    // No change
-                    console.log("No change in title and description");
+                if (edited_image.data === undefined) {
+                    // No image
+                    if(edited_title === foundData.title && edited_description === foundData.description) {
+                        // No change
+                        console.log("No change in title and description");
+                    } else {
+                        const result = await Post.updateOne({postNum: req.body.postNum},
+                            {title: edited_title, 
+                                description: edited_description,
+                                edited: true});
+                        const result2 = await Post.updateOne({postNum: req.body.postNum},
+                            {$unset: { "image": ""}});
+                        console.log("Update Successful");
+                        // console.log(result);
+                    }
                 } else {
+                    // TODO: add image
                     const result = await Post.updateOne({postNum: req.body.postNum},
-                        {title: edited_title, 
-                            description: edited_description, 
-                            image: edited_image,
-                            edited: true});
+                            {title: edited_title, 
+                                description: edited_description, 
+                                image: edited_image,
+                                edited: true});
                     console.log("Update Successful");
                     // console.log(result);
                 }
@@ -185,7 +197,6 @@ const postController = {
         const postNum = req.body.postNum;
         console.log(req.body);
         
-        // TODO: Put an if statement here to check if post exists to send a res
         try {
             const result = await Post.deleteOne({postNum: postNum}).exec();
             console.log("Delete Successful.");
@@ -241,7 +252,7 @@ const postController = {
     },
 
     /*
-            TODO: This function edits a comment in the database
+            This function edits a comment in the database
     */
     editComment: async function (req, res) {
         console.log(req.body);
@@ -305,7 +316,6 @@ const postController = {
     /*
             This function adds a comment to the database and updates
             the replied to comment document's number of comments
-            TODO: merge to createComment
     */
     createReply: async function (req, res) {
         console.log(req.body);

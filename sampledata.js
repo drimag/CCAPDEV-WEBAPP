@@ -148,6 +148,7 @@ async function addSampleData() {
             commentNum: 1,
             user_id: newUser3._id,
             post_id: newPost5._id,
+            date: "2023-07-29",
             comment: "eh not my fav",
             num_comments: 1,
             votes: 5
@@ -158,6 +159,7 @@ async function addSampleData() {
             user_id: newUser2._id,
             post_id: newPost5._id,
             parent_id: newComment._id,
+            date: "2023-07-29",
             comment: "why?????",
             num_comments: 1,
             votes: -5
@@ -168,6 +170,7 @@ async function addSampleData() {
             user_id: newUser._id,
             post_id: newPost5._id,
             parent_id: newComment2._id,
+            date: "2023-07-29",
             comment: "bc same",
             votes: 5
         });
@@ -176,6 +179,7 @@ async function addSampleData() {
             commentNum: 4,
             user_id: newUser._id,
             post_id: newPost5._id,
+            date: "2023-08-01",
             comment: "Right now I am underwhelmed by the song, it's way too repetitive and boring for me.",
             votes: -5
         });
@@ -184,6 +188,7 @@ async function addSampleData() {
             commentNum: 5,
             user_id: newUser3._id,
             post_id: newPost5._id,
+            date: "2023-08-04",
             comment: "I didn't enjoy newjeans music apart from Ditto and I don't like Super Shy but I'm in the minority. I don't think catchiness is necessary in a song so I don't get why this \"I can't get this out of my head\" is used as a compliment but I'm probably in the minority again"
         });
 
@@ -191,6 +196,7 @@ async function addSampleData() {
             commentNum: 6,
             user_id: newUser5._id,
             post_id: newPost._id,
+            date: "2023-03-04",
             comment: "WE GOT VOCALBASEONE FOR REAL 😭"
         });
         
@@ -198,6 +204,7 @@ async function addSampleData() {
             commentNum: 7,
             user_id: newUser2._id,
             post_id: newPost3._id,
+            date: "2023-07-20",
             comment: "The explicit version, BYE."
         });
 
@@ -205,6 +212,7 @@ async function addSampleData() {
             commentNum: 8,
             user_id: newUser4._id,
             post_id: newPost3._id,
+            date: "2023-07-21",
             comment: "I'm sorry but I cannot with songs that list the days of the week in the chorus. It's a no for me."
         });
 

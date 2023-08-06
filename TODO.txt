@@ -14,7 +14,6 @@ reminder:
 - be able to navigate to about page
 - remembered thing for login
 - render - app deployment !!
-- change dates in sample comments
 - remove nodemon
 - test for bugs!
 

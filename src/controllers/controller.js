@@ -135,34 +135,32 @@ const controller = {
         console.log("Request to edit profile contents received.");
         const editData = req.body;
 
-        console.log(editData.newUsername);
-        console.log(editData.newBio);
-        //console.log(editData.newPFPdata);
-        console.log(editData.newPFPtype);
-
-        try {
-            const result = await User.updateOne({
-                username: editData.currentUser
-            },
-            {
-                username: editData.newUsername,
-                bio: editData.newBio,
-                pfp: 
+        if( !((editData.newUsername.length < 20) && (editData.newUsername.length > 0)) ||
+            editData.newBio.length > 160 ){
+            res.sendStatus(403);
+        } else {
+            try {
+                const result = await User.updateOne({
+                    username: editData.currentUser
+                },
                 {
-                    data: editData.newPFPdata,
-                    contentType: editData.newPFPtype
-                }
-                
-            }).exec();
+                    username: editData.newUsername,
+                    bio: editData.newBio,
+                    pfp: 
+                    {
+                        data: editData.newPFPdata,
+                        contentType: editData.newPFPtype
+                    }
+                    
+                }).exec();
 
-            //console.log(result);
-
-            console.log("Edit Profile Update Successful");
-            res.sendStatus(200);
-        } catch (err) {
-            console.log("Edit Profile Update Unsuccessful");
-            console.error(err);
-            res.sendStatus(500);
+                console.log("Edit Profile Update Successful");
+                res.sendStatus(200);
+            } catch (err) {
+                console.log("Edit Profile Update Unsuccessful");
+                console.error(err);
+                res.sendStatus(500);
+            }
         }
     }
 }

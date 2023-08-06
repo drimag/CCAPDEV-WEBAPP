@@ -93,6 +93,8 @@ $(document).ready(function() {
 			}
 			} catch (err) {
 				console.error(err);
+				location.href = "/home?loggedIn=" + currentUser;
+				alert("There was an error editing your profile");
 			}
 		}
 

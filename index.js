@@ -44,7 +44,7 @@ async function main () {
     app.use(session({
         secret: "verysecret",
         cookie: {
-            maxAge: 1000 * 60 * 60 * 24//,
+            maxAge: null//,
             //secure: false // nope I added this just now have u tried setting this to false apparently it should be false for local testing? idk
         },
         resave: false,
@@ -80,7 +80,7 @@ async function main () {
     app.use(router);
 
     // Activate the app
-    app.listen(process.env.PORT, async function() {
+    app.listen(process.env.SERVER_PORT, async function() {
         console.log("Express app is now listening...");
         
         try {

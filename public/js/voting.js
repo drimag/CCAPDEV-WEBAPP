@@ -35,7 +35,7 @@ $(document).ready(function() {
         
         if(postUVButton !== null && upvote !== null) {
             postUVButton.each(function () {
-            const eNumber = $(this).closest(".post").prop("id").slice(-1);
+            const eNumber = parseInt($(this).closest(".post").prop("id").slice(4));
             
             if (upvote.includes(Number(eNumber))) {
               $(this).addClass("clicked");
@@ -45,7 +45,7 @@ $(document).ready(function() {
         
         if(postDVButton !== null && dpvote !== null) {
             postDVButton.each(function () {
-                const eNumber = $(this).closest(".post").prop("id").slice(-1);
+                const eNumber = parseInt($(this).closest(".post").prop("id").slice(4));
                 
                 if (dpvote.includes(Number(eNumber))) {
                 $(this).addClass("clicked");
@@ -55,7 +55,7 @@ $(document).ready(function() {
 
         if(commentUVButtons !== null && ucvote !== null) {
             commentUVButtons.each(function () {
-                const eNumber = $(this).closest("[id*=comment]").prop("id").slice(-1);
+                const eNumber = parseInt($(this).closest(".post").prop("id").slice(4));
                 
                 if (ucvote.includes(Number(eNumber))) {
                 $(this).addClass("clicked");
@@ -65,7 +65,7 @@ $(document).ready(function() {
 
         if(commentDVButtons !== null && dcvote !== null) {
             commentDVButtons.each(function () {
-                const eNumber = $(this).closest("[id*=comment]").prop("id").slice(-1);
+                const eNumber = parseInt($(this).closest(".post").prop("id").slice(4));
                 
                 if (dcvote.includes(Number(eNumber))) {
                 $(this).addClass("clicked");
@@ -75,7 +75,7 @@ $(document).ready(function() {
 
         if(commentUVButtonsProfile !== null && ucvote !== null) {
             commentUVButtonsProfile.each(function () {
-            const eNumber = $(this).closest("[id*=comment]").prop("id").slice(-1);
+            const eNumber = parseInt($(this).closest(".post").prop("id").slice(4));
             
             if (ucvote.includes(Number(eNumber))) {
               $(this).addClass("clicked");
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
         if(commentDVButtonsProfile !== null && dcvote !== null) {
             commentDVButtonsProfile.each(function () {
-            const eNumber = $(this).closest("[id*=comment]").prop("id").slice(-1);
+                const eNumber = parseInt($(this).closest(".post").prop("id").slice(4));
             
             if (dcvote.includes(Number(eNumber))) {
               $(this).addClass("clicked");

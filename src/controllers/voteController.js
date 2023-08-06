@@ -50,8 +50,7 @@ const voteController = {
 					console.log("changing comment votes");
 					await Comment.updateOne(
 						{ commentNum: newVotes.num },
-						{$set:
-							{ votes: newVotes.votes }
+						{ votes: newVotes.votes 
 						}).then( result => {
                    			console.log("voting successful: " + result);
 						}).catch(err => {
@@ -68,8 +67,7 @@ const voteController = {
 					console.log("changing post votes");
 					await Post.updateOne(
 						{ postNum: newVotes.num },
-						{$set:
-							{ votes: newVotes.votes }
+						{ votes: newVotes.votes 
 						}).then( val => {
                    			console.log("voting successful: " + val);
 						}).catch(err => {
@@ -84,13 +82,12 @@ const voteController = {
 
 			await User.updateOne(
                 {username: curr.username},
-                {$set: 
-                    { 
-						upvoteComments: newVotes.upvoteComments,
-						downvoteComments: newVotes.downvoteComments,
-						upvotePosts: newVotes.upvotePosts,
-						downvotePosts: newVotes.downvotePosts
-					}
+                {
+					upvoteComments: newVotes.upvoteComments,
+					downvoteComments: newVotes.downvoteComments,
+					upvotePosts: newVotes.upvotePosts,
+					downvotePosts: newVotes.downvotePosts
+					
                 }).then( val => {
                     res.status(200).send("Votes updated successfully");
                     console.log("voting successful: " + val);

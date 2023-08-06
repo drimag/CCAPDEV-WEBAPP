@@ -19,6 +19,7 @@ reminder:
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
 - add a delete picture in edit post func (not that prio, can do last)
+- fix image hide thing in create post and edit post
 
 - change dates in sample data
 - remove nodemon

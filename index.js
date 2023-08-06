@@ -80,7 +80,7 @@ async function main () {
     app.use(router);
 
     // Activate the app
-    app.listen(process.env.SERVER_PORT, async function() {
+    app.listen(process.env.PORT, async function() {
         console.log("Express app is now listening...");
         
         try {

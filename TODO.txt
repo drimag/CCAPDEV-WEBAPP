@@ -1,12 +1,10 @@
 reminder:
-- double check on all form validations / error msgs
 - be able to navigate to about page
 - remembered thing for login
+- fix change password (html css etc, + u can change password to old password)
 - render - app deployment !!
 - remove nodemon
 - test for bugs!
-
-- add more sample data if kaya
 
 current errors:
 - editing a post with an image and not changing anything will still change edited to true

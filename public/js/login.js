@@ -3,7 +3,6 @@ $(".to-register").click(function(){
     window.location.href = "/register";
 });
 
-
 $(".login-button").click(async function(){
 
     let uname = $('#username').val();

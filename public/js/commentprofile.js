@@ -29,7 +29,12 @@ $(document).ready(function() {
             location.href = "/viewpost?postNum=" + postNum;
         } else {
             // Comment does not exist
-            $(this).find('.post-title').append(" [deleted]").css("color", "red");
+            console.log(" does not exist");
+            let text = "Replied to a post";
+            if($(this).find('.post-title') === "Replied to a comment") {
+                text = "Replied to a comment";
+            }
+            $(this).find('.post-title').text(text + " [deleted]").css("color", "red");
             console.log("Status code received: " + response.status);
         }
     });

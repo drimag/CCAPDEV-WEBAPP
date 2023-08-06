@@ -288,10 +288,10 @@ createCommentBtn?.addEventListener("click", async (e) => {
 });
 
 $(document).ready(function() {
+    const src = $('#displaynewpostimg').attr("src");
 
     $("#clearPost").click(function() {
-        $('#displaynewpostimg').removeAttr("src");
-        $('#displaynewpostimg').hide();
+        $('#displaynewpostimg').attr("src", src);
     });
     /*
             This function sends data to the route '/comment' via a DELETE request.

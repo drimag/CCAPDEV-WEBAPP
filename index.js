@@ -10,8 +10,9 @@ const router = require('./src/routes/router.js');
 const handlebars = require('handlebars');
 
 /* Server */
+
+const bcrypt = require('bcrypt');
 /*
-const bycrypt = require('bycrypt');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');

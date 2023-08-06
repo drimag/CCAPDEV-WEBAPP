@@ -7,17 +7,18 @@ x would be better if create post form fields are hidden until a button is presse
 x vote functionality
 x nav dropdown not working in profile + sign up + log in
 x password hashing
+
 reminder:
 - double check on login and register controllers functionality / error msgs
 - sessions
+- about page
+- render - app deployment
 
 
 ----------------------------------------------------------------------------------------
 TODO: (dont mind this its just for jaeme's todo)
 - add a delete picture in edit post func (not that prio, can do last)
 
-- fix sample data input thing (?)
 - change dates in sample data
-- render - application deployment
 - remove nodemon
 - test! (BY SUNDAY.)

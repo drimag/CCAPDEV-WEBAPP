@@ -1,6 +1,3 @@
-// import { getDb } from "./db.js";
-// const db = getDb();
-
 const User = require('./User.js');
 const Post = require('./Post.js');
 const Comment = require('./Comment.js');
@@ -11,7 +8,6 @@ async function addSampleData() {
         await Post.deleteMany({});
         await Comment.deleteMany({});
         
-        // TODO: Add PFPs
         const newUser = new User ({
             username: 'kkura',
             password: '1234',

@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
 const userSchema = new Schema({
-    // place code
     username: {
         type: SchemaTypes.String,
         required: true,
@@ -21,7 +20,6 @@ const userSchema = new Schema({
     pfp: {
         data: SchemaTypes.Buffer,
         contentType: SchemaTypes.String
-        // TODO: maybe add a default img if none added?
     },
     upvoteComments: {
         type: [SchemaTypes.Number],

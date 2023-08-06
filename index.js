@@ -9,7 +9,7 @@ dotenv.config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const connect = require('./src/models/db.js');
-const addSampleData = require('./src/models/sampledata.js');
+const addSampleData = require('./sampledata.js');
 const router = require('./src/routes/router.js');
 const handlebars = require('handlebars');
 

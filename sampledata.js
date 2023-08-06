@@ -1,6 +1,6 @@
-const User = require('./User.js');
-const Post = require('./Post.js');
-const Comment = require('./Comment.js');
+const User = require('./src/models/User.js');
+const Post = require('./src/models/Post.js');
+const Comment = require('./src/models/Comment.js');
 
 async function addSampleData() {
     try {
@@ -95,7 +95,7 @@ async function addSampleData() {
         const newPost = new Post ({
             postNum: 1,
             user_id: newUser._id,
-            // default date
+            date: "2022-12-15",
             title: "In Bloom made everyone shine",
             description: "After watching this multiples times and slept on it I feel like I can finally give my full opinion on this debut. Honestly because it was W1 and history of kpop groups having members that are rarely utilised my expectations for everyone except Haobin + matthew was pretty low but they gave everyone such good lines and parts in the MV?? I was legit shocked by how they decided to distribute the lines for each member but it turned out so good!!",
             votes: -5,
@@ -123,7 +123,7 @@ async function addSampleData() {
         const newPost4 = new Post ({
             postNum: 4,
             user_id: newUser4._id,
-            date: "2023-05-31",
+            date: "2023-07-19",
             title: "Enhypen Fate World Tour",
             description: "So I haven't gone to any concert before and everything just confuses me. I really want to go to this because they are my ults. Do you guys know when the tickets will go on sale or if they have already? I have looked it up and stuff but haven't found anything. I will probably be going to the Chicago one but I don't have info on it. Also ticket master says there's no info on it either. Ticket master overall is confusing. Help please😭",
         });
@@ -131,7 +131,7 @@ async function addSampleData() {
         const newPost5 = new Post ({
             postNum: 5,
             user_id: newUser5._id,
-            date: "2023-07-07",
+            date: "2023-07-28",
             title: "'Super Shy' for Song Of The Year and that's that.",
             description: "I'm all for people and their opinions but let's face the facts. I might be making this statement a little too fast but I'm super shy super shy has kinda already gotten glued to my head and I'm not sure I'll be able to remove it anytime now. It just has the perfect catchiness, bubbly upbeat funness to be a hit. I'm all here for it. It sounds very 'beabadoobee'.",
             votes: 5,

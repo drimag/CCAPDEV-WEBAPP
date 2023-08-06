@@ -50,13 +50,8 @@ const voteController = {
 					console.log("changing comment votes");
 					await Comment.updateOne(
 						{ commentNum: newVotes.num },
-						{ votes: newVotes.votes 
-						}).then( result => {
-                   			console.log("voting successful: " + result);
-						}).catch(err => {
-							res.status(500).send("Error voting");
-							console.log("voting error: " + err);
-						});
+						{ votes: newVotes.votes }).exec();
+					console.log("successful");
 				} catch (error) { 
 					console.error(error);
 					res.sendStatus(500);
@@ -67,13 +62,8 @@ const voteController = {
 					console.log("changing post votes");
 					await Post.updateOne(
 						{ postNum: newVotes.num },
-						{ votes: newVotes.votes 
-						}).then( val => {
-                   			console.log("voting successful: " + val);
-						}).catch(err => {
-							res.status(500).send("Error voting");
-							console.log("voting error: " + err);
-						});
+						{ votes: newVotes.votes }).exec();
+						console.log("successful");
 				} catch (error) { 
 					console.error(error);
 					res.sendStatus(500);
@@ -88,13 +78,8 @@ const voteController = {
 					upvotePosts: newVotes.upvotePosts,
 					downvotePosts: newVotes.downvotePosts
 					
-                }).then( val => {
-                    res.status(200).send("Votes updated successfully");
-                    console.log("voting successful: " + val);
-                }).catch(err => {
-                    res.status(500).send("Error voting");
-                    console.log("voting error: " + err);
-            	});
+                }).exec();
+			console.log("successful");
 
 		} catch (error) { 
 			console.error(error);

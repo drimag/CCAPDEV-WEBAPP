@@ -31,11 +31,12 @@ const controller = {
             loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
         }
         
-        const posts = await Post.find({}).populate({
-            path: 'user_id'
-        }).lean().exec();
-
-        // Filter posts if there is a search
+        try {
+            const posts = await Post.find({}).populate({
+                path: 'user_id'
+            }).lean().exec();
+    
+            // Filter posts if there is a search
             let searchTerms = req.query.search;
             let searchPosts;
         
@@ -51,18 +52,21 @@ const controller = {
             }
             
             const searchDetails = { numPosts : searchPosts.length, search : searchTerms };
-            console.log("search Detials: " + searchDetails);
-        
-        // Get dropdown links based on if user is logged in
-        const dropdowns = getDropdownLinks(loggedIn.username);
-        
-         res.render('index', {
-            pagetitle: "Home",
-            user: loggedIn,
-            posts: searchPosts,
-            dropdownLinks: dropdowns, // Navbar links
-            searchDetails: searchDetails
-        });
+                console.log("search Detials: " + searchDetails);
+            
+            // Get dropdown links based on if user is logged in
+            const dropdowns = getDropdownLinks(loggedIn.username);
+            
+             res.render('index', {
+                pagetitle: "Home",
+                user: loggedIn,
+                posts: searchPosts,
+                dropdownLinks: dropdowns, // Navbar links
+                searchDetails: searchDetails
+            });
+        } catch (error) {
+            console.error(error);
+        }
     },
 
     /*

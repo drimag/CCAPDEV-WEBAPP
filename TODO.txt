@@ -1,5 +1,4 @@
 reminder:
-- remembered thing for login
 - fix change password (html css etc, + u can change password to old password)
 
 current errors:

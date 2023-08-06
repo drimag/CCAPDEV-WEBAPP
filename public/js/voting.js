@@ -7,9 +7,9 @@ let dpvote;
 $(document).ready(function() {
     let votes;
 
-     function startVoting(){
+    async function startVoting(){
         try {
-            let votesString =  getVotes();
+            let votesString = await getVotes();
             votes = JSON.parse(votesString);
         } catch (error) {
             console.error("error fetching votes", error);
@@ -206,7 +206,6 @@ $("button.upvote").click(async function() {
 
 // Downvote when viewing a post
 $("button.downvote").click(async function() {
-        
     // var made to find this downvote's corresponding upvote button
     let upvoteButton = $(this).prevAll("button.upvote").first();
 
@@ -285,7 +284,7 @@ $("button.downvote").click(async function() {
 
     const currentURL = window.location.href;
     const params = new URLSearchParams(new URL(currentURL).search);
-    const currentUser = params.get("loggedIn");
+    
     try {
         const response = await fetch("/votes", {
             method: 'PUT',
@@ -303,6 +302,7 @@ $("button.downvote").click(async function() {
     } catch (err) {
         console.error(err);
     }
+    startVoting(); 
 
 });
 

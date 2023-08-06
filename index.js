@@ -1,6 +1,3 @@
-//var time = 1000 * 60 * 60 * 24;
-const dotenv = require('dotenv');
-dotenv.config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const connect = require('./src/models/db.js');
@@ -111,7 +108,7 @@ async function main () {
     app.use(router);
 
     // Activate the app
-    app.listen(process.env.SERVER_PORT, async function() {
+    app.listen(process.env.PORT, async function() {
         console.log("Express app is now listening...");
         
         try {

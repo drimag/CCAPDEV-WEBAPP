@@ -11,7 +11,7 @@ x password hashing
 reminder:
 - double check on login and register controllers functionality / error msgs
 - sessions
-- about page
+- be able to navigate to about page
 - render - app deployment
 
 

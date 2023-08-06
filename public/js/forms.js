@@ -148,7 +148,6 @@ editPostBtn?.addEventListener("click", async (e) => {
     console.log(postNum);
 
     const formData = new FormData(editPostForm);
-    const loggedIn = params.get("loggedIn"); 
     const title = formData.get("edit-title");
     const description = formData.get("edit-desc");
     
@@ -156,7 +155,6 @@ editPostBtn?.addEventListener("click", async (e) => {
         document.getElementById('noeditpostinput' + postNum).innerText = 'Cannot be empty!';
     } else {
         let data = {
-            loggedIn: loggedIn,
             postNum: postNum,
             title: title,
             description: description
@@ -174,7 +172,6 @@ editPostBtn?.addEventListener("click", async (e) => {
             imagetype = imagetype.replace(";base64", "");
     
             data = {
-                loggedIn: loggedIn,
                 postNum: postNum,
                 title: title,
                 description: description,
@@ -200,7 +197,6 @@ editPostBtn?.addEventListener("click", async (e) => {
         if (response.status == 200) {
             console.log("Edit Post Successful");
             location.reload();
-            //TODO: location.href = window.location.pathname + "?title=" + edited_title + "&loggedIn=" + currentUser;
         } else {
             console.log(`received response: ${response.status}`);
         }
@@ -250,7 +246,6 @@ createCommentBtn?.addEventListener("click", async (e) => {
     const formData = new FormData(commentForm);
 
     // Get values
-    // const loggedIn = params.get('loggedIn');
     const postNum = params.get('postNum');
     console.log(postNum);
 
@@ -348,12 +343,10 @@ $(document).ready(function() {
         const edited_comment = $("#edit-textcomment" + commentNum).val();
         console.log(edited_comment);
         
-        const loggedIn = params.get("loggedIn"); 
         if (edited_comment === '') {
             $("#noeditinput" + commentNum).text('Edited reply cannot be empty!');
         } else {
             let data = {
-                loggedIn: loggedIn,
                 commentNum: commentNum,
                 comment: edited_comment
             };
@@ -390,7 +383,6 @@ $(document).ready(function() {
         const replyForm = document.forms.createReplyForm;
 
         // Get values
-        const loggedIn = params.get('loggedIn');
         const postNum = params.get('postNum');
         const commentNum = $(this).attr('id').substring(11);
         console.log(commentNum);

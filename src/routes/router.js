@@ -57,7 +57,6 @@ router.put("/change-password", changePasswordController.changePassword);
 // About Page Route
 router.get("/about", aboutController.getAbout);
 
-
 // Login
 router.get('/login', async (req,res) => {
     // put this in login controller once it works

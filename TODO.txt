@@ -2,7 +2,6 @@ reminder:
 - be able to navigate to about page
 - remembered thing for login
 - fix change password (html css etc, + u can change password to old password)
-- render - app deployment !!
 - test for bugs!
 
 current errors:

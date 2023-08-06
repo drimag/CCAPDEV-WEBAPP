@@ -21,12 +21,14 @@ const controller = {
     */
     getHome: async function (req, res) {
         console.log('getHome received');
-
-        let loggedIn = await User.findOne({username: req.query.loggedIn}).lean().exec();
+        
+        let loggedIn = req.session.user;
         
         if(!loggedIn) {
             // only guest (does not include if the username doesnt exist)
             loggedIn = await User.findOne({username: "guest"}).lean().exec();
+        } else {
+            loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
         }
         
         const posts = await Post.find({}).populate({
@@ -52,13 +54,13 @@ const controller = {
             console.log("search Detials: " + searchDetails);
         
         // Get dropdown links based on if user is logged in
-        const dropdowns = getDropdownLinks(loggedIn.username); 
-
-        res.render('index', {
+        const dropdowns = getDropdownLinks(loggedIn.username);
+        
+         res.render('index', {
             pagetitle: "Home",
             user: loggedIn,
             posts: searchPosts,
-            dropdownLinks: dropdowns, // Navbar links 
+            dropdownLinks: dropdowns, // Navbar links
             searchDetails: searchDetails
         });
     },
@@ -67,12 +69,14 @@ const controller = {
             This displays 'profile.hbs' of a user.
     */
     getProfile: async function (req, res) {
-        let loggedIn = await User.findOne({username: req.query.loggedIn}).lean().exec();
+        let loggedIn = req.session.user;
         const view_user = await User.findOne({username: req.params.username}).lean().exec();
 
         if (!loggedIn) {
             loggedIn = await User.findOne({username: "guest"}).lean().exec();
-        } 
+        } else {
+            loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
+        }
 
         if (view_user) {
             // User Exists
@@ -108,14 +112,15 @@ const controller = {
     },
 
     /*
-            TODO: This displays 'edit_profile.hbs' of a user.
+            This displays 'edit_profile.hbs' of a user.
     */
     getEditProfile: async function(req, res) {
-        const loggedIn = await User.findOne({username: req.query.loggedIn}).lean().exec();
+        let loggedIn = req.session.user;
 
         if (loggedIn && loggedIn.username != "guest") {
             // Dropdown links for navbar
             const dropdowns = getDropdownLinks(loggedIn.username); 
+            loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
 
             res.render("edit_profile", {
                 pagetitle: "Edit Profile",
@@ -124,6 +129,49 @@ const controller = {
             });
         } else {
             // User does not exist
+            res.status(404).json("User Not Found");
+        }
+    },
+    
+    getMyProfile: async function (req, res) {
+        let loggedIn = req.session.user;
+        const view_user = loggedIn;
+
+        if (!loggedIn) {
+            loggedIn = await User.findOne({username: "guest"}).lean().exec();
+        } else {
+            loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
+        }
+
+        if (view_user) {
+            // User Exists
+            try {
+                const posts = await Post.find({user_id: view_user._id}).populate({
+                    path: 'user_id'
+                }).lean().exec();
+    
+                const comments = await Comment.find({user_id: view_user._id}).populate({
+                    path: 'user_id'
+                }).lean().exec();
+
+                // Dropdown links for navbar
+                const dropdowns = getDropdownLinks(loggedIn.username);
+
+                res.render("profile", {
+                    pagetitle: "My Profile",
+                    user: loggedIn,
+                    view_user: view_user,
+                    posts: posts,
+                    comments: comments,
+                    dropdownLinks: dropdowns
+                });
+            } catch (error) {
+                console.error(error);
+                res.sendStatus(500);
+            }
+
+        } else {
+            // No user found
             res.status(404).json("User Not Found");
         }
     },
@@ -141,7 +189,7 @@ const controller = {
         } else {
             try {
                 const result = await User.updateOne({
-                    username: editData.currentUser
+                    username: req.session.user.username
                 },
                 {
                     username: editData.newUsername,
@@ -153,7 +201,8 @@ const controller = {
                     }
                     
                 }).exec();
-
+                const user = await User.findOne({username: editData.newUsername});
+                req.session.user = user;
                 console.log("Edit Profile Update Successful");
                 res.sendStatus(200);
             } catch (err) {

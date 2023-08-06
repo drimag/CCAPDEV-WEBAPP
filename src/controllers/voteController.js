@@ -19,7 +19,7 @@ const voteController = {
 				console.log("This is a comment");
 				const comment = await Comment.findOne({ num: parseInt(number)}).exec();
 				comment.votes = votes;
-				await comments.updateOne({num: parseInt(number) }, { $set: { votes } });
+				await Comment.updateOne({num: parseInt(number) }, { $set: { votes } }).exec();
 			}else{
 				console.log("This is a post");
 				const post = await Post.findOne({ num: parseInt(number)}).exec();
@@ -44,14 +44,12 @@ const voteController = {
     getUserVotes: async function (req, res) {
 		console.log("user vote getter called");
 
-		let curr = req.query.loggedIn;
+		let curr = req.session.user;
 		console.log(curr);
 
 		try {
 			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") {
 				curr = await User.findOne({username: "guest"}).exec()
-			} else {
-				curr = await User.findOne({username: curr}).exec()
 			}
 
 			const votes = { 
@@ -73,7 +71,7 @@ const voteController = {
 	updateVotes: async function (req, res) {
 		console.log("call to update votes received")
 
-		let curr = req.query.loggedIn;
+		let curr = req.session.user;
 		let newVotes = req.body;
 
 		console.log(newVotes.toString());
@@ -84,16 +82,10 @@ const voteController = {
 			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") 
 				return res.status(400).send("No logged in user");
 
-            // Look for user with matching username
-            const user = await User.findOne({username: curr}).exec()
-
-            // User does not exist
-            if(!user) return res.status(404).send("User not found");
-
 			if(newVotes.type === "comment") {
 				try {
 					console.log("changing comment votes");
-					Comment.updateOne(
+					await Comment.updateOne(
 						{ commentNum: newVotes.num },
 						{$set:
 							{ votes: newVotes.votes }
@@ -111,7 +103,7 @@ const voteController = {
 			} else if(newVotes.type === "post") {
 				try {
 					console.log("changing post votes");
-					Post.updateOne(
+					await Post.updateOne(
 						{ postNum: newVotes.num },
 						{$set:
 							{ votes: newVotes.votes }
@@ -127,7 +119,7 @@ const voteController = {
 				}
 			}
 
-			User.updateOne(
+			await User.updateOne(
                 {username: curr},
                 {$set: 
                     { 

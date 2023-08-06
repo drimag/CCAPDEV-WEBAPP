@@ -66,7 +66,7 @@ $(document).ready(function() {
         
         const currentUser = $("#currentUser-navuser").text();
         console.log("Current User: " + currentUser);
-        location.href = "/profile/" + author + "?loggedIn=" + currentUser;
+        location.href = "/profile/" + author;
     });
 
     // View Comments User Profile
@@ -78,7 +78,7 @@ $(document).ready(function() {
         
         const currentUser = $("#currentUser-navuser").text();
         console.log("Current User: " + currentUser);
-        location.href = "/profile/" + comment_user + "?loggedIn=" + currentUser;
+        location.href = "/profile/" + comment_user;
     })
 
     $(".comment-user").hover(function() {

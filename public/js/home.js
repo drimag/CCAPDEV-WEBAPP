@@ -59,7 +59,7 @@ $(document).ready(function() {
                 location.href = login;
             } else {
                 // TODO: add title like in MCO2 (dont implement yet)
-                location.href = "/viewpost?postNum=" + id.substring(1) + "&loggedIn=" + currentUser;
+                location.href = "/viewpost?postNum=" + id.substring(1);
             }
         } else {
             // TODO: Bad Status Code
@@ -78,7 +78,7 @@ $(document).ready(function() {
         if(currentUser === "guest") {
             location.href = login;
         } else {
-            location.href = "/profile/" + currentUser + "?loggedIn=" + currentUser;
+            location.href = "/profile/" + currentUser;
         }
     });
 

@@ -6,9 +6,6 @@
 const dropdownLinks = document.querySelectorAll(".dropdown-link");
 const currentURL = window.location.href;
 const params = new URLSearchParams(new URL(currentURL).search);
-const user = params.get("loggedIn");
-
-console.log("currentuser: " + user);
 
 let prevScrollpos = window.scrollY;
 
@@ -70,7 +67,7 @@ window.onclick = function(event) {
 */
 const homeButton = document.querySelector(".home-button");
 homeButton.addEventListener("click", function() {
-	window.location.href = "/home?loggedIn=" + user;
+	window.location.href = "/home";
 });
 
 /*
@@ -108,37 +105,37 @@ dropdownLinks.forEach(link => {
 	  // Redirect the user to the appropriate location based on the link's ID
 		switch (id) {
 			case "Edit Profile":
-				window.location.href = "/edit-profile?loggedIn=" + user;
+				window.location.href = "/edit-profile";
 				console.log("clickd dropdown id: " + id);
 				break;
 
 			case "Sign Up":
-				window.location.href = "/register?loggedIn=guest";
+				window.location.href = "/register";
 				console.log("clickd dropdown id: " + id);
 				break;
 
 			case "View Profile":
-				window.location.href = "/profile/" + user + "?loggedIn=" + user;
+				window.location.href = "/profile";
 				console.log("clickd dropdown id: " + id);
 				break;
 
 			case "Log In":
-				window.location.href = "/login?loggedIn=guest";
+				window.location.href = "/login";
 				console.log("clickd dropdown id: " + id);
 				break;
 
 			case "Sign Out":
-				window.location.href = "/home?loggedIn=guest"
+				window.location.href = "/logout"
 				console.log("clickd dropdown id: " + id);
 				break;
 
 			case "Change Password":
-				window.location.href = "/change-password?loggedIn=" + user;
+				window.location.href = "/change-password";
 				console.log("clickd dropdown id: " + id);
 				break;
 
 			default:
-				window.location.href = "/home?loggedIn=" + user;
+				window.location.href = "/home";
 				console.log("clickd dropdown id: " + id);
 				break;
 	  	}
@@ -157,12 +154,6 @@ function enterSearch(event){
 	let searchInput = document.getElementById("search");
 	let searchTerms = searchInput.value;
 
-	console.log("home button user:" + user);
-
-	let currentUser = user;
-
-	if(currentUser === "") currentUser = "guest";
-
-	const redirect = `/home?loggedIn=${currentUser}&search=${searchTerms}`;
+	const redirect = `/home?search=${searchTerms}`;
 	window.location.href = redirect;
 }

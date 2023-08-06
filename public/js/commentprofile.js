@@ -16,7 +16,7 @@ $(document).ready(function() {
         console.log(loggedIn);
 
         // Get post number
-        let response = await fetch("/comment/postNum?commentNum=" + comment_id + "&loggedIn=" + loggedIn, {
+        let response = await fetch("/comment/postNum?commentNum=" + comment_id, {
             method: 'GET'
         });
         
@@ -26,7 +26,7 @@ $(document).ready(function() {
             const result = await response.json();
             const postNum = result.postNum;
             
-            location.href = "/viewpost?postNum=" + postNum + "&loggedIn=" + loggedIn;
+            location.href = "/viewpost?postNum=" + postNum;
         } else {
             // Comment does not exist
             $(this).find('.post-title').append(" [deleted]").css("color", "red");
@@ -83,7 +83,7 @@ $(document).ready(function() {
 
             const jString = JSON.stringify(data);
 
-            let response = await fetch("/comment?loggedIn=" + loggedIn, {
+            let response = await fetch("/comment", {
                 method: 'PUT',
                 body: jString,
                 headers: {

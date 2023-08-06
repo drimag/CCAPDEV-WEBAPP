@@ -55,11 +55,9 @@ $(document).ready(function() {
 		// take the currently logged in user
 		const currentURL = window.location.href;
 		const params = new URLSearchParams(new URL(currentURL).search);
-		const currentUser = params.get("loggedIn");
 
 		// Make a POST request to the server with the data
 		const data = {
-			currentUser: currentUser,
 			newUsername: newUsername,
 			newBio: newBio,
 			newPFPdata: newPFPdata,
@@ -85,15 +83,15 @@ $(document).ready(function() {
 
 			if(response.status === 200) {
 				console.log("Profile Edit Successful");
-				location.href = "/profile/"+ newUsername + "?loggedIn=" + newUsername;
+				location.href = "/profile/"+ newUsername;
 			} else {
 				console.log("Status code received: " + response.status);
-				location.href = "/home?loggedIn=" + currentUser;
+				location.href = "/home";
 				alert("There was an error editing your profile");
 			}
 			} catch (err) {
 				console.error(err);
-				location.href = "/home?loggedIn=" + currentUser;
+				location.href = "/home";
 				alert("There was an error editing your profile");
 			}
 		}

@@ -57,7 +57,7 @@ createPostBtn?.addEventListener("click", async (e) => {
         
         const jString = JSON.stringify(data);
         
-        const response = await fetch("/post?loggedIn=" + currentUser, {
+        const response = await fetch("/post", {
             method: 'POST',
             body: jString,
             headers: {
@@ -186,7 +186,7 @@ editPostBtn?.addEventListener("click", async (e) => {
     
         const jString = JSON.stringify(data);
     
-        let response = await fetch("/post?loggedIn=" + loggedIn, {
+        let response = await fetch("/post", {
             method: 'PUT',
             body: jString,
             headers: {
@@ -250,7 +250,7 @@ createCommentBtn?.addEventListener("click", async (e) => {
     const formData = new FormData(commentForm);
 
     // Get values
-    const loggedIn = params.get('loggedIn');
+    // const loggedIn = params.get('loggedIn');
     const postNum = params.get('postNum');
     console.log(postNum);
 
@@ -263,7 +263,7 @@ createCommentBtn?.addEventListener("click", async (e) => {
         const jString = JSON.stringify(data);
         console.log(jString);
     
-        const response = await fetch("/comment?loggedIn=" + loggedIn, {
+        const response = await fetch("/comment", {
             method: 'POST',
             body: jString,
             headers: {
@@ -360,7 +360,7 @@ $(document).ready(function() {
 
             const jString = JSON.stringify(data);
 
-            let response = await fetch("/comment?loggedIn=" + loggedIn, {
+            let response = await fetch("/comment", {
                 method: 'PUT',
                 body: jString,
                 headers: {
@@ -409,7 +409,7 @@ $(document).ready(function() {
             const jString = JSON.stringify(data);
             console.log(jString);
     
-            const response = await fetch("/reply?loggedIn=" + loggedIn, {
+            const response = await fetch("/reply", {
                 method: 'POST',
                 body: jString,
                 headers: {

@@ -40,10 +40,10 @@ const postController = {
     */
     getViewPost: async function (req, res) {
         const postNum = req.query.postNum;
-        const loggedInUser = req.query.loggedIn;
+        const loggedInUser = req.session.user;
+        loggedInUser.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
 
         // Get Current User
-        const loggedIn = await User.findOne({username: loggedInUser}).lean().exec();
         const foundData = await Post.findOne({postNum: postNum}).lean().exec();
         // console.log(foundData);
 
@@ -85,7 +85,7 @@ const postController = {
 
             res.render("view_post", {
                 pagetitle: "View Post",
-                user: loggedIn,
+                user: loggedInUser,
                 author: author,
                 post: foundData,
                 comments: comments,
@@ -100,15 +100,15 @@ const postController = {
             This function adds a post to the database
     */
     createPost: async function (req, res) {
-        const loggedIn = req.query.loggedIn;
-        const loggedInUser = await User.findOne({username: loggedIn}).exec();
+        const loggedIn = req.session.user;
+        loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
 
         // console.log(req.body);
 
         const postNums = await Post.find({}).distinct("postNum").exec();
         const newPost = new Post ({
             postNum: postNums[postNums.length - 1] + 1,
-            user_id: loggedInUser._id,
+            user_id: loggedIn._id,
             title: req.body.title,
             description: req.body.description,
             image: 
@@ -117,9 +117,8 @@ const postController = {
                 contentType: req.body.imagetype
             }
         });
-
-        // Could remove this with the session thing
-        if (loggedInUser) {
+        
+        if (loggedIn) {
             try {
                 const result = await newPost.save();
                 console.log("Post Successful");
@@ -205,7 +204,7 @@ const postController = {
         } catch (err) {
             console.log("Delete Unsuccessful.");
             console.error(err);
-            res.sendStatus(500); // Not sure if this is the right status code
+            res.sendStatus(500);
         }
         
     },
@@ -218,7 +217,8 @@ const postController = {
         console.log(req.body);
         // const postNum = req.body.id;
 
-        const loggedIn = await User.findOne({username: req.query.loggedIn}).exec();
+        const loggedIn = req.session.user;
+        loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
         console.log(loggedIn);
 
         const post = await Post.findOne({postNum: req.body.postNum}).exec();
@@ -320,7 +320,8 @@ const postController = {
     createReply: async function (req, res) {
         console.log(req.body);
 
-        const loggedIn = await User.findOne({username: req.query.loggedIn}).exec();
+        const loggedIn = req.session.user;
+        loggedIn.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
         console.log(loggedIn);
 
         const post = await Post.findOne({postNum: req.body.postNum}).exec();

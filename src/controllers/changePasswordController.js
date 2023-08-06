@@ -9,26 +9,22 @@ const changePasswordController = {
 
     getChangePassword: async function (req,res) {
         console.log("Request to change password page received.");
-        let curr = req.query.loggedIn;
+        let curr = req.session.user;
 
         try {
             // No login param in URL
             if(!curr) return res.status(400).send("No logged in user");
 
             console.log("1");
-            // Look for user with matching username
-            const user = await User.findOne({username: curr}).lean().exec();
-
-            console.log("2");
-            // User does not exist
-            if(!user) return res.status(404).send("User not found");
             
-            console.log("3");
-            const dropdowns = getDropdownLinks(user.username); 
+            console.log("2");
+            
+            curr.pfp.data = Buffer.from(req.session.user.pfp.data, 'base64');
+            const dropdowns = getDropdownLinks(curr.username); 
 
             res.render("change_password", {
                 pagetitle: "Change Password",
-                user: user,
+                user: curr,
                 dropdownLinks: dropdowns
             })
         } catch (error) {
@@ -40,22 +36,16 @@ const changePasswordController = {
     getIsMatchingPassword: async function (req,res) {
         console.log("Request to get if password matches");
 
-        let curr = req.query.loggedIn;
+        let curr = req.session.user;
 
         try {
             // No login param in url
             if(!curr) return res.status(400).send("No logged in user");
 
-            // Look for user with matching username
-            const currUser = await User.findOne({username: curr}).lean().exec();
-
-            // User does not exist
-            if(!currUser) return res.status(404).send("User not found");
-
             // Send the password
-            console.log("current user: " + currUser.username);
+            console.log("current user: " + curr.username);
             console.log("sending this as user password: " + JSON.stringify(req.body.password));
-            const isMatching = await bcrypt.compare(req.body.password, currUser.password);
+            const isMatching = await bcrypt.compare(req.body.password, curr.password);
             
             console.log("isMatching?: " + isMatching);
             if(isMatching) {
@@ -73,18 +63,12 @@ const changePasswordController = {
     changePassword: async function (req, res) {
         console.log("Request to change current user's password received.");
 
-        let currentUser = req.query.loggedIn;
+        let currentUser = req.session.user;
         let newPassword = req.body;
 
         try {
             // No login param in url
             if(!currentUser) return res.status(400).send("No logged in user");
-
-            // Look for user with matching username
-            const currUser = await User.findOne({username: currentUser}).lean().exec();
-
-            // User does not exist
-            if(!currUser) return res.status(404).send("User not found");
 
             if(newPassword.password.length > 15 || newPassword.password.length < 4){
                 res.status(403).send("invalid password")
@@ -96,7 +80,7 @@ const changePasswordController = {
                 // Change the password
                 try{
                     const result = await User.updateOne(
-                        { username: currentUser },
+                        { username: currentUser.username },
                         { password: hash }
                     ).exec();
 

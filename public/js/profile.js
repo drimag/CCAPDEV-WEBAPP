@@ -37,7 +37,7 @@ $(document).ready(function() {
 
     $("#edit-profile").click(function() {
         console.log("Edit profile button clicked.");
-        location.href = "/edit-profile?loggedIn=" + currentUser;
+        location.href = "/edit-profile";
     })
 
     
@@ -50,7 +50,7 @@ $(document).ready(function() {
         const response = await fetch("/post?postNum=" + id.substring(1).trimEnd());
 
         if (response.status === 200) {
-            location.href = "/viewpost?postNum=" + id.substring(1).trimEnd() + "&loggedIn=" + currentUser;
+            location.href = "/viewpost?postNum=" + id.substring(1).trimEnd();
         } else {
             // Post Does Not Exist
             // TODO: Page goes to Does not exist or deleted?

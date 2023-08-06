@@ -1,16 +1,5 @@
-Comments from MCO2:
-done: 
-x redirect the user to login on succesful register, and/or inform the user that the registration was successful
-x allow user to create posts with image attachments (jaeme)
-x include date of post / comment create in post and comment components (jaeme)
-x would be better if create post form fields are hidden until a button is pressed (jaeme)
-x vote functionality
-x nav dropdown not working in profile + sign up + log in
-x password hashing
-
 reminder:
 - double check on all form validations / error msgs
-- sessions
 - be able to navigate to about page
 - remembered thing for login
 - render - app deployment !!
@@ -20,7 +9,6 @@ reminder:
 - add more sample data if kaya
 
 current errors:
-- upvote button becomes upvoted when adding more posts
 - editing a post with an image and not changing anything will still change edited to true
 
 

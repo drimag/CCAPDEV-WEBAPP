@@ -10,6 +10,7 @@ const loginController = require('../controllers/loginController.js');
 
 const voteController = require('../controllers/voteController.js');
 const changePasswordController = require('../controllers/changePasswordController.js');
+const aboutController = require('../controllers/aboutController');
 
 // Home Route ✔️
 router.get(["/", "/home", "/homepage"], controller.getHome);
@@ -55,6 +56,9 @@ router.put("/votes", voteController.updateVotes);
 router.get("/change-password", changePasswordController.getChangePassword);
 router.post("/get-password", changePasswordController.getIsMatchingPassword);
 router.put("/change-password", changePasswordController.changePassword);
+
+// About Page Route
+router.get("/about", aboutController.getAbout);
 
 /*
     OLD ROUTES:

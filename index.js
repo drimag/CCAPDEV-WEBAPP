@@ -1,3 +1,4 @@
+//var time = 1000 * 60 * 60 * 24;
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
@@ -69,7 +70,37 @@ async function main () {
                     console.log("correct pass");
                     req.session.user = user;
                     req.session.authorized = true;
+                    req.session.cookie.maxAge = 1000 * 60 * 60 * 24;
                     console.log(req.session.user.username);
+                    res.sendStatus(200);
+                }
+            } else {
+                res.sendStatus(400);
+            }
+        }
+    });
+
+    app.post('/login-d', async (req, res) => {
+        console.log("login dont remember");
+        // this works but req.session cant be accessed in controller
+        if(req.body.username && req.body.password) {
+            console.log(req.body);
+            let user = await User.findOne({username: req.body.username});
+            console.log("finding user");
+            if (user) {
+                console.log("found user");
+
+                const result = await bcrypt.compare(req.body.password, user.password);
+                if (!result) {
+                    console.log("wrong pass");
+                    res.sendStatus(400);
+                } else {
+                    console.log("correct pass");
+                    req.session.user = user;
+                    req.session.authorized = true;
+                    //how do i make it forget the user after closing ;-;
+                    req.session.cookie.maxAge = null;
+                    //console.log(req.session.user.username);
                     res.sendStatus(200);
                 }
             } else {

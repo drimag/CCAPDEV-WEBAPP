@@ -186,7 +186,7 @@ $("button.upvote").click(async function() {
     const params = new URLSearchParams(new URL(currentURL).search);
     const currentUser = params.get("loggedIn");
     try {
-        const response = await fetch("/votes?loggedIn=" + currentUser, {
+        const response = await fetch("/votes", {
             method: 'PUT',
             body: jString,
             headers: {
@@ -287,7 +287,7 @@ $("button.downvote").click(async function() {
     const params = new URLSearchParams(new URL(currentURL).search);
     const currentUser = params.get("loggedIn");
     try {
-        const response = await fetch("/votes?loggedIn=" + currentUser, {
+        const response = await fetch("/votes", {
             method: 'PUT',
             body: jString,
             headers: {
@@ -312,7 +312,7 @@ async function getVotes() {
     const currentUser = params.get("loggedIn");
 
     try {
-        const response = await fetch("/votes?loggedIn=" + currentUser, {
+        const response = await fetch("/votes", {
             method: 'GET',
             headers: {
             'Content-Type': 'application/json'

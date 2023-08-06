@@ -48,9 +48,10 @@ const voteController = {
 			if(newVotes.type === "comment") {
 				try {
 					console.log("changing comment votes");
-					await Comment.updateOne(
+					const response = await Comment.updateOne(
 						{ commentNum: newVotes.num },
 						{ votes: newVotes.votes }).exec();
+						console.log(response);
 					console.log("successful");
 				} catch (error) { 
 					console.error(error);
@@ -80,6 +81,8 @@ const voteController = {
 					
                 }).exec();
 			console.log("successful");
+			const user = await User.findOne({username: curr.username});
+			req.session.user = user;
 
 		} catch (error) { 
 			console.error(error);

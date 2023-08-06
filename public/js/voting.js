@@ -295,7 +295,7 @@ $("button.downvote").click(async function() {
         });
         if(response.status === 200) {
             console.log("Upvote Successful");
-            location.reload();
+            //location.reload();
         } else {
             console.log("Status code received: " + response.status);
         }

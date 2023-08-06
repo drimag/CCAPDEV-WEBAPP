@@ -7,9 +7,9 @@ let dpvote;
 $(document).ready(function() {
     let votes;
 
-    async function startVoting(){
+     function startVoting(){
         try {
-            let votesString = await getVotes();
+            let votesString =  getVotes();
             votes = JSON.parse(votesString);
         } catch (error) {
             console.error("error fetching votes", error);

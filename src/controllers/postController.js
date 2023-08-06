@@ -144,6 +144,7 @@ const postController = {
         
         const foundData = await Post.findOne({postNum: req.body.postNum}).exec();
         //console.log(foundData);
+        console.log("found");
     
         if (foundData) {
             try {
@@ -153,8 +154,9 @@ const postController = {
                     data: req.body.imagedata,
                     contentType: req.body.imagetype
                 }
-
-                if(edited_title === foundData.title && edited_description === foundData.description && foundData.image === edited_image) {
+                
+                // TODO: no change in image
+                if(edited_title === foundData.title && edited_description === foundData.description) {
                     // No change
                     console.log("No change in title and description");
                 } else {

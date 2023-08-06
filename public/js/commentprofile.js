@@ -72,6 +72,7 @@ $(document).ready(function() {
         
         const loggedIn = params.get("loggedIn"); 
         if (edited_comment === '') {
+            $("#noeditinput" + commentNum).css("display", "block");
             $("#noeditinput" + commentNum).text('Edited reply cannot be empty!');
         } else {
             let data = {

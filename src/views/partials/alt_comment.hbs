@@ -30,8 +30,8 @@
         </div>
 
         {{#ifEqual @root.user.username user_id.username}}
-        {{> edit_comment }}
-        <p id="noeditinput{{commentNum}}" class="noinputmsg"></p>
+            {{> edit_comment }}
+            <p id="noeditinput{{commentNum}}" class="noinputmsg" style="display: none;"></p>
         {{/ifEqual}}
         
         <div class="actions-post flex-row-container">

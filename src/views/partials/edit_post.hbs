@@ -12,8 +12,11 @@
         <input type="button" id="selectImage" value="Select Image" onclick="document.getElementById('newpostpic').click();" style="width: 130px;" />
         <br>
 
+        {{#if post.image}}
         <img id="displaynewpostimg" src="data:image/{{ post.image.contentType }};base64,{{ post.image.data }}"></img>
-
+        {{else}}
+        <img id="displaynewpostimg"></img>
+        {{/if}}
         <p id="noeditpostinput{{post.postNum}}" class="noinputmsg"></p> <br>
         <button id="editPost" type="submit"> Submit </button>
         <button id="clearPost" type="reset"> Clear </button>

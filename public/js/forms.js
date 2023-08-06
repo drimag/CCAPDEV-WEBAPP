@@ -290,6 +290,9 @@ createCommentBtn?.addEventListener("click", async (e) => {
 
 $(document).ready(function() {
 
+    $("#edit-post").click(function() {
+        $('#displaynewpostimg').hide();
+    });
 
     $("#clearPost").click(function() {
         $('#displaynewpostimg').hide();

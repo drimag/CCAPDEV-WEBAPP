@@ -7,20 +7,20 @@ const loginController = {
         console.log(req.body);
         
         try{
-        const user = await User.findOne({username: req.body.username}).exec();
-        //add checkPassword with hash
-        const foundUser = await user.comparePassword(req.body.password);
-        // Checks if credentials are in db
-        if (foundUser) {
-            console.log("user is:",user);
-            console.log('Login successful:', user);
+            const user = await User.findOne({username: req.body.username}).exec();
+            //add checkPassword with hash
+            const foundUser = await user.comparePassword(req.body.password);
+            // Checks if credentials are in db
+            if (foundUser) {
+                console.log("user is:",user);
+                console.log('Login successful:', user);
 
-            // Transport user to home
-                res.sendStatus(200);
-            } else {
-                console.log("INVALID USERNAME/PASSWORD");
-                res.sendStatus(400);
-            }
+                // Transport user to home
+                    res.sendStatus(200);
+                } else {
+                    console.log("INVALID USERNAME/PASSWORD");
+                    res.sendStatus(400);
+                }
         }catch(err){
             console.log(err);
             res.sendStatus(400);

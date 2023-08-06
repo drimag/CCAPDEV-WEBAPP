@@ -10,7 +10,6 @@ const User = require('./src/models/User.js');
 const bcrypt = require('bcrypt');
 // const passport = require('passport');
 const session = require('express-session');
-const localStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 
 async function main () {

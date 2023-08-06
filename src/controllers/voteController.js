@@ -11,7 +11,7 @@ const voteController = {
 		console.log(curr);
 
 		try {
-			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") {
+			if(curr === null || curr === "guest" || curr == undefined || curr === "") {
 				curr = await User.findOne({username: "guest"}).exec()
 			}
 
@@ -42,7 +42,7 @@ const voteController = {
 		try {
 			if(!curr) return res.status(400).send("No logged in user");
 
-			if(curr === "null" || curr === "guest" || curr == undefined || curr === "") 
+			if(curr === null || curr.username === "guest" || curr == undefined || curr === "") 
 				return res.status(400).send("No logged in user");
 
 			if(newVotes.type === "comment") {
@@ -83,7 +83,7 @@ const voteController = {
 			}
 
 			await User.updateOne(
-                {username: curr},
+                {username: curr.username},
                 {$set: 
                     { 
 						upvoteComments: newVotes.upvoteComments,

@@ -9,18 +9,20 @@ x nav dropdown not working in profile + sign up + log in
 x password hashing
 
 reminder:
-- double check on login and register controllers functionality / error msgs
+- double check on all form validations / error msgs
 - sessions
 - be able to navigate to about page
 - remembered thing for login
-- render - app deployment
+- render - app deployment !!
+- change dates in sample comments
+- remove nodemon
+- test for bugs!
+
+- add more sample data if kaya
 
 current errors:
+- upvote button becomes upvoted when adding more posts
 - editing a post with an image and not changing anything will still change edited to true
 
 
-----------------------------------------------------------------------------------------
-TODO: (dont mind this its just for jaeme's todo)
-- change dates in sample comments
-- remove nodemon
-- test! (BY SUNDAY.)
+

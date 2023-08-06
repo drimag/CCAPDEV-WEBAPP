@@ -106,13 +106,9 @@ $("button.upvote").click(async function() {
     
     let eNumber = $(this).closest(".post,[id*=comment]").prop("id").slice(-1); 
     let eType = $(this).closest(".post,[id*=comment]").prop("id").slice(0,-1);
-    console.log("type: " + eType);
-    console.log("number: " + eNumber);
 
     let voteCount = $(this).siblings(".number"); 
     let currentVotes = parseInt(voteCount.text()); 
-
-    //TODO: apple class clicked to clicked based on user
 
     let newUCVote = ucvote;
     let newDCVote = dcvote;
@@ -124,8 +120,7 @@ $("button.upvote").click(async function() {
     let newVotes;
     // Removes vote if clicked again
     if ($(this).hasClass('clicked')) {
-        console.log("First");
-        newVotes = currentVotes - 1; // remember to update in db late
+        
         // remove eNumber from ucvote or upvote
         if(eType === "post") {
             newUPVote = upvote.filter((num) => num !== parseInt(eNumber));
@@ -134,13 +129,13 @@ $("button.upvote").click(async function() {
             console.log("remove comment upvote");
         }
 
-        //$(this).removeClass('clicked');
+        newVotes = currentVotes - 1; 
+        $(this).removeClass('clicked');
+        voteCount.text(newVotes);
     }
     // Removes effect of opposite vote if clicked
     else if (downvoteButton.hasClass('clicked')){
-        console.log("Second");
         //increase the vote count by 2,because it nullifies the downvote
-        newVotes = currentVotes + 2;
 
         if(eType === "post") {
             newDPVote = dpvote.filter((num) => num !== parseInt(eNumber));
@@ -149,20 +144,27 @@ $("button.upvote").click(async function() {
             newDCVote = dcvote.filter((num) => num !== parseInt(eNumber));
             newUCVote = [ ...ucvote , parseInt(eNumber)];
         }
+
+        newVotes = currentVotes + 2;
+        $(this).addClass('clicked');
+        voteCount.text(newVotes);
+        downvoteButton.removeClass('clicked');
     }   
     //When no vote was clicked
     else{
         console.log("Third");
         //increase vote count here by 1
     
-        newVotes = currentVotes + 1;
+        
         if(eType === "post") {
             newUPVote = [ ...upvote , parseInt(eNumber)];
         } else if (eType === "comment") {
             newUCVote = [ ...ucvote , parseInt(eNumber)];
         }
 
-        //$(this).addClass('clicked');
+        newVotes = currentVotes + 1;
+        $(this).addClass('clicked');
+        voteCount.text(newVotes);
     }
     console.log("new votes::", newVotes);
 
@@ -193,7 +195,7 @@ $("button.upvote").click(async function() {
         });
         if(response.status === 200) {
             console.log("Upvote Successful");
-            location.reload();
+            //location.reload(); // should be removed 
         } else {
             console.log("Status code received: " + response.status);
         }
@@ -223,19 +225,23 @@ $("button.downvote").click(async function() {
     // Removes vote if clicked again  
     if ($(this).hasClass('clicked')) {
         // Increase vote count here by 1
-        newVotes = currentVotes + 1;
+        
         if(eType === "post") {
             newDPVote = dpvote.filter((num) => num != parseInt(eNumber));
         } else if (eType === "comment") {
             newDCVote = dcvote.filter((num) => num != parseInt(eNumber));
             console.log("remove comment upvote");
         }
+
+        newVotes = currentVotes + 1;
+        voteCount.text(newVotes);
+        $(this).removeClass('clicked');
     }
     // Removes effect of opposite vote if clicked
     else if (upvoteButton.hasClass('clicked')){
         // Decrease the vote count by 2, because it nullifies the upvote
-        newVotes = currentVotes - 2;
-        console.log("test: " + eNumber);
+        
+        
         if(eType === "post") {
             newUPVote = upvote.filter((num) => num != parseInt(eNumber));
             newDPVote = [ ...dpvote , parseInt(eNumber)];
@@ -243,17 +249,24 @@ $("button.downvote").click(async function() {
             newUCVote = ucvote.filter((num) => num != parseInt(eNumber));
             newDCVote = [ ...dcvote , parseInt(eNumber)];
         }
-        console.log("test: " + newVotes + newUPVote);
+        newVotes = currentVotes - 2;
+        voteCount.text(newVotes);
+        $(this).addClass('clicked');
+        upvoteButton.removeClass('clicked');
     }
     // When no vote was clicked
     else{
         // Decrease vote count by 1
-        newVotes = currentVotes - 1;
+    
         if(eType === "post") {
             newDPVote = [ ...dpvote , parseInt(eNumber)];
         } else if (eType === "comment") {
             newDCVote = [ ...dcvote , parseInt(eNumber)];
         }
+
+        newVotes = currentVotes - 1;
+        voteCount.text(newVotes);
+        $(this).addClass('clicked');
     }
 
     const data = {
@@ -283,7 +296,7 @@ $("button.downvote").click(async function() {
         });
         if(response.status === 200) {
             console.log("Upvote Successful");
-            location.reload();
+            //location.reload();
         } else {
             console.log("Status code received: " + response.status);
         }

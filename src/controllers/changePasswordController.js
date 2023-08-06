@@ -86,27 +86,29 @@ const changePasswordController = {
             // User does not exist
             if(!currUser) return res.status(404).send("User not found");
 
-            // Hash the new password
-            const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-            const hash = await bcrypt.hash(newPassword.password, salt);
+            if(newPassword.password.length > 15 || newPassword.password.length < 4){
+                res.status(403).send("invalid password")
+            } else {
+                // Hash the new password
+                const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+                const hash = await bcrypt.hash(newPassword.password, salt);
 
-            // Change the password
-            try{
-                const result = await User.updateOne(
-                    { username: currentUser },
-                    { password: hash }
-                ).exec();
+                // Change the password
+                try{
+                    const result = await User.updateOne(
+                        { username: currentUser },
+                        { password: hash }
+                    ).exec();
 
-                console.log("newpas: " + newPassword.password)
-                res.status(200).send("Password changed successfully");
-                console.log("Edit password successful");
-            } catch (err) {
-                console.log("Edit Password Unsuccessful");
-                console.error(err);
-                res.sendStatus(500);
+                    console.log("newpas: " + newPassword.password)
+                    res.status(200).send("Password changed successfully");
+                    console.log("Edit password successful");
+                } catch (err) {
+                    console.log("Edit Password Unsuccessful");
+                    console.error(err);
+                    res.sendStatus(500);
+                }
             }
-            
-            
 
         } catch (error) {
             console.error(error);

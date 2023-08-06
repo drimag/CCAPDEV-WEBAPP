@@ -1,17 +1,7 @@
-/*
-import { getDb } from '../models/db.js';
-
-const db = getDb();
-
-const users = db.collection("users");
-const posts = db.collection("posts");
-const comments = db.collection("comments");
-*/
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
 
-// TODO: Adjust Functions to Mongoose
 const voteController = {
     
     postVote: async function (req, res) {

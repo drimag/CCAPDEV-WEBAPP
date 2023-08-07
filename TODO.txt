@@ -1,8 +1,0 @@
-reminder:
-- fix change password (html css etc, + u can change password to old password)
-
-current errors:
-- editing a post with an image and not changing anything will still change edited to true
-- image of comment upvote when viewing post is wrong
-- upvoting from other person's profile does not update in homepage
-- u can upvote as guest
